@@ -118,7 +118,7 @@ byte_list = [sps_bitstring[i:i+8] for i in range(0, len(sps_bitstring), 8)]
 zero_cnt = 0
 
 # 將每個 8 位的二進位字串轉換為整數並寫入檔案
-with open("output_sps.bin", "wb") as file:
+with open("SPS_header.bin", "wb") as file:
     # start code
     file.write((0).to_bytes(1, byteorder='big'))
     file.write((0).to_bytes(1, byteorder='big'))
