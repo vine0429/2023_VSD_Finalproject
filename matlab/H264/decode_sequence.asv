@@ -1,0 +1,52 @@
+%---------------------------------------------------------
+%% H.264 Decoder
+%% by A. A. Muhit
+% muhit@student.unsw.edu.au
+
+%---------------------------------------------------------
+% Initialization
+clear all;
+clc;
+tic
+system_dependent('DirChangeHandleWarn', 'Never');
+addpath(genpath('.'));
+
+%% Input - load the encoded file
+load foreman_enc.mat;
+filename =  'foreman';
+
+global h w QP block_size
+
+% load the original sequence for calculating PSNR 
+fid = uvc_open(['C:\PHD\code\seq\',filename,'.411'],'r');
+idx = 1;
+block_size = 16;
+
+%---------------------------------------------------------
+% Decode header
+[h,w,QP,Frame_start,Frame_end,m] = dec_header(bitstream);
+idx = idx + m - 1;
+
+N = 1 + (Frame_end - Frame_start);
+
+if (bitstream(idx:idx+3)=='1111')
+   disp('Decoding I Frame')
+   idx = idx + 4;
+   [Ceq_r(:,:,1),idx]=decode_i_frame(idx,bitstream);
+
+   Ceq(:,:,1) = uvc_read_frame(fid,Frame_start);
+   PSNR_rec(1)=find_psnr(Ceq(:,:,1),Ceq_r(:,:,1));
+end
+
+for k = 2:N       
+    if (bitstream(idx:idx+3)=='0000')
+        disp('Decoding P Frame')
+        idx = idx + 4;
+        [Ceq_r(:,:,k),idx]= decode_p_frame(idx,bitstream,Ceq_r(:,:,k-1));
+
+        Ceq(:,:,k) = uvc_read_frame(fid,Frame_start+k-1);
+        PSNR_rec(k) = find_psnr(Ceq(:,:,k),Ceq_r(:,:,k));
+    end  
+end
+
+toc

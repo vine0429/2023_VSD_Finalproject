@@ -1,0 +1,9 @@
+function [h,w,QP,Frame_start,Frame_end] = dec_header(k,bits)
+
+m = 1;
+
+h = bin2dec(bits(m:m+7));
+m = m + 8;
+disp('Height=')
+disp(h)
+
