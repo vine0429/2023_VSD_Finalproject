@@ -20,8 +20,6 @@ bits = '';
 % Convert 4x4 matrix data into a 1x16 data of zig-zag scan
 [row, col] = size(data);
 
-data
-
 % check the correct size of the block
 if((row~=4)||(col~=4))
     disp('Residual block size mismatch - exit from CAVLC')
@@ -102,13 +100,13 @@ end
 % Rows are the total coefficient(0-16) and columns are the trailing ones(0-3)
 % TABLE_COEFF0,1,2,3 ARE STORED IN TABLE.MAT OR CAVLC_TABLES.M FILE
 % Choose proper table_coeff based on n value
-if 0<=n && n<2
+if n>=0 && n<2
     Table_coeff = Table_coeff0;
-elseif 2<=n && n<4
+elseif n>=2 && n<4
     Table_coeff = Table_coeff1;
-elseif 4<=n && n<8
+elseif n>=4 && n<8
     Table_coeff = Table_coeff2;
-elseif 8<=n
+elseif n>=8
     Table_coeff = Table_coeff3;
 end
 
@@ -117,8 +115,6 @@ end
 coeff_token = Table_coeff(i_total + 1,i_trailing + 1);
 char(coeff_token)
 bits = [bits char(coeff_token)];
-
-n
 
 % If the total coefficients == 0 exit from this function
 if i_total==0
@@ -141,13 +137,13 @@ end
 
 % loop
 for i=(i_trailing + 1):i_total
-    
+   
     if level(i)<0
         i_level_code = -2*level(i) - 1;
     else
         i_level_code = 2*level(i) - 2;
     end
-    
+
     if (i == i_trailing + 1)&(i_trailing<3)
        i_level_code = i_level_code - 2; 
     end
@@ -162,10 +158,13 @@ for i=(i_trailing + 1):i_total
         
         if i_sufx_len>0 
             level_sufx = dec2bin(i_level_code,i_sufx_len);
+
             x = length(level_sufx);
             if x>i_sufx_len
                 level_sufx = level_sufx(x-i_sufx_len+1:x);
             end
+            i_level_code
+            level_sufx
             bits = [bits level_sufx];
         end
     elseif (i_sufx_len==0)&(i_level_code<30)
@@ -174,13 +173,15 @@ for i=(i_trailing + 1):i_total
             bits = [bits '0'];
             level_prfx = level_prfx - 1;
         end
-        bits = [bits '1'];
+        bits = [bits '1']
         
-       level_sufx = dec2bin(i_level_code-14,4);
+       level_sufx = dec2bin(i_level_code-14,4)
        x = length(level_sufx);
             if x>4
                 level_sufx = level_sufx(x-4+1:x);
             end
+       i_level_code
+       level_sufx
        bits = [bits level_sufx];
     
     elseif (i_sufx_len>0)&(bitshift(i_level_code,-i_sufx_len)==14)
@@ -196,6 +197,8 @@ for i=(i_trailing + 1):i_total
             if x>i_sufx_len
                 level_sufx = level_sufx(x-i_sufx_len+1:x);
             end
+        i_level_code
+        level_sufx
         bits = [bits level_sufx];
     else
         level_prfx = 15;
@@ -220,9 +223,12 @@ for i=(i_trailing + 1):i_total
             if x>12
                 level_sufx = level_sufx(x-12+1:x);
             end
+        i_level_code
+        level_sufx
         bits = [bits level_sufx];
     end
-    
+
+
     if i_sufx_len==0
         i_sufx_len = i_sufx_len + 1;
     end

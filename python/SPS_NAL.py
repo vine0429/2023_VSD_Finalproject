@@ -20,8 +20,8 @@ pic_order_cnt_type                      = 0   #(ue v bits)
 log2_max_pic_order_cnt_lsb_minus4       = 6   #(ue v bits)
 max_num_ref_frames                      = 1   #(ue v bits)
 gaps_in_frame_num_value_allowed_flag    = 0   #(1 bits) [False]
-pic_width_in_mbs_minus1                 = 25  #(ue v bits)
-pic_height_in_map_units_minus1          = 14  #(ue v bits)
+pic_width_in_mbs_minus1                 = 39  #(ue v bits)
+pic_height_in_map_units_minus1          = 29  #(ue v bits)
 frame_mbs_only_flag                     = 1   #(1 bits) [True]
 direct_8x8_inference_flag               = 0   #(1 bits) [False]
 frame_cropping_flag                     = 0   #(1 bits) [False]
@@ -33,7 +33,7 @@ video_signal_type_present_flag          = 0   #(1 bits) [False]
 chroma_loc_info_present_flag            = 0   #(1 bits) [False]
 timing_info_present_flag                = 1   #(1 bits) [True]
 num_units_in_tick                       = 1   #(32 bits)
-time_scale                              = 100 #(32 bits)
+time_scale                              = 30  #(32 bits)
 fixed_frame_rate_flag                   = 1   #(1 bits) [True]
 nal_hrd_parameters_present_flag         = 0   #(1 bits) [False]
 vcl_hrd_parameters_present_flag         = 0   #(1 bits) [False]
@@ -118,7 +118,7 @@ byte_list = [sps_bitstring[i:i+8] for i in range(0, len(sps_bitstring), 8)]
 zero_cnt = 0
 
 # 將每個 8 位的二進位字串轉換為整數並寫入檔案
-with open("SPS_header.bin", "wb") as file:
+with open("./bitstream/SPS_header.bin", "wb") as file:
     # start code
     file.write((0).to_bytes(1, byteorder='big'))
     file.write((0).to_bytes(1, byteorder='big'))

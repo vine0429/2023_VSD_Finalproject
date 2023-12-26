@@ -1,27 +1,27 @@
-def concatenate_bin_files(file1_path, file2_path, file3_path, output_path):
-    # 讀取第一個檔案的內容
-    with open(file1_path, "rb") as file1:
-        content1 = file1.read()
+SPS_path        = "./bitstream/SPS_header.bin"
+PPS_path        = "./bitstream/PPS_header.bin"
+output_path     = "h264.bin"
 
-    # 讀取第二個檔案的內容
-    with open(file2_path, "rb") as file2:
-        content2 = file2.read()
+total_bitstream = bytearray()
 
-    # 讀取第三個檔案的內容
-    with open(file3_path, "rb") as file3:
-        content3 = file3.read()
+# 讀取SPS
+with open(SPS_path, "rb") as file1:
+    SPS_header = file1.read()
 
-    # 合併三個內容
-    combined_content = content1 + content2 + content3
+# 讀取PPS
+with open(PPS_path, "rb") as file2:
+    PPS_header = file2.read()
 
-    # 將合併後的內容寫入新檔案
-    with open(output_path, "wb") as output_file:
-        output_file.write(combined_content)
+total_bitstream = total_bitstream + SPS_header + PPS_header
 
-# 使用範例
-file1_path  = "SPS_header.bin"
-file2_path  = "PPS_header.bin"
-file3_path  = "IDR_slice.bin"
-output_path = "h264.bin"
+# 讀取IDR_slice的內容
+for frame_num in range(98):
+    IDR_slice_path  = "./bitstream/IDR_slice_" + str(frame_num) + ".bin"
+    print(IDR_slice_path)
+    with open(IDR_slice_path, "rb") as file3:
+        IDR_slice = file3.read()
+        total_bitstream = total_bitstream + IDR_slice
 
-concatenate_bin_files(file1_path, file2_path, file3_path, output_path)
+# 將合併後的內容寫入新檔案
+with open(output_path, "wb") as output_file:
+    output_file.write(total_bitstream)
