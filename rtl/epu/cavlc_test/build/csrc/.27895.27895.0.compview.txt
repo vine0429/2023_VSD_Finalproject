@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1703701678.526759969, "rt":0.77, "ut":0.28, "st":0.17}}
+{"vcselab":{"timestamp_begin":1703701679.378148810, "rt":0.70, "ut":0.29, "st":0.11}}
+{"link":{"timestamp_begin":1703701680.141046092, "rt":0.25, "ut":0.17, "st":0.09}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1703701678.062725690}
+{"VCS_COMP_START_TIME": 1703701678.062725690}
+{"VCS_COMP_END_TIME": 1703701681.994215393}
+{"VCS_USER_OPTIONS": "-R -sverilog /home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/./sim/cavlc_top_tb.sv -debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/./src"}
+{"vcs1": {"peak_mem": 338280}}
+{"vcselab": {"peak_mem": 210716}}

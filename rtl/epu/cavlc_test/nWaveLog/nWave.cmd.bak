@@ -1,0 +1,76 @@
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvOpenFile -win $_nWave1 \
+           {/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/build/top.fsdb}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 255.273340
+wvGetSignalOpen -win $_nWave1
+wvGetSignalClose -win $_nWave1
+wvSetFileTimeRange -win $_nWave1 -time_unit 10p 0 22500
+wvGetSignalOpen -win $_nWave1
+wvGetSignalClose -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 23)}
+wvSetPosition -win $_nWave1 {("G1" 23)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/cavlc_top_tb/clk} \
+{/cavlc_top_tb/rst} \
+{/cavlc_top_tb/scale00\[7:0\]} \
+{/cavlc_top_tb/scale01\[7:0\]} \
+{/cavlc_top_tb/scale02\[7:0\]} \
+{/cavlc_top_tb/scale03\[7:0\]} \
+{/cavlc_top_tb/scale10\[7:0\]} \
+{/cavlc_top_tb/scale11\[7:0\]} \
+{/cavlc_top_tb/scale12\[7:0\]} \
+{/cavlc_top_tb/scale13\[7:0\]} \
+{/cavlc_top_tb/scale20\[7:0\]} \
+{/cavlc_top_tb/scale21\[7:0\]} \
+{/cavlc_top_tb/scale22\[7:0\]} \
+{/cavlc_top_tb/scale23\[7:0\]} \
+{/cavlc_top_tb/scale30\[7:0\]} \
+{/cavlc_top_tb/scale31\[7:0\]} \
+{/cavlc_top_tb/scale32\[7:0\]} \
+{/cavlc_top_tb/scale33\[7:0\]} \
+{/cavlc_top_tb/total_coeff_cnt\[3:0\]} \
+{/cavlc_top_tb/total_zero_cnt\[3:0\]} \
+{/cavlc_top_tb/trailing_ones_cnt\[1:0\]} \
+{/cavlc_top_tb/trailing_ones_flag\[2:0\]} \
+{/cavlc_top_tb/valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 \
+           18 19 20 21 22 23 )} 
+wvSetPosition -win $_nWave1 {("G1" 23)}
+wvGetSignalClose -win $_nWave1
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 381.291946 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 1461.619128 -snap {("G1" 7)}
+wvSetCursor -win $_nWave1 508.389262 -snap {("G1" 2)}
+wvSelectSignal -win $_nWave1 {( "G1" 19 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 20 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 19 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 20 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 19 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb"
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb"
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb/CAVLCTop/cavlc4x4buffer"
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb"
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb/CAVLCTop"
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb/CAVLCTop/cavlc4x4buffer"
+wvGetSignalSetScope -win $_nWave1 "/cavlc_top_tb/CAVLCTop/totalcoeffcounter"

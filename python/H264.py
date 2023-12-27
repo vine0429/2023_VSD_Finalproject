@@ -259,12 +259,15 @@ for frame_idx in range(frame_encnum):
         # 輸入矩陣W 輸出矩陣Z
         # 首先將W矩陣與MF矩陣直接進行相同位置元素的乘法運算
         Z  = np.multiply(W, MF)
+###################################################################
+        # # 最後把結果右移qbits次即可得到DCT&量化後的矩陣Z
+        # Z = Z / (2**qbits)
 
+        # # 一定要加上round，硬體只用15個bit表示
+        # Z = np.round(Z).astype(int)
+###################################################################
         # 最後把結果右移qbits次即可得到DCT&量化後的矩陣Z
-        Z = Z / (2**qbits)
-
-        # 一定要加上round，硬體只用15個bit表示
-        Z = np.round(Z).astype(int)
+        Z = Z >> qbits
 
         return Z
 
