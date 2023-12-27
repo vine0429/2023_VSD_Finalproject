@@ -1,7 +1,8 @@
 import math
 import numpy as np
-import mapping_function as map
-import enc 
+import mapping_function as map #查表
+import enc # 哥倫布編碼
+import header
 
 # 要讀取的文件
 file_path = "./yuv/kunkun_640x480_98.yuv"
@@ -10,7 +11,7 @@ file_path = "./yuv/kunkun_640x480_98.yuv"
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 640
 frame_height = 480
-frame_encnum = 98 # 這邊調整要編碼幾張frame
+frame_encnum = 10 # 這邊調整要編碼幾張frame
 
 for frame_idx in range(frame_encnum):
     # Slice header NAL
@@ -27,7 +28,7 @@ for frame_idx in range(frame_encnum):
     idr_pic_id                    = 0  #(ue v bits)
     pic_order_cnt_lsb             = 0  #(u v bits) 10 bits
     no_output_of_prior_pics_flag  = 0  #(1 bits)
-    long_term_reference_flag      = 0  #(1 bits) 
+    long_term_reference_flag      = 0  #(1 bits)
     slice_qp_delta                = 0  #(se v bits) [Default]
     disable_deblocking_filter_idc = 0  #(ue v bits)
     slice_alpha_c0_offset_div2    = 0  #(se v bits)
@@ -47,7 +48,7 @@ for frame_idx in range(frame_encnum):
                 enc.se(0,slice_qp_delta)               +\
                 enc.ue(0,disable_deblocking_filter_idc)+\
                 enc.se(0,slice_alpha_c0_offset_div2)   +\
-                enc.se(0,slice_beta_offset_div2)       
+                enc.se(0,slice_beta_offset_div2)
 
     # 初始化一個frame的矩陣用來保存資料
     matrix   = np.zeros((frame_height,frame_width))
@@ -185,9 +186,9 @@ for frame_idx in range(frame_encnum):
                 pred_res_matrix = res_DC
 
         # 看看解碼器猜得對不對
-        if (predpredMode == predMode) : 
-            prev_intra4x4_pred_mode_flag = 1 
-        else : 
+        if (predpredMode == predMode) :
+            prev_intra4x4_pred_mode_flag = 1
+        else :
             prev_intra4x4_pred_mode_flag = 0
         # 如果猜錯要編碼真正的mode
         # 如果實際用的mode比猜的還要小就直接encode，否則用的比猜的大就要先-1再encode
@@ -257,7 +258,7 @@ for frame_idx in range(frame_encnum):
 
         # 輸入矩陣W 輸出矩陣Z
         # 首先將W矩陣與MF矩陣直接進行相同位置元素的乘法運算
-        Z  = np.multiply(W, MF) 
+        Z  = np.multiply(W, MF)
 
         # 最後把結果右移qbits次即可得到DCT&量化後的矩陣Z
         Z = Z / (2**qbits)
@@ -265,7 +266,7 @@ for frame_idx in range(frame_encnum):
         # 一定要加上round，硬體只用15個bit表示
         Z = np.round(Z).astype(int)
 
-        return Z 
+        return Z
 
     def IQT_and_IDCT(Z, QP):
         # H264 採用非一致性量化
@@ -282,7 +283,7 @@ for frame_idx in range(frame_encnum):
                     [14 ,23 ,18],
                     [16 ,25 ,20],
                     [18 ,29 ,23]])
-        
+
         x = QP%6
 
         # find delta, lambda and miu values
@@ -294,17 +295,17 @@ for frame_idx in range(frame_encnum):
                     [m ,l ,m ,l],
                     [d ,m ,d ,m],
                     [m ,l ,m ,l]])
-        
-        Wi = (Z * V) 
+
+        Wi = (Z * V)
         Wi = Wi << (q -15)
 
         Ci = np.array([[1   ,  1 ,   1 ,   1],
                     [1   ,1/2 ,-1/2 ,  -1],
                     [1   , -1 ,  -1 ,   1],
                     [1/2 , -1 ,   1 ,-1/2]])
-        
+
         Ci = 2 * Ci
-        
+
         Cit = np.transpose(Ci)
 
         # 多除4
@@ -333,9 +334,9 @@ for frame_idx in range(frame_encnum):
         if ((not mbAddrA_valid) and (not mbAddrB_valid)): # 情況1: 都不可用
             nC = 0
         elif ((not mbAddrA_valid) and mbAddrB_valid): # 情況2: 只有上方可用nC = nB
-            nC = nB 
+            nC = nB
         elif (mbAddrA_valid and (not mbAddrB_valid)): # 情況3: 只有左側可用nC = nA
-            nC = nA 
+            nC = nA
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 nA nB 取平均
             nC = (nA + nB + 1) >> 1
 
@@ -388,7 +389,7 @@ for frame_idx in range(frame_encnum):
             elif (Start_record == True and Trailing_ones_flag3 == None and coeff == -1):
                 Trailing_ones_flag3 = "1" #負1要編碼成1'b1
                 Trailing_ones_cnt = Trailing_ones_cnt + 1
-                
+
         # 查表得到對應的coeff_token
         # 參考資料: https://blog.csdn.net/dongkun152/article/details/107623554
         coeff_token = map.coeff_token(TrailingOnes = Trailing_ones_cnt, TotalCoeff = Non_Zero_Coefficient, nC = nC)
@@ -401,7 +402,7 @@ for frame_idx in range(frame_encnum):
         # 沒有係數要編碼完coeff_token後就直接結束
         if (Non_Zero_Coefficient == 0):
             return cavlc_bitstring
-                
+
         if (Trailing_ones_cnt == 1):
             cavlc_bitstring = cavlc_bitstring + Trailing_ones_flag1
         elif (Trailing_ones_cnt == 2):
@@ -464,7 +465,7 @@ for frame_idx in range(frame_encnum):
 
                 cavlc_bitstring = cavlc_bitstring + levelPrefixBis + levelSuffixBis
 
-                # 步驟七 
+                # 步驟七
                 if (suffixLength == 0):
                     suffixLength = suffixLength + 1
                 if (abs(coeff) > ((3 <<(suffixLength-1))) and suffixLength < 6): # 要看是coeff的值
@@ -478,7 +479,7 @@ for frame_idx in range(frame_encnum):
             if (coeff != 0):
                 Start_cnt = True
             if (Start_cnt == True and coeff == 0):
-                TotalZeros = TotalZeros + 1 
+                TotalZeros = TotalZeros + 1
 
         # 查表編碼TotalZeros
         # 參考資料: https://blog.csdn.net/dongkun152/article/details/107623554
@@ -513,10 +514,10 @@ for frame_idx in range(frame_encnum):
         return cavlc_bitstring
 
     # intra_chroma_pred_mode
-    # 0 DC 
+    # 0 DC
     # 1 horizontal
     # 2 vertical
-    # 3 plane   
+    # 3 plane
     # chroma_format_idc 默認 = 1, 4:2:0
     # CBP共有6位，其中前面2位代表UV分量，描述如下表所示；後面4位是Y分量，分別代表巨集塊內的4個8x8子巨集塊，如果任意一位為0，表明對應的8x8塊中所有變換系數level（transform coefficient levels 也就是對像素殘差進行變換、量化後的矩陣內的值，以後統稱level）全部都是0，否則表明對應的8x8塊中的變換系數level不全為0。
     mb_type                          = 0  # (ue v bits) 0代表Intra4x4
@@ -526,7 +527,7 @@ for frame_idx in range(frame_encnum):
     total_macroblock_layer_bitstream = ""
 
     # frame_width  = 416
-    # frame_height = 240 
+    # frame_height = 240
 
     for mb_y in range (frame_height>>4):
         for mb_x in range (frame_width>>4):
@@ -534,7 +535,7 @@ for frame_idx in range(frame_encnum):
             # 每個macroblock總共有4個8x8的像素點
             CAVLC_bitstring = ""
             macroblock_layer_bitstream = ""
-            for i8x8 in range(4): # each luma 8x8 block 
+            for i8x8 in range(4): # each luma 8x8 block
                 for i4x4 in range (4): # each 4x4 sub-block of block
                     # 得到當前要編碼的4x4像素點
                     topleft_x = (mb_x << 4) + ((i8x8 & 0b0001) << 3) + ((i4x4 & 0b0001) << 2) # 相當於取餘數再乘 #對應整個frame的座標
@@ -597,3 +598,8 @@ for frame_idx in range(frame_encnum):
             else :
                 file.write(byte_value.to_bytes(1, byteorder='big'))
                 if (byte_value != 0): zero_cnt = 0
+
+# 最後把SPS、PPS、IDR Slice合在一起
+header.sps_nal(frame_width, frame_height)
+header.pps_nal()
+header.concate(frame_encnum)
