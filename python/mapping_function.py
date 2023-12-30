@@ -496,6 +496,58 @@ def coeff_token(TrailingOnes, TotalCoeff, nC):
     elif (TrailingOnes == 3 and TotalCoeff == 16 and nC >= 8):
         return "111111"
     
+def coeff_token_chromaDC(TrailingOnes, TotalCoeff):
+    # nC = -1
+    if (TrailingOnes == 0 and TotalCoeff == 0):
+        return "01"
+    elif (TrailingOnes == 0 and TotalCoeff == 1):
+        return "000111"
+    elif (TrailingOnes == 1 and TotalCoeff == 1):
+        return "1"
+    elif (TrailingOnes == 0 and TotalCoeff == 2):
+        return "000100"
+    elif (TrailingOnes == 1 and TotalCoeff == 2):
+        return "000110"
+    elif (TrailingOnes == 2 and TotalCoeff == 2):
+        return "001"
+    elif (TrailingOnes == 0 and TotalCoeff == 3):
+        return "000011"    
+    elif (TrailingOnes == 1 and TotalCoeff == 3):
+        return "0000011" 
+    elif (TrailingOnes == 2 and TotalCoeff == 3):
+        return "0000010" 
+    elif (TrailingOnes == 3 and TotalCoeff == 3):
+        return "000101" 
+    elif (TrailingOnes == 0 and TotalCoeff == 4):
+        return "000010" 
+    elif (TrailingOnes == 1 and TotalCoeff == 4):
+        return "00000011" 
+    elif (TrailingOnes == 2 and TotalCoeff == 4):
+        return "00000010" 
+    elif (TrailingOnes == 3 and TotalCoeff == 4):
+        return "0000000" 
+    
+def Totalzeros_chromaDC(TotalZeros, TotalCoeff):
+    if (TotalZeros == 0 and TotalCoeff == 1):
+        return "1"
+    elif (TotalZeros == 0 and TotalCoeff == 2):
+        return "1"
+    elif (TotalZeros == 0 and TotalCoeff == 3):
+        return "1"
+    elif (TotalZeros == 1 and TotalCoeff == 1):
+        return "01"
+    elif (TotalZeros == 1 and TotalCoeff == 2):
+        return "01"
+    elif (TotalZeros == 1 and TotalCoeff == 3):
+        return "0"
+    elif (TotalZeros == 2 and TotalCoeff == 1):
+        return "001"
+    elif (TotalZeros == 2 and TotalCoeff == 2):
+        return "00"
+    elif (TotalZeros == 3 and TotalCoeff == 1):
+        return "000"
+    
+
 def run_before(run_before, zerosLeft):
     if (run_before == 0):
         if (zerosLeft == 1):

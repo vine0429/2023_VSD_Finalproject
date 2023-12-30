@@ -1,0 +1,5 @@
+
+`define FRAME_WIDTH  640 
+`define FRAME_HEIGHT 320
+`define FRAME_WIDTH_DIV4  160
+`define FRAME_HEIGHT_DIV4 80
