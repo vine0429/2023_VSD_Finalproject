@@ -1,0 +1,6 @@
+{"vcs1":{"timestamp_begin":1703833444.735656885, "rt":0.55, "ut":0.16, "st":0.06}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1703833444.332261103}
+{"VCS_COMP_START_TIME": 1703833444.332261103}
+{"VCS_COMP_END_TIME": 1703833445.358086538}
+{"VCS_USER_OPTIONS": "-R -sverilog cavlc_top_tb.sv -debug_access+all -full64"}
+{"vcs1": {"peak_mem": 324684}}

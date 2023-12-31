@@ -1,0 +1,12 @@
+/home/N26120113/VSD/final/cavlc_v3/src/BitStream.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Coeff_token_enc.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Control.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Levelcode.sv
+/home/N26120113/VSD/final/cavlc_v3/src/NC_compute.sv
+/home/N26120113/VSD/final/cavlc_v3/src/RunBefore.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Totalcoeffs.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Totalzeros.sv
+/home/N26120113/VSD/final/cavlc_v3/src/Trailingones.sv
+/home/N26120113/VSD/final/cavlc_v3/src/cavlc_top.sv
+/home/N26120113/VSD/final/cavlc_v3/src/zigzag.sv
+/home/N26120113/VSD/final/cavlc_v3/tb/cavlc_top_tb.sv
