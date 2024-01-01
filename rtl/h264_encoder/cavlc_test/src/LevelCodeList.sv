@@ -1,0 +1,29 @@
+module LevelCodeList(
+    input              clk,
+    input              rst,
+    input              cnt_rst,
+    input              start_cnt_i,
+    input              trailing_ones_stop_cnt,
+    input        [1:0] trailing_ones_cnt,
+    input        [7:0] coeff_i,
+    output logic [7:0] level_code_list [0:15],
+    output logic [4:0] level_code_cnt
+);
+
+logic trailing_ones_end;
+
+always_ff @(posedge clk) begin
+    if (rst) begin
+        integer i=0;
+        for (i=0; i<16; i=i+1) begin
+            level_code_list[i] <= 8'd0;
+        end
+        level_code_cnt <= 5'd0;
+    end
+    else if ((trailing_ones_cnt == 2'd3 || trailing_ones_stop_cnt) && coeff_i != 8'd0) begin
+        level_code_list[level_code_cnt] <= coeff_i;
+        level_code_cnt                  <= level_code_cnt + 5'd1;
+    end
+end
+
+endmodule : LevelCodeList

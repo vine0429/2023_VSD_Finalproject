@@ -1,5 +1,6 @@
 root_dir := $(PWD)
 src_dir := ./src
+h264_dir := ./h264_encoder
 syn_dir := ./syn
 pr_dir := ./pr
 inc_dir := ./include
@@ -85,6 +86,10 @@ rtl3: | clean $(bld_dir)
 	+prog_path=$(root_dir)/$(sim_dir)/prog3 \
   +rdcycle=1 
 
+h264:
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/h264_tb.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(h264_dir)+$(root_dir)/$(h264_dir)/intra+$(root_dir)/$(h264_dir)/packer+$(root_dir)/$(h264_dir)/fetch+$(root_dir)/$(h264_dir)/dct_quant+$(root_dir)/$(h264_dir)/cavlc \
+	+prog_path=$(root_dir)/$(sim_dir)/h264_0 \
 
 # Post-Synthesis simulation
 syn_all: syn0 syn1 syn2 syn3

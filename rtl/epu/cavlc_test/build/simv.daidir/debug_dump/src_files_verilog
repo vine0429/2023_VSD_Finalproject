@@ -1,7 +1,0 @@
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/sim/cavlc_top_tb.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/CAVLC4x4Buffer.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/CAVLCFsm.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/CAVLCTop.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/TotalCoeffCounter.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/TotalZeroCounter.sv
-/home/N26124939/VSD/VSD_Project/rtl/epu/cavlc_test/src/TrailingOneCounter.sv

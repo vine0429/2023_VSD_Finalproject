@@ -188,17 +188,25 @@ for frame_idx in range(frame_encnum):
             sum_Horizontal = np.sum(np.abs(res_Horizontal))
             sum_DC         = np.sum(np.abs(res_DC))
 
-            sum_min = min(sum_Vertical,sum_Horizontal,sum_DC)
+            # sum_min = min(sum_Vertical,sum_Horizontal,sum_DC)
 
-            if (sum_min == sum_Vertical):
-                predMode        = 0
-                pred_matrix     = pred_Vertical
-                pred_res_matrix = res_Vertical
-            elif (sum_min == sum_Horizontal):
-                predMode        = 1
-                pred_matrix     = pred_Horizontal
-                pred_res_matrix = res_Horizontal
-            elif (sum_min == sum_DC):
+            # 只有DC模式
+            sum_min = min(sum_DC,sum_DC,sum_DC)
+
+            # if (sum_min == sum_Vertical):
+            #     predMode        = 0
+            #     pred_matrix     = pred_Vertical
+            #     pred_res_matrix = res_Vertical
+            # elif (sum_min == sum_Horizontal):
+            #     predMode        = 1
+            #     pred_matrix     = pred_Horizontal
+            #     pred_res_matrix = res_Horizontal
+            # elif (sum_min == sum_DC):
+            #     predMode        = 2
+            #     pred_matrix     = pred_DC_matrix
+            #     pred_res_matrix = res_DC
+
+            if (sum_min == sum_DC):
                 predMode        = 2
                 pred_matrix     = pred_DC_matrix
                 pred_res_matrix = res_DC
