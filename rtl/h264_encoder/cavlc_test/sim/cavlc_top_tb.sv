@@ -89,22 +89,22 @@ module cavlc_top_tb();
     // scale32 = -8'd1;
     // scale33 = -8'd1;
 
-    scale00 =  8'd2;
-    scale01 = -8'd2;
-    scale02 = -8'd1;
-    scale03 =  8'd1; 
-    scale10 = -8'd1;
-    scale11 =  8'd2;
-    scale12 = -8'd1;
-    scale13 = -8'd1;
-    scale20 =  8'd1;
-    scale21 = -8'd1;
-    scale22 = -8'd0;
-    scale23 = -8'd0;
-    scale30 = -8'd1;
-    scale31 =  8'd1;
-    scale32 = -8'd0;
-    scale33 = -8'd0;
+    scale00 = -8'd12;
+    scale01 = 8'd7;
+    scale02 = 8'd0;
+    scale03 = 8'd1;
+    scale10 = 8'd7;
+    scale11 = 8'd1;
+    scale12 = -8'd3;
+    scale13 = 8'd0;
+    scale20 = 8'd0;
+    scale21 = -8'd5;
+    scale22 = -8'd3;
+    scale23 = 8'd0;
+    scale30 = 8'd0;
+    scale31 = -8'd2;
+    scale32 = 8'd2;
+    scale33 = 8'd1;
 
     #10 
     valid   = 1'b0;
@@ -125,7 +125,7 @@ module cavlc_top_tb();
     scale32 = 8'd0;
     scale33 = 8'd0;
 
-    #200 $finish;
+    #600 $finish;
     end
 
     // always @(posedge clk) 

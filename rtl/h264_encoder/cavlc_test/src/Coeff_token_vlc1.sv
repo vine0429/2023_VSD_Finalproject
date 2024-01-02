@@ -54,22 +54,22 @@ always_comb begin
         {2'd1,5'd12}: begin CodeBit = {1'b0, 15'b000000000001010};   CodeLength = 5'd15; end
         {2'd2,5'd12}: begin CodeBit = {1'b0, 15'b000000000001101};   CodeLength = 5'd15; end
         {2'd3,5'd12}: begin CodeBit = {2'b0, 14'b00000000001000};    CodeLength = 5'd14; end
-        {2'd0,5'd13}: begin CodeBit = {0'b0, 16'b0000000000001111};  CodeLength = 5'd16; end
+        {2'd0,5'd13}: begin CodeBit = { 16'b0000000000001111};  CodeLength = 5'd16; end
         {2'd1,5'd13}: begin CodeBit = {1'b0, 15'b000000000000001};   CodeLength = 5'd15; end
         {2'd2,5'd13}: begin CodeBit = {1'b0, 15'b000000000001001};   CodeLength = 5'd15; end
         {2'd3,5'd13}: begin CodeBit = {1'b0, 15'b000000000001100};   CodeLength = 5'd15; end
-        {2'd0,5'd14}: begin CodeBit = {0'b0, 16'b0000000000001011};  CodeLength = 5'd16; end
-        {2'd1,5'd14}: begin CodeBit = {0'b0, 16'b0000000000001110};  CodeLength = 5'd16; end
-        {2'd2,5'd14}: begin CodeBit = {0'b0, 16'b0000000000001101};  CodeLength = 5'd16; end
+        {2'd0,5'd14}: begin CodeBit = { 16'b0000000000001011};  CodeLength = 5'd16; end
+        {2'd1,5'd14}: begin CodeBit = { 16'b0000000000001110};  CodeLength = 5'd16; end
+        {2'd2,5'd14}: begin CodeBit = { 16'b0000000000001101};  CodeLength = 5'd16; end
         {2'd3,5'd14}: begin CodeBit = {1'b0, 15'b000000000001000};   CodeLength = 5'd15; end
-        {2'd0,5'd15}: begin CodeBit = {0'b0, 16'b0000000000000111};  CodeLength = 5'd16; end
-        {2'd1,5'd15}: begin CodeBit = {0'b0, 16'b0000000000001010};  CodeLength = 5'd16; end
-        {2'd2,5'd15}: begin CodeBit = {0'b0, 16'b0000000000001001};  CodeLength = 5'd16; end
-        {2'd3,5'd15}: begin CodeBit = {0'b0, 16'b0000000000001100};  CodeLength = 5'd16; end
-        {2'd0,5'd16}: begin CodeBit = {0'b0, 16'b0000000000000100};  CodeLength = 5'd16; end
-        {2'd1,5'd16}: begin CodeBit = {0'b0, 16'b0000000000000110};  CodeLength = 5'd16; end
-        {2'd2,5'd16}: begin CodeBit = {0'b0, 16'b0000000000000101};  CodeLength = 5'd16; end
-        {2'd3,5'd16}: begin CodeBit = {0'b0, 16'b0000000000001000};  CodeLength = 5'd16; end
+        {2'd0,5'd15}: begin CodeBit = { 16'b0000000000000111};  CodeLength = 5'd16; end
+        {2'd1,5'd15}: begin CodeBit = { 16'b0000000000001010};  CodeLength = 5'd16; end
+        {2'd2,5'd15}: begin CodeBit = { 16'b0000000000001001};  CodeLength = 5'd16; end
+        {2'd3,5'd15}: begin CodeBit = { 16'b0000000000001100};  CodeLength = 5'd16; end
+        {2'd0,5'd16}: begin CodeBit = { 16'b0000000000000100};  CodeLength = 5'd16; end
+        {2'd1,5'd16}: begin CodeBit = { 16'b0000000000000110};  CodeLength = 5'd16; end
+        {2'd2,5'd16}: begin CodeBit = { 16'b0000000000000101};  CodeLength = 5'd16; end
+        {2'd3,5'd16}: begin CodeBit = { 16'b0000000000001000};  CodeLength = 5'd16; end
     endcase
 end
 

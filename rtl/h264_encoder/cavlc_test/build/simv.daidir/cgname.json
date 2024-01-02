@@ -11,11 +11,23 @@
         "module",
         6
     ],
-    "CntEncReg": [
-        "CntEncReg",
-        "Y2CLh",
+    "CAVLCCntTop": [
+        "CAVLCCntTop",
+        "Drpkk",
         "module",
-        4
+        8
+    ],
+    "Coeff_token_vlc_chromaDC": [
+        "Coeff_token_vlc_chromaDC",
+        "k7YUZ",
+        "module",
+        5
+    ],
+    "LevelCodeEncoder": [
+        "LevelCodeEncoder",
+        "aD2xu",
+        "module",
+        7
     ],
     "cavlc_top_tb": [
         "cavlc_top_tb",

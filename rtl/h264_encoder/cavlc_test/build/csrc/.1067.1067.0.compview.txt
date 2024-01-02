@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1704207537.102428927, "rt":1.12, "ut":0.48, "st":0.17}}
+{"vcselab":{"timestamp_begin":1704207538.307477705, "rt":0.95, "ut":0.36, "st":0.11}}
+{"link":{"timestamp_begin":1704207539.325634092, "rt":0.26, "ut":0.19, "st":0.08}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1704207536.648468160}
+{"VCS_COMP_START_TIME": 1704207536.648468160}
+{"VCS_COMP_END_TIME": 1704207541.280438494}
+{"VCS_USER_OPTIONS": "-R -sverilog /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./sim/cavlc_top_tb.sv -debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src"}
+{"vcs1": {"peak_mem": 341980}}
+{"vcselab": {"peak_mem": 227160}}

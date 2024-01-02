@@ -1,10 +1,10 @@
-24       
+32       
 0 CAVLCTop.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CAVLCTop.sv
+0 CAVLCCntTop.sv
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CAVLCCntTop.sv
 0 CAVLC4x4Buffer.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CAVLC4x4Buffer.sv
-0 CAVLCFsm.sv
-0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CAVLCFsm.sv
 0 TotalCoeffCounter.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/TotalCoeffCounter.sv
 0 TotalZeroCounter.sv
@@ -13,16 +13,24 @@
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/TrailingOneCounter.sv
 0 LevelCodeList.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/LevelCodeList.sv
-0 CntEncReg.sv
-0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CntEncReg.sv
+0 CAVLCEncTop.sv
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CAVLCEncTop.sv
+0 CoeffTokenEncoder.sv
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/CoeffTokenEncoder.sv
+0 epu_define.svh
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/epu_define.svh
 0 Coeff_token_vlc1.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/Coeff_token_vlc1.sv
 0 Coeff_token_vlc2.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/Coeff_token_vlc2.sv
 0 Coeff_token_vlc3.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/Coeff_token_vlc3.sv
+0 Coeff_token_flc.sv
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/Coeff_token_flc.sv
 0 Coeff_token_vlc_chromaDC.sv
 0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/Coeff_token_vlc_chromaDC.sv
+0 LevelCodeEncoder.sv
+0 /usr/cad/synopsys/vcs/2023.03/etc/systemverilog/LevelCodeEncoder.sv
 32
 +incdir+/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src
 +itf+/usr/cad/synopsys/vcs/2023.03/linux64/lib/vcsdp_lite.tab
@@ -60,7 +68,7 @@
 vip_dir=/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/vip
 maxpend=0
 XLOCALEDIR=/usr/cad/synopsys/icc2/2022.12-sp6//etc/locale
-XDG_SESSION_ID=175093
+XDG_SESSION_ID=177025
 XDG_RUNTIME_DIR=/run/user/1055
 XDG_DATA_DIRS=/home/N26124939/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 VMR_MODE_FLAG=64
@@ -79,12 +87,12 @@ UNAME=/bin/uname
 TOOL_HOME=/usr/cad/synopsys/vcs/2023.03/linux64
 SYN_MAN_DIR=/usr/cad/synopsys/vcs/2023.03/doc/man
 SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
-SSH_TTY=/dev/pts/9
-SSH_CONNECTION=218.173.156.238 51842 140.116.157.16 5614
-SSH_CLIENT=218.173.156.238 51842 5614
+SSH_TTY=/dev/pts/16
+SSH_CONNECTION=218.173.156.238 49864 140.116.157.16 5614
+SSH_CLIENT=218.173.156.238 49864 5614
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2023.03/linux64/clang
 SNPS_INTERNAL_VCS_LINUX_OS=linux
-SHLIB_PATH=/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/::/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/:
+SHLIB_PATH=/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/:
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 REMOTEHOST=218-173-156-238.dynamic-ip.hinet.net
@@ -99,8 +107,8 @@ MGC_TMPDIR=/tmp
 MGC_LOCATION_MAP=NO_MAP
 MGC_HOME=/usr/cad/modelsim/modelsim/cur
 MFLAGS=
-MAKE_TERMOUT=/dev/pts/9
-MAKE_TERMERR=/dev/pts/9
+MAKE_TERMOUT=/dev/pts/16
+MAKE_TERMERR=/dev/pts/16
 MAKELEVEL=1
 MAKEFLAGS=
 LESSOPEN=||/usr/bin/lesspipe.sh %s
@@ -116,20 +124,24 @@ GROUP=N26124939
 ENCOUNTER=/usr/cad/cadence/INNOVUS/cur/tools/fe
 0
 0
-15
+19
+1704218929 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/LevelCodeEncoder.sv
 1704133494 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_vlc_chromaDC.sv
+1704177602 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_flc.sv
 1704133439 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_vlc3.sv
 1704133433 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_vlc2.sv
-1704133415 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_vlc1.sv
-1704131110 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CntEncReg.sv
+1704197744 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/Coeff_token_vlc1.sv
+1704198214 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/epu_define.svh
+1704199105 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CoeffTokenEncoder.sv
+1704218868 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLCEncTop.sv
 1704128159 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/LevelCodeList.sv
 1704127845 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/TrailingOneCounter.sv
 1704129005 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/TotalZeroCounter.sv
 1704129031 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/TotalCoeffCounter.sv
-1703701372 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLCFsm.sv
 1703699433 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLC4x4Buffer.sv
-1704133639 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLCTop.sv
-1704130595 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./sim/cavlc_top_tb.sv
+1704207602 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLCCntTop.sv
+1704207510 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./src/CAVLCTop.sv
+1704219276 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/./sim/cavlc_top_tb.sv
 1581256760 /usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/verdi.tab
 1677384340 /usr/cad/synopsys/vcs/2023.03/linux64/lib/vcsdp_lite.tab
 4
@@ -137,5 +149,5 @@ ENCOUNTER=/usr/cad/cadence/INNOVUS/cur/tools/fe
 1677385060 /usr/cad/synopsys/vcs/2023.03/linux64/lib/liberrorinf.so
 1677385018 /usr/cad/synopsys/vcs/2023.03/linux64/lib/libsnpsmalloc.so
 1677385055 /usr/cad/synopsys/vcs/2023.03/linux64/lib/libvfs.so
-1704133644 simv.daidir
+1704219282 simv.daidir
 -1 partitionlib
