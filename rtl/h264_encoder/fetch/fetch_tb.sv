@@ -23,7 +23,7 @@ logic [31:0] mem [0:95]; // for test
 assign data_word  = mem[fetch_addr];
 assign data_valid = 1'b1;
 
-fetch_test fetch_m(
+fetch fetch_m(
 
     .clk(clk),
     .rst(rst),

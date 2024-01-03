@@ -1,7 +1,0 @@
-wvResizeWindow -win $_nWave1 0 23 1920 1017
-wvResizeWindow -win $_nWave1 0 23 1920 1017
-wvResizeWindow -win $_nWave1 0 23 1920 1017
-wvResizeWindow -win $_nWave1 0 23 1920 1017
-wvResizeWindow -win $_nWave1 0 0 893 202
-wvResizeWindow -win $_nWave1 8 31 144 1061
-wvExit
