@@ -641,7 +641,7 @@ for frame_idx in range(frame_encnum):
         Z = Z / (2**qbits)
 
         # 一定要加上round，硬體只用15個bit表示
-        Z = np.round(Z).astype(int)
+        Z = np.round(Z+0.001).astype(int)
 
         return Z
     
@@ -690,7 +690,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         # 一定要有round
-        Y = np.round((Cit@Wi@Ci) / 256).astype(int)
+        Y = np.round((Cit@Wi@Ci) / 256+0.001).astype(int)
 
         return Y
 
@@ -736,7 +736,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         Y = (Cit@Wi@Ci) / 256
-        Y = np.round(Y).astype(int)
+        Y = np.round(Y+0.001).astype(int)
 
         return Y
 
@@ -751,7 +751,7 @@ for frame_idx in range(frame_encnum):
         
         YD = hadamard@WD@hadamard
 
-        ZD = np.round((YD * 9362) / (2** (qbits + 1))) #9362 = MF[0,0] 
+        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.001) #9362 = MF[0,0] 
         ZD = ZD.astype(int)
 
         return ZD
