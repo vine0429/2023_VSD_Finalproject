@@ -1,6 +1,6 @@
 root_dir := $(PWD)
 src_dir := ./src
-h264_dir := ./h264_encoder
+h264_dir := ./H264
 syn_dir := ./syn
 pr_dir := ./pr
 inc_dir := ./include
@@ -90,6 +90,14 @@ h264:
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/h264_tb.sv -debug_access+all -full64  \
 	+incdir+$(root_dir)/$(h264_dir)+$(root_dir)/$(h264_dir)/intra+$(root_dir)/$(h264_dir)/packer+$(root_dir)/$(h264_dir)/fetch+$(root_dir)/$(h264_dir)/dct_quant+$(root_dir)/$(h264_dir)/cavlc \
 	+prog_path=$(root_dir)/$(sim_dir)/h264_0 \
+	
+cavlc: | $(bld_dir) 
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/cavlc_top_tb.sv -debug_access+all -full64 \
+	+incdir+$(root_dir)/$(src_dir)
+
+fetch:
+	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
 
 # Post-Synthesis simulation
 syn_all: syn0 syn1 syn2 syn3
