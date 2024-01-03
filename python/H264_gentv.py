@@ -78,9 +78,6 @@ for frame_idx in range(frame_encnum):
                 byte_value = file.read(1)
                 matrix_V[y,x] = int.from_bytes(byte_value, byteorder='big')
 
-    # 輸出測試資料
-    for x in range (0,12,4):
-        print(x)
     #############################################################################################################################################################################################
     # 編碼到目前的block top參考像素
     intra4x4_tp = np.full((1,frame_width),0)
@@ -831,9 +828,6 @@ for frame_idx in range(frame_encnum):
         ZigZag_list_HtL = ZigZag_list
         ZigZag_list_HtL.reverse()
 
-        print(Z)
-        print(ZigZag_list_HtL)
-
         # 再計算矩陣Z的拖尾係數
         Trailing_ones_cnt   = 0
         Trailing_ones_flag1 = None
@@ -906,6 +900,7 @@ for frame_idx in range(frame_encnum):
         else :
             suffixLength = 0
 
+        levelbitstring = ""
         FirstNonZero = True
         for coeff in ZigZag_list_HtL:
             levelPrefixBis = ""
@@ -947,7 +942,10 @@ for frame_idx in range(frame_encnum):
                     if ((levelCode >= (1 << 12)) or (levelCode < 0)):
                         print("Overflow occured")
                     levelSuffixBis   = bin(levelCode)[2:].zfill(12)[-12:]
-
+                print("coeff", coeff)
+                print("levelPrefixBis", levelPrefixBis)
+                print("levelSuffixBis", levelSuffixBis)
+                levelbitstring = levelbitstring + levelPrefixBis + levelSuffixBis
                 cavlc_bitstring = cavlc_bitstring + levelPrefixBis + levelSuffixBis
 
                 # 步驟七
@@ -955,7 +953,17 @@ for frame_idx in range(frame_encnum):
                     suffixLength = suffixLength + 1
                 if (abs(coeff) > ((3 <<(suffixLength-1))) and suffixLength < 6): # 要看是coeff的值
                     suffixLength = suffixLength + 1
-
+        if (iCbCr == 2):
+            print(Z)
+            for y in range (4):
+                for x in range (4):
+                    if (Z[y,x] < 0):
+                        print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
+                    else :
+                        print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
+            print("levelbitstring = ", levelbitstring)
+            print(len(levelbitstring))
+            print("------------------------")
         # 計算TotalZeros 到最後一個非零係數前的0的個數
         Start_cnt = False
         TotalZeros = 0

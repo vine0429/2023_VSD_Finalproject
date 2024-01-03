@@ -33,8 +33,8 @@ module cavlc_top_tb();
         .clk(clk),
         .rst(rst),
         .valid(valid),
-        .scale00_i(scale00), .scale01_i(scale01), .scale02_i(scale02), .scale03_i(scale03), 
-        .scale10_i(scale10), .scale11_i(scale11), .scale12_i(scale12), .scale13_i(scale13), 
+        .scale00_i(scale00), .scale01_i(scale01), .scale02_i(scale02), .scale03_i(scale03),
+        .scale10_i(scale10), .scale11_i(scale11), .scale12_i(scale12), .scale13_i(scale13),
         .scale20_i(scale20), .scale21_i(scale21), .scale22_i(scale22), .scale23_i(scale23),
         .scale30_i(scale30), .scale31_i(scale31), .scale32_i(scale32), .scale33_i(scale33)
     );
@@ -54,7 +54,7 @@ module cavlc_top_tb();
     scale00 = 8'd0;
     scale01 = 8'd0;
     scale02 = 8'd0;
-    scale03 = 8'd0; 
+    scale03 = 8'd0;
     scale10 = 8'd0;
     scale11 = 8'd0;
     scale12 = 8'd0;
@@ -75,7 +75,7 @@ module cavlc_top_tb();
     // scale00 = -8'd10;
     // scale01 = -8'd1;
     // scale02 = -8'd1;
-    // scale03 = -8'd1; 
+    // scale03 = -8'd1;
     // scale10 = -8'd3;
     // scale11 = -8'd1;
     // scale12 = -8'd1;
@@ -89,29 +89,29 @@ module cavlc_top_tb();
     // scale32 = -8'd1;
     // scale33 = -8'd1;
 
-    scale00 = -8'd12;
-    scale01 = 8'd7;
-    scale02 = 8'd0;
-    scale03 = 8'd1;
-    scale10 = 8'd7;
-    scale11 = 8'd1;
-    scale12 = -8'd3;
+    scale00 = 8'd3;
+    scale01 = 8'd0;
+    scale02 = -8'd1;
+    scale03 = 8'd0;
+    scale10 = 8'd1;
+    scale11 = -8'd2;
+    scale12 = 8'd1;
     scale13 = 8'd0;
-    scale20 = 8'd0;
-    scale21 = -8'd5;
-    scale22 = -8'd3;
-    scale23 = 8'd0;
+    scale20 = -8'd1;
+    scale21 = 8'd0;
+    scale22 = 8'd1;
+    scale23 = -8'd1;
     scale30 = 8'd0;
-    scale31 = -8'd2;
-    scale32 = 8'd2;
-    scale33 = 8'd1;
+    scale31 = 8'd0;
+    scale32 = -8'd1;
+    scale33 = -8'd1;
 
-    #10 
+    #10
     valid   = 1'b0;
     scale00 = 8'd0;
     scale01 = 8'd0;
     scale02 = 8'd0;
-    scale03 = 8'd0; 
+    scale03 = 8'd0;
     scale10 = 8'd0;
     scale11 = 8'd0;
     scale12 = 8'd0;
@@ -128,17 +128,17 @@ module cavlc_top_tb();
     #600 $finish;
     end
 
-    // always @(posedge clk) 
+    // always @(posedge clk)
     // begin
     //     $display("inputdata = %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", din_00, din_01, din_02, din_03,
     //     din_10, din_11, din_12, din_13, din_20, din_21, din_22, din_23, din_30, din_31, din_32, din_33);
     // end
-    // always @(posedge clk) 
+    // always @(posedge clk)
     // begin
     //     $display("outputdata = %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d", dout_00, dout_01, dout_02, dout_03,
     //     dout_10, dout_11, dout_12, dout_13, dout_20, dout_21, dout_22, dout_23, dout_30, dout_31, dout_32, dout_33);
     // end
-    // always @(posedge clk) 
+    // always @(posedge clk)
     // begin
     //     $display("read_data = %b", dout_00);
     // end

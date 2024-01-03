@@ -1,5 +1,7 @@
 `include "CoeffTokenEncoder.sv"
 `include "LevelCodeEncoder.sv"
+`include "TotalZerosEncoder.sv"
+`include "RunBeforeEncoder.sv"
 
 module CAVLCEncTop(
     input       clk,
@@ -12,6 +14,8 @@ module CAVLCEncTop(
     input [2:0] trailing_ones_flag,
     input [4:0] total_zero_cnt,
     input [4:0] total_coeff_cnt,
+    input [4:0] runbefore_cnt,
+    input [4:0] runbefore_list [0:15],
     input [7:0] level_code_list [0:15],
     input [4:0] level_code_cnt,
 
@@ -49,6 +53,8 @@ logic [1:0] trailing_ones_cnt_r;
 logic [2:0] trailing_ones_flag_r;
 logic [4:0] total_zero_cnt_r;
 logic [4:0] total_coeff_cnt_r;
+logic [4:0] runbefore_cnt_r;
+logic [4:0] runbefore_list_r [0:15];
 logic [7:0] level_code_list_r [0:15];
 logic [4:0] level_code_cnt_r;
 
@@ -59,13 +65,6 @@ logic       enc_load;
 logic [3:0] enc_cycle;
 logic [2:0] curr_state;
 logic [2:0] next_state;
-
-//encode output
-logic [4:0]  levelPrefix [0:15];
-logic [15:0] levelSuffixBis [0:15];
-logic [4:0]  levelSuffixLength [0:15];
-assign trailingones_code = trailing_ones_flag_r;
-assign trailingones_bit  = trailing_ones_cnt_r;
 
 assign enc_load        = (curr_state == LOAD);
 assign enc_end         = (next_state == WAITBIS);
@@ -83,8 +82,11 @@ always_ff @(posedge clk) begin
         level_code_cnt_r     <= 5'b0;
         topleft_x_r          <= 10'd0;
         topleft_y_r          <= 10'd0;
-        for (int i=0; i<16; i=i+1)
+        runbefore_cnt_r      <= 5'd0;
+        for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;
+            runbefore_list_r[i]  <= 5'd0;
+        end
     end
     else if (cavlc_enc_ready && cavlc_cnt_valid) begin
         trailing_ones_cnt_r  <= trailing_ones_cnt;
@@ -94,8 +96,11 @@ always_ff @(posedge clk) begin
         level_code_cnt_r     <= level_code_cnt;
         topleft_x_r          <= topleft_x;
         topleft_y_r          <= topleft_y;
-        for (int i=0; i<16; i=i+1)
+        runbefore_cnt_r      <= runbefore_cnt;
+        for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= level_code_list[i];
+            runbefore_list_r[i]  <= runbefore_list[i];
+        end
     end
 end
 
@@ -119,7 +124,7 @@ end
 always_ff @(posedge clk) begin
     if (rst)
         enc_cycle <= 4'd0;
-    else if (next_state == ENC) 
+    else if (next_state == ENC)
         enc_cycle <= enc_cycle + 4'd1;
 end
 
@@ -135,6 +140,9 @@ CoeffTokenEncoder coefftokenencoder(
     .coeff_token_len     (coeff_token_bit)
 );
 
+assign trailingones_code = trailing_ones_flag_r;
+assign trailingones_bit  = trailing_ones_cnt_r;
+
 LevelCodeEncoder levelcodeencoder(
     .clk                 (clk),
     .rst                 (rst),
@@ -146,10 +154,27 @@ LevelCodeEncoder levelcodeencoder(
     .level_code_list     (level_code_list_r),
     .level_code_cnt      (level_code_cnt_r),
     .levelcode_code      (levelcode_code),
-    .levelcode_bit       (levelcode_bit),
-    .levelPrefix_o       (levelPrefix),
-    .levelSuffixBis_o    (levelSuffixBis),
-    .levelSuffixLength_o (levelSuffixLength)
+    .levelcode_bit       (levelcode_bit)
+);
+
+TotalZerosEncoder totalzerosencoder(
+    .total_zero_cnt      (total_zero_cnt_r),
+    .total_coeff_cnt     (total_coeff_cnt_r),
+    .CodeBit             (totalzero_code),
+    .CodeLength          (totalzero_bit)
+);
+
+RunBeforeEncoder runbeforeencoder(
+    .clk                 (clk),
+    .rst                 (rst),
+    .start_enc           (start_enc),
+    .enc_rst             (enc_rst),
+    .enc_load            (enc_load),
+    .total_zero_cnt      (total_zero_cnt_r),
+    .runbefore_cnt       (runbefore_cnt_r),
+    .runbefore_list      (runbefore_list_r),
+    .runbefore_code      (runbefore_code),
+    .runbefore_bit       (runbefore_bit)
 );
 
 endmodule : CAVLCEncTop

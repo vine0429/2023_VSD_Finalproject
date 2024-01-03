@@ -145,11 +145,11 @@ maxproc		4096
 (Special)Runtime environment variables:
 
 Runtime environment variables:
-REMOTEHOST=218-173-156-238.dynamic-ip.hinet.net
+REMOTEHOST=140.116.157.24
 MANPATH=/usr/cad/synopsys/synthesis/2019.12//doc/syn/man:/usr/cad/synopsys/vcs/2023.03/doc/man
 SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
 SNPS_VCS_INTERNAL_MAKE_OPT=
-XDG_SESSION_ID=177025
+XDG_SESSION_ID=178972
 HOSTNAME=cav16
 GUESTFISH_INIT=\e[1;34m
 XLOCALEDIR=/usr/cad/synopsys/icc2/2022.12-sp6//etc/locale
@@ -161,13 +161,13 @@ TERM=xterm
 SHELL=/bin/bash
 MAKEFLAGS=
 HISTSIZE=1000
-SSH_CLIENT=218.173.156.238 49864 5614
+SSH_CLIENT=140.116.157.24 49227 5614
 QTDIR=/usr/lib64/qt-3.3
 MGC_LOCATION_MAP=NO_MAP
 QTINC=/usr/lib64/qt-3.3/include
 SSH_TTY=/dev/pts/16
 LC_ALL=C
-SNPS_VCS_INTERNAL_ROOT_PID=882
+SNPS_VCS_INTERNAL_ROOT_PID=22347
 QT_GRAPHICSSYSTEM_CHECKED=1
 GROUP=N26124939
 USER=N26124939
@@ -188,7 +188,7 @@ GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\]
 MAIL=/var/spool/mail/N26124939
 PATH=.:/usr/cad/synopsys/icc2/2022.12-sp6//bin:/usr/cad/synopsys/spyglass/2023.03//SPYGLASS_HOME/bin:/usr/cad/cadence/INNOVUS/cur/tools/celtic/bin:/usr/cad/cadence/INNOVUS/cur/tools/plato/bin:/usr/cad/cadence/INNOVUS/cur/tools/dfII/bin:/usr/cad/cadence/INNOVUS/cur/tools/bin:/usr/cad/cadence/INNOVUS/cur//tools/tlfUtil/bin:/usr/cad/synopsys/vcs/2023.03/amd64/bin:/opt/RISCV/bin:/usr/cad/synopsys/verdi/2020.03//bin:/usr/cad/synopsys/synthesis/2019.12//amd64/syn/bin:/cad/synopsys/lc/cur/bin:/usr/cad/modelsim/modelsim/cur/modeltech/bin:/usr/cad/modelsim/modelsim/cur/bin:/usr/cad/cadence/jasper_2023.03/bin:/usr/cad/cadence/INCISIV/cur/tools/bin:/usr/cad/cadence/INCISIV/cur/tools/vtools/vfault/bin:/usr/cad/cadence/INCISIV/cur/tools/dfII/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/N26124939/.local/bin:/home/N26124939/bin
 maxpend=0
-SNPS_VCS_INTERNAL_CURR_PID=882
+SNPS_VCS_INTERNAL_CURR_PID=22347
 VERDI_HOME=/usr/cad/synopsys/verdi/2020.03/
 PWD=/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/build
 VCS_HOME=/usr/cad/synopsys/vcs/2023.03
@@ -202,7 +202,7 @@ VCS_CC=gcc
 LM_LICENSE_FILE=26585@lstn:26585@lstc:26585@lshc:5280@lshc:5280@lstc:5280@lstn:1717@lstn:1717@lsncku:
 HISTCONTROL=ignoredups
 VCS_ARG_ADDED_FOR_TMP=1
-SNPS_VCS_TMPDIR=/tmp/vcs_20240102181437_882
+SNPS_VCS_TMPDIR=/tmp/vcs_20240103075125_22347
 SHLVL=4
 HOME=/home/N26124939
 OSTYPE=linux
@@ -215,14 +215,14 @@ LOGNAME=N26124939
 SNPS_VCS_INTERNAL_MAKE=make
 QTLIB=/usr/lib64/qt-3.3/lib
 MAKE_TERMERR=/dev/pts/16
-SNPS_VCS_INTERNAL_ROOT_START_TIME=1704219278.053327726
+SNPS_VCS_INTERNAL_ROOT_START_TIME=1704268285.263831285
 XDG_DATA_DIRS=/home/N26124939/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-SSH_CONNECTION=218.173.156.238 49864 140.116.157.16 5614
+SSH_CONNECTION=140.116.157.24 49227 140.116.157.16 5614
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 SHLIB_PATH=/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/:
 sysc_uni_pwd=/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/build
 vip_dir=/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/vip
-DISPLAY=localhost:21.0
+DISPLAY=localhost:20.0
 XDG_RUNTIME_DIR=/run/user/1055
 VCS_ARCH=linux64
 QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
@@ -239,8 +239,8 @@ FLEXLM_BORROWFILE=/home/N26124939/.cav16-borrow.txt
 Runtime command line arguments:
 argv[0]=simv
 240 profile - 100
-          CPU/Mem usage: 0.060 sys,  0.290 user,  274.83M mem
-241 Elapsed time:    0:00:01    Wed Jan  3 02:14:41 2024
+          CPU/Mem usage: 0.060 sys,  0.320 user,  274.99M mem
+241 Elapsed time:    0:00:01    Wed Jan  3 15:51:29 2024
 242 pliAppInit
 243 FSDB_GATE is set.
 244 FSDB_RTL is set.
@@ -276,42 +276,42 @@ argv[0]=simv
 274 *Verdi* : Enable +mda dumping.
 275 *Verdi* : End of traversing.
 276 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.080 sys,  0.300 user,  374.44M mem
+          CPU/Mem usage: 0.080 sys,  0.340 user,  374.60M mem
                    incr: 0.010 sys,  0.010 user,  7.87M mem
                    accu: 0.010 sys,  0.010 user,  7.87M mem
               accu incr: 0.010 sys,  0.010 user,  7.87M mem
 
-          Count usage: 736 var,  665 idcode,  122 callback
-                 incr: 736 var,  665 idcode,  122 callback
-                 accu: 736 var,  665 idcode,  122 callback
-            accu incr: 736 var,  665 idcode,  122 callback
-277 Elapsed time:    0:00:02    Wed Jan  3 02:14:42 2024
+          Count usage: 747 var,  670 idcode,  127 callback
+                 incr: 747 var,  670 idcode,  127 callback
+                 accu: 747 var,  670 idcode,  127 callback
+            accu incr: 747 var,  670 idcode,  127 callback
+277 Elapsed time:    0:00:01    Wed Jan  3 15:51:29 2024
 278 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.080 sys,  0.300 user,  375.49M mem
+          CPU/Mem usage: 0.080 sys,  0.340 user,  375.66M mem
                    incr: 0.000 sys,  0.000 user,  1.05M mem
-                   accu: 0.010 sys,  0.010 user,  8.93M mem
+                   accu: 0.010 sys,  0.010 user,  8.92M mem
               accu incr: 0.000 sys,  0.000 user,  1.05M mem
 
-          Count usage: 736 var,  665 idcode,  122 callback
+          Count usage: 747 var,  670 idcode,  127 callback
                  incr: 0 var,  0 idcode,  0 callback
-                 accu: 736 var,  665 idcode,  122 callback
+                 accu: 747 var,  670 idcode,  127 callback
             accu incr: 0 var,  0 idcode,  0 callback
-279 Elapsed time:    0:00:02    Wed Jan  3 02:14:42 2024
+279 Elapsed time:    0:00:01    Wed Jan  3 15:51:29 2024
 280 End of simulation at 63500
-281 Elapsed time:    0:00:02    Wed Jan  3 02:14:42 2024
+281 Elapsed time:    0:00:01    Wed Jan  3 15:51:29 2024
 282 Begin FSDB profile info:
-283 FSDB Writer : bc1(148) bcn(3038) mtf/stf(0/0)
-FSDB Writer elapsed time : flush(0.114275) io wait(0.000000) theadpool wait(0.000000)
+283 FSDB Writer : bc1(151) bcn(2972) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.155317) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
 284 End FSDB profile info
 285 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
-286                      - BlockUsed:1 Acquire:2758 BufferUsed:41751
+286                      - BlockUsed:1 Acquire:2705 BufferUsed:40634
 287                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:0
-288                      - MainProducerTime:0.405029001 TotalConsumerTime:0.000000000
-289                      - ElapsedTime:0.648587000
-290 Producer   0 profile - BlockUsed:1 Acquire:2758 BufferUsed:41751
+288                      - MainProducerTime:0.438875906 TotalConsumerTime:0.000000000
+289                      - ElapsedTime:0.863126000
+290 Producer   0 profile - BlockUsed:1 Acquire:2705 BufferUsed:40634
 291 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
-292                      - BlockUsed:1 Acquire:2758 BufferUsed:41751
+292                      - BlockUsed:1 Acquire:2705 BufferUsed:40634
 293 SimExit
-294 Elapsed time:    0:00:02    Wed Jan  3 02:14:42 2024
+294 Elapsed time:    0:00:01    Wed Jan  3 15:51:29 2024
 295 Sim process exit

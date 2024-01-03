@@ -9,14 +9,11 @@ module LevelCodeEncoder(
     input        [7:0]  level_code_list [0:15],
     input        [4:0]  level_code_cnt,
     output logic [49:0] levelcode_code,
-    output logic [5:0]  levelcode_bit,
-    output logic [4:0]  levelPrefix_o [0:15],
-    output logic [15:0] levelSuffixBis_o [0:15],
-    output logic [4:0]  levelSuffixLength_o [0:15]
+    output logic [5:0]  levelcode_bit
 );
 
-logic [7:0] coeff;
-logic [7:0] coeff_abs;
+logic [7:0]  coeff;
+logic [7:0]  coeff_abs;
 logic [4:0]  encode_idx;
 logic        FirstNonZero;
 logic [7:0]  levelCode;
@@ -109,29 +106,6 @@ always_ff @(posedge clk) begin
             suffixLength_r <= 8'd0;
     else if (start_enc)
         suffixLength_r <= suffixLength;
-end
-
-//level code encode output
-always_ff @(posedge clk) begin
-    if (rst) begin
-        for (int i=0; i<16; i=i+1) begin
-            levelPrefix_o[i]       <= 5'd0;
-            levelSuffixBis_o[i]    <= 16'd0;
-            levelSuffixLength_o[i] <= 5'd0;
-        end
-    end
-    else if (enc_rst) begin
-        for (int i=0; i<16; i=i+1) begin
-            levelPrefix_o[i]       <= 5'd0;
-            levelSuffixBis_o[i]    <= 16'd0;
-            levelSuffixLength_o[i] <= 5'd0;
-        end
-    end
-    else if (start_enc && (encode_idx < level_code_cnt)) begin
-        levelPrefix_o[encode_idx]       <= levelPrefix;
-        levelSuffixBis_o[encode_idx]    <= levelSuffixBis;
-        levelSuffixLength_o[encode_idx] <= levelSuffixLength;
-    end
 end
 
 always_ff @(posedge clk) begin

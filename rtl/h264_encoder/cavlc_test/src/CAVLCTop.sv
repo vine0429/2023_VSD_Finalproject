@@ -34,14 +34,10 @@ logic [1:0] trailing_ones_cnt;
 logic [2:0] trailing_ones_flag;
 logic [4:0] total_zero_cnt;
 logic [4:0] total_coeff_cnt;
+logic [4:0] runbefore_cnt;
+logic [4:0] runbefore_list [0:15];
 logic [7:0] level_code_list [0:15];
 logic [4:0] level_code_cnt;
-logic [1:0] trailing_ones_cnt_r;
-logic [2:0] trailing_ones_flag_r;
-logic [4:0] total_zero_cnt_r;
-logic [4:0] total_coeff_cnt_r;
-logic [7:0] level_code_list_r [0:15];
-logic [4:0] level_code_cnt_r;
 
 //encoder
 logic cavlc_enc_ready;
@@ -91,6 +87,8 @@ CAVLCCntTop cavlccnttop(
     .trailing_ones_flag(trailing_ones_flag),
     .total_zero_cnt    (total_zero_cnt),
     .total_coeff_cnt   (total_coeff_cnt),
+    .runbefore_cnt     (runbefore_cnt),
+    .runbefore_list    (runbefore_list),
     .level_code_list   (level_code_list),
     .level_code_cnt    (level_code_cnt)
 );
@@ -107,6 +105,8 @@ CAVLCEncTop cavlcenctop(
     .trailing_ones_flag (trailing_ones_flag ),
     .total_zero_cnt     (total_zero_cnt     ),
     .total_coeff_cnt    (total_coeff_cnt    ),
+    .runbefore_cnt      (runbefore_cnt      ),
+    .runbefore_list     (runbefore_list     ),
     .level_code_list    (level_code_list    ),
     .level_code_cnt     (level_code_cnt     ),
     .cavlc_enc_ready    (cavlc_enc_ready    ),

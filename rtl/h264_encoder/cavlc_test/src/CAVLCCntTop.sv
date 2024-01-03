@@ -3,6 +3,7 @@
 `include "TotalZeroCounter.sv"
 `include "TrailingOneCounter.sv"
 `include "LevelCodeList.sv"
+`include "RunBeforeCounter.sv"
 
 module CAVLCCntTop(
     input              clk,
@@ -32,6 +33,8 @@ module CAVLCCntTop(
     output logic [2:0] trailing_ones_flag,
     output logic [4:0] total_zero_cnt,
     output logic [4:0] total_coeff_cnt,
+    output logic [4:0] runbefore_cnt,
+    output logic [4:0] runbefore_list [0:15],
     output logic [7:0] level_code_list [0:15],
     output logic [4:0] level_code_cnt
 );
@@ -132,6 +135,16 @@ LevelCodeList levelcodelist(
     .coeff_i               (coeff),
     .level_code_list       (level_code_list),
     .level_code_cnt        (level_code_cnt)
+);
+
+RunBeforeCounter runbeforecounter(
+    .clk                   (clk),
+    .rst                   (rst),
+    .cnt_rst               (cnt_rst),
+    .start_cnt_i           (start_cnt),
+    .coeff_i               (coeff),
+    .runbefore_cnt         (runbefore_cnt),
+    .runbefore_list        (runbefore_list)
 );
 
 endmodule : CAVLCCntTop

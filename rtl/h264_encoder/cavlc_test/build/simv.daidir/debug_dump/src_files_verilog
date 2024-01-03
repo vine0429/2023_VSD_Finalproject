@@ -11,7 +11,10 @@
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/Coeff_token_vlc_chromaDC.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/LevelCodeEncoder.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/LevelCodeList.sv
+/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/RunBeforeCounter.sv
+/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/RunBeforeEncoder.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/TotalCoeffCounter.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/TotalZeroCounter.sv
+/home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/TotalZerosEncoder.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/TrailingOneCounter.sv
 /home/N26124939/VSD/VSD_Project/rtl/h264_encoder/cavlc_test/src/epu_define.svh

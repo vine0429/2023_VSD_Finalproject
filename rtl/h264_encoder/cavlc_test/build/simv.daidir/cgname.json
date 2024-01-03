@@ -11,6 +11,12 @@
         "module",
         6
     ],
+    "RunBeforeCounter": [
+        "RunBeforeCounter",
+        "nPS07",
+        "module",
+        4
+    ],
     "CAVLCCntTop": [
         "CAVLCCntTop",
         "Drpkk",
@@ -23,9 +29,9 @@
         "module",
         5
     ],
-    "LevelCodeEncoder": [
-        "LevelCodeEncoder",
-        "aD2xu",
+    "TotalZerosEncoder": [
+        "TotalZerosEncoder",
+        "dHT3I",
         "module",
         7
     ],

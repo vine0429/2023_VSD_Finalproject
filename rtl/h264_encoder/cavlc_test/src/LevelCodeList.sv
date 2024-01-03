@@ -10,14 +10,10 @@ module LevelCodeList(
     output logic [4:0] level_code_cnt
 );
 
-logic trailing_ones_end;
-
 always_ff @(posedge clk) begin
     if (rst) begin
-        integer i=0;
-        for (i=0; i<16; i=i+1) begin
+        for (int i=0; i<16; i=i+1)
             level_code_list[i] <= 8'd0;
-        end
         level_code_cnt <= 5'd0;
     end
     else if ((trailing_ones_cnt == 2'd3 || trailing_ones_stop_cnt) && coeff_i != 8'd0) begin
