@@ -8,8 +8,8 @@ module intra_4x4_top(
     input [5:0] fetch_mb_x_i,
     input [5:0] fetch_mb_y_i,
     input [7:0] matrixY_i [0:15][0:15],
-    input [7:0] matrixU_i [0:7][0:7],
-    input [7:0] matrixV_i [0:7][0:7],
+    // input [7:0] matrixU_i [0:7][0:7],
+    // input [7:0] matrixV_i [0:7][0:7],
 
     output logic intra_ready,
     output logic dctq_valid,
@@ -25,8 +25,10 @@ logic [3:0]  next_state;
 logic [5:0]  mb_x;
 logic [5:0]  mb_y;
 logic [7:0]  matrixY_buf [0:15][0:15];
-logic [7:0]  matrixU_buf [0:7][0:7];
-logic [7:0]  matrixV_buf [0:7][0:7];
+// logic [7:0]  matrixU_buf [0:7][0:7];
+// logic [7:0]  matrixV_buf [0:7][0:7];
+logic [9:0]  topleft_x_buf;
+logic [9:0]  topleft_y_buf;
 
 logic [7:0]  intra_4x4_luma [0:3][0:3];
 logic [8:0]  preLoopFilter  [0:3][0:3];
@@ -79,7 +81,7 @@ always_comb begin
         CNT_PRELOOP: next_state = RENEW_PIX;
         RENEW_PIX  : next_state = WAIT_CAVLC;
         WAIT_CAVLC : next_state = (!intra_4x4_finish && cavlc_cnt_ready) ?   NEXT_4x4 : 
-                                  (intra_4x4_finish && cavlc_cnt_ready)  ?        IDLE : WAIT_CAVLC;
+                                  (intra_4x4_finish && cavlc_cnt_ready)  ?       IDLE : WAIT_CAVLC;
     endcase
 end
 
@@ -109,37 +111,37 @@ always_ff @(posedge clk) begin
 end
 
 // U
-always_ff @(posedge clk) begin
-    if (rst) begin
-        for (int i=0; i<8; i=i+1) 
-            for(int j=0; j<8; j=j+1) 
-                matrixU_buf[i][j] <= 8'd0;
-    end
-    else if (next_state == LOAD) begin
-        for (int i=0; i<8; i=i+1) 
-            for(int j=0; j<8; j=j+1) 
-                matrixU_buf[i][j] <= matrixU_i[i][j];
-    end
-end
+// always_ff @(posedge clk) begin
+//     if (rst) begin
+//         for (int i=0; i<8; i=i+1) 
+//             for(int j=0; j<8; j=j+1) 
+//                 matrixU_buf[i][j] <= 8'd0;
+//     end
+//     else if (next_state == LOAD) begin
+//         for (int i=0; i<8; i=i+1) 
+//             for(int j=0; j<8; j=j+1) 
+//                 matrixU_buf[i][j] <= matrixU_i[i][j];
+//     end
+// end
 
-// V
-always_ff @(posedge clk) begin
-    if (rst) begin
-        for (int i=0; i<8; i=i+1) 
-            for(int j=0; j<8; j=j+1) 
-                matrixV_buf[i][j] <= 8'd0;
-    end
-    else if (next_state == LOAD) begin
-        for (int i=0; i<8; i=i+1) 
-            for(int j=0; j<8; j=j+1) 
-                matrixV_buf[i][j] <= matrixV_i[i][j];
-    end
-end
+// // V
+// always_ff @(posedge clk) begin
+//     if (rst) begin
+//         for (int i=0; i<8; i=i+1) 
+//             for(int j=0; j<8; j=j+1) 
+//                 matrixV_buf[i][j] <= 8'd0;
+//     end
+//     else if (next_state == LOAD) begin
+//         for (int i=0; i<8; i=i+1) 
+//             for(int j=0; j<8; j=j+1) 
+//                 matrixV_buf[i][j] <= matrixV_i[i][j];
+//     end
+// end
 
 always_ff @(posedge clk) begin
     if (rst) 
         i4x4 <= 2'd0;
-    else if (curr_state == LOAD)
+    else if (next_state == LOAD)
         i4x4 <= 2'd0;
     else if (next_state == NEXT_4x4)
         i4x4 <= i4x4 + 2'd1;
@@ -148,7 +150,7 @@ end
 always_ff @(posedge clk) begin
     if (rst)
         i8x8 <= 2'd0;
-    else if (curr_state == LOAD)
+    else if (next_state == LOAD)
         i8x8 <= 2'd0;
     else if (i4x4 == 2'd3 && next_state == NEXT_4x4)
         i8x8 <= i8x8 + 2'd1;
@@ -159,10 +161,14 @@ always_ff @(posedge clk) begin
     if (rst) begin
         topleft_x <= 10'd0;
         topleft_y <= 10'd0;
+        topleft_x_buf <= 10'b0;
+        topleft_y_buf <= 10'b0;
     end
     else if (next_state == CNT_TOPLEFT) begin
         topleft_x <= (mb_x << 4) + ((i8x8 & 4'b0001) << 3) + ((i4x4 & 4'b0001) << 2);
         topleft_y <= (mb_y << 4) + ((i8x8 & 4'b0010) << 2) + ((i4x4 & 4'b0010) << 1);
+        topleft_x_buf <= ((i8x8 & 4'b0001) << 3) + ((i4x4 & 4'b0001) << 2);
+        topleft_y_buf <= ((i8x8 & 4'b0010) << 2) + ((i4x4 & 4'b0010) << 1);
     end
 end
 
@@ -186,7 +192,7 @@ always_ff @(posedge clk) begin
     else if (next_state == CNT_PREPARE) begin
         for (int i=0; i<4; i=i+1) 
             for(int j=0; j<4; j=j+1) 
-                intra_4x4_luma[j][i] = matrixY_buf[topleft_y+j][topleft_x+i];
+                intra_4x4_luma[j][i] = matrixY_buf[topleft_y_buf+j][topleft_x_buf+i];
         A <= intra4x4_tp[topleft_x+10'd0];
         B <= intra4x4_tp[topleft_x+10'd1];
         C <= intra4x4_tp[topleft_x+10'd2];

@@ -11,6 +11,7 @@ module h264_top(
     input        data_valid,
     input [31:0] data_word,
 
+    output logic        fetch_req,
     output logic [31:0] fetch_addr
 );
 
@@ -57,8 +58,9 @@ fetch fetch_inst(
     .fetch_mb_x_o  (fetch_mb_x    ),
     .fetch_mb_y_o  (fetch_mb_y    ),
     .matrixY_o     (matrixY),
-    .matrixU_o     (matrixU),
-    .matrixV_o     (matrixV),
+    // .matrixU_o     (matrixU),
+    // .matrixV_o     (matrixV),
+    .fetch_req_o   (fetch_req),
     .fetch_addr_o  (fetch_addr)
 );
 
@@ -70,8 +72,8 @@ intra_4x4_top intra_4x4_top_inst(
     .fetch_mb_x_i      (fetch_mb_x),
     .fetch_mb_y_i      (fetch_mb_y),
     .matrixY_i         (matrixY),
-    .matrixU_i         (matrixU),
-    .matrixV_i         (matrixV),
+    // .matrixU_i         (matrixU),
+    // .matrixV_i         (matrixV),
     .intra_ready       (intra_ready),
     .dctq_valid        (dctq_valid),
     .topleft_x         (topleft_x),

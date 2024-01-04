@@ -1,3 +1,4 @@
+/home/N26124939/VSD/VSD_Project/rtl/include/epu_define.svh
 /home/N26124939/VSD/VSD_Project/rtl/sim/h264_tb.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/Bitstream.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/CAVLC4x4Buffer.sv
@@ -18,7 +19,6 @@
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/TotalZeroCounter.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/TotalZerosEncoder.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/TrailingOneCounter.sv
-/home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/epu_define.svh
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/dct_quant/tq_dct_4x4.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/dct_quant/tq_dct_quant.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/dct_quant/tq_dequant_4x4.sv

@@ -12,9 +12,10 @@ module fetch(
     output logic [5:0] fetch_mb_x_o,
     output logic [5:0] fetch_mb_y_o,
     output logic [7:0] matrixY_o [0:15][0:15],
-    output logic [7:0] matrixU_o [0:7][0:7],
-    output logic [7:0] matrixV_o [0:7][0:7],
+    // output logic [7:0] matrixU_o [0:7][0:7],
+    // output logic [7:0] matrixV_o [0:7][0:7],
 
+    output logic        fetch_req_o,
     output logic [31:0] fetch_addr_o
 );
 
@@ -50,21 +51,20 @@ assign data_byte0   = data_word_i[7:0];
 assign data_byte1   = data_word_i[15:8];
 assign data_byte2   = data_word_i[23:16];
 assign data_byte3   = data_word_i[31:24];
-assign fetch_mb_x_o = 6'd0;
-assign fetch_mb_y_o = 6'd0;
+assign fetch_req_o  = (curr_state == IDLE && (fetch_mb_y_o != (`FRAME_HEIGHT >> 4)));
 
 assign pos_x0 = pos_x;
 assign pos_x1 = pos_x + 4'd1;
 assign pos_x2 = pos_x + 4'd2;
 assign pos_x3 = pos_x + 4'd3;
 assign fetchY_finish = (curr_state == LD_Y && pixel_count==8'd252 && data_valid_i);
-assign fetchU_finish = (curr_state == LD_U && pixel_count==8'd60  && data_valid_i);
-assign fetchV_finish = (curr_state == LD_V && pixel_count==8'd60  && data_valid_i);
+// assign fetchU_finish = (curr_state == LD_U && pixel_count==8'd60  && data_valid_i);
+// assign fetchV_finish = (curr_state == LD_V && pixel_count==8'd60  && data_valid_i);
 
 always_ff @(posedge clk) begin
     if (rst)
         fetch_valid <= 1'b0;
-    else if (curr_state == LD_V && fetchV_finish)
+    else if (next_state == WAITINTRA)
         fetch_valid <= 1'b1;
     else if (next_state == IDLE)
         fetch_valid <= 1'b0;
@@ -79,10 +79,10 @@ end : FSM_cur_state
 
 always_comb begin : FSM_next_state
     case (curr_state)
-        IDLE           : next_state  = (fetch_start_i) ? LD_Y      : IDLE;
-        LD_Y           : next_state  = (fetchY_finish) ? LD_U      : LD_Y;
-        LD_U           : next_state  = (fetchU_finish) ? LD_V      : LD_U;
-        LD_V           : next_state  = (fetchV_finish) ? WAITINTRA : LD_V;
+        IDLE           : next_state  = (fetch_req_o)   ? LD_Y      : IDLE;
+        LD_Y           : next_state  = (fetchY_finish) ? WAITINTRA : LD_Y; //only luma
+        // LD_U           : next_state  = (fetchU_finish) ? LD_V      : LD_U;
+        // LD_V           : next_state  = (fetchV_finish) ? WAITINTRA : LD_V;
         WAITINTRA      : next_state  = (intra_ready && fetch_valid) ? IDLE : WAITINTRA;
         default: next_state  = IDLE;
     endcase
@@ -93,7 +93,7 @@ always_ff @(posedge clk) begin
         pixel_count <= 8'd0;
     else if (fetchY_finish || fetchU_finish || fetchV_finish)
         pixel_count <= 8'd0;
-    else if (curr_state != IDLE && data_valid_i)
+    else if (curr_state == LD_Y && data_valid_i)
         pixel_count <= pixel_count + 8'd4;
 end
 
@@ -113,7 +113,7 @@ end
 always_ff @(posedge clk) begin
     if (rst)
         fetch_addr_o <= 32'd0;
-    else if (curr_state != IDLE && data_valid_i)
+    else if (curr_state == LD_Y && data_valid_i)
         fetch_addr_o <= fetch_addr_o + 32'd1;
 end
 
@@ -126,6 +126,21 @@ always_ff @(posedge clk) begin
         pos_y <= pos_y + 4'd1;
     else if ((curr_state == LD_U || curr_state == LD_V) && pos_x == 4'd4)
         pos_y <= pos_y + 4'd1;
+end
+
+always_ff @(posedge clk) begin
+    if (rst) begin
+        fetch_mb_x_o <= 6'd0;
+        fetch_mb_y_o <= 6'd0;
+    end
+    else if (curr_state == WAITINTRA && next_state == IDLE) begin
+        if (fetch_mb_x_o == `WIDTH_MB_NUM_MINUS1)
+            fetch_mb_x_o <= 6'd0;
+        else 
+            fetch_mb_x_o <= fetch_mb_x_o + 6'd1;
+        if (fetch_mb_x_o == `WIDTH_MB_NUM_MINUS1)
+            fetch_mb_y_o <= fetch_mb_y_o + 6'd1;
+    end
 end
 
 // Y
@@ -145,35 +160,35 @@ always_ff @(posedge clk ) begin
 end
 
 // U
-always_ff @(posedge clk) begin
-    if(rst) begin
-        integer i=0, j=0;
-        for (i=0; i<8; i=i+1) 
-            for(j=0; j<8; j=j+1) 
-                matrixU_o[i][j] <= 8'd0;
-    end
-    else if(curr_state == LD_U && data_valid_i) begin
-        matrixU_o[pos_y][pos_x0] <= data_byte0;
-        matrixU_o[pos_y][pos_x1] <= data_byte1;
-        matrixU_o[pos_y][pos_x2] <= data_byte2;
-        matrixU_o[pos_y][pos_x3] <= data_byte3;
-    end
-end
+// always_ff @(posedge clk) begin
+//     if(rst) begin
+//         integer i=0, j=0;
+//         for (i=0; i<8; i=i+1) 
+//             for(j=0; j<8; j=j+1) 
+//                 matrixU_o[i][j] <= 8'd0;
+//     end
+//     else if(curr_state == LD_U && data_valid_i) begin
+//         matrixU_o[pos_y][pos_x0] <= data_byte0;
+//         matrixU_o[pos_y][pos_x1] <= data_byte1;
+//         matrixU_o[pos_y][pos_x2] <= data_byte2;
+//         matrixU_o[pos_y][pos_x3] <= data_byte3;
+//     end
+// end
 
-// V
-always_ff @(posedge clk) begin
-    if(rst) begin
-        integer i=0, j=0;
-        for (i=0; i<8; i=i+1) 
-            for(j=0; j<8; j=j+1) 
-                matrixV_o[i][j] <= 8'd0;
-    end
-    else if(curr_state == LD_V && data_valid_i) begin
-        matrixV_o[pos_y][pos_x0] <= data_byte0;
-        matrixV_o[pos_y][pos_x1] <= data_byte1;
-        matrixV_o[pos_y][pos_x2] <= data_byte2;
-        matrixV_o[pos_y][pos_x3] <= data_byte3;
-    end
-end
+// // V
+// always_ff @(posedge clk) begin
+//     if(rst) begin
+//         integer i=0, j=0;
+//         for (i=0; i<8; i=i+1) 
+//             for(j=0; j<8; j=j+1) 
+//                 matrixV_o[i][j] <= 8'd0;
+//     end
+//     else if(curr_state == LD_V && data_valid_i) begin
+//         matrixV_o[pos_y][pos_x0] <= data_byte0;
+//         matrixV_o[pos_y][pos_x1] <= data_byte1;
+//         matrixV_o[pos_y][pos_x2] <= data_byte2;
+//         matrixV_o[pos_y][pos_x3] <= data_byte3;
+//     end
+// end
 
 endmodule : fetch

@@ -22,7 +22,7 @@ logic [7:0] matrixU [0:7][0:7];
 logic [7:0] matrixV [0:7][0:7];
 logic       fetch_finish;
 
-logic [31:0] mem [0:95]; // for test
+logic [31:0] mem [0:32767]; // for test
 assign data_word  = mem[fetch_addr];
 assign data_valid = 1'b1;
 
@@ -53,11 +53,11 @@ initial begin
   
   start = 1'b0;
 
-  #10000;
+  #10000000;
 
   
   fid = $fopen("mem_output.hex", "w");
-  for(int i=0; i<16; i=i+1 ) begin
+  for(int i=0; i<TOP.packer_inst.paker_waddr; i=i+1 ) begin
       $fwrite(fid, "%h\n", TOP.packer_inst.mem[i]);
   end
   

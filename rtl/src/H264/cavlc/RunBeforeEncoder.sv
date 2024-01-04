@@ -239,7 +239,7 @@ always_ff @(posedge clk) begin
         runbefore_code <= 32'b0;
         runbefore_bit  <= 5'd0;
     end
-    else if (start_enc && (encode_idx <= (runbefore_cnt -5'd1))) begin
+    else if (start_enc && runbefore_cnt != 0 && (encode_idx <= (runbefore_cnt -5'd1))) begin
         runbefore_code <= next_runbefore_code;
         runbefore_bit  <= next_runbefore_bit;
     end

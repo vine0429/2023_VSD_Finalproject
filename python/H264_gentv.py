@@ -11,7 +11,7 @@ file_path = "./yuv/BlowingBubbles_416x240_50.yuv"
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 416
 frame_height = 240
-frame_encnum = 10 # 這邊調整要編碼幾張frame
+frame_encnum = 1 # 這邊調整要編碼幾張frame
 SubWidthC    = 2
 SubHeightC   = 2
 
@@ -192,15 +192,20 @@ for frame_idx in range(frame_encnum):
             # 只用DC mode
             sum_min = min(sum_DC,sum_DC,sum_DC)
 
-            if (sum_min == sum_Vertical):
-                predMode        = 0
-                pred_matrix     = pred_Vertical
-                pred_res_matrix = res_Vertical
-            elif (sum_min == sum_Horizontal):
-                predMode        = 1
-                pred_matrix     = pred_Horizontal
-                pred_res_matrix = res_Horizontal
-            elif (sum_min == sum_DC):
+            # if (sum_min == sum_Vertical):
+            #     predMode        = 0
+            #     pred_matrix     = pred_Vertical
+            #     pred_res_matrix = res_Vertical
+            # elif (sum_min == sum_Horizontal):
+            #     predMode        = 1
+            #     pred_matrix     = pred_Horizontal
+            #     pred_res_matrix = res_Horizontal
+            # elif (sum_min == sum_DC):
+            #     predMode        = 2
+            #     pred_matrix     = pred_DC_matrix
+            #     pred_res_matrix = res_DC
+
+            if (sum_min == sum_DC):
                 predMode        = 2
                 pred_matrix     = pred_DC_matrix
                 pred_res_matrix = res_DC
@@ -224,13 +229,24 @@ for frame_idx in range(frame_encnum):
 
         preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
 
-        # print(intra4x4_luma)
-        # print(pred_matrix)
-        # print(DCT_and_QT(pred_res_matrix))
-        # print(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP))
-        # print(pred_res_matrix)
-        # print(preLoopFilter)
-        # print("---------------")
+        if (topleft_x == 36 and topleft_y == 8):
+            print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
+            print(A)
+            print(B)
+            print(C)
+            print(D)
+            print(I)
+            print(J)
+            print(K)
+            print(L)
+            print(intra4x4_luma)
+            print(pred_matrix)
+            print(pred_res_matrix)
+            print(DCT_and_QT(pred_res_matrix))
+            print(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP))
+            print(pred_res_matrix)
+            print(preLoopFilter)
+            print("---------------")
 
         # print(intra4x4_luma)
         # print(pred_res_matrix)
@@ -999,8 +1015,8 @@ for frame_idx in range(frame_encnum):
             if (coeff == 0 and Start_encode == True):
                 run_before = run_before + 1
             if (coeff != 0 and Start_encode == True):
-                print("run_before = ", run_before, "zero_left = ", zero_left, "bistring = ", map.run_before(run_before, zero_left))
-                runbefore_string = runbefore_string + map.run_before(run_before, zero_left)
+                # print("run_before = ", run_before, "zero_left = ", zero_left, "bistring = ", map.run_before(run_before, zero_left))
+                # runbefore_string = runbefore_string + map.run_before(run_before, zero_left)
                 cavlc_bitstring = cavlc_bitstring + map.run_before(run_before, zero_left)
                 zero_left = zero_left - run_before
                 if (zero_left == 0): break #run_before 編碼完成
@@ -1008,7 +1024,7 @@ for frame_idx in range(frame_encnum):
             if (coeff != 0):
                 Start_encode = True
 
-        if (iCbCr == 2):
+        if (iCbCr == 2 and topleft_x == 32 and topleft_y == 4):
             print(Z)
             print("ZigZag_list_HtL = ",ZigZag_list_HtL)
             print("total_coeff_cnt = ", Non_Zero_Coefficient, "trailing ones cnt = ", Trailing_ones_cnt)
@@ -1019,14 +1035,14 @@ for frame_idx in range(frame_encnum):
             print(hex(int(cavlc_bitstring, 2))[2:])
             print(len(cavlc_bitstring))
             print("--------------------------------")
-            # print(Z)
-            # print(ZigZag_list_HtL)
-            # for y in range (4):
-            #     for x in range (4):
-            #         if (Z[y,x] < 0):
-            #             print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
-            #         else :
-            #             print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
+            print(Z)
+            print(ZigZag_list_HtL)
+            for y in range (4):
+                for x in range (4):
+                    if (Z[y,x] < 0):
+                        print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
+                    else :
+                        print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
 
         # if (len(runbefore_string) >= 25):
         #     print(cavlc_bitstring)
@@ -1211,7 +1227,7 @@ for frame_idx in range(frame_encnum):
     # CBP共有6位，其中前面2位代表UV分量，描述如下表所示；後面4位是Y分量，分別代表巨集塊內的4個8x8子巨集塊，如果任意一位為0，表明對應的8x8塊中所有變換系數level（transform coefficient levels 也就是對像素殘差進行變換、量化後的矩陣內的值，以後統稱level）全部都是0，否則表明對應的8x8塊中的變換系數level不全為0。
     mb_type                          = 0  # (ue v bits) 0代表Intra4x4
     intra_chroma_pred_mode           = 0  # (ue v bits)
-    coded_block_pattern              = int(0b101111)  # (me v bits)
+    coded_block_pattern              = int(0b001111)  # (me v bits)
     mb_qp_delta                      = 0  # (se v bits)
     total_macroblock_layer_bitstream = ""
 
@@ -1242,10 +1258,20 @@ for frame_idx in range(frame_encnum):
                         mp_pred[(i8x8 << 2) + i4x4] = "0" + rem_intra4x4_pred_mode
                     # 殘差矩陣經過DCT和量化運算
                     matrix_Z = DCT_and_QT(pred_res_matrix)
+                    # print("topleft_x =", topleft_x, "topleft_y = ", topleft_y)
+                    # print(matrix_Z)
+                    # print("---------------------------")
                     # 將此量化後的矩陣送入CAVLC編碼
-                    CAVLC_bitstring = CAVLC_bitstring + CAVLC(matrix_Z, topleft_x = topleft_x, topleft_y = topleft_y, iCbCr = 2)
+                    # 呼叫兩次就錯了
+                    test_cavlc = CAVLC(matrix_Z, topleft_x = topleft_x, topleft_y = topleft_y, iCbCr = 2)
+                    CAVLC_bitstring = CAVLC_bitstring + test_cavlc
+                    print("topleft_x =", topleft_x, "topleft_y = ", topleft_y)
+                    print(test_cavlc, len(test_cavlc))
+                    print(hex(int(test_cavlc,2))[2:])
+                    # print(CAVLC_bitstring)
+                    # print(hex(int(CAVLC_bitstring,2))[2:])
             # 色度編碼
-            CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma_dc(mb_x, mb_y)
+            # CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma_dc(mb_x, mb_y)
             # block編碼完成輸出macroblock_layer
             mb_pred_bitstring = ""
             for mp_pred_str in mp_pred:
@@ -1257,9 +1283,17 @@ for frame_idx in range(frame_encnum):
                                         enc.me(0,coded_block_pattern)   +\
                                         enc.se(0,mb_qp_delta)           +\
                                         CAVLC_bitstring
+
+            # print(macroblock_layer_bitstream, len(macroblock_layer_bitstream))
+            #                             CAVLC_bitstring
+            # macroblock_layer_bitstream = CAVLC_bitstring
+            # print(macroblock_layer_bitstream)
             total_macroblock_layer_bitstream = total_macroblock_layer_bitstream + macroblock_layer_bitstream
 
     IDR_slice_bitstream = IDR_sh_bitstring + total_macroblock_layer_bitstream
+    # IDR_slice_bitstream = total_macroblock_layer_bitstream
+
+    # print(IDR_sh_bitstring, len(IDR_sh_bitstring))
 
     # 分割二進位字串為 8 位一組的列表
     byte_list = [IDR_slice_bitstream[i:i+8] for i in range(0, len(IDR_slice_bitstream), 8)]
@@ -1275,6 +1309,9 @@ for frame_idx in range(frame_encnum):
         for i, byte in enumerate(byte_list):
             rbsp = byte + "10000000"  # 最後沒有byte對齊
             byte_value = int(rbsp[0:8], 2)
+            # print(rbsp[0:8],end="")
+            # if (i % 4 == 3):
+            #     print() 
             if (byte_value == 0x0) : # 避免出現000000、000001、000002、000003 nal_start_code
                 zero_cnt = zero_cnt + 1
 
@@ -1289,6 +1326,34 @@ for frame_idx in range(frame_encnum):
             else :
                 file.write(byte_value.to_bytes(1, byteorder='big'))
                 if (byte_value != 0): zero_cnt = 0
+    
+    with open("gold.hex", "w") as file:
+        file.write((0).to_bytes(1, byteorder='big').hex())
+        file.write((0).to_bytes(1, byteorder='big').hex())
+        file.write((0).to_bytes(1, byteorder='big').hex())
+        file.write((1).to_bytes(1, byteorder='big').hex())
+        file.write("\n")
+        for i, byte in enumerate(byte_list):
+            rbsp = byte + "10000000"  # 最後沒有byte對齊
+            byte_value = int(rbsp[0:8], 2)
+
+            if byte_value == 0x0:  # 避免出現000000、000001、000002、000003 nal_start_code
+                zero_cnt = zero_cnt + 1
+
+            if zero_cnt == 2 and (byte_value == 1 or byte_value == 2 or byte_value == 3):
+                file.write((3).to_bytes(1, byteorder='big').hex())
+                file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                zero_cnt = 0
+            elif zero_cnt == 3 and byte_value == 0:
+                file.write((3).to_bytes(1, byteorder='big').hex())
+                file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                zero_cnt = 1
+            else:
+                file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                if byte_value != 0:
+                    zero_cnt = 0
+            if (i % 4 == 3):
+                file.write("\n")
 
 # 最後把SPS、PPS、IDR Slice合在一起
 header.sps_nal(frame_width, frame_height)

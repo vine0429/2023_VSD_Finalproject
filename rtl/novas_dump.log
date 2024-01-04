@@ -136,7 +136,7 @@ Limit information:
 cputime		unlimited
 filesize		unlimited
 datasize		unlimited
-stacksize		8194 kbytes
+stacksize		8193 kbytes
 coredumpsize		0 kbytes
 memoryuse		unlimited
 vmemoryuse		unlimited
@@ -169,7 +169,7 @@ QTDIR=/usr/lib64/qt-3.3
 QTINC=/usr/lib64/qt-3.3/include
 SSH_TTY=/dev/pts/20
 LC_ALL=C
-SNPS_VCS_INTERNAL_ROOT_PID=31456
+SNPS_VCS_INTERNAL_ROOT_PID=17628
 QT_GRAPHICSSYSTEM_CHECKED=1
 USER=N26124939
 GROUP=N26124939
@@ -190,7 +190,7 @@ GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\]
 maxpend=0
 PATH=.:/usr/cad/synopsys/icc2/2022.12-sp6//bin:/usr/cad/synopsys/spyglass/2023.03//SPYGLASS_HOME/bin:/usr/cad/cadence/INNOVUS/cur/tools/celtic/bin:/usr/cad/cadence/INNOVUS/cur/tools/plato/bin:/usr/cad/cadence/INNOVUS/cur/tools/dfII/bin:/usr/cad/cadence/INNOVUS/cur/tools/bin:/usr/cad/cadence/INNOVUS/cur//tools/tlfUtil/bin:/usr/cad/synopsys/vcs/2023.03/amd64/bin:/opt/RISCV/bin:/usr/cad/synopsys/verdi/2020.03//bin:/usr/cad/synopsys/synthesis/2019.12//amd64/syn/bin:/cad/synopsys/lc/cur/bin:/usr/cad/modelsim/modelsim/cur/modeltech/bin:/usr/cad/modelsim/modelsim/cur/bin:/usr/cad/cadence/jasper_2023.03/bin:/usr/cad/cadence/INCISIV/cur/tools/bin:/usr/cad/cadence/INCISIV/cur/tools/vtools/vfault/bin:/usr/cad/cadence/INCISIV/cur/tools/dfII/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/N26124939/.local/bin:/home/N26124939/bin
 MAIL=/var/spool/mail/N26124939
-SNPS_VCS_INTERNAL_CURR_PID=31456
+SNPS_VCS_INTERNAL_CURR_PID=17628
 VERDI_HOME=/usr/cad/synopsys/verdi/2020.03/
 PWD=/home/N26124939/VSD/VSD_Project/rtl
 VCS_HOME=/usr/cad/synopsys/vcs/2023.03
@@ -204,7 +204,7 @@ VCS_CC=gcc
 LM_LICENSE_FILE=26585@lstn:26585@lstc:26585@lshc:5280@lshc:5280@lstc:5280@lstn:1717@lstn:1717@lsncku:
 HISTCONTROL=ignoredups
 VCS_ARG_ADDED_FOR_TMP=1
-SNPS_VCS_TMPDIR=/tmp/vcs_20240104135441_31456
+SNPS_VCS_TMPDIR=/tmp/vcs_20240104185325_17628
 HOME=/home/N26124939
 SHLVL=3
 OSTYPE=linux
@@ -217,7 +217,7 @@ MACHTYPE=x86_64
 SNPS_VCS_INTERNAL_MAKE=make
 MAKE_TERMERR=/dev/pts/20
 QTLIB=/usr/lib64/qt-3.3/lib
-SNPS_VCS_INTERNAL_ROOT_START_TIME=1704376482.033417741
+SNPS_VCS_INTERNAL_ROOT_START_TIME=1704394405.816453211
 SSH_CONNECTION=218.173.156.238 55486 140.116.157.16 5614
 XDG_DATA_DIRS=/home/N26124939/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 LESSOPEN=||/usr/bin/lesspipe.sh %s
@@ -242,8 +242,8 @@ Runtime command line arguments:
 argv[0]=simv
 argv[1]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_0
 243 profile - 100
-          CPU/Mem usage: 0.070 sys,  0.320 user,  275.72M mem
-244 Elapsed time:    0:00:01    Thu Jan  4 21:54:46 2024
+          CPU/Mem usage: 0.070 sys,  0.320 user,  275.66M mem
+244 Elapsed time:    0:00:00    Fri Jan  5 02:53:29 2024
 245 pliAppInit
 246 FSDB_GATE is set.
 247 FSDB_RTL is set.
@@ -279,42 +279,42 @@ argv[1]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_0
 277 *Verdi* : Enable +mda dumping.
 278 *Verdi* : End of traversing.
 279 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.080 sys,  0.360 user,  376.59M mem
-                   incr: 0.000 sys,  0.030 user,  9.10M mem
-                   accu: 0.000 sys,  0.030 user,  9.10M mem
-              accu incr: 0.000 sys,  0.030 user,  9.10M mem
+          CPU/Mem usage: 0.090 sys,  0.350 user,  377.49M mem
+                   incr: 0.010 sys,  0.030 user,  10.07M mem
+                   accu: 0.010 sys,  0.030 user,  10.07M mem
+              accu incr: 0.010 sys,  0.030 user,  10.07M mem
 
-          Count usage: 4745 var,  4653 idcode,  292 callback
-                 incr: 4745 var,  4653 idcode,  292 callback
-                 accu: 4745 var,  4653 idcode,  292 callback
-            accu incr: 4745 var,  4653 idcode,  292 callback
-280 Elapsed time:    0:00:01    Thu Jan  4 21:54:46 2024
+          Count usage: 44832 var,  44740 idcode,  288 callback
+                 incr: 44832 var,  44740 idcode,  288 callback
+                 accu: 44832 var,  44740 idcode,  288 callback
+            accu incr: 44832 var,  44740 idcode,  288 callback
+280 Elapsed time:    0:00:01    Fri Jan  5 02:53:30 2024
 281 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.080 sys,  0.360 user,  377.93M mem
-                   incr: 0.000 sys,  0.000 user,  1.33M mem
-                   accu: 0.000 sys,  0.030 user,  10.43M mem
-              accu incr: 0.000 sys,  0.000 user,  1.33M mem
+          CPU/Mem usage: 0.090 sys,  0.370 user,  380.35M mem
+                   incr: 0.000 sys,  0.020 user,  2.86M mem
+                   accu: 0.010 sys,  0.050 user,  12.93M mem
+              accu incr: 0.000 sys,  0.020 user,  2.86M mem
 
-          Count usage: 4745 var,  4653 idcode,  292 callback
+          Count usage: 44832 var,  44740 idcode,  288 callback
                  incr: 0 var,  0 idcode,  0 callback
-                 accu: 4745 var,  4653 idcode,  292 callback
+                 accu: 44832 var,  44740 idcode,  288 callback
             accu incr: 0 var,  0 idcode,  0 callback
-282 Elapsed time:    0:00:01    Thu Jan  4 21:54:46 2024
-283 End of simulation at 10970
-284 Elapsed time:    0:00:01    Thu Jan  4 21:54:46 2024
+282 Elapsed time:    0:00:01    Fri Jan  5 02:53:30 2024
+283 End of simulation at 10000970
+284 Elapsed time:    0:00:03    Fri Jan  5 02:53:32 2024
 285 Begin FSDB profile info:
-286 FSDB Writer : bc1(2329) bcn(47240) mtf/stf(0/0)
-FSDB Writer elapsed time : flush(0.224391) io wait(0.000000) theadpool wait(0.000000)
+286 FSDB Writer : bc1(2031625) bcn(12633167) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(1.004191) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
 287 End FSDB profile info
 288 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
-289                      - BlockUsed:1 Acquire:47900 BufferUsed:726049
-290                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:0
-291                      - MainProducerTime:0.494684699 TotalConsumerTime:0.000000000
-292                      - ElapsedTime:1.243355000
-293 Producer   0 profile - BlockUsed:1 Acquire:47900 BufferUsed:726049
-294 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
-295                      - BlockUsed:1 Acquire:47900 BufferUsed:726049
+289                      - BlockUsed:127 Acquire:16621037 BufferUsed:246404091
+290                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:124
+291                      - MainProducerTime:3.554433535 TotalConsumerTime:1.304448638
+292                      - ElapsedTime:4.450350000
+293 Producer   0 profile - BlockUsed:127 Acquire:16621037 BufferUsed:246404091
+294 Consumer   0 profile - Affinity:-1 CPUTime:1.304448638 LifeTime:2.356414168 (0.55%)
+295                      - BlockUsed:127 Acquire:16621037 BufferUsed:246404091
 296 SimExit
-297 Elapsed time:    0:00:02    Thu Jan  4 21:54:47 2024
+297 Elapsed time:    0:00:05    Fri Jan  5 02:53:34 2024
 298 Sim process exit

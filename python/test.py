@@ -1,0 +1,1 @@
+print((0).to_bytes(1, byteorder='big').hex())
