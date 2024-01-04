@@ -1,4 +1,4 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 // `include "tq_div6.sv"
 // `include "tq_mod6.sv"
 `include "tq_idct_4x4.sv"

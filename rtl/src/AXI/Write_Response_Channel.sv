@@ -11,6 +11,8 @@ module Write_Response_Channel
     input                               BREADY_M0,   
     // Input M1
     input                               BREADY_M1,
+    // Input M2
+    input                               BREADY_M2,
     // Input S0
     input           [`AXI_IDS_BITS-1:0] BID_S0,
     input           [1:0]               BRESP_S0,
@@ -35,6 +37,14 @@ module Write_Response_Channel
     input           [`AXI_IDS_BITS-1:0] BID_S5,
     input           [1:0]               BRESP_S5,
     input                               BVALID_S5,
+    // Input S6
+    input           [`AXI_IDS_BITS-1:0] BID_S6,
+    input           [1:0]               BRESP_S6,
+    input                               BVALID_S6,
+    // Input S7
+    input           [`AXI_IDS_BITS-1:0] BID_S7,
+    input           [1:0]               BRESP_S7,
+    input                               BVALID_S7,
     // Output M0
     output  logic   [`AXI_ID_BITS-1:0]  BID_M0,
     output  logic   [1:0]               BRESP_M0,
@@ -43,6 +53,10 @@ module Write_Response_Channel
     output  logic   [`AXI_ID_BITS-1:0]  BID_M1,
     output  logic   [1:0]               BRESP_M1,
     output  logic                       BVALID_M1,
+    // Output M2
+    output  logic   [`AXI_ID_BITS-1:0]  BID_M2,
+    output  logic   [1:0]               BRESP_M2,
+    output  logic                       BVALID_M2,
     // Output S0
     output  logic                       BREADY_S0,    
     // Output S1
@@ -54,7 +68,11 @@ module Write_Response_Channel
     // Output S4
     output  logic                       BREADY_S4,  
     // Output S5
-    output  logic                       BREADY_S5
+    output  logic                       BREADY_S5,
+    // Output S6
+    output  logic                       BREADY_S6,
+    // Output S7
+    output  logic                       BREADY_S7
 );
 
 always_comb begin
@@ -84,6 +102,16 @@ always_comb begin
     		BID_M0      = BID_S5[3:0];
     		BRESP_M0    = BRESP_S5   ;
     	end
+        `M0_S6_W: begin
+            BVALID_M0   = BVALID_S6;
+            BID_M0      = BID_S6[3:0];
+            BRESP_M0    = BRESP_S6   ;
+        end
+        `M0_S7_W: begin
+            BVALID_M0   = BVALID_S7;
+            BID_M0      = BID_S7[3:0];
+            BRESP_M0    = BRESP_S7   ;
+        end
     	`M0_NO_W: begin
     		BVALID_M0   = 1'b0;
     		BID_M0      = BID_S0[3:0];
@@ -124,6 +152,16 @@ always_comb begin
     		BID_M1      = BID_S5[3:0];
     		BRESP_M1    = BRESP_S5   ;
     	end
+        `M1_S6_W: begin
+            BVALID_M1   = BVALID_S6;
+            BID_M1      = BID_S6[3:0];
+            BRESP_M1    = BRESP_S6   ;
+        end
+        `M1_S7_W: begin
+            BVALID_M1   = BVALID_S7;
+            BID_M1      = BID_S7[3:0];
+            BRESP_M1    = BRESP_S7   ;
+        end
     	`M1_NO_W: begin
     		BVALID_M1   = 1'b0;
     		BID_M1      = BID_S0[3:0];
@@ -137,11 +175,62 @@ always_comb begin
     endcase
 end
 
+always_comb begin
+    case (AW_arbiter)
+    	`M2_S1_W: begin
+    		BVALID_M2   = BVALID_S1  ;
+    		BID_M2      = BID_S1[3:0];
+    		BRESP_M2    = BRESP_S1   ;
+    	end
+    	`M2_S2_W: begin
+    		BVALID_M2   = BVALID_S2;
+    		BID_M2      = BID_S2[3:0];
+    		BRESP_M2    = BRESP_S2   ;
+    	end
+    	`M2_S3_W: begin
+    		BVALID_M2   = BVALID_S3;
+    		BID_M2      = BID_S3[3:0];
+    		BRESP_M2    = BRESP_S3   ;
+    	end
+    	`M2_S4_W: begin
+    		BVALID_M2   = BVALID_S4;
+    		BID_M2      = BID_S4[3:0];
+    		BRESP_M2    = BRESP_S4   ;
+    	end
+        `M2_S5_W: begin
+    		BVALID_M2   = BVALID_S5;
+    		BID_M2      = BID_S5[3:0];
+    		BRESP_M2    = BRESP_S5   ;
+    	end
+        `M2_S6_W: begin
+            BVALID_M2   = BVALID_S6;
+            BID_M2      = BID_S6[3:0];
+            BRESP_M2    = BRESP_S6   ;
+        end
+        `M2_S7_W: begin
+            BVALID_M2   = BVALID_S7;
+            BID_M2      = BID_S7[3:0];
+            BRESP_M2    = BRESP_S7   ;
+        end
+    	`M2_NO_W: begin
+    		BVALID_M2   = 1'b0;
+    		BID_M2      = BID_S0[3:0];
+    		BRESP_M2    = `AXI_RESP_DECERR;
+    	end
+    	default: begin
+    		BVALID_M2   = 1'b0;
+    		BID_M2      = `AXI_ID_BITS'b0;
+    		BRESP_M2    = `AXI_RESP_DECERR;
+    	end
+    endcase
+end
+
 
 always_comb begin
     case (AW_arbiter)
         `M0_S1_W:                BREADY_S1 = BREADY_M0;
         `M1_S1_W:                BREADY_S1 = BREADY_M1;
+        `M2_S1_W:                BREADY_S1 = BREADY_M2;
         default:                 BREADY_S1 = 1'b0;
     endcase
 end
@@ -150,6 +239,7 @@ always_comb begin
     case (AW_arbiter)
         `M0_S2_W:                BREADY_S2 = BREADY_M0;
         `M1_S2_W:                BREADY_S2 = BREADY_M1;
+        `M2_S2_W:                BREADY_S2 = BREADY_M2;
         default:                 BREADY_S2 = 1'b0;
     endcase
 end
@@ -158,6 +248,7 @@ always_comb begin
     case (AW_arbiter)
         `M0_S3_W:                BREADY_S3 = BREADY_M0;
         `M1_S3_W:                BREADY_S3 = BREADY_M1;
+        `M2_S3_W:                BREADY_S3 = BREADY_M2;
         default:                 BREADY_S3 = 1'b0;
     endcase
 end
@@ -166,6 +257,7 @@ always_comb begin
     case (AW_arbiter)
         `M0_S4_W:                BREADY_S4 = BREADY_M0;
         `M1_S4_W:                BREADY_S4 = BREADY_M1;
+        `M2_S4_W:                BREADY_S4 = BREADY_M2;
         default:                 BREADY_S4 = 1'b0;
     endcase
 end
@@ -174,7 +266,26 @@ always_comb begin
     case (AW_arbiter)
         `M0_S5_W:                BREADY_S5 = BREADY_M0;
         `M1_S5_W:                BREADY_S5 = BREADY_M1;
+        `M2_S5_W:                BREADY_S5 = BREADY_M2;
         default:                 BREADY_S5 = 1'b0;
+    endcase
+end
+
+always_comb begin
+    case (AW_arbiter)
+        `M0_S6_W:                BREADY_S6 = BREADY_M0;
+        `M1_S6_W:                BREADY_S6 = BREADY_M1;
+        `M2_S6_W:                BREADY_S6 = BREADY_M2;
+        default:                 BREADY_S6 = 1'b0;
+    endcase
+end
+
+always_comb begin
+    case (AW_arbiter)
+        `M0_S7_W:                BREADY_S7 = BREADY_M0;
+        `M1_S7_W:                BREADY_S7 = BREADY_M1;
+        `M2_S7_W:                BREADY_S7 = BREADY_M2;
+        default:                 BREADY_S7 = 1'b0;
     endcase
 end
 

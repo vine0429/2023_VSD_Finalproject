@@ -1,4 +1,4 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 
 
 module tq_dct_4x4 (
@@ -58,29 +58,29 @@ tq_dct4 #(12) u_dct_v3(
 endmodule
 
 module tq_dct4 ( s0, s1, s2, s3, d0, d1, d2, d3 );
-	parameter INPUT_WIDTH = 9;
+parameter INPUT_WIDTH = 9;
 
-	input  [INPUT_WIDTH-1:0] s0, s1, s2, s3;
-	output [INPUT_WIDTH+2:0] d0, d1, d2, d3;
-	//extend sign bit
-	wire [INPUT_WIDTH+2:0] e0, e1, e2, e3;
-	//intermediate 
-	wire [INPUT_WIDTH+2:0] t0, t1, t2, t3;
+input  [INPUT_WIDTH-1:0] s0, s1, s2, s3;
+output [INPUT_WIDTH+2:0] d0, d1, d2, d3;
+//extend sign bit
+wire [INPUT_WIDTH+2:0] e0, e1, e2, e3;
+//intermediate 
+wire [INPUT_WIDTH+2:0] t0, t1, t2, t3;
 
-	assign e0 = {{3{s0[INPUT_WIDTH-1]}},s0[INPUT_WIDTH-1:0]};
-	assign e1 = {{3{s1[INPUT_WIDTH-1]}},s1[INPUT_WIDTH-1:0]};
-	assign e2 = {{3{s2[INPUT_WIDTH-1]}},s2[INPUT_WIDTH-1:0]};
-	assign e3 = {{3{s3[INPUT_WIDTH-1]}},s3[INPUT_WIDTH-1:0]};
+assign e0 = {{3{s0[INPUT_WIDTH-1]}},s0[INPUT_WIDTH-1:0]};
+assign e1 = {{3{s1[INPUT_WIDTH-1]}},s1[INPUT_WIDTH-1:0]};
+assign e2 = {{3{s2[INPUT_WIDTH-1]}},s2[INPUT_WIDTH-1:0]};
+assign e3 = {{3{s3[INPUT_WIDTH-1]}},s3[INPUT_WIDTH-1:0]};
 
 
-	assign t0 = e0 + e3;
-	assign t1 = e1 + e2;
-	assign t2 = e1 - e2;
-	assign t3 = e0 - e3;
+assign t0 = e0 + e3;
+assign t1 = e1 + e2;
+assign t2 = e1 - e2;
+assign t3 = e0 - e3;
 
-	assign d0 = t0 + t1;
-	assign d1 =(t3 << 1) + t2;
-	assign d2 = t0 - t1;
-	assign d3 = t3 - (t2 << 1);
+assign d0 = t0 + t1;
+assign d1 =(t3 << 1) + t2;
+assign d2 = t0 - t1;
+assign d3 = t3 - (t2 << 1);
 
 endmodule

@@ -1,9 +1,9 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 
 module tq_div6( 
   input  logic [5:0] qp_i,
   output logic [3:0] div_o
-);
+  );
   always_comb begin
     case (qp_i)
        0, 1, 2, 3, 4, 5 : div_o = 4'b0000;

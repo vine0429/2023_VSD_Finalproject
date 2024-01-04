@@ -1,6 +1,6 @@
 // `timescale 1ns / 1ps
 `include "h264_top.sv"
-module fetch_tb;
+module h264_tb;
 
 parameter cycle=10;
 string prog_path;
@@ -51,7 +51,7 @@ initial begin
   
   start = 1'b0;
 
-  #100 $finish;
+  #10000 $finish;
 end
 
 initial begin

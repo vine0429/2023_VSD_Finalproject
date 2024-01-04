@@ -1,0 +1,1293 @@
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvOpenFile -win $_nWave1 {/home/N26124939/VSD/VSD_Project/rtl/h264_top.fsdb}
+wvSetCursor -win $_nWave1 806.464889
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvSetCursor -win $_nWave1 876.461293
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/fetch_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/fetch_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/fetch_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/fetch_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvGetSignalSetSignalFilter -win $_nWave1 "*valid*"
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 2 )} 
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 2)}
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 0)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvResizeWindow -win $_nWave1 54 237 960 332
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvSetCursor -win $_nWave1 495.154735 -snap {("G2" 0)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2000.229027 -snap {("G1" 1)}
+wvZoom -win $_nWave1 1961.008850 2147.304690
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1833.239578 -snap {("G1" 1)}
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetSignalFilter -win $_nWave1 "**"
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 2 3 )} 
+wvSetPosition -win $_nWave1 {("G1" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 5)}
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetRadix -win $_nWave1 -2Com
+wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 2 3 )} 
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSelectSignal -win $_nWave1 {( "G2" 4 )} 
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 4 5 )} 
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSelectSignal -win $_nWave1 {( "G2" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 5 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvExpandBus -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvExpandBus -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvSetPosition -win $_nWave1 {("G2" 23)}
+wvSetPosition -win $_nWave1 {("G2" 23)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[1\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[2\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[3\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[4\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[5\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[6\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[7\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[8\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[9\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[10\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[11\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[12\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[13\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[14\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[15\]\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 23 )} 
+wvSetPosition -win $_nWave1 {("G2" 23)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1864.691763 -snap {("G2" 14)}
+wvSetCursor -win $_nWave1 1848.341167 -snap {("G2" 23)}
+wvSetCursor -win $_nWave1 1844.253518 -snap {("G2" 23)}
+wvSetCursor -win $_nWave1 1854.063876 -snap {("G2" 23)}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/runbefore_list\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSetCursor -win $_nWave1 1867.961882 -snap {("G2" 7)}
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvExpandBus -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetSignalFilter -win $_nWave1 "*enc_valid*"
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvGetSignalSetSignalFilter -win $_nWave1 "*cnt_valid*"
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 2 )} 
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 0)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetCursor -win $_nWave1 1285.156840 -snap {("G3" 2)}
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 1168.000876 1331.586433
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1475.664086 -snap {("G3" 2)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetSignalFilter -win $_nWave1 "**"
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 1)}
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 2 )} 
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1258.218662 -snap {("G3" 2)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 1209.991513 1328.743996
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSetCursor -win $_nWave1 1454.741035 -snap {("G3" 1)}
+wvSelectSignal -win $_nWave1 {( "G3" 3 )} 
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 3 )} 
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetCursor -win $_nWave1 1095.406639 -snap {("G4" 1)}
+wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 1 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetRadix -win $_nWave1 -2Com
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1315.182809 -snap {("G4" 2)}
+wvZoom -win $_nWave1 1254.553814 1585.681401
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 3 )} 
+wvSetCursor -win $_nWave1 1255.878325 -snap {("G3" 2)}
+wvSetCursor -win $_nWave1 1453.671870 -snap {("G3" 1)}
+wvSetCursor -win $_nWave1 1658.529471 -snap {("G3" 2)}
+wvSetCursor -win $_nWave1 1858.089030 -snap {("G3" 2)}
+wvSelectSignal -win $_nWave1 {( "G2" 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetCursor -win $_nWave1 1422.766629 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 1631.156257 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 1836.896864 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 1631.156257 -snap {("G2" 7)}
+wvSetCursor -win $_nWave1 1827.183788 -snap {("G2" 7)}
+wvSetCursor -win $_nWave1 1724.754988 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1730.936036 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1738.000092 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1744.181140 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1757.426243 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1740.649112 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1749.479181 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1756.543236 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1742.415126 -snap {("G2" 6)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 1663.827512 1810.406657
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 7 )} 
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvGetSignalClose -win $_nWave1
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 7 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/start_enc} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1675.260685 -snap {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 7)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/start_enc} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/zero_left_r\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 8 )} 
+wvSetPosition -win $_nWave1 {("G2" 8)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 9)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 9)}
+wvSetCursor -win $_nWave1 1684.739470 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1695.000010 -snap {("G2" 10)}
+wvSetCursor -win $_nWave1 1704.576514 -snap {("G2" 10)}
+wvSetCursor -win $_nWave1 1714.739335 -snap {("G2" 10)}
+wvSetCursor -win $_nWave1 1694.218255 -snap {("G2" 10)}
+wvSetCursor -win $_nWave1 1705.455989 -snap {("G2" 10)}
+wvSetCursor -win $_nWave1 1715.618810 -snap {("G2" 8)}
+wvSetCursor -win $_nWave1 1725.293034 -snap {("G2" 8)}
+wvSetCursor -win $_nWave1 1734.674099 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1745.130078 -snap {("G2" 6)}
+wvSetCursor -win $_nWave1 1754.902021 -snap {("G2" 8)}
+wvSetCursor -win $_nWave1 1765.064842 -snap {("G2" 10)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvSetPosition -win $_nWave1 {("G2" 10)}
+wvSetPosition -win $_nWave1 {("G2" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/start_enc} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/zero_left_r\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 10 )} 
+wvSetPosition -win $_nWave1 {("G2" 10)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1832.491248 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2033.402396 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2235.095300 -snap {("G1" 1)}
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2439.133470 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2626.754775 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 2836.265233 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3039.521648 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3236.524018 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3438.216922 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3621.147695 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 3830.658153 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 4018.279458 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 4234.043960 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 4432.609842 -snap {("G1" 1)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1248.312867 -snap {("G1" 2)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetSignalFilter -win $_nWave1 "*clk*"
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/start_enc} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/zero_left_r\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder"
+wvGetSignalSetScope -win $_nWave1 \
+           "/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter"
+wvSetPosition -win $_nWave1 {("G2" 12)}
+wvSetPosition -win $_nWave1 {("G2" 12)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/cavlctop/cavlc_enc_valid} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_code\[15:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/coeff_token_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_code\[8:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/totalzero_bit\[3:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_code\[31:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_bit\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/start_enc} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/run_before\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/zero_left_r\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/encode_idx\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbeforeencoder/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/enc_rst} \
+{/h264_tb/TOP/cavlctop/cavlcenctop/runbefore_list_r\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_cnt\[4:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbefore_list\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/clk} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/start_cnt_i} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/coeff_i\[7:0\]} \
+{/h264_tb/TOP/cavlctop/cavlccnttop/runbeforecounter/runbefore_cnt\[4:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 12 )} 
+wvSetPosition -win $_nWave1 {("G2" 12)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 1174.448200 1462.520400
+wvSetCursor -win $_nWave1 1274.313229 -snap {("G2" 12)}
+wvSetCursor -win $_nWave1 1266.823352 -snap {("G2" 12)}
+wvSetCursor -win $_nWave1 1276.617807 -snap {("G2" 12)}
+wvSetCursor -win $_nWave1 1265.863111 -snap {("G2" 12)}
+wvSetCursor -win $_nWave1 1275.273470 -snap {("G2" 12)}
+wvSetCursor -win $_nWave1 1264.710823 -snap {("G2" 12)}
+wvSelectSignal -win $_nWave1 {( "G2" 12 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 12)}
+wvSetPosition -win $_nWave1 {("G2" 11)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 4449.371153 -snap {("G1" 3)}
+wvSetCursor -win $_nWave1 4529.263177 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 4455.516693 -snap {("G1" 2)}
+wvSetCursor -win $_nWave1 1241.399134 -snap {("G1" 2)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 4498.358200 -snap {("G1" 2)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 753.419600 4712.565733
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvExit

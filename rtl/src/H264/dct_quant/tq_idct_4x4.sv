@@ -1,4 +1,4 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 
 module tq_idct_4x4 (
 input  logic  [14:0] idct_s00_i, idct_s01_i, idct_s02_i, idct_s03_i,

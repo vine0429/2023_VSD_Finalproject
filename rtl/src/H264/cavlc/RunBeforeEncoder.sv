@@ -206,9 +206,16 @@ always_comb begin
         {5'd14,5'd15}: begin CodeBit = {1'b0, 10'b0000000001};CodeLength = 4'd10; end
         default      : begin CodeBit = {1'b0, 10'b0000000000};CodeLength = 4'd0; end
     endcase
-    next_runbefore_code = (runbefore_code << CodeLength) + CodeBit;
-    next_runbefore_bit = runbefore_bit + CodeLength;
-    zero_left = zero_left_r - run_before;
+    if (zero_left_r > 5'd0) begin
+        next_runbefore_code = (runbefore_code << CodeLength) + CodeBit;
+        next_runbefore_bit = runbefore_bit + CodeLength;
+        zero_left = zero_left_r - run_before;
+    end
+    else begin
+        next_runbefore_code = runbefore_code;
+        next_runbefore_bit = runbefore_bit;
+        zero_left = zero_left_r;
+    end
 end
 
 //zero_left
@@ -232,7 +239,7 @@ always_ff @(posedge clk) begin
         runbefore_code <= 32'b0;
         runbefore_bit  <= 5'd0;
     end
-    else if (start_enc && (encode_idx < (runbefore_cnt -5'd1))) begin
+    else if (start_enc && (encode_idx <= (runbefore_cnt -5'd1))) begin
         runbefore_code <= next_runbefore_code;
         runbefore_bit  <= next_runbefore_bit;
     end

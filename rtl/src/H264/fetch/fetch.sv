@@ -1,13 +1,14 @@
 `include "epu_define.svh"
 
-module fetch_test(
+module fetch(
     input        clk,
     input        rst,
+    input        intra_ready,
     input        fetch_start_i,
     input [31:0] data_word_i,
     input        data_valid_i,
 
-    output logic       matrix_valid,
+    output logic       fetch_valid,
     output logic [5:0] fetch_mb_x_o,
     output logic [5:0] fetch_mb_y_o,
     output logic [7:0] matrixY_o [0:15][0:15],
@@ -26,6 +27,7 @@ localparam 	IDLE = 3'd0;
 localparam  LD_Y = 3'd1;
 localparam  LD_U = 3'd2;
 localparam  LD_V = 3'd3;  
+localparam  WAITINTRA = 3'd4;
 
 logic       fetchY_finish;
 logic       fetchU_finish;
@@ -61,9 +63,11 @@ assign fetchV_finish = (curr_state == LD_V && pixel_count==8'd60  && data_valid_
 
 always_ff @(posedge clk) begin
     if (rst)
-        matrix_valid <= 1'b0;
+        fetch_valid <= 1'b0;
     else if (curr_state == LD_V && fetchV_finish)
-        matrix_valid <= 1'b1;
+        fetch_valid <= 1'b1;
+    else if (next_state == IDLE)
+        fetch_valid <= 1'b0;
 end
 
 always_ff @(posedge clk)begin : FSM_cur_state
@@ -75,10 +79,11 @@ end : FSM_cur_state
 
 always_comb begin : FSM_next_state
     case (curr_state)
-        IDLE           : next_state  = (fetch_start_i) ? LD_Y   : IDLE;
-        LD_Y           : next_state  = (fetchY_finish) ? LD_U   : LD_Y;
-        LD_U           : next_state  = (fetchU_finish) ? LD_V   : LD_U;
-        LD_V           : next_state  = (fetchV_finish) ? IDLE   : LD_V;
+        IDLE           : next_state  = (fetch_start_i) ? LD_Y      : IDLE;
+        LD_Y           : next_state  = (fetchY_finish) ? LD_U      : LD_Y;
+        LD_U           : next_state  = (fetchU_finish) ? LD_V      : LD_U;
+        LD_V           : next_state  = (fetchV_finish) ? WAITINTRA : LD_V;
+        WAITINTRA      : next_state  = (intra_ready && fetch_valid) ? IDLE : WAITINTRA;
         default: next_state  = IDLE;
     endcase
 end : FSM_next_state
@@ -171,4 +176,4 @@ always_ff @(posedge clk) begin
     end
 end
 
-endmodule : fetch_test
+endmodule : fetch

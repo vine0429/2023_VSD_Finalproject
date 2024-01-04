@@ -9,7 +9,6 @@ module CAVLCEncTop(
     input       rst,
     input [9:0] topleft_x,
     input [9:0] topleft_y,
-    input       cavlc_bis_ready,
     input       cavlc_cnt_valid,
     input [1:0] trailing_ones_cnt,
     input [2:0] trailing_ones_flag,
@@ -67,7 +66,7 @@ logic [2:0] curr_state;
 logic [2:0] next_state;
 
 assign enc_load        = (curr_state == LOAD);
-assign enc_end         = (next_state == WAITBIS);
+assign enc_end         = (curr_state == WAITBIS && next_state == IDLE);
 assign start_enc       = (curr_state == ENC);
 assign enc_rst         = (next_state == IDLE);
 assign cavlc_enc_ready = (curr_state == IDLE);
@@ -88,7 +87,21 @@ always_ff @(posedge clk) begin
             runbefore_list_r[i]  <= 5'd0;
         end
     end
-    else if (cavlc_enc_ready && cavlc_cnt_valid) begin
+    else if (enc_rst) begin
+        trailing_ones_cnt_r  <= 2'b0;
+        trailing_ones_flag_r <= 3'b0;
+        total_zero_cnt_r     <= 5'b0;
+        total_coeff_cnt_r    <= 5'b0;
+        level_code_cnt_r     <= 5'b0;
+        topleft_x_r          <= 10'd0;
+        topleft_y_r          <= 10'd0;
+        runbefore_cnt_r      <= 5'd0;
+        for (int i=0; i<16; i=i+1) begin
+            level_code_list_r[i] <= 8'b0;
+            runbefore_list_r[i]  <= 5'd0;
+        end
+    end
+    else if (next_state == LOAD) begin
         trailing_ones_cnt_r  <= trailing_ones_cnt;
         trailing_ones_flag_r <= trailing_ones_flag;
         total_zero_cnt_r     <= total_zero_cnt;
@@ -117,7 +130,7 @@ always_comb begin
         IDLE:    next_state = (cavlc_cnt_valid && cavlc_enc_ready) ? LOAD    : IDLE;
         LOAD:    next_state = ENC;
         ENC:     next_state = (enc_cycle == 4'd15)                 ? WAITBIS : ENC;
-        WAITBIS: next_state = (cavlc_enc_valid && cavlc_bis_ready) ? IDLE    : WAITBIS;
+        WAITBIS: next_state = (cavlc_enc_valid)                    ? IDLE    : WAITBIS;
     endcase
 end
 

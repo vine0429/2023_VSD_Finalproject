@@ -1,4 +1,4 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 
 module tq_quant_4x4(
     input [2:0] qpmod6_i, 

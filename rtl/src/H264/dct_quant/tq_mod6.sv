@@ -1,9 +1,9 @@
-`include "../epu_define.svh"
+`include "epu_define.svh"
 
 module tq_mod6( 
   input        [5:0] qp_i, 
   output logic [2:0] mod_o
-);
+  );
 
   always_comb begin  
     case (qp_i)
@@ -16,4 +16,4 @@ module tq_mod6(
       default                  : mod_o = 3'b000;  
     endcase 
   end
-endmodule : tq_mod6
+endmodule

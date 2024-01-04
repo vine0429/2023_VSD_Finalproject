@@ -2,19 +2,20 @@ module TotalZeroCounter(
     input              clk,
     input              rst,
     input              cnt_rst,
+    input              start_cnt,
     input        [7:0] coeff_i,
     output logic [4:0] total_zero_cnt
 );
 
-logic start_cnt;
+logic total_zeros_start_cnt;
 
 always_ff @(posedge clk) begin
     if (rst)
-        start_cnt <= 1'b0;
+        total_zeros_start_cnt <= 1'b0;
     else if (cnt_rst)
-        start_cnt <= 1'b0;
-    else if (coeff_i != 8'b0)
-        start_cnt <= 1'b1;
+        total_zeros_start_cnt <= 1'b0;
+    else if (coeff_i != 8'b0 && start_cnt)
+        total_zeros_start_cnt <= 1'b1;
 end
 
 always_ff @(posedge clk) begin
@@ -22,7 +23,7 @@ always_ff @(posedge clk) begin
         total_zero_cnt <= 5'b0;
     else if (cnt_rst)
         total_zero_cnt <= 5'b0;
-    else if (start_cnt && (coeff_i == 8'b0))
+    else if (total_zeros_start_cnt && (coeff_i == 8'b0) && start_cnt)
         total_zero_cnt <= total_zero_cnt + 5'd1;
 end
 

@@ -19,6 +19,13 @@ module Read_Arbiter (
     input                                   RVALID_M1,
     input           [`AXI_LEN_BITS-1:0]     ARLEN_M1,
     input                                   RLAST_M1,
+    // Input M2
+    input           [`AXI_ADDR_BITS-1:0]    ARADDR_M2,
+    input                                   ARVALID_M2,
+    input                                   RREADY_M2,
+    input                                   RVALID_M2,
+    input           [`AXI_LEN_BITS-1:0]     ARLEN_M2,
+    input                                   RLAST_M2,
     // Output Arbiter
     input   logic   [`MX_SX_ID_BITS-1:0]    AW_arbiter,
     output  logic   [`MX_SX_ID_BITS-1:0]    AR_arbiter
@@ -26,6 +33,7 @@ module Read_Arbiter (
 localparam  IDLE      = 2'd0,
             M0_STATE  = 2'd1,
             M1_STATE  = 2'd2;
+            M2_STATE  = 2'd3;
 
 logic [31:0] ARADDR_Reg;
 logic [1:0] AR_state;
@@ -35,7 +43,7 @@ always_ff @ (posedge ACLK) begin
         AR_state <= IDLE;
     end
     else begin
-        if ((RVALID_M0 && RREADY_M0 && RLAST_M0) || (RVALID_M1 && RREADY_M1 && RLAST_M1)) begin
+        if ((RVALID_M0 && RREADY_M0 && RLAST_M0) || (RVALID_M1 && RREADY_M1 && RLAST_M1) || (RVALID_M2 && RREADY_M2 && RLAST_M2)) begin
                 AR_state   <= IDLE;
                 ARADDR_Reg <= 32'b0;
         end
@@ -44,9 +52,13 @@ always_ff @ (posedge ACLK) begin
                 AR_state   <= M0_STATE;
                 ARADDR_Reg <= ARADDR_M0;
             end
-            else if (ARVALID_M1 && (AW_arbiter == `Default_W)) begin
+            else if (ARVALID_M1 && (AW_arbiter == (`Default_W))) begin
                 AR_state   <= M1_STATE;
                 ARADDR_Reg <= ARADDR_M1;
+            end
+            else if (ARVALID_M2 && (AW_arbiter == (`Default_W))) begin
+                AR_state   <= M2_STATE;
+                ARADDR_Reg <= ARADDR_M2;
             end
             else begin
                 AR_state <= IDLE;
@@ -89,27 +101,33 @@ always_comb begin
     case (AR_state)
         IDLE: begin
             if (ARVALID_M0) begin
-               if (ARADDR_M0[31:16] == 16'h0000) begin          //ROM
-                    AR_arbiter = `M0_S0_R;
-               end
-               else if (ARADDR_M0[31:16] == 16'h0001) begin     //IM
-                    AR_arbiter = `M0_S1_R;
-               end
-               else if (ARADDR_M0[31:16] == 16'h0002) begin     //DM
-                    AR_arbiter = `M0_S2_R;
-               end
-               else if (ARADDR_M0[31:16] == 16'h1000) begin     //Sctrl
-                    AR_arbiter = `M0_S3_R;
-               end
-               else if (ARADDR_M0[31:16] == 16'h1001) begin     //WDT
-                    AR_arbiter = `M0_S4_R;
-               end
-               else if (ARADDR_M0[31:24] == 8'h20) begin        //DRAM    
-                    AR_arbiter = `M0_S5_R;
+                if (ARADDR_M0[31:16] == 16'h0000) begin          //ROM
+                        AR_arbiter = `M0_S0_R;
+                end
+                else if (ARADDR_M0[31:16] == 16'h0001) begin     //IM
+                        AR_arbiter = `M0_S1_R;
+                end
+                else if (ARADDR_M0[31:16] == 16'h0002) begin     //DM
+                        AR_arbiter = `M0_S2_R;
+                end
+                else if (ARADDR_M0[31:16] == 16'h1000) begin     //Sctrl
+                        AR_arbiter = `M0_S3_R;
+                end
+                else if (ARADDR_M0[31:16] == 16'h1001) begin     //WDT
+                        AR_arbiter = `M0_S4_R;
+                end
+                else if (ARADDR_M0[31:24] == 8'h20) begin        //DRAM    
+                        AR_arbiter = `M0_S5_R;
+                end    
+                else if (ARADDR_M0[31:24] == 16'h0010) begin        //EPU    
+                        AR_arbiter = `M0_S6_R;
+                end    
+                else if (ARADDR_M0[31:24] == 16'h0003) begin        //DMA    
+                        AR_arbiter = `M0_S7_R;
                 end     
-               else begin
-                    AR_arbiter = `M0_NO_R;
-               end                      
+                else begin
+                            AR_arbiter = `M0_NO_R;
+                end                      
             end
         //    else if (ARVALID_M1)begin
         //        if (ARADDR_M1[31:16] == 16'h0000) begin          //ROM
@@ -157,6 +175,12 @@ always_comb begin
             else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
                 AR_arbiter = `M0_S5_R;
             end
+            else if (ARADDR_M0[31:24] == 16'h0010) begin        //EPU    
+                AR_arbiter = `M0_S6_R;
+            end    
+            else if (ARADDR_M0[31:24] == 16'h0003) begin    //DMA    
+                AR_arbiter = `M0_S7_R;
+            end
             else begin
                 AR_arbiter = `M0_NO_R;
             end
@@ -180,8 +204,43 @@ always_comb begin
             else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
                 AR_arbiter = `M1_S5_R;
             end
+            else if (ARADDR_Reg[31:24] == 16'h0010) begin      //EPU
+                AR_arbiter = `M1_S6_R;
+            end
+            else if (ARADDR_Reg[31:24] == 16'h0003) begin   //DMA
+                AR_arbiter = `M1_S7_R;
+            end
             else begin
                 AR_arbiter = `M1_NO_R;
+            end
+        end
+        M2_STATE: begin
+            if (ARADDR_Reg[31:16] == 16'h0000) begin        //ROM
+                AR_arbiter = `M2_S0_R;
+            end
+            else if (ARADDR_Reg[31:16] == 16'h0001) begin   //IM
+                AR_arbiter = `M2_S1_R;
+            end
+            else if (ARADDR_Reg[31:16] == 16'h0002) begin   //DM
+                AR_arbiter = `M2_S2_R;
+            end
+            else if (ARADDR_Reg[31:16] == 16'h1000) begin   //Sctrl
+                AR_arbiter = `M2_S3_R;
+            end
+            else if (ARADDR_Reg[31:16] == 16'h1001) begin   //WDT
+                AR_arbiter = `M2_S4_R;
+            end
+            else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
+                AR_arbiter = `M2_S5_R;
+            end
+            else if (ARADDR_Reg[31:24] == 16'h0010) begin      //EPU
+                AR_arbiter = `M2_S6_R;
+            end
+            else if (ARADDR_Reg[31:24] == 16'h0003) begin      //DMA
+                AR_arbiter = `M2_S7_R;
+            end
+            else begin
+                AR_arbiter = `M2_NO_R;
             end
         end
         default: AR_arbiter = `Default_R;

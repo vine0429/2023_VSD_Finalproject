@@ -11,7 +11,7 @@ file_path = "./yuv/BlowingBubbles_416x240_50.yuv"
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 416
 frame_height = 240
-frame_encnum = 1 # 這邊調整要編碼幾張frame
+frame_encnum = 10 # 這邊調整要編碼幾張frame
 SubWidthC    = 2
 SubHeightC   = 2
 
@@ -189,7 +189,8 @@ for frame_idx in range(frame_encnum):
             sum_Horizontal = np.sum(np.abs(res_Horizontal))
             sum_DC         = np.sum(np.abs(res_DC))
 
-            sum_min = min(sum_Vertical,sum_Horizontal,sum_DC)
+            # 只用DC mode
+            sum_min = min(sum_DC,sum_DC,sum_DC)
 
             if (sum_min == sum_Vertical):
                 predMode        = 0
@@ -203,6 +204,7 @@ for frame_idx in range(frame_encnum):
                 predMode        = 2
                 pred_matrix     = pred_DC_matrix
                 pred_res_matrix = res_DC
+
 
         # 看看解碼器猜得對不對
         if (predpredMode == predMode) :
@@ -221,6 +223,14 @@ for frame_idx in range(frame_encnum):
         pred_res_matrix = pred_res_matrix.astype(int)
 
         preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
+
+        # print(intra4x4_luma)
+        # print(pred_matrix)
+        # print(DCT_and_QT(pred_res_matrix))
+        # print(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP))
+        # print(pred_res_matrix)
+        # print(preLoopFilter)
+        # print("---------------")
 
         # print(intra4x4_luma)
         # print(pred_res_matrix)
@@ -639,7 +649,7 @@ for frame_idx in range(frame_encnum):
         Z = Z / (2**qbits)
 
         # 一定要加上round，硬體只用15個bit表示
-        Z = np.round(Z).astype(int)
+        Z = np.round(Z+0.001).astype(int)
 
         return Z
     
@@ -688,7 +698,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         # 一定要有round
-        Y = np.round((Cit@Wi@Ci) / 256).astype(int)
+        Y = np.round((Cit@Wi@Ci) / 256 + 0.001).astype(int)
 
         return Y
 
@@ -734,7 +744,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         Y = (Cit@Wi@Ci) / 256
-        Y = np.round(Y).astype(int)
+        Y = np.round(Y+0.001).astype(int)
 
         return Y
 
@@ -749,7 +759,7 @@ for frame_idx in range(frame_encnum):
         
         YD = hadamard@WD@hadamard
 
-        ZD = np.round((YD * 9362) / (2** (qbits + 1))) #9362 = MF[0,0] 
+        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.001) #9362 = MF[0,0] 
         ZD = ZD.astype(int)
 
         return ZD
@@ -942,9 +952,6 @@ for frame_idx in range(frame_encnum):
                     if ((levelCode >= (1 << 12)) or (levelCode < 0)):
                         print("Overflow occured")
                     levelSuffixBis   = bin(levelCode)[2:].zfill(12)[-12:]
-                print("coeff", coeff)
-                print("levelPrefixBis", levelPrefixBis)
-                print("levelSuffixBis", levelSuffixBis)
                 levelbitstring = levelbitstring + levelPrefixBis + levelSuffixBis
                 cavlc_bitstring = cavlc_bitstring + levelPrefixBis + levelSuffixBis
 
@@ -953,17 +960,10 @@ for frame_idx in range(frame_encnum):
                     suffixLength = suffixLength + 1
                 if (abs(coeff) > ((3 <<(suffixLength-1))) and suffixLength < 6): # 要看是coeff的值
                     suffixLength = suffixLength + 1
-        if (iCbCr == 2):
-            print(Z)
-            for y in range (4):
-                for x in range (4):
-                    if (Z[y,x] < 0):
-                        print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
-                    else :
-                        print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
-            print("levelbitstring = ", levelbitstring)
-            print(len(levelbitstring))
-            print("------------------------")
+                # print("coeff = ",coeff , "levelCode = ", levelCode)
+                # print("levelbitstring = ", levelbitstring)
+                # print(len(levelbitstring))
+                # print("------------------------")
         # 計算TotalZeros 到最後一個非零係數前的0的個數
         Start_cnt = False
         TotalZeros = 0
@@ -984,6 +984,8 @@ for frame_idx in range(frame_encnum):
         run_before   = 0
         zero_left    = TotalZeros
 
+
+        runbefore_string = ""
         # 編碼run_before 一樣是從高頻編碼到低頻
         # run_before 到下一個非0係數之前有幾個0
         for coeff in ZigZag_list_HtL:
@@ -997,14 +999,44 @@ for frame_idx in range(frame_encnum):
             if (coeff == 0 and Start_encode == True):
                 run_before = run_before + 1
             if (coeff != 0 and Start_encode == True):
+                print("run_before = ", run_before, "zero_left = ", zero_left, "bistring = ", map.run_before(run_before, zero_left))
+                runbefore_string = runbefore_string + map.run_before(run_before, zero_left)
                 cavlc_bitstring = cavlc_bitstring + map.run_before(run_before, zero_left)
-                encode_coeff = coeff
                 zero_left = zero_left - run_before
                 if (zero_left == 0): break #run_before 編碼完成
                 run_before = 0
             if (coeff != 0):
                 Start_encode = True
-                encode_coeff = coeff
+
+        if (iCbCr == 2):
+            print(Z)
+            print("ZigZag_list_HtL = ",ZigZag_list_HtL)
+            print("total_coeff_cnt = ", Non_Zero_Coefficient, "trailing ones cnt = ", Trailing_ones_cnt)
+            print("coeff_token = ", coeff_token, "coeff_token len = ", len(coeff_token))
+            print("total zeros = ", map.Totalzeros(TotalZeros = TotalZeros,TotalCoeff = Non_Zero_Coefficient))
+            print("runbefore = ", runbefore_string, len(runbefore_string))
+            print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
+            print(hex(int(cavlc_bitstring, 2))[2:])
+            print(len(cavlc_bitstring))
+            print("--------------------------------")
+            # print(Z)
+            # print(ZigZag_list_HtL)
+            # for y in range (4):
+            #     for x in range (4):
+            #         if (Z[y,x] < 0):
+            #             print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
+            #         else :
+            #             print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
+
+        # if (len(runbefore_string) >= 25):
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print("------------------------")
+
+        # if (len(cavlc_bitstring) >= 64):
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print("------------------------")
 
         return cavlc_bitstring
 

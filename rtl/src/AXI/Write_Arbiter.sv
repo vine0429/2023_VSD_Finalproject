@@ -18,12 +18,19 @@ module Write_Arbiter
     input  logic                      BVALID_M1,
     input  logic                      BREADY_M1,
     input  logic [`AXI_ADDR_BITS-1:0] AWADDR_M1,
+    // M2
+    input  logic                      AWVALID_M2,
+    input  logic                      WVALID_M2,
+    input  logic                      BVALID_M2,
+    input  logic                      BREADY_M2,
+    input  logic [`AXI_ADDR_BITS-1:0] AWADDR_M2,
     // OUTPUT
     output logic [`MX_SX_ID_BITS-1:0] AW_arbiter
 );
 localparam  IDLE      = 2'd0,
             M0_STATE  = 2'd1,
             M1_STATE  = 2'd2;
+            M2_STATE  = 2'd3;
 
 // logic [`AXI_ADDR_BITS-1:0] AWADDR_Reg;
 // logic [1:0] AW_state;
@@ -203,6 +210,12 @@ always_comb begin
         end
         else if (AWADDR_M0[31:24] == 8'h20) begin        //DRAM    
             AW_arbiter = `M0_S5_W;
+        end   
+        else if (AWADDR_M0[31:24] == 16'h0010) begin      //EPU  
+            AW_arbiter = `M0_S6_W;
+        end   
+        else if (AWADDR_M0[31:24] == 16'h0003) begin        //DMA    
+            AW_arbiter = `M0_S7_W;
         end     
         else begin
             AW_arbiter = `M0_NO_W;
@@ -227,8 +240,43 @@ always_comb begin
         else if (AWADDR_M1[31:24] == 8'h20) begin        //DRAM    
             AW_arbiter = `M1_S5_W;
         end     
+        else if (AWADDR_M1[31:24] == 16'h0010) begin        //EPU     
+            AW_arbiter = `M1_S6_W;
+        end  
+        else if (AWADDR_M1[31:24] == 16'h0003) begin        //DMA    
+            AW_arbiter = `M1_S7_W;
+        end  
         else begin
             AW_arbiter = `M1_NO_W;
+        end  
+    end
+    else if (AWVALID_M2)begin
+        if (AWADDR_M2[31:16] == 16'h0000) begin          //ROM
+            AW_arbiter = `M2_S0_W;
+        end
+        else if (AWADDR_M2[31:16] == 16'h0001) begin     //IM
+            AW_arbiter = `M2_S1_W;
+        end
+        else if (AWADDR_M2[31:16] == 16'h0002) begin     //DM
+            AW_arbiter = `M2_S2_W;
+        end
+        else if (AWADDR_M2[31:16] == 16'h1000) begin     //Sctrl
+            AW_arbiter = `M2_S3_W;
+        end
+        else if (AWADDR_M2[31:16] == 16'h1001) begin     //WDT
+            AW_arbiter = `M2_S4_W;
+        end
+        else if (AWADDR_M2[31:24] == 8'h20) begin        //DRAM    
+            AW_arbiter = `M2_S5_W;
+        end     
+        else if (AWADDR_M2[31:24] == 16'h0010) begin        //EPU    
+            AW_arbiter = `M2_S6_W;
+        end    
+        else if (AWADDR_M2[31:24] == 16'h0003) begin        //DMA    
+            AW_arbiter = `M2_S7_W;
+        end    
+        else begin
+            AW_arbiter = `M2_NO_W;
         end  
     end
     else begin

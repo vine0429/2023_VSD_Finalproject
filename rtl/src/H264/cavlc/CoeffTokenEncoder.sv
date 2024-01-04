@@ -33,8 +33,8 @@ logic [4:0]  CoeffTokenCodeLength_flc;
 logic [15:0] CoeffTokenCodeBit_vlc_chromaDC;
 logic [4:0]  CoeffTokenCodeLength_vlc_chromaDC;
 
-assign mbAddrA_valid = (topleft_x != 9'd0);
-assign mbAddrB_valid = (topleft_y != 9'd0);
+assign mbAddrA_valid = (topleft_x != 10'd0);
+assign mbAddrB_valid = (topleft_y != 10'd0);
 assign nA = intra4x4_lc[topleft_y>>2];
 assign nB = intra4x4_tc[topleft_x>>2];
 
@@ -80,8 +80,8 @@ always_ff @(posedge clk) begin
             intra4x4_lc[i] <= 5'b0;
     end
     else if (enc_end) begin
-        intra4x4_tc[topleft_x>>2] <= nC;
-        intra4x4_lc[topleft_y>>2] <= nC;
+        intra4x4_tc[topleft_x>>2] <= total_coeff_cnt;
+        intra4x4_lc[topleft_y>>2] <= total_coeff_cnt;
     end
 end
 

@@ -1,7 +1,7 @@
 module CAVLC4x4Buffer(
     input        clk,
     input        rst,
-    input        valid_i,           // from quant
+    input        load,           // from quant
     input        [3:0] coeff_idx_i,  // 0 ~ 15
     input        [7:0] scale00_i,
     input        [7:0] scale01_i,
@@ -57,7 +57,7 @@ module CAVLC4x4Buffer(
             scale32_buf <= 8'b0;
             scale33_buf <= 8'b0;
         end
-        else if (valid_i) begin
+        else if (load) begin
             scale00_buf <= scale00_i;
             scale01_buf <= scale01_i;
             scale02_buf <= scale02_i;

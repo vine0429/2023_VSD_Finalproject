@@ -75,6 +75,40 @@ module AXI (
 	output [1:0] 						BRESP_M1,
 	output 								BVALID_M1,
 	input 								BREADY_M1,
+	// M2(DMA)
+	// READ
+	input [`AXI_ID_BITS-1:0]          	ARID_M2,
+	input [`AXI_ADDR_BITS-1:0]        	ARADDR_M2,
+	input [`AXI_LEN_BITS-1:0]         	ARLEN_M2,
+	input [`AXI_SIZE_BITS-1:0]        	ARSIZE_M2,
+	input [1:0]                       	ARBURST_M2,
+	input                             	ARVALID_M2,
+	output logic                      	ARREADY_M2,
+	output logic [`AXI_ID_BITS-1:0]   	RID_M2,
+	output logic [`AXI_DATA_BITS-1:0] 	RDATA_M2,
+	output logic [1:0]                	RRESP_M2,
+	output logic                      	RLAST_M2,
+	output logic                      	RVALID_M2,
+	input                             	RREADY_M2,
+	// WRITE
+	input [`AXI_ID_BITS-1:0] 			AWID_M2,
+	input [`AXI_ADDR_BITS-1:0] 			AWADDR_M2,
+	input [`AXI_LEN_BITS-1:0] 			AWLEN_M2,
+	input [`AXI_SIZE_BITS-1:0] 			AWSIZE_M2,
+	input [1:0] 						AWBURST_M2,
+	input 								AWVALID_M2,
+	output 								AWREADY_M2,
+	// WRITE DATA
+	input [`AXI_DATA_BITS-1:0] 			WDATA_M2,
+	input [`AXI_STRB_BITS-1:0] 			WSTRB_M2,
+	input 								WLAST_M2,
+	input 								WVALID_M2,
+	output 								WREADY_M2,
+	// WRITE RESPONSE
+	output [`AXI_ID_BITS-1:0] 			BID_M2,
+	output [1:0] 						BRESP_M2,
+	output 								BVALID_M2,
+	input 								BREADY_M2,
 	// SLAVE INTERFACE
 	// S0
 	// READ
@@ -281,7 +315,82 @@ module AXI (
 	input [1:0]                       RRESP_S5,
 	input                             RLAST_S5,
 	input                             RVALID_S5,
-	output logic                      RREADY_S5
+	output logic                      RREADY_S5,
+	// S6
+	// WRITE
+	output logic [`AXI_IDS_BITS-1:0]  AWID_S6,
+	output [`AXI_ADDR_BITS-1:0]       AWADDR_S6,
+	output [`AXI_LEN_BITS-1:0]        AWLEN_S6,
+	output [`AXI_SIZE_BITS-1:0]       AWSIZE_S6,
+	output [1:0]                      AWBURST_S6,
+	output logic                      AWVALID_S6,
+
+	input                             AWREADY_S6,
+
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S6,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S6,
+	output logic                      WLAST_S6,
+	output logic                      WVALID_S6,
+
+	input                             WREADY_S6,
+	input [`AXI_IDS_BITS-1:0]         BID_S6,
+	input [1:0]                       BRESP_S6,
+	input                             BVALID_S6,
+
+	output logic                      BREADY_S6,
+	// READ
+	output logic [`AXI_IDS_BITS-1:0]  ARID_S6,
+	output [`AXI_ADDR_BITS-1:0]       ARADDR_S6,
+	output [`AXI_LEN_BITS-1:0]        ARLEN_S6,
+	output [`AXI_SIZE_BITS-1:0]       ARSIZE_S6,
+	output [1:0]                      ARBURST_S6,
+	output logic                      ARVALID_S6,
+
+	input                             ARREADY_S6,
+	input [`AXI_IDS_BITS-1:0]         RID_S6,
+	input [`AXI_DATA_BITS-1:0]        RDATA_S6,
+	input [1:0]                       RRESP_S6,
+	input                             RLAST_S6,
+	input                             RVALID_S6,
+
+	output logic                      RREADY_S6,
+    // S7
+	// WRITE
+	output logic [`AXI_IDS_BITS-1:0]  AWID_S7,
+	output [`AXI_ADDR_BITS-1:0]       AWADDR_S7,
+	output [`AXI_LEN_BITS-1:0]        AWLEN_S7,
+	output [`AXI_SIZE_BITS-1:0]       AWSIZE_S7,
+	output [1:0]                      AWBURST_S7,
+	output logic                      AWVALID_S7,
+
+	input                             AWREADY_S7,
+
+	output logic [`AXI_DATA_BITS-1:0] WDATA_S7,
+	output logic [`AXI_STRB_BITS-1:0] WSTRB_S7,
+	output logic                      WLAST_S7,
+	output logic                      WVALID_S7,
+
+	input                             WREADY_S7,
+	input [`AXI_IDS_BITS-1:0]         BID_S7,
+	input [1:0]                       BRESP_S7,
+	input                             BVALID_S7,
+
+	output logic                      BREADY_S7,
+	// READ
+	output logic [`AXI_IDS_BITS-1:0]  ARID_S7,
+	output [`AXI_ADDR_BITS-1:0]       ARADDR_S7,
+	output [`AXI_LEN_BITS-1:0]        ARLEN_S7,
+	output [`AXI_SIZE_BITS-1:0]       ARSIZE_S7,
+	output [1:0]                      ARBURST_S7,
+	output logic                      ARVALID_S7,
+
+	input                             ARREADY_S7,
+	input [`AXI_IDS_BITS-1:0]         RID_S7,
+	input [`AXI_DATA_BITS-1:0]        RDATA_S7,
+	input [1:0]                       RRESP_S7,
+	input                             RLAST_S7,
+	input                             RVALID_S7,
+	output logic                      RREADY_S7
 );
 
 // ADDR:
@@ -291,6 +400,9 @@ module AXI (
 // Sctrl 0x1000_0000 ~ 0x1000_03FF  S3
 // WDT   0x1001_0000 ~ 0x1001_03FF  S4
 // DRAM  0x2000_0000 ~ 0x201F_FFFF  S5
+
+// EPU   0x0010_0000 ~ 0x0010_0FFF  S6
+// DMA   0x0003_0000 ~ 0x0003_001F  S7
 
 // CDC net
 //-------------------------------------------//
@@ -345,6 +457,40 @@ logic [`AXI_ID_BITS  -1:0] BID_M1_AXI;
 logic [1:0]                BRESP_M1_AXI;
 logic                      BVALID_M1_AXI;
 logic                      BREADY_M1_AXI;
+//------------ Read Address M2 --------------//
+logic                      ARREADY_M2_AXI;
+logic [`AXI_ID_BITS  -1:0] ARID_M2_AXI;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_M2_AXI;
+logic [`AXI_LEN_BITS -1:0] ARLEN_M2_AXI;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_M2_AXI;
+logic [1:0]                ARBURST_M2_AXI;
+logic                      ARVALID_M2_AXI;
+//-------------- Read Data M2 ---------------//
+logic [`AXI_ID_BITS  -1:0] RID_M2_AXI;
+logic [`AXI_DATA_BITS-1:0] RDATA_M2_AXI;
+logic [1:0]                RRESP_M2_AXI;
+logic                      RLAST_M2_AXI;
+logic                      RVALID_M2_AXI;
+logic                      RREADY_M2_AXI;
+//------------ Write Address M2 -------------//
+logic                      AWREADY_M2_AXI;
+logic [`AXI_ID_BITS  -1:0] AWID_M2_AXI;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_M2_AXI;
+logic [`AXI_LEN_BITS -1:0] AWLEN_M2_AXI;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_M2_AXI;
+logic [1:0]                AWBURST_M2_AXI;
+logic                      AWVALID_M2_AXI;
+//-------------- Write Data M2 --------------//
+logic                      WREADY_M2_AXI;
+logic [`AXI_DATA_BITS-1:0] WDATA_M2_AXI;
+logic [`AXI_STRB_BITS-1:0] WSTRB_M2_AXI;
+logic                      WLAST_M2_AXI;
+logic                      WVALID_M2_AXI;
+//------------- Write Response M2 -----------//
+logic [`AXI_ID_BITS  -1:0] BID_M2_AXI;
+logic [1:0]                BRESP_M2_AXI;
+logic                      BVALID_M2_AXI;
+logic                      BREADY_M2_AXI;
 //-------------------------------------------//
 //                 Slave                     //
 //-------------------------------------------//
@@ -534,6 +680,76 @@ logic [`AXI_IDS_BITS -1:0] BID_S5_AXI;
 logic [1:0]                BRESP_S5_AXI;
 logic                      BVALID_S5_AXI;
 
+//------------- Read Address S6 -------------//
+logic [`AXI_IDS_BITS -1:0] ARID_S6_AXI;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_S6_AXI;
+logic [`AXI_LEN_BITS -1:0] ARLEN_S6_AXI;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_S6_AXI;
+logic [1:0]                ARBURST_S6_AXI;
+logic                      ARVALID_S6_AXI;
+logic                      ARREADY_S6_AXI;
+//--------------- Read Data S6 --------------//
+logic                      RREADY_S6_AXI;
+logic [`AXI_IDS_BITS -1:0] RID_S6_AXI;
+logic [`AXI_DATA_BITS-1:0] RDATA_S6_AXI;
+logic [1:0]                RRESP_S6_AXI;
+logic                      RLAST_S6_AXI;
+logic                      RVALID_S6_AXI;
+//-------------- Write Address S6 -----------//
+logic [`AXI_IDS_BITS -1:0] AWID_S6_AXI;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_S6_AXI;
+logic [`AXI_LEN_BITS -1:0] AWLEN_S6_AXI;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_S6_AXI;
+logic [1:0]                AWBURST_S6_AXI;
+logic                      AWVALID_S6_AXI;
+logic                      AWREADY_S6_AXI;
+//--------------- Write Data S6 -------------//
+logic [`AXI_DATA_BITS-1:0] WDATA_S6_AXI;
+logic [`AXI_STRB_BITS-1:0] WSTRB_S6_AXI;
+logic                      WLAST_S6_AXI;
+logic                      WVALID_S6_AXI;
+logic                      WREADY_S6_AXI;
+//------------- Write Respone S6 ------------//
+logic                      BREADY_S6_AXI;
+logic [`AXI_IDS_BITS -1:0] BID_S6_AXI;
+logic [1:0]                BRESP_S6_AXI;
+logic                      BVALID_S6_AXI;
+
+//------------- Read Address S7 -------------//
+logic [`AXI_IDS_BITS -1:0] ARID_S7_AXI;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_S7_AXI;
+logic [`AXI_LEN_BITS -1:0] ARLEN_S7_AXI;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_S7_AXI;
+logic [1:0]                ARBURST_S7_AXI;
+logic                      ARVALID_S7_AXI;
+logic                      ARREADY_S7_AXI;
+//--------------- Read Data S7 --------------//
+logic                      RREADY_S7_AXI;
+logic [`AXI_IDS_BITS -1:0] RID_S7_AXI;
+logic [`AXI_DATA_BITS-1:0] RDATA_S7_AXI;
+logic [1:0]                RRESP_S7_AXI;
+logic                      RLAST_S7_AXI;
+logic                      RVALID_S7_AXI;
+//-------------- Write Address S7 -----------//
+logic [`AXI_IDS_BITS -1:0] AWID_S7_AXI;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_S7_AXI;
+logic [`AXI_LEN_BITS -1:0] AWLEN_S7_AXI;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_S7_AXI;
+logic [1:0]                AWBURST_S7_AXI;
+logic                      AWVALID_S7_AXI;
+logic                      AWREADY_S7_AXI;
+//--------------- Write Data S7 -------------//
+logic [`AXI_DATA_BITS-1:0] WDATA_S7_AXI;
+logic [`AXI_STRB_BITS-1:0] WSTRB_S7_AXI;
+logic                      WLAST_S7_AXI;
+logic                      WVALID_S7_AXI;
+logic                      WREADY_S7_AXI;
+//------------- Write Respone S7 ------------//
+logic                      BREADY_S7_AXI;
+logic [`AXI_IDS_BITS -1:0] BID_S7_AXI;
+logic [1:0]                BRESP_S7_AXI;
+logic                      BVALID_S7_AXI;
+
 //----------------------------------//
 logic [`MX_SX_ID_BITS-1:0] AW_arbiter, AR_arbiter;
 
@@ -553,6 +769,12 @@ Write_Arbiter Write_Arbiter(
 	.WVALID_M1  (WVALID_M1_AXI),
 	.BVALID_M1  (BVALID_M1_AXI),
 	.BREADY_M1  (BREADY_M1_AXI),
+	// M2
+	.AWADDR_M2  (AWADDR_M2_AXI),
+	.AWVALID_M2 (AWVALID_M2_AXI),
+	.WVALID_M2  (WVALID_M2_AXI),
+	.BVALID_M2  (BVALID_M2_AXI),
+	.BREADY_M2  (BREADY_M2_AXI),
     // OUTPUT
 	.AW_arbiter (AW_arbiter)
 );
@@ -577,6 +799,13 @@ Write_Address_Channel Write_Address_Channel(
 	.AWSIZE_M1  (AWSIZE_M1_AXI),
 	.AWBURST_M1 (AWBURST_M1_AXI),
 	.AWVALID_M1 (AWVALID_M1_AXI),
+	// Input M2
+	.AWID_M2    (AWID_M2_AXI),
+	.AWADDR_M2  (AWADDR_M2_AXI),
+	.AWLEN_M2   (AWLEN_M2_AXI),
+	.AWSIZE_M2  (AWSIZE_M2_AXI),
+	.AWBURST_M2 (AWBURST_M2_AXI),
+	.AWVALID_M2 (AWVALID_M2_AXI),
     // Input S0
 	.AWREADY_S0 (1'b0),
     // Input S1
@@ -589,10 +818,16 @@ Write_Address_Channel Write_Address_Channel(
 	.AWREADY_S4 (AWREADY_S4_AXI),
 	// Input S5
 	.AWREADY_S5 (AWREADY_S5_AXI),
+	// Input S6
+	.AWREADY_S6 (AWREADY_S6_AXI),
+	// Input S7
+	.AWREADY_S7 (AWREADY_S7_AXI),
     // Output M0
 	.AWREADY_M0 (),
     // Output M1
 	.AWREADY_M1 (AWREADY_M1_AXI),
+	// Output M2
+	.AWREADY_M2 (AWREADY_M2_AXI),
     // Output S0
 	.AWID_S0    (),
 	.AWADDR_S0  (),
@@ -634,7 +869,21 @@ Write_Address_Channel Write_Address_Channel(
 	.AWLEN_S5   (AWLEN_S5_AXI),
 	.AWSIZE_S5  (AWSIZE_S5_AXI),
 	.AWBURST_S5 (AWBURST_S5_AXI),
-	.AWVALID_S5 (AWVALID_S5_AXI)
+	.AWVALID_S5 (AWVALID_S5_AXI),
+	// Output S6
+	.AWID_S6    (AWID_S6_AXI),
+	.AWADDR_S6  (AWADDR_S6_AXI),
+	.AWLEN_S6   (AWLEN_S6_AXI),
+	.AWSIZE_S6  (AWSIZE_S6_AXI),
+	.AWBURST_S6 (AWBURST_S6_AXI),
+	.AWVALID_S6 (AWVALID_S6_AXI),
+	// Output S7
+	.AWID_S7    (AWID_S7_AXI),
+	.AWADDR_S7  (AWADDR_S7_AXI),
+	.AWLEN_S7   (AWLEN_S7_AXI),
+	.AWSIZE_S7  (AWSIZE_S7_AXI),
+	.AWBURST_S7 (AWBURST_S7_AXI),
+	.AWVALID_S7 (AWVALID_S7_AXI)
 );
 Write_Data_Channel Write_Data_Channel(
 	// Clock & Reset
@@ -652,6 +901,11 @@ Write_Data_Channel Write_Data_Channel(
 	.WSTRB_M1   (WSTRB_M1_AXI),
 	.WLAST_M1   (WLAST_M1_AXI),
 	.WVALID_M1  (WVALID_M1_AXI),
+	// Input M2
+	.WDATA_M2   (WDATA_M2_AXI),
+	.WSTRB_M2   (WSTRB_M2_AXI),
+	.WLAST_M2   (WLAST_M2_AXI),
+	.WVALID_M2  (WVALID_M2_AXI),
     // Input S0
 	.WREADY_S0  (1'b0),
     // Input S1
@@ -664,10 +918,16 @@ Write_Data_Channel Write_Data_Channel(
 	.WREADY_S4  (WREADY_S4_AXI),
     // Input S5
 	.WREADY_S5  (WREADY_S5_AXI),
+	// Input S6
+	.WREADY_S6  (WREADY_S6_AXI),
+	// Input S7
+	.WREADY_S7  (WREADY_S7_AXI),
     // Output M0
 	.WREADY_M0  (),
 	// Output M1
 	.WREADY_M1 (WREADY_M1_AXI),
+	// Output M2
+	.WREADY_M2 (WREADY_2_AXI),
 	// Output S0
 	.WDATA_S0   (),
 	.WSTRB_S0   (),
@@ -697,7 +957,17 @@ Write_Data_Channel Write_Data_Channel(
 	.WDATA_S5   (WDATA_S5_AXI),
 	.WSTRB_S5   (WSTRB_S5_AXI),
 	.WLAST_S5   (WLAST_S5_AXI),
-	.WVALID_S5  (WVALID_S5_AXI)
+	.WVALID_S5  (WVALID_S5_AXI),
+	// Output S6
+	.WDATA_S6   (WDATA_S6_AXI),
+	.WSTRB_S6   (WSTRB_S6_AXI),
+	.WLAST_S6   (WLAST_S6_AXI),
+	.WVALID_S6  (WVALID_S6_AXI),
+	// Output S7
+	.WDATA_S7   (WDATA_S7_AXI),
+	.WSTRB_S7   (WSTRB_S7_AXI),
+	.WLAST_S7   (WLAST_S7_AXI),
+	.WVALID_S7  (WVALID_S7_AXI)
 );
 Write_Response_Channel Write_Response_Channel(
     // Clock & Reset
@@ -709,6 +979,8 @@ Write_Response_Channel Write_Response_Channel(
 	.BREADY_M0  (1'b0),
     // Input M1
 	.BREADY_M1  (BREADY_M1_AXI),
+	// Input M2
+	.BREADY_M2  (BREADY_M2_AXI),
     // Input S0
 	.BID_S0     (`AXI_IDS_BITS'd0),
 	.BRESP_S0   (2'd0),
@@ -733,6 +1005,14 @@ Write_Response_Channel Write_Response_Channel(
 	.BID_S5     (BID_S5_AXI),
 	.BRESP_S5   (BRESP_S5_AXI),
 	.BVALID_S5  (BVALID_S5_AXI),
+	// Input S6
+	.BID_S6     (BID_S6_AXI),
+	.BRESP_S6   (BRESP_S6_AXI),
+	.BVALID_S6  (BVALID_S6_AXI),
+	// Input S7
+	.BID_S7     (BID_S7_AXI),
+	.BRESP_S7   (BRESP_S7_AXI),
+	.BVALID_S7  (BVALID_S7_AXI),
     // Output M0
 	.BID_M0     (),
 	.BRESP_M0   (),
@@ -741,6 +1021,10 @@ Write_Response_Channel Write_Response_Channel(
 	.BID_M1     (BID_M1_AXI),
 	.BRESP_M1   (BRESP_M1_AXI),
 	.BVALID_M1  (BVALID_M1_AXI),
+	// Output M2
+	.BID_M2     (BID_M2_AXI),
+	.BRESP_M2   (BRESP_M2_AXI),
+	.BVALID_M2  (BVALID_M2_AXI),
 	// Output S0
 	.BREADY_S0  (),
 	// Output S1
@@ -752,7 +1036,11 @@ Write_Response_Channel Write_Response_Channel(
 	// Output S4
 	.BREADY_S4 (BREADY_S4_AXI),
     // Output S5
-	.BREADY_S5 (BREADY_S5_AXI)
+	.BREADY_S5 (BREADY_S5_AXI),
+	// Output S6
+	.BREADY_S6 (BREADY_S6_AXI),
+	// Output S7
+	.BREADY_S7 (BREADY_S7_AXI)
 );
 Read_Arbiter Read_Arbiter(
     // Clock & Reset
@@ -772,6 +1060,13 @@ Read_Arbiter Read_Arbiter(
 	.RREADY_M1  (RREADY_M1_AXI),
 	.ARLEN_M1   (ARLEN_M1_AXI),
 	.RLAST_M1   (RLAST_M1_AXI),
+	// Input M2
+	.ARADDR_M2  (ARADDR_M2_AXI),
+	.ARVALID_M2 (ARVALID_M2_AXI),
+	.RVALID_M2  (RVALID_M2_AXI),
+	.RREADY_M2  (RREADY_M2_AXI),
+	.ARLEN_M2   (ARLEN_M2_AXI),
+	.RLAST_M2   (RLAST_M2_AXI),
     // Output Arbiter
 	.AW_arbiter (AW_arbiter),
 	.AR_arbiter (AR_arbiter)
@@ -796,6 +1091,13 @@ Read_Address_Channel Read_Address_Channel(
 	.ARSIZE_M1  (ARSIZE_M1_AXI),
 	.ARBURST_M1 (ARBURST_M1_AXI),
 	.ARVALID_M1 (ARVALID_M1_AXI),
+	// Input M2
+	.ARID_M2    (ARID_M2_AXI),
+	.ARADDR_M2  (ARADDR_M2_AXI),
+	.ARLEN_M2   (ARLEN_M2_AXI),
+	.ARSIZE_M2  (ARSIZE_M2_AXI),
+	.ARBURST_M2 (ARBURST_M2_AXI),
+	.ARVALID_M2 (ARVALID_M2_AXI),
     // Input S0
 	.ARREADY_S0 (ARREADY_S0_AXI),
     // Input S1
@@ -808,10 +1110,16 @@ Read_Address_Channel Read_Address_Channel(
 	.ARREADY_S4 (ARREADY_S4_AXI),
     // Input S5
 	.ARREADY_S5 (ARREADY_S5_AXI),
+	// Input S6
+	.ARREADY_S6 (ARREADY_S6_AXI),
+	// Input S7
+	.ARREADY_S7 (ARREADY_S7_AXI),
     // Output M0
 	.ARREADY_M0 (ARREADY_M0_AXI),
     // Output M1
 	.ARREADY_M1 (ARREADY_M1_AXI),
+	// Output M2
+	.ARREADY_M2 (ARREADY_M2_AXI),
     // Output S0
 	.ARID_S0    (ARID_S0_AXI),
 	.ARADDR_S0  (ARADDR_S0_AXI),
@@ -853,7 +1161,21 @@ Read_Address_Channel Read_Address_Channel(
 	.ARLEN_S5   (ARLEN_S5_AXI),
 	.ARSIZE_S5  (ARSIZE_S5_AXI),
 	.ARBURST_S5 (ARBURST_S5_AXI),
-	.ARVALID_S5 (ARVALID_S5_AXI)
+	.ARVALID_S5 (ARVALID_S5_AXI),
+	// Output S6
+	.ARID_S6    (ARID_S6_AXI),
+	.ARADDR_S6  (ARADDR_S6_AXI),
+	.ARLEN_S6   (ARLEN_S6_AXI),
+	.ARSIZE_S6  (ARSIZE_S6_AXI),
+	.ARBURST_S6 (ARBURST_S6_AXI),
+	.ARVALID_S6 (ARVALID_S6_AXI),
+	// Output S7
+	.ARID_S7    (ARID_S7_AXI),
+	.ARADDR_S7  (ARADDR_S7_AXI),
+	.ARLEN_S7   (ARLEN_S7_AXI),
+	.ARSIZE_S7  (ARSIZE_S7_AXI),
+	.ARBURST_S7 (ARBURST_S7_AXI),
+	.ARVALID_S7 (ARVALID_S7_AXI)
 );
 Read_Data_Channel Read_Data_Channel(
     // Clock & Reset
@@ -897,10 +1219,24 @@ Read_Data_Channel Read_Data_Channel(
 	.RRESP_S5   (RRESP_S5_AXI),
 	.RLAST_S5   (RLAST_S5_AXI),
 	.RVALID_S5  (RVALID_S5_AXI),
+	// Input S6
+	.RID_S6     (RID_S6_AXI),
+	.RDATA_S6   (RDATA_S6_AXI),
+	.RRESP_S6   (RRESP_S6_AXI),
+	.RLAST_S6   (RLAST_S6_AXI),
+	.RVALID_S6  (RVALID_S6_AXI),
+	// Input S7
+	.RID_S7     (RID_S7_AXI),
+	.RDATA_S7   (RDATA_S7_AXI),
+	.RRESP_S7   (RRESP_S7_AXI),
+	.RLAST_S7   (RLAST_S7_AXI),
+	.RVALID_S7  (RVALID_S7_AXI),
     // Output M0
 	.RREADY_M0  (RREADY_M0_AXI),
     // Output M1
 	.RREADY_M1  (RREADY_M1_AXI),
+	// Output M2
+	.RREADY_M2  (RREADY_M2_AXI),
     // Output S0
 	.RREADY_S0  (RREADY_S0_AXI),
 	// Output S1
@@ -913,6 +1249,10 @@ Read_Data_Channel Read_Data_Channel(
 	.RREADY_S4  (RREADY_S4_AXI),
     // Output S5
 	.RREADY_S5  (RREADY_S5_AXI),
+	// Output S6
+	.RREADY_S6  (RREADY_S6_AXI),
+	// Output S7
+	.RREADY_S7  (RREADY_S7_AXI),
 	// Output M0
 	.RID_M0     (RID_M0_AXI),
 	.RDATA_M0   (RDATA_M0_AXI),
@@ -924,7 +1264,13 @@ Read_Data_Channel Read_Data_Channel(
 	.RDATA_M1   (RDATA_M1_AXI),
 	.RRESP_M1   (RRESP_M1_AXI),
 	.RLAST_M1   (RLAST_M1_AXI),
-	.RVALID_M1  (RVALID_M1_AXI)
+	.RVALID_M1  (RVALID_M1_AXI),
+	// Output M2
+	.RID_M2     (RID_M2_AXI),
+	.RDATA_M2   (RDATA_M2_AXI),
+	.RRESP_M2   (RRESP_M2_AXI),
+	.RLAST_M2   (RLAST_M2_AXI),
+	.RVALID_M2  (RVALID_M2_AXI)
 );
 
 // CDC
@@ -1068,6 +1414,77 @@ AXI_M_CDC axi_m1_cdc(
 	.BRESP_AXI  (BRESP_M1_AXI  ),
 	.BVALID_AXI (BVALID_M1_AXI ),
 	.BREADY_AXI (BREADY_M1_AXI )
+);
+
+AXI_M_CDC axi_m2_cdc(
+	// Clock & Reset
+	.clk        (CPU_CLK_i     ),
+	.rst        (CPU_RST_i     ),
+	.axi_clk    (AXI_CLK_i     ),
+	.axi_rst    (AXI_RST_i     ),
+	// AW Channel
+	.AWID       (AWID_M2       ),
+	.AWADDR     (AWADDR_M2     ),
+	.AWLEN      (AWLEN_M2      ),
+	.AWSIZE     (AWSIZE_M2     ),
+	.AWBURST    (AWBURST_M2    ),
+	.AWVALID    (AWVALID_M2    ),
+	.AWREADY    (AWREADY_M2    ),
+	.AWID_AXI   (AWID_M2_AXI   ),
+	.AWADDR_AXI (AWADDR_M2_AXI ),
+	.AWLEN_AXI  (AWLEN_M2_AXI  ),
+	.AWSIZE_AXI (AWSIZE_M2_AXI ),
+	.AWBURST_AXI(AWBURST_M2_AXI),
+	.AWVALID_AXI(AWVALID_M2_AXI),
+	.AWREADY_AXI(AWREADY_M2_AXI),
+	// W Channel
+	.WDATA      (WDATA_M2      ),
+	.WSTRB      (WSTRB_M2      ),
+	.WLAST      (WLAST_M2      ),
+	.WVALID     (WVALID_M2     ),
+	.WREADY     (WREADY_M2     ),
+	.WDATA_AXI  (WDATA_M2_AXI  ),
+	.WSTRB_AXI  (WSTRB_M2_AXI  ),
+	.WLAST_AXI  (WLAST_M2_AXI  ),
+	.WVALID_AXI (WVALID_M2_AXI ),
+	.WREADY_AXI (WREADY_M2_AXI ),
+	// AR Channel
+	.ARID       (ARID_M2       ),
+	.ARADDR     (ARADDR_M2     ),
+	.ARLEN      (ARLEN_M2      ),
+	.ARSIZE     (ARSIZE_M2     ),
+	.ARBURST    (ARBURST_M2    ),
+	.ARVALID    (ARVALID_M2    ),
+	.ARREADY    (ARREADY_M2    ),
+	.ARID_AXI   (ARID_M2_AXI   ),
+	.ARADDR_AXI (ARADDR_M2_AXI ),
+	.ARLEN_AXI  (ARLEN_M2_AXI  ),
+	.ARSIZE_AXI (ARSIZE_M2_AXI ),
+	.ARBURST_AXI(ARBURST_M2_AXI),
+	.ARVALID_AXI(ARVALID_M2_AXI),
+	.ARREADY_AXI(ARREADY_M2_AXI),
+	// R Channel
+	.RID        (RID_M2        ),
+	.RDATA      (RDATA_M2      ),
+	.RRESP      (RRESP_M2      ),
+	.RLAST      (RLAST_M2      ),
+	.RVALID     (RVALID_M2     ),
+	.RREADY     (RREADY_M2     ),
+	.RID_AXI    (RID_M2_AXI    ),
+	.RDATA_AXI  (RDATA_M2_AXI  ),
+	.RRESP_AXI  (RRESP_M2_AXI  ),
+	.RLAST_AXI  (RLAST_M2_AXI  ),
+	.RVALID_AXI (RVALID_M2_AXI ),
+	.RREADY_AXI (RREADY_M2_AXI ),
+	// B Channel
+	.BID        (BID_M2        ),
+	.BRESP      (BRESP_M2      ),
+	.BVALID     (BVALID_M2     ),
+	.BREADY     (BREADY_M2     ),
+	.BID_AXI    (BID_M2_AXI    ),
+	.BRESP_AXI  (BRESP_M2_AXI  ),
+	.BVALID_AXI (BVALID_M2_AXI ),
+	.BREADY_AXI (BREADY_M2_AXI )
 );
 
 AXI_S_CDC axi_s0_cdc(
@@ -1494,6 +1911,148 @@ AXI_S_CDC axi_s5_cdc(
 	.BRESP_AXI  (BRESP_S5_AXI  ),
 	.BVALID_AXI (BVALID_S5_AXI ),
 	.BREADY_AXI (BREADY_S5_AXI )
+);
+
+AXI_S_CDC axi_s6_cdc(
+	// Clock & Reset
+	.clk        (DRAM_CLK_i    ),
+	.rst        (DRAM_RST_i    ),
+	.axi_clk    (AXI_CLK_i     ),
+	.axi_rst    (AXI_RST_i     ),
+	// AW Channel
+	.AWID       (AWID_S6       ),
+	.AWADDR     (AWADDR_S6     ),
+	.AWLEN      (AWLEN_S6      ),
+	.AWSIZE     (AWSIZE_S6     ),
+	.AWBURST    (AWBURST_S6    ),
+	.AWVALID    (AWVALID_S6    ),
+	.AWREADY    (AWREADY_S6    ),
+	.AWID_AXI   (AWID_S6_AXI   ),
+	.AWADDR_AXI (AWADDR_S6_AXI ),
+	.AWLEN_AXI  (AWLEN_S6_AXI  ),
+	.AWSIZE_AXI (AWSIZE_S6_AXI ),
+	.AWBURST_AXI(AWBURST_S6_AXI),
+	.AWVALID_AXI(AWVALID_S6_AXI),
+	.AWREADY_AXI(AWREADY_S6_AXI),
+	// W Channel
+	.WDATA      (WDATA_S6      ),
+	.WSTRB      (WSTRB_S6      ),
+	.WLAST      (WLAST_S6      ),
+	.WVALID     (WVALID_S6     ),
+	.WREADY     (WREADY_S6     ),
+	.WDATA_AXI  (WDATA_S6_AXI  ),
+	.WSTRB_AXI  (WSTRB_S6_AXI  ),
+	.WLAST_AXI  (WLAST_S6_AXI  ),
+	.WVALID_AXI (WVALID_S6_AXI ),
+	.WREADY_AXI (WREADY_S6_AXI ),
+	// AR Channel
+	.ARID       (ARID_S6       ),
+	.ARADDR     (ARADDR_S6     ),
+	.ARLEN      (ARLEN_S6      ),
+	.ARSIZE     (ARSIZE_S6     ),
+	.ARBURST    (ARBURST_S6    ),
+	.ARVALID    (ARVALID_S6    ),
+	.ARREADY    (ARREADY_S6    ),
+	.ARID_AXI   (ARID_S6_AXI   ),
+	.ARADDR_AXI (ARADDR_S6_AXI ),
+	.ARLEN_AXI  (ARLEN_S6_AXI  ),
+	.ARSIZE_AXI (ARSIZE_S6_AXI ),
+	.ARBURST_AXI(ARBURST_S6_AXI),
+	.ARVALID_AXI(ARVALID_S6_AXI),
+	.ARREADY_AXI(ARREADY_S6_AXI),
+	// R Channel
+	.RID        (RID_S6        ),
+	.RDATA      (RDATA_S6      ),
+	.RRESP      (RRESP_S6      ),
+	.RLAST      (RLAST_S6      ),
+	.RVALID     (RVALID_S6     ),
+	.RREADY     (RREADY_S6     ),
+	.RID_AXI    (RID_S6_AXI    ),
+	.RDATA_AXI  (RDATA_S6_AXI  ),
+	.RRESP_AXI  (RRESP_S6_AXI  ),
+	.RLAST_AXI  (RLAST_S6_AXI  ),
+	.RVALID_AXI (RVALID_S6_AXI ),
+	.RREADY_AXI (RREADY_S6_AXI ),
+	// B Channel
+	.BID        (BID_S6        ),
+	.BRESP      (BRESP_S6      ),
+	.BVALID     (BVALID_S6     ),
+	.BREADY     (BREADY_S6     ),
+	.BID_AXI    (BID_S6_AXI    ),
+	.BRESP_AXI  (BRESP_S6_AXI  ),
+	.BVALID_AXI (BVALID_S6_AXI ),
+	.BREADY_AXI (BREADY_S6_AXI )
+);
+
+AXI_S_CDC axi_s7_cdc(
+	// Clock & Reset
+	.clk        (DRAM_CLK_i    ),
+	.rst        (DRAM_RST_i    ),
+	.axi_clk    (AXI_CLK_i     ),
+	.axi_rst    (AXI_RST_i     ),
+	// AW Channel
+	.AWID       (AWID_S7       ),
+	.AWADDR     (AWADDR_S7     ),
+	.AWLEN      (AWLEN_S7      ),
+	.AWSIZE     (AWSIZE_S7     ),
+	.AWBURST    (AWBURST_S7    ),
+	.AWVALID    (AWVALID_S7    ),
+	.AWREADY    (AWREADY_S7    ),
+	.AWID_AXI   (AWID_S7_AXI   ),
+	.AWADDR_AXI (AWADDR_S7_AXI ),
+	.AWLEN_AXI  (AWLEN_S7_AXI  ),
+	.AWSIZE_AXI (AWSIZE_S7_AXI ),
+	.AWBURST_AXI(AWBURST_S7_AXI),
+	.AWVALID_AXI(AWVALID_S7_AXI),
+	.AWREADY_AXI(AWREADY_S7_AXI),
+	// W Channel
+	.WDATA      (WDATA_S7      ),
+	.WSTRB      (WSTRB_S7      ),
+	.WLAST      (WLAST_S7      ),
+	.WVALID     (WVALID_S7     ),
+	.WREADY     (WREADY_S7     ),
+	.WDATA_AXI  (WDATA_S7_AXI  ),
+	.WSTRB_AXI  (WSTRB_S7_AXI  ),
+	.WLAST_AXI  (WLAST_S7_AXI  ),
+	.WVALID_AXI (WVALID_S7_AXI ),
+	.WREADY_AXI (WREADY_S7_AXI ),
+	// AR Channel
+	.ARID       (ARID_S7       ),
+	.ARADDR     (ARADDR_S7     ),
+	.ARLEN      (ARLEN_S7      ),
+	.ARSIZE     (ARSIZE_S7     ),
+	.ARBURST    (ARBURST_S7    ),
+	.ARVALID    (ARVALID_S7    ),
+	.ARREADY    (ARREADY_S7    ),
+	.ARID_AXI   (ARID_S7_AXI   ),
+	.ARADDR_AXI (ARADDR_S7_AXI ),
+	.ARLEN_AXI  (ARLEN_S7_AXI  ),
+	.ARSIZE_AXI (ARSIZE_S7_AXI ),
+	.ARBURST_AXI(ARBURST_S7_AXI),
+	.ARVALID_AXI(ARVALID_S7_AXI),
+	.ARREADY_AXI(ARREADY_S7_AXI),
+	// R Channel
+	.RID        (RID_S7        ),
+	.RDATA      (RDATA_S7      ),
+	.RRESP      (RRESP_S7      ),
+	.RLAST      (RLAST_S7      ),
+	.RVALID     (RVALID_S7     ),
+	.RREADY     (RREADY_S7     ),
+	.RID_AXI    (RID_S7_AXI    ),
+	.RDATA_AXI  (RDATA_S7_AXI  ),
+	.RRESP_AXI  (RRESP_S7_AXI  ),
+	.RLAST_AXI  (RLAST_S7_AXI  ),
+	.RVALID_AXI (RVALID_S7_AXI ),
+	.RREADY_AXI (RREADY_S7_AXI ),
+	// B Channel
+	.BID        (BID_S7        ),
+	.BRESP      (BRESP_S7      ),
+	.BVALID     (BVALID_S7     ),
+	.BREADY     (BREADY_S7     ),
+	.BID_AXI    (BID_S7_AXI    ),
+	.BRESP_AXI  (BRESP_S7_AXI  ),
+	.BVALID_AXI (BVALID_S7_AXI ),
+	.BREADY_AXI (BREADY_S7_AXI )
 );
 
 endmodule

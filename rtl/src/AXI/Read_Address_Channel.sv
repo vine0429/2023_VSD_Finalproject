@@ -21,6 +21,13 @@ module Read_Address_Channel (
     input           [`AXI_SIZE_BITS-1:0]    ARSIZE_M1,
     input           [1:0]                   ARBURST_M1,
     input                                   ARVALID_M1,
+    // Input M2
+    input           [`AXI_ID_BITS-1:0]      ARID_M2,
+    input           [`AXI_ADDR_BITS-1:0]    ARADDR_M2,
+    input           [`AXI_LEN_BITS-1:0]     ARLEN_M2,
+    input           [`AXI_SIZE_BITS-1:0]    ARSIZE_M2,
+    input           [1:0]                   ARBURST_M2,
+    input                                   ARVALID_M2,
     // Input S0
     input                                   ARREADY_S0,
     // Input S1
@@ -33,10 +40,16 @@ module Read_Address_Channel (
     input                                   ARREADY_S4,
     // Input S5
     input                                   ARREADY_S5,
+    // Input S6
+    input                                   ARREADY_S6,
+    // Input S7
+    input                                   ARREADY_S7,
     // Output M0
     output  logic                           ARREADY_M0,
     // Output M1
     output  logic                           ARREADY_M1,
+    // Output M2
+    output  logic                           ARREADY_M2,
     // Output S0
     output  logic   [`AXI_IDS_BITS-1:0]     ARID_S0,
     output  logic   [`AXI_ADDR_BITS-1:0]    ARADDR_S0,
@@ -78,7 +91,21 @@ module Read_Address_Channel (
     output  logic   [`AXI_LEN_BITS-1:0]     ARLEN_S5,
     output  logic   [`AXI_SIZE_BITS-1:0]    ARSIZE_S5,
     output  logic   [1:0]                   ARBURST_S5,
-    output  logic                           ARVALID_S5
+    output  logic                           ARVALID_S5,
+    // Output S6
+    output  logic   [`AXI_IDS_BITS-1:0]     ARID_S6,
+    output  logic   [`AXI_ADDR_BITS-1:0]    ARADDR_S6,
+    output  logic   [`AXI_LEN_BITS-1:0]     ARLEN_S6,
+    output  logic   [`AXI_SIZE_BITS-1:0]    ARSIZE_S6,
+    output  logic   [1:0]                   ARBURST_S6,
+    output  logic                           ARVALID_S6,
+    // Output S7
+    output  logic   [`AXI_IDS_BITS-1:0]     ARID_S7,
+    output  logic   [`AXI_ADDR_BITS-1:0]    ARADDR_S7,
+    output  logic   [`AXI_LEN_BITS-1:0]     ARLEN_S7,
+    output  logic   [`AXI_SIZE_BITS-1:0]    ARSIZE_S7,
+    output  logic   [1:0]                   ARBURST_S7,
+    output  logic                           ARVALID_S7
 );
 
 // ARREADY M0
@@ -90,6 +117,8 @@ always_comb begin
         `M0_S3_R:       ARREADY_M0 = ARREADY_S3 ;
         `M0_S4_R:       ARREADY_M0 = ARREADY_S4 ;
         `M0_S5_R:       ARREADY_M0 = ARREADY_S5 ;
+        `M0_S6_R:       ARREADY_M0 = ARREADY_S6 ;
+        `M0_S7_R:       ARREADY_M0 = ARREADY_S7 ;
         default:        ARREADY_M0 = 1'd0       ;
     endcase
 end 
@@ -103,7 +132,24 @@ always_comb begin
         `M1_S3_R:       ARREADY_M1 = ARREADY_S3 ;
         `M1_S4_R:       ARREADY_M1 = ARREADY_S4 ;
         `M1_S5_R:       ARREADY_M1 = ARREADY_S5 ;
+        `M1_S6_R:       ARREADY_M1 = ARREADY_S6 ;
+        `M1_S7_R:       ARREADY_M1 = ARREADY_S7 ;
         default:        ARREADY_M1 = 1'd0       ;
+    endcase     
+end 
+
+// ARREADY M2
+always_comb begin
+    case (AR_arbiter)
+        `M2_S0_R:       ARREADY_M2 = ARREADY_S0 ;
+        `M2_S1_R:       ARREADY_M2 = ARREADY_S1 ;
+        `M2_S2_R:       ARREADY_M2 = ARREADY_S2 ;
+        `M2_S3_R:       ARREADY_M2 = ARREADY_S3 ;
+        `M2_S4_R:       ARREADY_M2 = ARREADY_S4 ;
+        `M2_S5_R:       ARREADY_M2 = ARREADY_S5 ;
+        `M2_S6_R:       ARREADY_M2 = ARREADY_S6 ;
+        `M2_S7_R:       ARREADY_M2 = ARREADY_S7 ;
+        default:        ARREADY_M2 = 1'd0       ;
     endcase     
 end 
 
@@ -112,6 +158,7 @@ always_comb begin
     case (AR_arbiter)
         `M0_S0_R:       ARVALID_S0 = ARVALID_M0 ;
         `M1_S0_R:       ARVALID_S0 = ARVALID_M1 ;
+        `M2_S0_R:       ARVALID_S0 = ARVALID_M2 ;
         default:        ARVALID_S0 = 1'd0       ;
     endcase
 end
@@ -121,6 +168,7 @@ always_comb begin
     case (AR_arbiter)
         `M0_S1_R:       ARVALID_S1 = ARVALID_M0 ;
         `M1_S1_R:       ARVALID_S1 = ARVALID_M1 ;
+        `M2_S1_R:       ARVALID_S1 = ARVALID_M2 ;
         default:        ARVALID_S1 = 1'd0       ;
     endcase
 end
@@ -130,6 +178,7 @@ always_comb begin
     case (AR_arbiter)
         `M0_S2_R:       ARVALID_S2 = ARVALID_M0 ;
         `M1_S2_R:       ARVALID_S2 = ARVALID_M1 ;
+        `M2_S2_R:       ARVALID_S2 = ARVALID_M2 ;
         default:        ARVALID_S2 = 1'd0       ;
     endcase
 end
@@ -139,6 +188,7 @@ always_comb begin
     case (AR_arbiter)
         `M0_S3_R:       ARVALID_S3 = ARVALID_M0 ;
         `M1_S3_R:       ARVALID_S3 = ARVALID_M1 ;
+        `M2_S3_R:       ARVALID_S3 = ARVALID_M2 ;
         default:        ARVALID_S3 = 1'd0       ;
     endcase
 end
@@ -148,6 +198,7 @@ always_comb begin
     case (AR_arbiter)
         `M0_S4_R:       ARVALID_S4 = ARVALID_M0 ;
         `M1_S4_R:       ARVALID_S4 = ARVALID_M1 ;
+        `M2_S4_R:       ARVALID_S4 = ARVALID_M2 ;
         default:        ARVALID_S4 = 1'd0       ;
     endcase
 end
@@ -157,7 +208,28 @@ always_comb begin
     case (AR_arbiter)
         `M0_S5_R:       ARVALID_S5 = ARVALID_M0 ;
         `M1_S5_R:       ARVALID_S5 = ARVALID_M1 ;
+        `M2_S5_R:       ARVALID_S5 = ARVALID_M2 ;
         default:        ARVALID_S5 = 1'd0       ;
+    endcase
+end
+
+// ARVALID S6
+always_comb begin
+    case (AR_arbiter)
+        `M0_S6_R:       ARVALID_S6 = ARVALID_M0 ;
+        `M1_S6_R:       ARVALID_S6 = ARVALID_M1 ;
+        `M2_S6_R:       ARVALID_S6 = ARVALID_M2 ;
+        default:        ARVALID_S6 = 1'd0       ;
+    endcase
+end
+
+// ARVALID S7
+always_comb begin
+    case (AR_arbiter)
+        `M0_S7_R:       ARVALID_S7 = ARVALID_M0 ;
+        `M1_S7_R:       ARVALID_S7 = ARVALID_M1 ;
+        `M2_S7_R:       ARVALID_S7 = ARVALID_M2 ;
+        default:        ARVALID_S7 = 1'd0       ;
     endcase
 end
 
@@ -319,6 +391,60 @@ always_comb begin
             ARLEN_S5    = `AXI_LEN_BITS 'b0 ;
             ARSIZE_S5   = `AXI_SIZE_BITS'b0 ;
             ARBURST_S5  = 2'b0              ;                    
+        end
+    endcase
+end
+
+// control output to S6
+always_comb begin
+    case (AR_arbiter)
+        `M0_S6_R: begin
+            ARID_S6     = {4'b0, ARID_M0};
+            ARADDR_S6   = ARADDR_M0      ;
+            ARLEN_S6    = ARLEN_M0       ; 
+            ARSIZE_S6   = ARSIZE_M0      ;
+            ARBURST_S6  = ARBURST_M0     ; 
+        end
+        `M1_S6_R: begin
+            ARID_S6     = {4'b1, ARID_M1};
+            ARADDR_S6   = ARADDR_M1      ;
+            ARLEN_S6    = ARLEN_M1       ; 
+            ARSIZE_S6   = ARSIZE_M1      ;
+            ARBURST_S6  = ARBURST_M1     ; 
+        end  
+        default: begin
+            ARID_S6     = `AXI_IDS_BITS 'b0 ;
+            ARADDR_S6   = `AXI_ADDR_BITS'b0 ;     
+            ARLEN_S6    = `AXI_LEN_BITS 'b0 ;
+            ARSIZE_S6   = `AXI_SIZE_BITS'b0 ;
+            ARBURST_S6  = 2'b0              ;                    
+        end
+    endcase
+end
+
+// control output to S7
+always_comb begin
+    case (AR_arbiter)
+        `M0_S7_R: begin
+            ARID_S7     = {4'b0, ARID_M0};
+            ARADDR_S7   = ARADDR_M0      ;
+            ARLEN_S7    = ARLEN_M0       ; 
+            ARSIZE_S7   = ARSIZE_M0      ;
+            ARBURST_S7  = ARBURST_M0     ; 
+        end
+        `M1_S7_R: begin
+            ARID_S7     = {4'b1, ARID_M1};
+            ARADDR_S7   = ARADDR_M1      ;
+            ARLEN_S7    = ARLEN_M1       ; 
+            ARSIZE_S7   = ARSIZE_M1      ;
+            ARBURST_S7  = ARBURST_M1     ; 
+        end  
+        default: begin
+            ARID_S7     = `AXI_IDS_BITS 'b0 ;
+            ARADDR_S7   = `AXI_ADDR_BITS'b0 ;     
+            ARLEN_S7    = `AXI_LEN_BITS 'b0 ;
+            ARSIZE_S7   = `AXI_SIZE_BITS'b0 ;
+            ARBURST_S7  = 2'b0              ;                    
         end
     endcase
 end
