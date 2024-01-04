@@ -58,7 +58,7 @@ initial begin
   
   fid = $fopen("mem_output.hex", "w");
   for(int i=0; i<16; i=i+1 ) begin
-      $fwrite(fid, "%h\n", TOP.packer_test_inst.mem[i]);
+      $fwrite(fid, "%h\n", TOP.packer_inst.mem[i]);
   end
   
   $finish;

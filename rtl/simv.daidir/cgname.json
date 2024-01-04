@@ -95,11 +95,11 @@
         "module",
         15
     ],
-    "packer_test": [
-        "packer_test",
-        "TRTdd",
+    "packer": [
+        "packer",
+        "BvMik",
         "module",
-        19
+        20
     ],
     "h264_tb": [
         "h264_tb",

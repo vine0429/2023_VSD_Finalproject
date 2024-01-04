@@ -1,5 +1,7 @@
+wvResizeWindow -win $_nWave1 0 23 2194 1163
 wvSetPosition -win $_nWave1 {("G1" 0)}
 wvOpenFile -win $_nWave1 {/home/N26124939/VSD/VSD_Project/rtl/h264_top.fsdb}
+wvResizeWindow -win $_nWave1 0 23 2194 1163
 wvGetSignalOpen -win $_nWave1
 wvGetSignalSetScope -win $_nWave1 "/h264_tb"
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
@@ -8,7 +10,17 @@ wvSetPosition -win $_nWave1 {("G1" 1)}
 wvSetPosition -win $_nWave1 {("G1" 1)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvSetPosition -win $_nWave1 {("G1" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
@@ -19,192 +31,303 @@ wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 2)}
-wvSetPosition -win $_nWave1 {("G1" 2)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
-wvSetPosition -win $_nWave1 {("G1" 2)}
-wvZoom -win $_nWave1 207.857341 424.751958
-wvSetCursor -win $_nWave1 334.703540 -snap {("G1" 2)}
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 3 )} 
-wvSetPosition -win $_nWave1 {("G1" 3)}
-wvSetPosition -win $_nWave1 {("G1" 4)}
-wvSetPosition -win $_nWave1 {("G1" 4)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
-wvSetPosition -win $_nWave1 {("G1" 4)}
-wvGetSignalClose -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoom -win $_nWave1 0.000000 560.311093
-wvSetCursor -win $_nWave1 138.021166 -snap {("G2" 0)}
-wvSetCursor -win $_nWave1 22.851187 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 11.882617 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 5.484285 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 12.339641 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 20.566068 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 27.421424 -snap {("G1" 4)}
-wvSetCursor -win $_nWave1 32.448685 -snap {("G1" 4)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvGetSignalClose -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvGetSignalClose -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvGetSignalClose -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoom -win $_nWave1 1396.664519 1444.194987
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 1424.151551 -snap {("G1" 7)}
-wvSetCursor -win $_nWave1 1434.386497 -snap {("G1" 7)}
-wvSetCursor -win $_nWave1 1426.942900 -snap {("G1" 7)}
+wvSetCursor -win $_nWave1 1419.213316 -snap {("G1" 1)}
+wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
+wvExpandBus -win $_nWave1
+wvSetCursor -win $_nWave1 1847.787635 -snap {("G1" 3)}
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 1435.316947 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1460.749236 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1479.978529 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1495.486022 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1501.689020 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1506.651418 -snap {("G1" 6)}
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 3 4 5 6 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
 wvGetSignalOpen -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 8)}
-wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSetPosition -win $_nWave1 {("G1" 18)}
+wvSetPosition -win $_nWave1 {("G1" 18)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
 }
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSetPosition -win $_nWave1 {("G1" 18)}
 wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1524.600444 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1651.064997 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1861.839252 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1594.858529 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1454.342359 -snap {("G1" 18)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSetCursor -win $_nWave1 1637.013380 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1988.303805 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2220.155485 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2444.981357 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1622.961763 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1278.697146 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1580.806912 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1854.813443 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2079.639315 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2641.703995 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2880.581484 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3112.433164 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1447.316550 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1658.090805 -snap {("G1" 18)}
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSetCursor -win $_nWave1 1946.148954 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1847.787635 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2037.484464 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2297.439379 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2473.084591 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2613.600761 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 2866.529867 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3049.200888 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3351.310653 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3590.188142 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3758.807546 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 3934.452758 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 4081.994737 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 4215.485098 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 4461.388396 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1447.316550 -snap {("G1" 18)}
+wvSetCursor -win $_nWave1 1629.987571 -snap {("G1" 18)}
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvSetCursor -win $_nWave1 1414.846995 -snap {("G1" 18)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 19 20 )} 
+wvSetPosition -win $_nWave1 {("G1" 20)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 1344.456597 1900.540739
+wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSetPosition -win $_nWave1 {("G1" 21)}
+wvSetPosition -win $_nWave1 {("G1" 21)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 21 )} 
+wvSetPosition -win $_nWave1 {("G1" 21)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1421.504400 -snap {("G1" 21)}
+wvSelectSignal -win $_nWave1 {( "G1" 19 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 19 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSetRadix -win $_nWave1 -format Hex
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 21 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSetPosition -win $_nWave1 {("G1" 22)}
+wvSetPosition -win $_nWave1 {("G1" 22)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 22 )} 
+wvSetPosition -win $_nWave1 {("G1" 22)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvSetCursor -win $_nWave1 1431.554113 -snap {("G1" 22)}
+wvSetCursor -win $_nWave1 1445.791207 -snap {("G1" 22)}
+wvSelectSignal -win $_nWave1 {( "G1" 20 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 18 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSetPosition -win $_nWave1 {("G1" 24)}
+wvSetPosition -win $_nWave1 {("G1" 24)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvSelectSignal -win $_nWave1 {( "G1" 23 24 )} 
+wvSetPosition -win $_nWave1 {("G1" 24)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 23)}
 wvSetPosition -win $_nWave1 {("G2" 0)}
 wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvSetPosition -win $_nWave1 {("G2" 2)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
+wvSetPosition -win $_nWave1 {("G2" 3)}
+wvGetSignalClose -win $_nWave1
 wvSetPosition -win $_nWave1 {("G2" 1)}
+wvSetPosition -win $_nWave1 {("G2" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 0)}
 wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
-wvSetRadix -win $_nWave1 -format UDec
 wvGetSignalOpen -win $_nWave1
 wvGetSignalSetScope -win $_nWave1 "/h264_tb"
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
@@ -214,221 +337,317 @@ wvSetPosition -win $_nWave1 {("G2" 2)}
 wvSetPosition -win $_nWave1 {("G2" 2)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
 {/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
 {/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/clk} \
+{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G3" \
 }
 wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
 wvSetPosition -win $_nWave1 {("G2" 2)}
 wvGetSignalClose -win $_nWave1
-wvSetPosition -win $_nWave1 {("G2" 0)}
-wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
 wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvSetPosition -win $_nWave1 {("G1" 8)}
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvCut -win $_nWave1
-wvSetPosition -win $_nWave1 {("G2" 0)}
-wvSetPosition -win $_nWave1 {("G1" 7)}
+wvSetPosition -win $_nWave1 {("G2" 4)}
+wvSelectSignal -win $_nWave1 {( "G2" 4 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvZoom -win $_nWave1 1398.892545 1470.915491
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 5 )} 
+wvSetPosition -win $_nWave1 {("G2" 5)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1435.554827 -snap {("G2" 4)}
+wvSetCursor -win $_nWave1 1445.100037 -snap {("G2" 4)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+}
+wvSelectSignal -win $_nWave1 {( "G2" 6 )} 
+wvSetPosition -win $_nWave1 {("G2" 6)}
+wvGetSignalClose -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 1 2 )} 
+wvSetPosition -win $_nWave1 {("G3" 2)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1665.542169 -snap {("G3" 2)}
+wvZoom -win $_nWave1 1548.337349 1819.759036
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSetCursor -win $_nWave1 1858.183190 -snap {("G3" 2)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
+wvSetCursor -win $_nWave1 2223.695747 -snap {("G3" 2)}
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvSetCursor -win $_nWave1 1649.112813 -snap {("G3" 1)}
+wvSetCursor -win $_nWave1 1842.547517 -snap {("G3" 1)}
+wvSetCursor -win $_nWave1 1658.948476 -snap {("G3" 1)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 3 )} 
+wvSetPosition -win $_nWave1 {("G3" 3)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 1786.812094 1937.625592
+wvSetCursor -win $_nWave1 1845.231608 -snap {("G3" 2)}
+wvSetCursor -win $_nWave1 1855.175355 -snap {("G3" 2)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2045.625734 -snap {("G3" 3)}
+wvZoom -win $_nWave1 2025.738240 2085.400723
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2237.398000 -snap {("G3" 3)}
+wvZoom -win $_nWave1 2218.166137 2298.590290
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2448.096727 -snap {("G3" 3)}
+wvZoom -win $_nWave1 2438.669720 2474.020996
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomIn -win $_nWave1
-wvSetCursor -win $_nWave1 1842.290244 -snap {("G1" 2)}
-wvSetCursor -win $_nWave1 1867.102234 -snap {("G1" 2)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 \
-           "/h264_tb/TOP/packer_test_inst/Unnamed_\$packer_test_sv_60"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 8)}
-wvSetPosition -win $_nWave1 {("G1" 8)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:63\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvSetPosition -win $_nWave1 {("G1" 8)}
-wvGetSignalClose -win $_nWave1
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSetPosition -win $_nWave1 {("G3" 0)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G3" 1)}
-wvSetPosition -win $_nWave1 {("G3" 1)}
-wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
-wvExpandBus -win $_nWave1
-wvScrollUp -win $_nWave1 3
-wvScrollUp -win $_nWave1 27
-wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
-wvSelectSignal -win $_nWave1 {( "G3" 1 )} 
-wvSetPosition -win $_nWave1 {("G3" 1)}
-wvCollapseBus -win $_nWave1
-wvSetPosition -win $_nWave1 {("G3" 1)}
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvSetCursor -win $_nWave1 1422.967616 -snap {("G1" 6)}
-wvSelectGroup -win $_nWave1 {G4}
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 4 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G4" 1 )} 
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvGetSignalClose -win $_nWave1
-wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomOut -win $_nWave1
 wvZoomIn -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoom -win $_nWave1 1301.367700 1726.119657
-wvZoomOut -win $_nWave1
 wvZoomIn -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
-wvSetCursor -win $_nWave1 1435.445194 -snap {("G4" 1)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 2651.993145 -snap {("G3" 2)}
+wvSetCursor -win $_nWave1 1442.021273 -snap {("G3" 1)}
+wvSetCursor -win $_nWave1 1831.532766 -snap {("G3" 2)}
 wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 \
-           "/h264_tb/TOP/packer_test_inst/Unnamed_\$packer_test_sv_60"
-wvGetSignalSetSignalFilter -win $_nWave1 "*mem*"
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G3" 4)}
+wvSetPosition -win $_nWave1 {("G3" 4)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G4" 2)}
-wvSetPosition -win $_nWave1 {("G4" 2)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
 {/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
 {/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
 }
-wvAddSignal -win $_nWave1 -group {"G5" \
+wvAddSignal -win $_nWave1 -group {"G4" \
 }
-wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
-wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSelectSignal -win $_nWave1 {( "G3" 4 )} 
+wvSetPosition -win $_nWave1 {("G3" 4)}
 wvGetSignalClose -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 3895.065824 -snap {("G4" 2)}
-wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetCursor -win $_nWave1 2204.469302 -snap {("G3" 4)}
+wvSelectSignal -win $_nWave1 {( "G3" 4 )} 
 wvExpandBus -win $_nWave1
-wvSetCursor -win $_nWave1 4491.526020 -snap {("G4" 1)}
+wvSetCursor -win $_nWave1 1848.107723 -snap {("G3" 7)}
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvSelectSignal -win $_nWave1 {( "G3" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 5 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSetRadix -win $_nWave1 -format Hex
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 5 )} 
+wvSetRadix -win $_nWave1 -format Hex
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvSetCursor -win $_nWave1 1373.665905 -snap {("G1" 6)}
-wvZoom -win $_nWave1 1346.554078 1563.448695
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomIn -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomIn -win $_nWave1
-wvSetCursor -win $_nWave1 1443.325167 -snap {("G4" 3)}
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 4011.139632 -snap {("G3" 19)}
+wvSetCursor -win $_nWave1 1848.107723 -snap {("G3" 6)}
+wvSetCursor -win $_nWave1 1400.583880 -snap {("G3" 4)}
+wvSetCursor -win $_nWave1 3820.527625 -snap {("G3" 18)}
+wvSetCursor -win $_nWave1 3654.778053 -snap {("G3" 17)}
+wvSetCursor -win $_nWave1 1400.583880 -snap {("G3" 4)}
+wvSetCursor -win $_nWave1 1715.508066 -snap {("G3" 5)}
+wvSetCursor -win $_nWave1 1450.308751 -snap {("G3" 4)}
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
@@ -436,29 +655,277 @@ wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
 wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 1 2 )} 
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_mb_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_slice_header} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 3 4 )} 
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 1095.794505 -snap {("G4" 3)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_mb_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_slice_header} \
+{/h264_tb/TOP/cavlc_cnt_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 5 )} 
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 933.454579 1095.794505
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 1034.694039 1129.838318
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 1 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/h264_tb"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_mb_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_slice_header} \
+{/h264_tb/TOP/cavlc_cnt_ready} \
+{/h264_tb/TOP/intra_4x4_top_inst/dctq_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 6 )} 
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
+{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
+{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_mb_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_slice_header} \
+{/h264_tb/TOP/cavlc_cnt_ready} \
+{/h264_tb/TOP/intra_4x4_top_inst/dctq_valid} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 6 )} 
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 5 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 1420.474359 -snap {("G3" 5)}
+wvSelectSignal -win $_nWave1 {( "G3" 4 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvGetSignalOpen -win $_nWave1
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/fetch_inst"
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
 wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetSignalFilter -win $_nWave1 "**"
-wvSetPosition -win $_nWave1 {("G4" 18)}
-wvSetPosition -win $_nWave1 {("G4" 18)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
 wvAddSignal -win $_nWave1 -clear
 wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
 }
 wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
+{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/output_valid} \
 {/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
 {/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
 {/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
@@ -477,988 +944,20 @@ wvAddSignal -win $_nWave1 -group {"G4" \
 {/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
 {/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
 }
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSetPosition -win $_nWave1 {("G4" 18)}
-wvSetPosition -win $_nWave1 {("G4" 19)}
-wvSetPosition -win $_nWave1 {("G4" 19)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
 wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
+{/h264_tb/TOP/packer_test_inst/enc_mb_header} \
+{/h264_tb/TOP/packer_test_inst/enc_slice_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_mb_header} \
+{/h264_tb/TOP/intra_4x4_top_inst/enc_slice_header} \
+{/h264_tb/TOP/cavlc_cnt_ready} \
+{/h264_tb/TOP/intra_4x4_top_inst/dctq_valid} \
+{/h264_tb/TOP/packer_test_inst/slice_header\[42:0\]} \
 }
 wvAddSignal -win $_nWave1 -group {"G5" \
 }
-wvSelectSignal -win $_nWave1 {( "G4" 19 )} 
-wvSetPosition -win $_nWave1 {("G4" 19)}
-wvGetSignalClose -win $_nWave1
-wvSetPosition -win $_nWave1 {("G4" 13)}
-wvSetPosition -win $_nWave1 {("G4" 6)}
-wvSetPosition -win $_nWave1 {("G4" 4)}
-wvSetPosition -win $_nWave1 {("G4" 3)}
-wvSetPosition -win $_nWave1 {("G4" 2)}
-wvSetPosition -win $_nWave1 {("G4" 1)}
-wvSetPosition -win $_nWave1 {("G4" 0)}
-wvSetPosition -win $_nWave1 {("G3" 0)}
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSetPosition -win $_nWave1 {("G2" 2)}
-wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G2" 3)}
-wvSetPosition -win $_nWave1 {("G2" 3)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
-wvSetPosition -win $_nWave1 {("G2" 3)}
-wvGetSignalClose -win $_nWave1
-wvSetCursor -win $_nWave1 1436.602496 -snap {("G2" 3)}
-wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
-wvSelectSignal -win $_nWave1 {( "G2" 3 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvSetCursor -win $_nWave1 1646.066791 -snap {("G2" 3)}
-wvSetCursor -win $_nWave1 1640.405594 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1634.744397 -snap {("G1" 6)}
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvSetCursor -win $_nWave1 1841.378093 -snap {("G2" 3)}
-wvSetCursor -win $_nWave1 1831.470998 -snap {("G1" 6)}
-wvSetCursor -win $_nWave1 1849.869889 -snap {("G1" 4)}
-wvZoom -win $_nWave1 1835.716896 1869.684079
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetCursor -win $_nWave1 1834.747197 -snap {("G1" 6)}
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvSetPosition -win $_nWave1 {("G1" 4)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 4)}
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetCursor -win $_nWave1 1834.082260 -snap {("G2" 1)}
-wvSetCursor -win $_nWave1 1844.721247 -snap {("G2" 1)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalClose -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSetPosition -win $_nWave1 {("G1" 6)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvResizeWindow -win $_nWave1 9 31 1919 1017
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvResizeWindow -win $_nWave1 2 31 1926 1017
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 1 )} 
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvGetSignalClose -win $_nWave1
-wvSetCursor -win $_nWave1 1855.786283 -snap {("G1" 7)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 9)}
-wvSetPosition -win $_nWave1 {("G1" 9)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 8 9 )} 
-wvSetPosition -win $_nWave1 {("G1" 9)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetCursor -win $_nWave1 1832.293327 -snap {("G1" 5)}
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 6 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvGetSignalClose -win $_nWave1
-wvSetCursor -win $_nWave1 1634.597886 -snap {("G1" 5)}
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
-wvSetRadix -win $_nWave1 -format Hex
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/intra_4x4_top_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
+wvSelectSignal -win $_nWave1 {( "G4" 7 )} 
+wvSetPosition -win $_nWave1 {("G4" 7)}
 wvGetSignalClose -win $_nWave1
 wvDisplayGridCount -win $_nWave1 -off
 wvGetSignalClose -win $_nWave1
 wvReloadFile -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 12)}
-wvSetPosition -win $_nWave1 {("G1" 12)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 12 )} 
-wvSetPosition -win $_nWave1 {("G1" 12)}
-wvGetSignalClose -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 12 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvZoomIn -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomIn -win $_nWave1
-wvSetCursor -win $_nWave1 1844.704700 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1853.126703 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1849.137333 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1853.126703 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1845.591226 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 2045.946247 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1854.456493 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1845.147963 -snap {("G1" 12)}
-wvSetCursor -win $_nWave1 1855.786283 -snap {("G1" 12)}
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvZoomOut -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomIn -win $_nWave1
-wvSetCursor -win $_nWave1 1833.844748 -snap {("G1" 5)}
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvSetCursor -win $_nWave1 1847.364280 -snap {("G1" 5)}
-wvSetCursor -win $_nWave1 1833.179853 -snap {("G1" 5)}
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 2632.383621 -snap {("G1" 5)}
-wvZoom -win $_nWave1 2604.014768 2669.617739
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 2443.415286 -snap {("G1" 5)}
-wvSetCursor -win $_nWave1 2432.339460 -snap {("G1" 5)}
-wvZoom -win $_nWave1 2428.931513 2450.231179
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomIn -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 13 14 )} 
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvGetSignalClose -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 13)}
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 14 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 14 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 14 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string2\[127:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSetRadix -win $_nWave1 -format UDec
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G2" 2)}
-wvSetPosition -win $_nWave1 {("G2" 2)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string2\[127:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/next_test_string1\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string3\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G2" 1 2 )} 
-wvSetPosition -win $_nWave1 {("G2" 2)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
-wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSetPosition -win $_nWave1 {("G2" 0)}
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
-wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvSetPosition -win $_nWave1 {("G1" 17)}
-wvSelectSignal -win $_nWave1 {( "G1" 17 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 5 )} 
-wvSetPosition -win $_nWave1 {("G1" 5)}
-wvSetPosition -win $_nWave1 {("G1" 7)}
-wvSetPosition -win $_nWave1 {("G1" 9)}
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 10)}
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
-wvSetCursor -win $_nWave1 1631.853752 -snap {("G1" 10)}
-wvSelectSignal -win $_nWave1 {( "G1" 13 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 11 )} 
-wvSetPosition -win $_nWave1 {("G1" 11)}
-wvSetPosition -win $_nWave1 {("G1" 12)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 12)}
-wvSelectSignal -win $_nWave1 {( "G1" 13 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 12 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 12 )} 
-wvSetRadix -win $_nWave1 -format Hex
-wvSelectSignal -win $_nWave1 {( "G1" 13 )} 
-wvZoom -win $_nWave1 1580.955849 1687.177560
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G2" 1 )} 
-wvSetPosition -win $_nWave1 {("G2" 1)}
-wvSetPosition -win $_nWave1 {("G1" 17)}
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvSetPosition -win $_nWave1 {("G1" 13)}
-wvMoveSelected -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 13)}
-wvSetPosition -win $_nWave1 {("G1" 14)}
-wvSetCursor -win $_nWave1 1645.102726 -snap {("G1" 13)}
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 1832.025348 -snap {("G1" 14)}
-wvSetCursor -win $_nWave1 1642.343721 -snap {("G1" 14)}
-wvSelectSignal -win $_nWave1 {( "G1" 13 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 10 )} 
-wvSetCursor -win $_nWave1 1832.715099 -snap {("G1" 10)}
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G4" 3 )} 
-wvSetCursor -win $_nWave1 1440.200859 -snap {("G4" 3)}
-wvDisplayGridCount -win $_nWave1 -off
-wvGetSignalClose -win $_nWave1
-wvReloadFile -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 13 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 14 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string1\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string2\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string3\[127:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvExpandBus -win $_nWave1
-wvScrollUp -win $_nWave1 9
-wvScrollUp -win $_nWave1 219
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvCollapseBus -win $_nWave1
-wvSetPosition -win $_nWave1 {("G1" 15)}
-wvSetCursor -win $_nWave1 1622.295221 -snap {("G1" 15)}
-wvZoom -win $_nWave1 1589.187155 1655.403286
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 15 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvResizeWindow -win $_nWave1 2 31 1926 1017
-wvResizeWindow -win $_nWave1 2 31 1926 1017
-wvGetSignalOpen -win $_nWave1
-wvGetSignalSetScope -win $_nWave1 "/h264_tb"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvGetSignalSetScope -win $_nWave1 "/h264_tb/TOP/packer_test_inst"
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvAddSignal -win $_nWave1 -clear
-wvAddSignal -win $_nWave1 -group {"G1" \
-{/h264_tb/TOP/packer_test_inst/output_valid} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/output_data32\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_valid} \
-{/h264_tb/TOP/packer_test_inst/pivot\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_bit\[6:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_cavlc_code\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_bitstream_code\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/test_string\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string1\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string2\[127:0\]} \
-{/h264_tb/TOP/packer_test_inst/next_test_string3\[127:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G2" \
-{/h264_tb/TOP/packer_test_inst/left_cavlc_len\[8:0\]} \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer_len\[8:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G3" \
-}
-wvAddSignal -win $_nWave1 -group {"G4" \
-{/h264_tb/TOP/packer_test_inst/cavlc_buffer\[255:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0:15\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[0\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[1\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[2\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[3\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[4\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[5\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[6\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[7\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[8\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[9\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[10\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[11\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[12\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[13\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[14\]\[31:0\]} \
-{/h264_tb/TOP/packer_test_inst/mem\[15\]\[31:0\]} \
-}
-wvAddSignal -win $_nWave1 -group {"G5" \
-}
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSetPosition -win $_nWave1 {("G1" 16)}
-wvGetSignalClose -win $_nWave1
-wvSelectSignal -win $_nWave1 {( "G1" 16 )} 
-wvSetRadix -win $_nWave1 -format Bin
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvSetCursor -win $_nWave1 1818.194642 -snap {("G1" 10)}
-wvZoom -win $_nWave1 1818.194642 1845.887083
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvZoomOut -win $_nWave1
-wvExit

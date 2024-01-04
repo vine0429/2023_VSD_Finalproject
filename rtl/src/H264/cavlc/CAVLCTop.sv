@@ -8,8 +8,6 @@ module CAVLCTop(
     input              packer_ready,
     input [9:0]        topleft_x,
     input [9:0]        topleft_y,
-    input              enc_slice_header,
-    input              enc_mb_header,
     input [14:0]       scale00_i,
     input [14:0]       scale01_i,
     input [14:0]       scale02_i,
@@ -31,8 +29,8 @@ module CAVLCTop(
     output logic [6:0]   cavlc_bitstream_bit,
     output logic       cavlc_cnt_ready,
     output logic       cavlc_enc_valid,
-    output logic       enc_slice_header_o,
-    output logic       enc_mb_header_o
+    output logic [9:0] topleft_x_enc,
+    output logic [9:0] topleft_y_enc
 );
 
 //count
@@ -50,8 +48,6 @@ logic [9:0] topleft_y_r;
 
 //encoder
 logic cavlc_enc_ready;
-logic cavlc_cnt_slice_header;
-logic cavlc_cnt_mb_header;
 
 CAVLCCntTop cavlccnttop(
     .clk                (clk),
@@ -59,8 +55,6 @@ CAVLCCntTop cavlccnttop(
     .valid              (valid),
     .topleft_x          (topleft_x),
     .topleft_y          (topleft_y),
-    .enc_slice_header   (enc_slice_header),
-    .enc_mb_header      (enc_mb_header),
     .cavlc_enc_ready    (cavlc_enc_ready),
     .scale00_i          (scale00_i),
     .scale01_i          (scale01_i),
@@ -89,9 +83,7 @@ CAVLCCntTop cavlccnttop(
     .level_code_list    (level_code_list),
     .level_code_cnt     (level_code_cnt),
     .topleft_x_r        (topleft_x_r),
-    .topleft_y_r        (topleft_y_r),
-    .enc_slice_header_r (cavlc_cnt_slice_header),
-    .enc_mb_header_r    (cavlc_cnt_mb_header)
+    .topleft_y_r        (topleft_y_r)
 );
 
 //encoder
@@ -100,8 +92,6 @@ CAVLCEncTop cavlcenctop(
     .rst                 (rst                 ),
     .topleft_x           (topleft_x_r         ),
     .topleft_y           (topleft_y_r         ),
-    .enc_slice_header    (cavlc_cnt_slice_header    ),
-    .enc_mb_header       (cavlc_cnt_mb_header       ),
     .cavlc_cnt_valid     (cavlc_cnt_valid     ),
     .trailing_ones_cnt   (trailing_ones_cnt   ),
     .trailing_ones_flag  (trailing_ones_flag  ),
@@ -115,8 +105,8 @@ CAVLCEncTop cavlcenctop(
     .cavlc_enc_valid     (cavlc_enc_valid     ),
     .cavlc_bitstream_code(cavlc_bitstream_code),
     .cavlc_bitstream_bit (cavlc_bitstream_bit ),
-    .enc_slice_header_o  (enc_slice_header_o  ),
-    .enc_mb_header_o     (enc_mb_header_o     )
+    .topleft_x_r         (topleft_x_enc       ),
+    .topleft_y_r         (topleft_y_enc       )
 );
 
 endmodule : CAVLCTop
