@@ -110,7 +110,7 @@ module Write_Address_Channel
 );
 localparam	IDLE      = 2'd0,
           	M0_STATE  = 2'd1,
-          	M1_STATE  = 2'd2;
+          	M1_STATE  = 2'd2,
           	M2_STATE  = 2'd3;
 
 // AWREADY M0

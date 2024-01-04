@@ -32,7 +32,7 @@ module Read_Arbiter (
 );
 localparam  IDLE      = 2'd0,
             M0_STATE  = 2'd1,
-            M1_STATE  = 2'd2;
+            M1_STATE  = 2'd2,
             M2_STATE  = 2'd3;
 
 logic [31:0] ARADDR_Reg;

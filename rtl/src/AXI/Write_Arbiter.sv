@@ -29,7 +29,7 @@ module Write_Arbiter
 );
 localparam  IDLE      = 2'd0,
             M0_STATE  = 2'd1,
-            M1_STATE  = 2'd2;
+            M1_STATE  = 2'd2,
             M2_STATE  = 2'd3;
 
 // logic [`AXI_ADDR_BITS-1:0] AWADDR_Reg;

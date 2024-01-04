@@ -99,7 +99,7 @@ module Read_Data_Channel (
 
 localparam  IDLE      = 2'd0,
             M0_STATE  = 2'd1,
-            M1_STATE  = 2'd2;
+            M1_STATE  = 2'd2,
             M2_STATE  = 2'd3;
             
 // output to M0
@@ -325,7 +325,7 @@ always_comb begin
         `M2_S5_R:       RVALID_M2 = RVALID_S5;
         `M2_S6_R:       RVALID_M2 = RVALID_S6;
         `M2_S7_R:       RVALID_M2 = RVALID_S7;
-        default:        RVALID_2 = 1'b0;
+        default:        RVALID_M2 = 1'b0;
     endcase
 end
 
