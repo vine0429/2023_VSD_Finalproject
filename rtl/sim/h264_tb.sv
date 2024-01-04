@@ -36,6 +36,8 @@ h264_top TOP(
   .fetch_addr(fetch_addr)
 );
 
+int fid;
+
 always #(cycle/2) clk=~clk;
 initial begin
   $value$plusargs("prog_path=%s", prog_path);
@@ -51,7 +53,15 @@ initial begin
   
   start = 1'b0;
 
-  #10000 $finish;
+  #10000;
+
+  
+  fid = $fopen("mem_output.hex", "w");
+  for(int i=0; i<16; i=i+1 ) begin
+      $fwrite(fid, "%h\n", TOP.packer_test_inst.mem[i]);
+  end
+  
+  $finish;
 end
 
 initial begin

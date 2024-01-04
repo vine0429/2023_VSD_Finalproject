@@ -95,6 +95,12 @@
         "module",
         15
     ],
+    "packer_test": [
+        "packer_test",
+        "TRTdd",
+        "module",
+        19
+    ],
     "h264_tb": [
         "h264_tb",
         "cwFws",

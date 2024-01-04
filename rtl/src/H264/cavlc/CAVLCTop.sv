@@ -5,8 +5,11 @@ module CAVLCTop(
     input              clk,
     input              rst,
     input              valid,
+    input              packer_ready,
     input [9:0]        topleft_x,
     input [9:0]        topleft_y,
+    input              enc_slice_header,
+    input              enc_mb_header,
     input [14:0]       scale00_i,
     input [14:0]       scale01_i,
     input [14:0]       scale02_i,
@@ -28,7 +31,8 @@ module CAVLCTop(
     output logic [6:0]   cavlc_bitstream_bit,
     output logic       cavlc_cnt_ready,
     output logic       cavlc_enc_valid,
-    output logic       packer_ready
+    output logic       enc_slice_header_o,
+    output logic       enc_mb_header_o
 );
 
 //count
@@ -46,42 +50,48 @@ logic [9:0] topleft_y_r;
 
 //encoder
 logic cavlc_enc_ready;
+logic cavlc_cnt_slice_header;
+logic cavlc_cnt_mb_header;
 
 CAVLCCntTop cavlccnttop(
-    .clk               (clk),
-    .rst               (rst),
-    .valid             (valid),
-    .topleft_x         (topleft_x),
-    .topleft_y         (topleft_y),
-    .cavlc_enc_ready   (cavlc_enc_ready),
-    .scale00_i         (scale00_i),
-    .scale01_i         (scale01_i),
-    .scale02_i         (scale02_i),
-    .scale03_i         (scale03_i),
-    .scale10_i         (scale10_i),
-    .scale11_i         (scale11_i),
-    .scale12_i         (scale12_i),
-    .scale13_i         (scale13_i),
-    .scale20_i         (scale20_i),
-    .scale21_i         (scale21_i),
-    .scale22_i         (scale22_i),
-    .scale23_i         (scale23_i),
-    .scale30_i         (scale30_i),
-    .scale31_i         (scale31_i),
-    .scale32_i         (scale32_i),
-    .scale33_i         (scale33_i),
-    .cavlc_cnt_valid   (cavlc_cnt_valid),
-    .cavlc_cnt_ready   (cavlc_cnt_ready),
-    .trailing_ones_cnt (trailing_ones_cnt),
-    .trailing_ones_flag(trailing_ones_flag),
-    .total_zero_cnt    (total_zero_cnt),
-    .total_coeff_cnt   (total_coeff_cnt),
-    .runbefore_cnt     (runbefore_cnt),
-    .runbefore_list    (runbefore_list),
-    .level_code_list   (level_code_list),
-    .level_code_cnt    (level_code_cnt),
-    .topleft_x_r       (topleft_x_r),
-    .topleft_y_r       (topleft_y_r)
+    .clk                (clk),
+    .rst                (rst),
+    .valid              (valid),
+    .topleft_x          (topleft_x),
+    .topleft_y          (topleft_y),
+    .enc_slice_header   (enc_slice_header),
+    .enc_mb_header      (enc_mb_header),
+    .cavlc_enc_ready    (cavlc_enc_ready),
+    .scale00_i          (scale00_i),
+    .scale01_i          (scale01_i),
+    .scale02_i          (scale02_i),
+    .scale03_i          (scale03_i),
+    .scale10_i          (scale10_i),
+    .scale11_i          (scale11_i),
+    .scale12_i          (scale12_i),
+    .scale13_i          (scale13_i),
+    .scale20_i          (scale20_i),
+    .scale21_i          (scale21_i),
+    .scale22_i          (scale22_i),
+    .scale23_i          (scale23_i),
+    .scale30_i          (scale30_i),
+    .scale31_i          (scale31_i),
+    .scale32_i          (scale32_i),
+    .scale33_i          (scale33_i),
+    .cavlc_cnt_valid    (cavlc_cnt_valid),
+    .cavlc_cnt_ready    (cavlc_cnt_ready),
+    .trailing_ones_cnt  (trailing_ones_cnt),
+    .trailing_ones_flag (trailing_ones_flag),
+    .total_zero_cnt     (total_zero_cnt),
+    .total_coeff_cnt    (total_coeff_cnt),
+    .runbefore_cnt      (runbefore_cnt),
+    .runbefore_list     (runbefore_list),
+    .level_code_list    (level_code_list),
+    .level_code_cnt     (level_code_cnt),
+    .topleft_x_r        (topleft_x_r),
+    .topleft_y_r        (topleft_y_r),
+    .enc_slice_header_r (cavlc_cnt_slice_header),
+    .enc_mb_header_r    (cavlc_cnt_mb_header)
 );
 
 //encoder
@@ -90,6 +100,8 @@ CAVLCEncTop cavlcenctop(
     .rst                 (rst                 ),
     .topleft_x           (topleft_x_r         ),
     .topleft_y           (topleft_y_r         ),
+    .enc_slice_header    (cavlc_cnt_slice_header    ),
+    .enc_mb_header       (cavlc_cnt_mb_header       ),
     .cavlc_cnt_valid     (cavlc_cnt_valid     ),
     .trailing_ones_cnt   (trailing_ones_cnt   ),
     .trailing_ones_flag  (trailing_ones_flag  ),
@@ -102,7 +114,9 @@ CAVLCEncTop cavlcenctop(
     .cavlc_enc_ready     (cavlc_enc_ready     ),
     .cavlc_enc_valid     (cavlc_enc_valid     ),
     .cavlc_bitstream_code(cavlc_bitstream_code),
-    .cavlc_bitstream_bit (cavlc_bitstream_bit )
+    .cavlc_bitstream_bit (cavlc_bitstream_bit ),
+    .enc_slice_header_o  (enc_slice_header_o  ),
+    .enc_mb_header_o     (enc_mb_header_o     )
 );
 
 endmodule : CAVLCTop

@@ -10,7 +10,9 @@ module CAVLCCntTop(
     input              rst,
     input              valid,
     input [9:0]        topleft_x,         
-    input [9:0]        topleft_y,         
+    input [9:0]        topleft_y,
+    input              enc_slice_header, 
+    input              enc_mb_header,           
     input              cavlc_enc_ready,
     input [14:0]       scale00_i,
     input [14:0]       scale01_i,
@@ -40,7 +42,9 @@ module CAVLCCntTop(
     output logic [7:0] level_code_list [0:15],
     output logic [4:0] level_code_cnt,
     output logic [9:0] topleft_x_r,
-    output logic [9:0] topleft_y_r
+    output logic [9:0] topleft_y_r,
+    output logic       enc_slice_header_r,
+    output logic       enc_mb_header_r    
 );
 
 localparam IDLE      = 3'd0;
@@ -60,12 +64,16 @@ assign cavlc_cnt_ready = (state_curr == IDLE);
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        topleft_x_r <= 10'd0;
-        topleft_y_r <= 10'd0;
+        topleft_x_r        <= 10'd0;
+        topleft_y_r        <= 10'd0;
+        enc_slice_header_r <= 1'b0;
+        enc_mb_header_r    <= 1'b0;
     end
     else if (state_next == LOAD) begin
         topleft_x_r <= topleft_x;
         topleft_y_r <= topleft_y;
+        enc_slice_header_r <= enc_slice_header;
+        enc_mb_header_r    <= enc_mb_header;
     end
 end
 

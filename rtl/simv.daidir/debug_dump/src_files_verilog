@@ -31,3 +31,4 @@
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/h264_top.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/intra/intra_4x4_pe.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/intra/intra_4x4_top.sv
+/home/N26124939/VSD/VSD_Project/rtl/src/H264/packer/packer_test.sv

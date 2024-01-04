@@ -204,6 +204,7 @@ Orientation = Landscape
 nWaveOpenFsdbDirHistory = "\"/home/N26124939/VSD/VSD_Project/rtl/h264_top.fsdb\""
 [Form]
 version = Verdi_Q-2020.03
+wave/unknownSave.fm = 100,100,520,275
 [General]
 autoSaveSession = FALSE
 TclAutoSource = 
@@ -315,6 +316,7 @@ Wave_comment_string_font = -f COURIER12 -c ID_RED5
 HB_designTreeFont = *-adobe-courier-medium-r-*-*-12-*-*-*-*-*-iso8859-*
 Text_font = COURIER12
 nMemory_font = Fixed 14
+Wave_getsignal_form_font = -f COURIER12
 [OtherEditor]
 cmd1 = "xterm -font 9x15 -fg black -bg gray -e"
 name = "vi"
@@ -325,9 +327,11 @@ FileName = test.ps
 PaperSize = A4 - 210x297 (mm)
 ColorPrint = FALSE
 [QtDialog]
-openFileDlg = 247,366,602,483
-qWaveSignalDialog = 697,365,800,479
 QwUserAskDlg = 925,469,324,134
+QwQuestionMsgDlg = 788,436,324,110
+openFileDlg = 667,298,602,483
+ActiveFileDialog = 756,403,417,272
+qWaveSignalDialog = 640,299,800,479
 [Session Cache]
 1 = string (session file name)
 2 = string (session file name)
@@ -541,8 +545,8 @@ waveform_vertical_scroll_bar = TRUE
 scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
-getSignalForm = 697 365 800 479 261 381 293 89
-viewPort = 0 23 2194 1163 268 400
+getSignalForm = 640 299 800 479 261 381 293 89
+viewPort = 2 31 1926 1017 268 807
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98

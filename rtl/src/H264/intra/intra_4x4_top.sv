@@ -15,7 +15,9 @@ module intra_4x4_top(
     output logic dctq_valid,
     output logic [9:0] topleft_x,
     output logic [9:0] topleft_y,
-    output logic signed [14:0] DCTQ_4x4 [0:3][0:3]
+    output logic signed [14:0] DCTQ_4x4 [0:3][0:3],
+    output logic enc_slice_header,
+    output logic enc_mb_header
 );
 
 logic [1:0]  i4x4;
@@ -57,6 +59,8 @@ localparam WAIT_CAVLC  = 4'd11;
 assign intra_ready      = (curr_state == IDLE);
 assign dctq_valid       = (curr_state == WAIT_CAVLC);
 assign intra_4x4_finish = (i4x4 == 2'd3 && i8x8 == 2'd3);
+assign enc_slice_header = (topleft_x == 10'd0 && topleft_y == 10'd0);
+assign enc_mb_header    = (i4x4 == 2'd0 && i8x8 == 2'd0);
 
 always_ff @(posedge clk) begin
     if (rst)

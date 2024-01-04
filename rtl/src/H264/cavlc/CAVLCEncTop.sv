@@ -9,6 +9,8 @@ module CAVLCEncTop(
     input       rst,
     input [9:0] topleft_x,
     input [9:0] topleft_y,
+    input       enc_slice_header,
+    input       enc_mb_header,
     input       cavlc_cnt_valid,
     input [1:0] trailing_ones_cnt,
     input [2:0] trailing_ones_flag,
@@ -22,7 +24,9 @@ module CAVLCEncTop(
     output logic cavlc_enc_ready,
     output logic cavlc_enc_valid,
     output logic [127:0] cavlc_bitstream_code,
-    output logic [6:0]   cavlc_bitstream_bit
+    output logic [6:0]   cavlc_bitstream_bit,
+    output logic enc_slice_header_o,  
+    output logic enc_mb_header_o     
 );
 
 localparam IDLE        = 3'd0;
@@ -82,6 +86,8 @@ always_ff @(posedge clk) begin
         topleft_x_r          <= 10'd0;
         topleft_y_r          <= 10'd0;
         runbefore_cnt_r      <= 5'd0;
+        enc_slice_header_o   <= 1'b0;  
+        enc_mb_header_o      <= 1'b0;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;
             runbefore_list_r[i]  <= 5'd0;
@@ -96,6 +102,8 @@ always_ff @(posedge clk) begin
         topleft_x_r          <= 10'd0;
         topleft_y_r          <= 10'd0;
         runbefore_cnt_r      <= 5'd0;
+        enc_slice_header_o   <= 1'b0;  
+        enc_mb_header_o      <= 1'b0;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;
             runbefore_list_r[i]  <= 5'd0;
@@ -110,6 +118,8 @@ always_ff @(posedge clk) begin
         topleft_x_r          <= topleft_x;
         topleft_y_r          <= topleft_y;
         runbefore_cnt_r      <= runbefore_cnt;
+        enc_slice_header_o   <= enc_slice_header;  
+        enc_mb_header_o      <= enc_mb_header;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= level_code_list[i];
             runbefore_list_r[i]  <= runbefore_list[i];
