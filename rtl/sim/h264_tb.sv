@@ -50,17 +50,17 @@ initial begin
   begin
     #(cycle);
   end
-  
+
   start = 1'b0;
 
-  #10000000;
+  #2000000;
 
-  
+
   fid = $fopen("mem_output.hex", "w");
   for(int i=0; i<TOP.packer_inst.paker_waddr; i=i+1 ) begin
       $fwrite(fid, "%h\n", TOP.packer_inst.mem[i]);
   end
-  
+
   $finish;
 end
 

@@ -70,7 +70,7 @@ always_comb begin
     end
     else if (cavlc_bitstream_valid) begin
         next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit;
-        next_cavlc_code = (next_cavlc_code << cavlc_bitstream_bit) + cavlc_bitstream_code;
+        next_cavlc_code = (cavlc_buffer << cavlc_bitstream_bit) + cavlc_bitstream_code;
     end
     else begin
         next_cavlc_len  = left_cavlc_len;

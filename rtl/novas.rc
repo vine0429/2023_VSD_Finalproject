@@ -329,9 +329,9 @@ ColorPrint = FALSE
 [QtDialog]
 QwUserAskDlg = 925,469,324,134
 QwQuestionMsgDlg = 788,436,324,110
-openFileDlg = 667,298,602,483
 ActiveFileDialog = 756,403,417,272
-qWaveSignalDialog = 640,299,800,479
+openFileDlg = 796,363,602,483
+qWaveSignalDialog = 786,417,800,468
 [Session Cache]
 1 = string (session file name)
 2 = string (session file name)
@@ -545,8 +545,8 @@ waveform_vertical_scroll_bar = TRUE
 scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
-getSignalForm = 640 299 800 479 261 381 293 89
-viewPort = 2 31 1926 1017 268 807
+getSignalForm = 786 417 800 468 289 370 265 87
+viewPort = 0 23 2194 1163 268 207
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98

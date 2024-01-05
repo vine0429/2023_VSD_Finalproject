@@ -157,7 +157,7 @@ for frame_idx in range(frame_encnum):
                 pred_matrix = np.full((4,4),(I+J+K+L) / 4)
             elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
                 pred_matrix = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-            pred_matrix = np.round(pred_matrix+0.001).astype(int) # 四捨五入完變成整數 0.001 是因為python round 112.5 round 會變成 112 怪怪的
+            pred_matrix = np.round(pred_matrix+0.00000001).astype(int) # 四捨五入完變成整數 0.001 是因為python round 112.5 round 會變成 112 怪怪的
             predpredMode = 2
             predMode = 2
             pred_res_matrix = intra4x4_luma - pred_matrix
@@ -177,7 +177,7 @@ for frame_idx in range(frame_encnum):
                                         [L,L,L,L]])
             # DC預測模式
             pred_DC_matrix = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-            pred_DC_matrix = np.round(pred_DC_matrix+0.001).astype(int)
+            pred_DC_matrix = np.round(pred_DC_matrix+0.00000001).astype(int)
 
             # 殘差的矩陣結果
             res_Vertical   = intra4x4_luma - pred_Vertical
@@ -229,24 +229,24 @@ for frame_idx in range(frame_encnum):
 
         preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
 
-        if (topleft_x == 36 and topleft_y == 8):
-            print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
-            print(A)
-            print(B)
-            print(C)
-            print(D)
-            print(I)
-            print(J)
-            print(K)
-            print(L)
-            print(intra4x4_luma)
-            print(pred_matrix)
-            print(pred_res_matrix)
-            print(DCT_and_QT(pred_res_matrix))
-            print(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP))
-            print(pred_res_matrix)
-            print(preLoopFilter)
-            print("---------------")
+        # if (topleft_x == 120 and topleft_y == 8):
+        #     print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
+        #     print(A)
+        #     print(B)
+        #     print(C)
+        #     print(D)
+        #     print(I)
+        #     print(J)
+        #     print(K)
+        #     print(L)
+        #     print(intra4x4_luma)
+        #     print(pred_matrix)
+        #     print(pred_res_matrix)
+        #     print(DCT_and_QT(pred_res_matrix))
+        #     print(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP))
+        #     print(pred_res_matrix)
+        #     print(preLoopFilter)
+        #     print("---------------")
 
         # print(intra4x4_luma)
         # print(pred_res_matrix)
@@ -309,7 +309,7 @@ for frame_idx in range(frame_encnum):
             pred_topleft_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topleft_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topleft_u = np.round(pred_topleft_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topleft_u = np.round(pred_topleft_u+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         # 右上角4x4 U
         A = intra4x4_tu[0,(mb_x<<3)+4]
@@ -329,7 +329,7 @@ for frame_idx in range(frame_encnum):
             pred_topright_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topright_u = np.round(pred_topright_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topright_u = np.round(pred_topright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.001
         
         # 左下角4x4 U
         A = pred_topleft_u[3,0]
@@ -349,7 +349,7 @@ for frame_idx in range(frame_encnum):
             pred_downleft_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downleft_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downleft_u = np.round(pred_downleft_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downleft_u = np.round(pred_downleft_u+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         # 右下角4x4 U
         A = pred_topright_u[3,0]
@@ -370,7 +370,7 @@ for frame_idx in range(frame_encnum):
             pred_downright_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downright_u = np.round(pred_downright_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downright_u = np.round(pred_downright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         
         # 左上角4x4 v
@@ -393,7 +393,7 @@ for frame_idx in range(frame_encnum):
             pred_topleft_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topleft_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topleft_v = np.round(pred_topleft_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topleft_v = np.round(pred_topleft_v+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         # 右上角4x4 v
         A = intra4x4_tv[0,(mb_x<<3)+4]
@@ -413,7 +413,7 @@ for frame_idx in range(frame_encnum):
             pred_topright_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topright_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topright_v = np.round(pred_topright_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topright_v = np.round(pred_topright_v+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
 
         
@@ -435,7 +435,7 @@ for frame_idx in range(frame_encnum):
             pred_downleft_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downleft_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downleft_v = np.round(pred_downleft_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downleft_v = np.round(pred_downleft_v+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         # 右下角4x4 v
         A = pred_topright_v[0,0]
@@ -456,7 +456,7 @@ for frame_idx in range(frame_encnum):
             pred_downright_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downright_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downright_v = np.round(pred_downright_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downright_v = np.round(pred_downright_v+0.00000001).astype(int) # 四捨五入完變成整數 0.001
 
         # 計算出各個的殘差
         res_topleft_u   = (topleft_u   - pred_topleft_u  ).astype(int)
@@ -665,7 +665,7 @@ for frame_idx in range(frame_encnum):
         Z = Z / (2**qbits)
 
         # 一定要加上round，硬體只用15個bit表示
-        Z = np.round(Z+0.001).astype(int)
+        Z = np.round(Z+0.00000001).astype(int)
 
         return Z
     
@@ -714,7 +714,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         # 一定要有round
-        Y = np.round((Cit@Wi@Ci) / 256 + 0.001).astype(int)
+        Y = np.round((Cit@Wi@Ci) / 256 + 0.00000001).astype(int)
 
         return Y
 
@@ -760,7 +760,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         Y = (Cit@Wi@Ci) / 256
-        Y = np.round(Y+0.001).astype(int)
+        Y = np.round(Y+0.00000001).astype(int)
 
         return Y
 
@@ -775,7 +775,7 @@ for frame_idx in range(frame_encnum):
         
         YD = hadamard@WD@hadamard
 
-        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.001) #9362 = MF[0,0] 
+        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.00000001) #9362 = MF[0,0] 
         ZD = ZD.astype(int)
 
         return ZD
@@ -1016,7 +1016,7 @@ for frame_idx in range(frame_encnum):
                 run_before = run_before + 1
             if (coeff != 0 and Start_encode == True):
                 # print("run_before = ", run_before, "zero_left = ", zero_left, "bistring = ", map.run_before(run_before, zero_left))
-                # runbefore_string = runbefore_string + map.run_before(run_before, zero_left)
+                runbefore_string = runbefore_string + map.run_before(run_before, zero_left)
                 cavlc_bitstring = cavlc_bitstring + map.run_before(run_before, zero_left)
                 zero_left = zero_left - run_before
                 if (zero_left == 0): break #run_before 編碼完成
@@ -1024,25 +1024,25 @@ for frame_idx in range(frame_encnum):
             if (coeff != 0):
                 Start_encode = True
 
-        if (iCbCr == 2 and topleft_x == 32 and topleft_y == 4):
-            print(Z)
-            print("ZigZag_list_HtL = ",ZigZag_list_HtL)
-            print("total_coeff_cnt = ", Non_Zero_Coefficient, "trailing ones cnt = ", Trailing_ones_cnt)
-            print("coeff_token = ", coeff_token, "coeff_token len = ", len(coeff_token))
-            print("total zeros = ", map.Totalzeros(TotalZeros = TotalZeros,TotalCoeff = Non_Zero_Coefficient))
-            print("runbefore = ", runbefore_string, len(runbefore_string))
-            print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
-            print(hex(int(cavlc_bitstring, 2))[2:])
-            print(len(cavlc_bitstring))
-            print("--------------------------------")
-            print(Z)
-            print(ZigZag_list_HtL)
-            for y in range (4):
-                for x in range (4):
-                    if (Z[y,x] < 0):
-                        print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
-                    else :
-                        print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
+        # if (iCbCr == 2 and topleft_x == 120 and topleft_y == 8):
+        #     print(Z)
+        #     print("ZigZag_list_HtL = ",ZigZag_list_HtL)
+        #     print("total_coeff_cnt = ", Non_Zero_Coefficient, "trailing ones cnt = ", Trailing_ones_cnt)
+        #     print("coeff_token = ", coeff_token, "coeff_token len = ", len(coeff_token))
+        #     print("total zeros = ", map.Totalzeros(TotalZeros = TotalZeros,TotalCoeff = Non_Zero_Coefficient))
+        #     print("runbefore = ", runbefore_string, len(runbefore_string))
+        #     print("topleft_x = ", topleft_x, "topleft_y = ", topleft_y)
+        #     print(hex(int(cavlc_bitstring, 2))[2:])
+        #     print(len(cavlc_bitstring))
+        #     print("--------------------------------")
+        #     print(Z)
+        #     print(ZigZag_list_HtL)
+        #     for y in range (4):
+        #         for x in range (4):
+        #             if (Z[y,x] < 0):
+        #                 print("scale",str(y),str(x)," = -8'd",-Z[y,x],";",sep="")
+        #             else :
+        #                 print("scale",str(y),str(x)," = 8'd",Z[y,x],";",sep="")
 
         # if (len(runbefore_string) >= 25):
         #     print(cavlc_bitstring)
