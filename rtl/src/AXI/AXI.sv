@@ -20,11 +20,15 @@ module AXI (
 	input  logic                        ROM_CLK_i,
 	input  logic                        DRAM_CLK_i,
 	input  logic                        SRAM_CLK_i,
+	input  logic                        DMA_CLK_i,
+    input  logic                        EPU_CLK_i,
 	input  logic                        CPU_RST_i,
 	input  logic                        AXI_RST_i,
 	input  logic                        ROM_RST_i,
 	input  logic                        DRAM_RST_i,
 	input  logic                        SRAM_RST_i,
+	input  logic                        DMA_RST_i,
+    input  logic                        EPU_RST_i,
 	// SLAVE INTERFACE FOR MASTERS
 	// M0
 	// READ
@@ -775,6 +779,12 @@ Write_Arbiter Write_Arbiter(
 	.WVALID_M2  (WVALID_M2_AXI),
 	.BVALID_M2  (BVALID_M2_AXI),
 	.BREADY_M2  (BREADY_M2_AXI),
+	.WLAST_M0	(WLAST_M0_AXI),
+	.WREADY_M0	(WREADY_M0_AXI),
+	.WLAST_M1	(WLAST_M1_AXI),
+	.WREADY_M1	(WREADY_M1_AXI),
+	.WLAST_M2	(WLAST_M2_AXI),
+	.WREADY_M2	(WREADY_M2_AXI),
     // OUTPUT
 	.AW_arbiter (AW_arbiter)
 );
@@ -927,7 +937,7 @@ Write_Data_Channel Write_Data_Channel(
 	// Output M1
 	.WREADY_M1 (WREADY_M1_AXI),
 	// Output M2
-	.WREADY_M2 (WREADY_2_AXI),
+	.WREADY_M2 (WREADY_M2_AXI),
 	// Output S0
 	.WDATA_S0   (),
 	.WSTRB_S0   (),
@@ -1418,8 +1428,8 @@ AXI_M_CDC axi_m1_cdc(
 
 AXI_M_CDC axi_m2_cdc(
 	// Clock & Reset
-	.clk        (CPU_CLK_i     ),
-	.rst        (CPU_RST_i     ),
+	.clk        (DMA_CLK_i     ),
+	.rst        (DMA_RST_i     ),
 	.axi_clk    (AXI_CLK_i     ),
 	.axi_rst    (AXI_RST_i     ),
 	// AW Channel
@@ -1915,8 +1925,8 @@ AXI_S_CDC axi_s5_cdc(
 
 AXI_S_CDC axi_s6_cdc(
 	// Clock & Reset
-	.clk        (DRAM_CLK_i    ),
-	.rst        (DRAM_RST_i    ),
+	.clk        (EPU_CLK_i    ),
+	.rst        (EPU_RST_i    ),
 	.axi_clk    (AXI_CLK_i     ),
 	.axi_rst    (AXI_RST_i     ),
 	// AW Channel
@@ -1986,8 +1996,8 @@ AXI_S_CDC axi_s6_cdc(
 
 AXI_S_CDC axi_s7_cdc(
 	// Clock & Reset
-	.clk        (DRAM_CLK_i    ),
-	.rst        (DRAM_RST_i    ),
+	.clk        (DMA_CLK_i    ),
+	.rst        (DMA_RST_i    ),
 	.axi_clk    (AXI_CLK_i     ),
 	.axi_rst    (AXI_RST_i     ),
 	// AW Channel

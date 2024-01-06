@@ -97,6 +97,18 @@ cavlc: | $(bld_dir)
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/cavlc_top_tb.sv -debug_access+all -full64 \
 	+incdir+$(root_dir)/$(src_dir)
 
+
+h264_prog_main_test:| clean $(bld_dir)
+	make -C $(sim_dir)/h264_prog_main_test/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/h264_prog_main_test_tb.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+h264_prog_main_test$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/h264_prog_main_test \
+  +rdcycle=1
+
+
+
 fetch:
 	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
 
@@ -323,3 +335,4 @@ clean:
 	make -C $(sim_dir)/prog1/ clean; \
 	make -C $(sim_dir)/prog2/ clean; \
 	make -C $(sim_dir)/prog3/ clean; \
+	make -C $(sim_dir)/h264_prog_main_test/ clean; \

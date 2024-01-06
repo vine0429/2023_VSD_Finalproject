@@ -22,9 +22,14 @@ logic [7:0] matrixU [0:7][0:7];
 logic [7:0] matrixV [0:7][0:7];
 logic       fetch_finish;
 
-logic [31:0] mem [0:32767]; // for test
+logic [31:0] mem [0:95]; // for test
 assign data_word  = mem[fetch_addr];
 assign data_valid = 1'b1;
+
+
+logic [31:0] fifo_output_data;
+logic        fifo_full;
+
 
 h264_top TOP(
   .clk(clk),
@@ -33,10 +38,12 @@ h264_top TOP(
 
   .data_valid(data_valid),
   .data_word(data_word),
-  .fetch_addr(fetch_addr)
-);
+  .fetch_addr(fetch_addr),
+  .fifo_output_data(fifo_output_data),
+  .fifo_full(fifo_full),
+  .fifo_pop(1'b1)
 
-int fid;
+);
 
 always #(cycle/2) clk=~clk;
 initial begin
@@ -50,18 +57,10 @@ initial begin
   begin
     #(cycle);
   end
-
+  
   start = 1'b0;
 
-  #2000000;
-
-
-  fid = $fopen("mem_output.hex", "w");
-  for(int i=0; i<TOP.packer_inst.paker_waddr; i=i+1 ) begin
-      $fwrite(fid, "%h\n", TOP.packer_inst.mem[i]);
-  end
-
-  $finish;
+  #10000 $finish;
 end
 
 initial begin

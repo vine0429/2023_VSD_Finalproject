@@ -95,12 +95,6 @@
         "module",
         15
     ],
-    "packer": [
-        "packer",
-        "BvMik",
-        "module",
-        20
-    ],
     "h264_tb": [
         "h264_tb",
         "cwFws",

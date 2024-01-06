@@ -250,6 +250,13 @@ always_comb begin
             ARSIZE_S0   = ARSIZE_M1      ;
             ARBURST_S0  = ARBURST_M1     ; 
         end  
+        `M2_S0_R: begin
+            ARID_S0     = {4'b1, ARID_M2};
+            ARADDR_S0   = ARADDR_M2      ;
+            ARLEN_S0    = ARLEN_M2       ; 
+            ARSIZE_S0   = ARSIZE_M2      ;
+            ARBURST_S0  = ARBURST_M2     ; 
+        end 
         default: begin
             ARID_S0     = `AXI_ID_BITS  'b0 ;
             ARADDR_S0   = `AXI_ADDR_BITS'b0 ;     
@@ -276,7 +283,14 @@ always_comb begin
             ARLEN_S1    = ARLEN_M1       ; 
             ARSIZE_S1   = ARSIZE_M1      ;
             ARBURST_S1  = ARBURST_M1     ; 
-        end  
+        end 
+        `M1_S1_R: begin
+            ARID_S1     = {4'b1, ARID_M2};
+            ARADDR_S1   = ARADDR_M2      ;
+            ARLEN_S1    = ARLEN_M2       ; 
+            ARSIZE_S1   = ARSIZE_M2      ;
+            ARBURST_S1  = ARBURST_M2     ; 
+        end 
         default: begin
             ARID_S1     = `AXI_IDS_BITS 'b0 ;
             ARADDR_S1   = `AXI_ADDR_BITS'b0 ;     
@@ -303,6 +317,13 @@ always_comb begin
             ARLEN_S2    = ARLEN_M1       ; 
             ARSIZE_S2   = ARSIZE_M1      ;
             ARBURST_S2  = ARBURST_M1     ; 
+        end  
+        `M2_S2_R: begin
+            ARID_S2     = {4'b1, ARID_M2};
+            ARADDR_S2   = ARADDR_M2      ;
+            ARLEN_S2    = ARLEN_M2       ; 
+            ARSIZE_S2   = ARSIZE_M2      ;
+            ARBURST_S2  = ARBURST_M2     ; 
         end  
         default: begin
             ARID_S2     = `AXI_IDS_BITS 'b0 ;
@@ -331,6 +352,13 @@ always_comb begin
             ARSIZE_S3   = ARSIZE_M1      ;
             ARBURST_S3  = ARBURST_M1     ; 
         end  
+        `M2_S3_R: begin
+            ARID_S3     = {4'b1, ARID_M2};
+            ARADDR_S3   = ARADDR_M2      ;
+            ARLEN_S3    = ARLEN_M2       ; 
+            ARSIZE_S3   = ARSIZE_M2      ;
+            ARBURST_S3  = ARBURST_M2     ; 
+        end  
         default: begin
             ARID_S3     = `AXI_IDS_BITS 'b0 ;
             ARADDR_S3   = `AXI_ADDR_BITS'b0 ;     
@@ -357,6 +385,13 @@ always_comb begin
             ARLEN_S4    = ARLEN_M1       ; 
             ARSIZE_S4   = ARSIZE_M1      ;
             ARBURST_S4  = ARBURST_M1     ; 
+        end 
+        `M2_S4_R: begin
+            ARID_S4     = {4'b1, ARID_M2};
+            ARADDR_S4   = ARADDR_M2      ;
+            ARLEN_S4    = ARLEN_M2       ; 
+            ARSIZE_S4   = ARSIZE_M2      ;
+            ARBURST_S4  = ARBURST_M2     ; 
         end  
         default: begin
             ARID_S4     = `AXI_IDS_BITS 'b0 ;
@@ -385,6 +420,13 @@ always_comb begin
             ARSIZE_S5   = ARSIZE_M1      ;
             ARBURST_S5  = ARBURST_M1     ; 
         end  
+        `M2_S5_R: begin
+            ARID_S5     = {4'b1, ARID_M2};
+            ARADDR_S5   = ARADDR_M2      ;
+            ARLEN_S5    = ARLEN_M2       ; 
+            ARSIZE_S5   = ARSIZE_M2      ;
+            ARBURST_S5  = ARBURST_M2     ; 
+        end  
         default: begin
             ARID_S5     = `AXI_IDS_BITS 'b0 ;
             ARADDR_S5   = `AXI_ADDR_BITS'b0 ;     
@@ -412,6 +454,13 @@ always_comb begin
             ARSIZE_S6   = ARSIZE_M1      ;
             ARBURST_S6  = ARBURST_M1     ; 
         end  
+        `M2_S6_R: begin
+            ARID_S6     = {4'b1, ARID_M2};
+            ARADDR_S6   = ARADDR_M2      ;
+            ARLEN_S6    = ARLEN_M2       ; 
+            ARSIZE_S6   = ARSIZE_M2      ;
+            ARBURST_S6  = ARBURST_M2     ; 
+        end 
         default: begin
             ARID_S6     = `AXI_IDS_BITS 'b0 ;
             ARADDR_S6   = `AXI_ADDR_BITS'b0 ;     
@@ -439,6 +488,13 @@ always_comb begin
             ARSIZE_S7   = ARSIZE_M1      ;
             ARBURST_S7  = ARBURST_M1     ; 
         end  
+        `M2_S7_R: begin
+            ARID_S7     = {4'b1, ARID_M2};
+            ARADDR_S7   = ARADDR_M2      ;
+            ARLEN_S7    = ARLEN_M2       ; 
+            ARSIZE_S7   = ARSIZE_M2      ;
+            ARBURST_S7  = ARBURST_M2     ; 
+        end 
         default: begin
             ARID_S7     = `AXI_IDS_BITS 'b0 ;
             ARADDR_S7   = `AXI_ADDR_BITS'b0 ;     

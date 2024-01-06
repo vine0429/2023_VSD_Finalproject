@@ -11,7 +11,9 @@ file_path = "./yuv/BlowingBubbles_416x240_50.yuv"
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 416
 frame_height = 240
-frame_encnum = 10 # 這邊調整要編碼幾張frame
+frame_encnum = 3    # 這邊調整要編碼幾張frame
+frame_chroma = True # 是否要編碼色度
+gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 SubWidthC    = 2
 SubHeightC   = 2
 
@@ -237,7 +239,7 @@ for frame_idx in range(frame_encnum):
 
         return prev_intra4x4_pred_mode_flag, rem_intra4x4_pred_mode, pred_res_matrix
     
-    def intra_16x16_chroma_dc(mb_x, mb_y):
+    def intra_16x16_chroma(mb_x, mb_y):
         topleft_u = np.zeros((4,4)); topright_u = np.zeros((4,4)); downleft_u = np.zeros((4,4)); downright_u = np.zeros((4,4))
         topleft_v = np.zeros((4,4)); topright_v = np.zeros((4,4)); downleft_v = np.zeros((4,4)); downright_v = np.zeros((4,4))
         for iCbCr in range(2):
@@ -557,7 +559,7 @@ for frame_idx in range(frame_encnum):
         intra4x4_lv[(mb_y<<3)+6,0] = preloop_downright_v[2,3]
         intra4x4_lv[(mb_y<<3)+7,0] = preloop_downright_v[3,3]
 
-        # 回傳intra_16x16_chroma_dc 編碼結果
+        # 回傳intra_16x16_chroma 編碼結果
         return (chromaDC_bitstring + chromaAC_bitstring)
 
     def DCT_and_QT(residual):
@@ -1167,12 +1169,12 @@ for frame_idx in range(frame_encnum):
     # CBP共有6位，其中前面2位代表UV分量，描述如下表所示；後面4位是Y分量，分別代表巨集塊內的4個8x8子巨集塊，如果任意一位為0，表明對應的8x8塊中所有變換系數level（transform coefficient levels 也就是對像素殘差進行變換、量化後的矩陣內的值，以後統稱level）全部都是0，否則表明對應的8x8塊中的變換系數level不全為0。
     mb_type                          = 0  # (ue v bits) 0代表Intra4x4
     intra_chroma_pred_mode           = 0  # (ue v bits)
-    coded_block_pattern              = int(0b101111)  # (me v bits)
+    if (frame_chroma == True):
+        coded_block_pattern          = int(0b101111)  # (me v bits)
+    elif (frame_chroma == False):
+        coded_block_pattern          = int(0b001111)  # (me v bits)
     mb_qp_delta                      = 0  # (se v bits)
     total_macroblock_layer_bitstream = ""
-
-    # frame_width  = 416
-    # frame_height = 240
 
     for mb_y in range (frame_height>>4):
         for mb_x in range (frame_width>>4):
@@ -1200,8 +1202,9 @@ for frame_idx in range(frame_encnum):
                     matrix_Z = DCT_and_QT(pred_res_matrix)
                     # 將此量化後的矩陣送入CAVLC編碼
                     CAVLC_bitstring = CAVLC_bitstring + CAVLC(matrix_Z, topleft_x = topleft_x, topleft_y = topleft_y, iCbCr = 2)
-            # 色度編碼
-            CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma_dc(mb_x, mb_y)
+            # 色度編碼 DC + AC
+            if (frame_chroma == True):
+                CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma(mb_x, mb_y)
             # block編碼完成輸出macroblock_layer
             mb_pred_bitstring = ""
             for mp_pred_str in mp_pred:
@@ -1245,7 +1248,34 @@ for frame_idx in range(frame_encnum):
             else :
                 file.write(byte_value.to_bytes(1, byteorder='big'))
                 if (byte_value != 0): zero_cnt = 0
+    if (gen_gold_hex == True):
+        with open("./bitstream/IDR_slice_"+str(frame_idx)+"_golden.hex", "w") as golden_file:
+            golden_file.write((0).to_bytes(1, byteorder='big').hex())
+            golden_file.write((0).to_bytes(1, byteorder='big').hex())
+            golden_file.write((0).to_bytes(1, byteorder='big').hex())
+            golden_file.write((1).to_bytes(1, byteorder='big').hex())
+            golden_file.write("\n")
+            for i, byte in enumerate(byte_list):
+                rbsp = byte + "10000000"  # 最後沒有byte對齊
+                byte_value = int(rbsp[0:8], 2)
 
+                if byte_value == 0x0:  # 避免出現000000、000001、000002、000003 nal_start_code
+                    zero_cnt = zero_cnt + 1
+
+                if zero_cnt == 2 and (byte_value == 1 or byte_value == 2 or byte_value == 3):
+                    golden_file.write((3).to_bytes(1, byteorder='big').hex())
+                    golden_file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                    zero_cnt = 0
+                elif zero_cnt == 3 and byte_value == 0:
+                    golden_file.write((3).to_bytes(1, byteorder='big').hex())
+                    golden_file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                    zero_cnt = 1
+                else:
+                    golden_file.write(byte_value.to_bytes(1, byteorder='big').hex())
+                    if byte_value != 0:
+                        zero_cnt = 0
+                if (i % 4 == 3):
+                    golden_file.write("\n")
 # 最後把SPS、PPS、IDR Slice合在一起
 header.sps_nal(frame_width, frame_height)
 header.pps_nal()

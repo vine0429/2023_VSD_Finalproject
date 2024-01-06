@@ -56,7 +56,7 @@ always_ff @ (posedge ACLK) begin
                 AR_state   <= M1_STATE;
                 ARADDR_Reg <= ARADDR_M1;
             end
-            else if (ARVALID_M2 && (AW_arbiter == (`Default_W))) begin
+            else if (ARVALID_M2) begin
                 AR_state   <= M2_STATE;
                 ARADDR_Reg <= ARADDR_M2;
             end
@@ -119,10 +119,10 @@ always_comb begin
                 else if (ARADDR_M0[31:24] == 8'h20) begin        //DRAM    
                         AR_arbiter = `M0_S5_R;
                 end    
-                else if (ARADDR_M0[31:24] == 16'h0010) begin        //EPU    
+                else if (ARADDR_M0[31:16] == 16'h0010) begin        //EPU    
                         AR_arbiter = `M0_S6_R;
                 end    
-                else if (ARADDR_M0[31:24] == 16'h0003) begin        //DMA    
+                else if (ARADDR_M0[31:16] == 16'h0003) begin        //DMA    
                         AR_arbiter = `M0_S7_R;
                 end     
                 else begin
@@ -175,10 +175,10 @@ always_comb begin
             else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
                 AR_arbiter = `M0_S5_R;
             end
-            else if (ARADDR_M0[31:24] == 16'h0010) begin        //EPU    
+            else if (ARADDR_Reg[31:16] == 16'h0010) begin        //EPU    
                 AR_arbiter = `M0_S6_R;
             end    
-            else if (ARADDR_M0[31:24] == 16'h0003) begin    //DMA    
+            else if (ARADDR_Reg[31:16] == 16'h0003) begin    //DMA    
                 AR_arbiter = `M0_S7_R;
             end
             else begin
@@ -204,10 +204,10 @@ always_comb begin
             else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
                 AR_arbiter = `M1_S5_R;
             end
-            else if (ARADDR_Reg[31:24] == 16'h0010) begin      //EPU
+            else if (ARADDR_Reg[31:16] == 16'h0010) begin      //EPU
                 AR_arbiter = `M1_S6_R;
             end
-            else if (ARADDR_Reg[31:24] == 16'h0003) begin   //DMA
+            else if (ARADDR_Reg[31:16] == 16'h0003) begin   //DMA
                 AR_arbiter = `M1_S7_R;
             end
             else begin
@@ -233,10 +233,10 @@ always_comb begin
             else if (ARADDR_Reg[31:24] == 8'h20) begin      //DRAM
                 AR_arbiter = `M2_S5_R;
             end
-            else if (ARADDR_Reg[31:24] == 16'h0010) begin      //EPU
+            else if (ARADDR_Reg[31:16] == 16'h0010) begin      //EPU
                 AR_arbiter = `M2_S6_R;
             end
-            else if (ARADDR_Reg[31:24] == 16'h0003) begin      //DMA
+            else if (ARADDR_Reg[31:16] == 16'h0003) begin      //DMA
                 AR_arbiter = `M2_S7_R;
             end
             else begin

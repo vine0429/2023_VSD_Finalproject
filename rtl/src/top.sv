@@ -10,6 +10,8 @@
 `include "./AXI/AXI.sv"
 `include "STRL_wrapper.sv"
 `include "WDT_wrapper.sv"
+`include "DMA_wrapper.sv"
+`include "EPU_wrapper.sv"
 
 //CPU
 `include "./CPU/RegisterFile.sv"
@@ -56,17 +58,25 @@
 `include "./CDC_lib/B_FIFO_AM.sv"
 `include "./CDC_lib/B_FIFO_SA.sv"
 
+
+//H264_lib
+`include "./H264/h264_top.sv"
+
 module top (
     input  logic           cpu_clk         ,
     input  logic           axi_clk         ,
     input  logic           rom_clk         ,
     input  logic           dram_clk        ,
     input  logic           sram_clk        ,
+    input  logic           epu_clk        ,
+    input  logic           dma_clk        ,
     input  logic           cpu_rst         ,
     input  logic           axi_rst         ,
     input  logic           rom_rst         ,
     input  logic           dram_rst        ,
     input  logic           sram_rst        ,
+    input  logic           epu_rst        ,
+    input  logic           dma_rst        ,
 
     input  logic [31:0]    ROM_out         ,
     input  logic           sensor_ready    ,
@@ -88,6 +98,7 @@ module top (
 //interrupt
 logic sctrl_interrupt;
 logic timer_interrupt;
+logic dma_interrupt;
 
 //-------------------------------------------//
 //                 Master                    //
@@ -141,6 +152,40 @@ logic [`AXI_ID_BITS  -1:0] BID_M1;
 logic [1:0]                BRESP_M1;
 logic                      BVALID_M1;
 logic                      BREADY_M1;
+//------------ Read Address M2 --------------//
+logic                      ARREADY_M2;
+logic [`AXI_ID_BITS  -1:0] ARID_M2;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_M2;
+logic [`AXI_LEN_BITS -1:0] ARLEN_M2;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_M2;
+logic [1:0]                ARBURST_M2;
+logic                      ARVALID_M2;
+//-------------- Read Data M2 ---------------//
+logic [`AXI_ID_BITS  -1:0] RID_M2;
+logic [`AXI_DATA_BITS-1:0] RDATA_M2;
+logic [1:0]                RRESP_M2;
+logic                      RLAST_M2;
+logic                      RVALID_M2;
+logic                      RREADY_M2;
+//------------ Write Address M2 -------------//
+logic                      AWREADY_M2;
+logic [`AXI_ID_BITS  -1:0] AWID_M2;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_M2;
+logic [`AXI_LEN_BITS -1:0] AWLEN_M2;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_M2;
+logic [1:0]                AWBURST_M2;
+logic                      AWVALID_M2;
+//-------------- Write Data M2 --------------//
+logic                      WREADY_M2;
+logic [`AXI_DATA_BITS-1:0] WDATA_M2;
+logic [`AXI_STRB_BITS-1:0] WSTRB_M2;
+logic                      WLAST_M2;
+logic                      WVALID_M2;
+//------------- Write Response M2 -----------//
+logic [`AXI_ID_BITS  -1:0] BID_M2;
+logic [1:0]                BRESP_M2;
+logic                      BVALID_M2;
+logic                      BREADY_M2;
 //-------------------------------------------//
 //                 Slave                     //
 //-------------------------------------------//
@@ -330,11 +375,82 @@ logic [`AXI_IDS_BITS -1:0] BID_S5;
 logic [1:0]                BRESP_S5;
 logic                      BVALID_S5;
 
+//------------- Read Address S6 -------------//
+logic [`AXI_IDS_BITS -1:0] ARID_S6;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_S6;
+logic [`AXI_LEN_BITS -1:0] ARLEN_S6;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_S6;
+logic [1:0]                ARBURST_S6;
+logic                      ARVALID_S6;
+logic                      ARREADY_S6;
+//--------------- Read Data S6 --------------//
+logic                      RREADY_S6;
+logic [`AXI_IDS_BITS -1:0] RID_S6;
+logic [`AXI_DATA_BITS-1:0] RDATA_S6;
+logic [1:0]                RRESP_S6;
+logic                      RLAST_S6;
+logic                      RVALID_S6;
+//-------------- Write Address S6 -----------//
+logic [`AXI_IDS_BITS -1:0] AWID_S6;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_S6;
+logic [`AXI_LEN_BITS -1:0] AWLEN_S6;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_S6;
+logic [1:0]                AWBURST_S6;
+logic                      AWVALID_S6;
+logic                      AWREADY_S6;
+//--------------- Write Data S6 -------------//
+logic [`AXI_DATA_BITS-1:0] WDATA_S6;
+logic [`AXI_STRB_BITS-1:0] WSTRB_S6;
+logic                      WLAST_S6;
+logic                      WVALID_S6;
+logic                      WREADY_S6;
+//------------- Write Respone S6 ------------//
+logic                      BREADY_S6;
+logic [`AXI_IDS_BITS -1:0] BID_S6;
+logic [1:0]                BRESP_S6;
+logic                      BVALID_S6;
+
+//------------- Read Address S7 -------------//
+logic [`AXI_IDS_BITS -1:0] ARID_S7;
+logic [`AXI_ADDR_BITS-1:0] ARADDR_S7;
+logic [`AXI_LEN_BITS -1:0] ARLEN_S7;
+logic [`AXI_SIZE_BITS-1:0] ARSIZE_S7;
+logic [1:0]                ARBURST_S7;
+logic                      ARVALID_S7;
+logic                      ARREADY_S7;
+//--------------- Read Data S7 --------------//
+logic                      RREADY_S7;
+logic [`AXI_IDS_BITS -1:0] RID_S7;
+logic [`AXI_DATA_BITS-1:0] RDATA_S7;
+logic [1:0]                RRESP_S7;
+logic                      RLAST_S7;
+logic                      RVALID_S7;
+//-------------- Write Address S7 -----------//
+logic [`AXI_IDS_BITS -1:0] AWID_S7;
+logic [`AXI_ADDR_BITS-1:0] AWADDR_S7;
+logic [`AXI_LEN_BITS -1:0] AWLEN_S7;
+logic [`AXI_SIZE_BITS-1:0] AWSIZE_S7;
+logic [1:0]                AWBURST_S7;
+logic                      AWVALID_S7;
+logic                      AWREADY_S7;
+//--------------- Write Data S7 -------------//
+logic [`AXI_DATA_BITS-1:0] WDATA_S7;
+logic [`AXI_STRB_BITS-1:0] WSTRB_S7;
+logic                      WLAST_S7;
+logic                      WVALID_S7;
+logic                      WREADY_S7;
+//------------- Write Respone S7 ------------//
+logic                      BREADY_S7;
+logic [`AXI_IDS_BITS -1:0] BID_S7;
+logic [1:0]                BRESP_S7;
+logic                      BVALID_S7;
+
 //------------------sub module---------------------//
 
 CPU_wrapper CPU1(
     .sctrl_interrupt_i    (sctrl_interrupt),
     .timer_interrupt_i    (timer_interrupt),
+    .dma_interrupt_i      (dma_interrupt),
 
     .ACLK                 (cpu_clk),
     .ARESETn              (~cpu_rst),
@@ -672,11 +788,15 @@ AXI AXI
     .ROM_CLK_i              (rom_clk),
     .DRAM_CLK_i             (dram_clk),
     .SRAM_CLK_i             (sram_clk),
+    .DMA_CLK_i              (dma_clk),
+    .EPU_CLK_i              (epu_clk),
     .CPU_RST_i              (cpu_rst),
     .AXI_RST_i              (axi_rst),
     .ROM_RST_i              (rom_rst),
     .DRAM_RST_i             (dram_rst),
     .SRAM_RST_i             (sram_rst),
+    .DMA_RST_i              (dma_rst),
+    .EPU_RST_i              (epu_rst),
     //---------------- Master ----------------//
     //----------- Read address0 --------------//
     .ARID_M0                (ARID_M0),
@@ -727,6 +847,40 @@ AXI AXI
     .BRESP_M1               (BRESP_M1),
     .BVALID_M1              (BVALID_M1),
     .BREADY_M1              (BREADY_M1),
+    //----------- Read address2 --------------//
+    .ARID_M2                (ARID_M2),
+    .ARADDR_M2              (ARADDR_M2),
+    .ARLEN_M2               (ARLEN_M2),
+    .ARSIZE_M2              (ARSIZE_M2),
+    .ARBURST_M2             (ARBURST_M2),
+    .ARVALID_M2             (ARVALID_M2),
+    .ARREADY_M2             (ARREADY_M2),
+    //------------ Read data2 -----------------//
+    .RID_M2                 (RID_M2),
+    .RDATA_M2               (RDATA_M2),
+    .RRESP_M2               (RRESP_M2),
+    .RLAST_M2               (RLAST_M2),
+    .RVALID_M2              (RVALID_M2),
+    .RREADY_M2              (RREADY_M2),
+    //------------ Write address2 -------------//
+    .AWID_M2                (AWID_M2),
+    .AWADDR_M2              (AWADDR_M2),
+    .AWLEN_M2               (AWLEN_M2),
+    .AWSIZE_M2              (AWSIZE_M2),
+    .AWBURST_M2             (AWBURST_M2),
+    .AWVALID_M2             (AWVALID_M2),
+    .AWREADY_M2             (AWREADY_M2),
+    //------------ Write data2 ----------------//
+    .WDATA_M2               (WDATA_M2),
+    .WSTRB_M2               (WSTRB_M2),
+    .WLAST_M2               (WLAST_M2),
+    .WVALID_M2              (WVALID_M2),
+    .WREADY_M2              (WREADY_M2),
+    //------------ Write response2 ------------//
+    .BID_M2                 (BID_M2),
+    .BRESP_M2               (BRESP_M2),
+    .BVALID_M2              (BVALID_M2),
+    .BREADY_M2              (BREADY_M2),
     //---------------- Slave -----------------//
     //----------- Read address0 --------------//
     .ARID_S0                (ARID_S0),
@@ -913,7 +1067,200 @@ AXI AXI
     .BID_S5                 (BID_S5),
     .BRESP_S5               (BRESP_S5),
     .BVALID_S5              (BVALID_S5),
-    .BREADY_S5              (BREADY_S5)
+    .BREADY_S5              (BREADY_S5),
+    //----------- Read address6 --------------//
+    .ARID_S6                (ARID_S6),
+    .ARADDR_S6              (ARADDR_S6),
+    .ARLEN_S6               (ARLEN_S6),
+    .ARSIZE_S6              (ARSIZE_S6),
+    .ARBURST_S6             (ARBURST_S6),
+    .ARVALID_S6             (ARVALID_S6),
+    .ARREADY_S6             (ARREADY_S6),
+    //------------ Read data6 -----------------//
+    .RID_S6                 (RID_S6),
+    .RDATA_S6               (RDATA_S6),
+    .RRESP_S6               (RRESP_S6),
+    .RLAST_S6               (RLAST_S6),
+    .RVALID_S6              (RVALID_S6),
+    .RREADY_S6              (RREADY_S6),
+    //------------ Write address6 -------------//
+    .AWID_S6                (AWID_S6),
+    .AWADDR_S6              (AWADDR_S6),
+    .AWLEN_S6               (AWLEN_S6),
+    .AWSIZE_S6              (AWSIZE_S6),
+    .AWBURST_S6             (AWBURST_S6),
+    .AWVALID_S6             (AWVALID_S6),
+    .AWREADY_S6             (AWREADY_S6),
+    //------------ Write data6 ----------------//
+    .WDATA_S6               (WDATA_S6),
+    .WSTRB_S6               (WSTRB_S6),
+    .WLAST_S6               (WLAST_S6),
+    .WVALID_S6              (WVALID_S6),
+    .WREADY_S6              (WREADY_S6),
+    //------------ Write response6 ------------//
+    .BID_S6                 (BID_S6),
+    .BRESP_S6               (BRESP_S6),
+    .BVALID_S6              (BVALID_S6),
+    .BREADY_S6              (BREADY_S6),
+    //----------- Read address7 --------------//
+    .ARID_S7                (ARID_S7),
+    .ARADDR_S7              (ARADDR_S7),
+    .ARLEN_S7               (ARLEN_S7),
+    .ARSIZE_S7              (ARSIZE_S7),
+    .ARBURST_S7             (ARBURST_S7),
+    .ARVALID_S7             (ARVALID_S7),
+    .ARREADY_S7             (ARREADY_S7),
+    //------------ Read data7 -----------------//
+    .RID_S7                 (RID_S7),
+    .RDATA_S7               (RDATA_S7),
+    .RRESP_S7               (RRESP_S7),
+    .RLAST_S7               (RLAST_S7),
+    .RVALID_S7              (RVALID_S7),
+    .RREADY_S7              (RREADY_S7),
+    //------------ Write address7 -------------//
+    .AWID_S7                (AWID_S7),
+    .AWADDR_S7              (AWADDR_S7),
+    .AWLEN_S7               (AWLEN_S7),
+    .AWSIZE_S7              (AWSIZE_S7),
+    .AWBURST_S7             (AWBURST_S7),
+    .AWVALID_S7             (AWVALID_S7),
+    .AWREADY_S7             (AWREADY_S7),
+    //------------ Write data7 ----------------//
+    .WDATA_S7               (WDATA_S7),
+    .WSTRB_S7               (WSTRB_S7),
+    .WLAST_S7               (WLAST_S7),
+    .WVALID_S7              (WVALID_S7),
+    .WREADY_S7              (WREADY_S7),
+    //------------ Write response5 ------------//
+    .BID_S5                 (BID_S7),
+    .BRESP_S5               (BRESP_S7),
+    .BVALID_S5              (BVALID_S7),
+    .BREADY_S5              (BREADY_S7)
+);
+
+DMA_wrapper DMA_wrapper(
+    .clk                 (dma_clk),
+    .rst                 (dma_rst),
+
+    .AWID_M2              (AWID_M2),
+    .AWADDR_M2            (AWADDR_M2),
+    .AWLEN_M2             (AWLEN_M2),
+    .AWSIZE_M2            (AWSIZE_M2),
+    .AWBURST_M2           (AWBURST_M2),
+    .AWVALID_M2           (AWVALID_M2),
+    .AWREADY_M2           (AWREADY_M2),
+
+    .WDATA_M2             (WDATA_M2),
+    .WSTRB_M2             (WSTRB_M2),
+    .WLAST_M2             (WLAST_M2),
+    .WVALID_M2            (WVALID_M2),
+    .WREADY_M2            (WREADY_M2),
+
+    .BID_M2               (BID_M2),
+    .BRESP_M2             (BRESP_M2),
+    .BVALID_M2            (BVALID_M2),
+    .BREADY_M2            (BREADY_M2),
+
+    .ARID_M2              (ARID_M2),
+    .ARADDR_M2            (ARADDR_M2),
+    .ARLEN_M2             (ARLEN_M2),
+    .ARSIZE_M2            (ARSIZE_M2),
+    .ARBURST_M2           (ARBURST_M2),
+    .ARVALID_M2           (ARVALID_M2),
+    .ARREADY_M2           (ARREADY_M2),
+
+    .RID_M2               (RID_M2),
+    .RDATA_M2             (RDATA_M2),
+    .RRESP_M2             (RRESP_M2),
+    .RLAST_M2             (RLAST_M2),
+    .RVALID_M2            (RVALID_M2),
+    .RREADY_M2            (RREADY_M2),
+
+    .ARID_S7                   (ARID_S7) ,
+    .ARADDR_S7                 (ARADDR_S7) ,
+    .ARLEN_S7                  (ARLEN_S7) ,
+    .ARSIZE_S7                 (ARSIZE_S7) ,
+    .ARBURST_S7                (ARBURST_S7) ,
+    .ARVALID_S7                (ARVALID_S7) ,
+    .ARREADY_S7                (ARREADY_S7) ,
+
+    //------------ Read Data---------------//
+    .RREADY_S7                 (RREADY_S7) ,
+    .RID_S7                   (RID_S7) ,
+    .RDATA_S7                  (RDATA_S7) ,
+    .RRESP_S7                  (RRESP_S7) ,
+    .RLAST_S7                  (RLAST_S7) ,
+    .RVALID_S7                 (RVALID_S7) ,
+
+    //-----------Write Address ------------//
+    .AWID_S7                   (AWID_S7) ,
+    .AWADDR_S7                 (AWADDR_S7) ,
+    .AWLEN_S7                  (AWLEN_S7) ,
+    .AWSIZE_S7                 (AWSIZE_S7) ,
+    .AWBURST_S7                (AWBURST_S7) ,
+    .AWVALID_S7                (AWVALID_S7) ,
+    .AWREADY_S7                (AWREADY_S7) ,
+
+    //------------ Write Data --------------//
+    .WDATA_S7                  (WDATA_S7) ,
+    .WSTRB_S7                  (WSTRB_S7) ,
+    .WLAST_S7                  (WLAST_S7) ,
+    .WVALID_S7                 (WVALID_S7) ,
+    .WREADY_S7                 (WREADY_S7) ,
+
+    //------------ Write Response ---------//
+    .BREADY_S7                 (BREADY_S7) ,
+    .BID_S7                   (BID_S7) , 
+    .BRESP_S7                  (BRESP_S7) ,
+    .BVALID_S7                 (BVALID_S7),
+
+    .DMA_interrupt(dma_interrupt)
+);
+
+EPU_wrapper EPU_wrapper
+(
+    .clk               (epu_clk) ,
+    .rst               (epu_rst) ,
+
+    .ARID                   (ARID_S6)       ,
+    .ARADDR                 (ARADDR_S6)     ,
+    .ARLEN                  (ARLEN_S6)      ,
+    .ARSIZE                 (ARSIZE_S6)     ,
+    .ARBURST                (ARBURST_S6)    ,
+    .ARVALID                (ARVALID_S6)    ,
+    .ARREADY                (ARREADY_S6)    ,
+
+    //------------ Read Data---------------//
+    .RREADY                 (RREADY_S6)     ,
+    .RID                    (RID_S6)        ,
+    .RDATA                  (RDATA_S6)      ,
+    .RRESP                  (RRESP_S6)      ,
+    .RLAST                  (RLAST_S6)      ,
+    .RVALID                 (RVALID_S6)     ,
+
+    //-----------Write Address ------------//
+    .AWID                   (AWID_S6)       ,
+    .AWADDR                 (AWADDR_S6)     ,
+    .AWLEN                  (AWLEN_S6)      ,
+    .AWSIZE                 (AWSIZE_S6)     ,
+    .AWBURST                (AWBURST_S6)    ,
+    .AWVALID                (AWVALID_S6)    ,
+    .AWREADY                (AWREADY_S6)    ,
+
+    //------------ Write Data --------------//
+    .WDATA                  (WDATA_S6)      ,
+    .WSTRB                  (WSTRB_S6)      ,
+    .WLAST                  (WLAST_S6)      ,
+    .WVALID                 (WVALID_S6)     ,
+    .WREADY                 (WREADY_S6)     ,
+
+    //------------ Write Response ---------//
+    .BREADY                 (BREADY_S6)     ,
+    .BID                    (BID_S6)        ,
+    .BRESP                  (BRESP_S6)      ,
+    .BVALID                 (BVALID_S6)     ,
+
+    .EPU_interrupt(EPU_interrupt)
 );
 
 endmodule : top

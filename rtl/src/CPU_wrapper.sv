@@ -6,6 +6,7 @@
 module CPU_wrapper (
     input  logic sctrl_interrupt_i               ,
     input  logic timer_interrupt_i               ,
+    input  logic dma_interrupt_i                 ,
 
     input  logic ACLK                            ,
 	input  logic ARESETn                         ,
@@ -357,6 +358,7 @@ module CPU_wrapper (
     CPU cpu(
         .sctrl_interrupt_i      (sctrl_interrupt_i     ),
         .timer_interrupt_i      (timer_interrupt_i     ),
+        .dma_interrupt_i        (dma_interrupt_i        ),
 
         .clk_i                  (ACLK                  ),
         .rst_i                  (~ARESETn              ),

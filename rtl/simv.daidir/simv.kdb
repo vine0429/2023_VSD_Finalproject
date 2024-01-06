@@ -1,7 +1,7 @@
 rc file Version 1.0
 
 [Design]
-COMPILE_PATH=/home/N26124939/VSD/VSD_Project/rtl
+COMPILE_PATH=/home/N26120082/VSD/Final/2023_VSD_Finalproject-main/rtl
 VCS_HOME=/usr/cad/synopsys/vcs/2023.03
 VERDI_HOME=/usr/cad/synopsys/verdi/2020.03/
 SystemC=FALSE

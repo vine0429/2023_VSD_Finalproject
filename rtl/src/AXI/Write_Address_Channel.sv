@@ -106,7 +106,7 @@ module Write_Address_Channel
 	output  logic   [`AXI_LEN_BITS-1:0]     AWLEN_S7,
 	output  logic   [`AXI_SIZE_BITS-1:0]    AWSIZE_S7,
 	output  logic   [1:0]                   AWBURST_S7,
-	output  logic                           AWVALID_S7,
+	output  logic                           AWVALID_S7
 );
 localparam	IDLE      = 2'd0,
           	M0_STATE  = 2'd1,

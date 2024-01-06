@@ -1,0 +1,107 @@
+Magic 271485
+Revision Verdi_Q-2020.03
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 23 1920 1017 207 283
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/N26120082/VSD/Final/rtl/build/top.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 109653712.075195 109706812.661133
+cursor 109692210.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 22
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByValue
+
+
+addGroup "G1"
+activeDirFile "" "/home/N26120082/VSD/Final/rtl/build/top.fsdb"
+addSignal -h 15 /top_tb/TOP/CPU1/cpu/id_pc_w[31:0]
+addSignal -h 15 -holdScope id_insn_w[31:0]
+addGroup "EPU"
+addSignal -h 15 /top_tb/TOP/EPU_wrapper/AWADDR[31:0]
+addSignal -h 15 -holdScope AWLEN[6:0]
+addSignal -h 15 -holdScope AWVALID
+addSignal -h 15 -holdScope AWREADY
+addSignal -h 15 -holdScope WDATA[31:0]
+addSignal -h 15 -holdScope WREADY
+addSignal -h 15 -holdScope WVALID
+addSignal -h 15 -holdScope WLAST
+addSignal -h 15 /top_tb/TOP/DMA_wrapper/DMA_interrupt
+addGroup "G4"
+addSignal -h 15 /top_tb/TOP/CPU1/cpu/executestage/ex_alu_result_o[31:0]
+addGroup "G5"
+addSignal -h 15 -UNSIGNED -UDEC /top_tb/TOP/CPU1/cpu/registerfile/id_rs1_i[4:0]
+addSignal -h 15 -holdScope id_rs1_rdata_o[31:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope id_rs2_i[4:0]
+addSignal -h 15 -holdScope id_rs2_rdata_o[31:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope wb_rd_i[4:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope wb_reg_wdata_i[31:0]
+addSignal -h 15 -holdScope wb_reg_write_i
+addGroup "G6"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/home/N26120082/VSD/Final/rtl/build/top.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/top_tb"
+"/top_tb/TOP"
+"/top_tb/TOP/CPU1"
+"/top_tb/TOP/CPU1/cpu"
+"/top_tb/TOP/CPU1/cpu/executestage"
+"/top_tb/TOP/CPU1/cpu/registerfile"
+"/top_tb/TOP/DM1"
+"/top_tb/TOP/EPU_wrapper"
+
+SCOPE_LIST_BEGIN
+"/top_tb"
+"/top_tb/TOP"
+"/top_tb/TOP/CPU1"
+"/top_tb/TOP/CPU1/cpu"
+"/top_tb/TOP/EPU_wrapper"
+"/top_tb/TOP/DRAM_wrapper"
+"/top_tb/TOP/AXI"
+"/top_tb/TOP/DMA_wrapper"
+"/top_tb/TOP/CPU1/cpu/pc"
+"/top_tb/TOP/CPU1/cpu/executestage"
+"/top_tb/TOP/DM1"
+"/top_tb/TOP/CPU1/cpu/registerfile"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+
