@@ -71,7 +71,7 @@ always_comb begin
         next_cavlc_code = (next_cavlc_code << cavlc_bitstream_bit) + cavlc_bitstream_code;
     end
     else if (cavlc_bitstream_valid && enc_last4x4) begin
-        next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit + macroblock_header_len + rbsp_len;
+        next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit + rbsp_len;
         next_cavlc_code = (cavlc_buffer << cavlc_bitstream_bit) + cavlc_bitstream_code;
         next_cavlc_code = (next_cavlc_code << rbsp_len) + rbsp;
     end
