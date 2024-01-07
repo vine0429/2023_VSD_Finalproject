@@ -10,7 +10,6 @@ _TEST_SIZE = DEFINED(_TEST_SIZE) ? _TEST_SIZE : 0x4000;
  ****************************************************************************/
 MEMORY {
 
-
   rom      : ORIGIN = 0x00000000, LENGTH = 0x00002000
   imem     : ORIGIN = 0x00010000, LENGTH = 0x00010000
   dmem     : ORIGIN = 0x00020000, LENGTH = 0x00010000
@@ -20,10 +19,9 @@ MEMORY {
   dram_raw : ORIGIN = 0x20100000, LENGTH = 0x01100000
   
   DMA      : ORIGIN = 0x00030000, LENGTH = 0x00000300
-  EPU_raw  : ORIGIN = 0x00100000, LENGTH = 0x00010000
-  EPU_rslt : ORIGIN = 0x00110000, LENGTH = 0x00010000
+  EPU_raw  : ORIGIN = 0x00100000, LENGTH = 0x00000004
+  EPU_rslt : ORIGIN = 0x00100010, LENGTH = 0x00000040
 
-  
 }
 
 /* Specify the default entry point to the program */

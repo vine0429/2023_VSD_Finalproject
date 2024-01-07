@@ -75,6 +75,7 @@ CAVLCCntTop cavlccnttop(
 CAVLCEncTop cavlcenctop(
     .clk                 (clk                 ),
     .rst                 (rst                 ),
+    .packer_ready        (packer_ready        ),
     .topleft_x           (topleft_x_r         ),
     .topleft_y           (topleft_y_r         ),
     .cavlc_cnt_valid     (cavlc_cnt_valid     ),

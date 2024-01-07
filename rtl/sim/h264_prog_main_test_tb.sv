@@ -51,7 +51,7 @@
 
 `define SIM_END 'h3fff
 `define SIM_END_CODE -32'd1
-`define COMPRESS_RESULT_START 'h40000    //same as address in link.ld
+`define COMPRESS_RESULT_START 'h4000    //same as address in link.ld
 
 module top_tb;
 

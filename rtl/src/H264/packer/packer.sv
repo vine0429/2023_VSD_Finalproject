@@ -1,7 +1,7 @@
 module packer(
     input  logic         clk,
     input  logic         rst,
-    input  logic [6:0]   h264_addr,
+    input  logic [7:0]   h264_addr,
     input  logic         h264_buf_clear,
     input  logic [9:0]   topleft_x_enc,
     input  logic [9:0]   topleft_y_enc,
@@ -90,7 +90,7 @@ always_ff @(posedge clk) begin
         cavlc_buffer     <= 256'd0;
         cavlc_buffer_len <= 9'd0;
     end
-    else if (cavlc_bitstream_valid || output_valid) begin
+    else if ((cavlc_bitstream_valid || output_valid) && packer_ready) begin
         cavlc_buffer     <= next_cavlc_code;
         cavlc_buffer_len <= next_cavlc_len;
     end
@@ -107,7 +107,7 @@ always_ff @(posedge clk) begin
         for (int i=0; i<64; i=i+1)
             mem[i] <= 32'd0;
     end
-    else if (output_valid) begin
+    else if (output_valid && paker_waddr != 32'd64) begin
         paker_waddr      <= paker_waddr + 32'd1;
         mem[paker_waddr] <= output_data32;
     end

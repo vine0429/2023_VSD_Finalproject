@@ -288,7 +288,7 @@ begin
     case(state_r)
       IDLE_R:
       begin
-        if(DMA_WEB && ~done)
+        if(DMA_WEB && ~done && DMA_en)
             state_r <= READ_ADDR;
         else
             state_r <= state_r;

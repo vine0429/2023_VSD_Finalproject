@@ -10,7 +10,7 @@ module H264(
     input  logic        data_valid,
     input  logic [31:0] data_word,
     input  logic        h264_buf_clear,
-    input  logic  [6:0] h264_addr,
+    input  logic  [7:0] h264_addr,
     output logic [31:0] h264_out,
     output logic [31:0] h264_buf_cnt,
     output logic        fetch_req

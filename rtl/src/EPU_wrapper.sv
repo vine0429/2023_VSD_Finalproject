@@ -47,8 +47,8 @@ module EPU_wrapper (
 enum logic [2:0] {IDLE, READ_ADDR, READ_DATA, WRITE_ADDR, WRITE_DATA, WRITE_RESP} state, next_state;
 logic data_valid, fetch_req;
 logic [31:0] data_word, fetch_addr, fifo_output_data;
-logic [6:0]  counter_r;
-logic [3:0]  ARLEN_r;
+logic [7:0]  counter_r;
+logic [7:0]  ARLEN_r;
 logic [7:0]  AWID_r;
 logic [7:0]  ARID_r;
 logic [31:0] AWADDR_r;
@@ -133,6 +133,7 @@ begin
     begin
         next_state = (ARVALID && ARREADY) ? READ_DATA : READ_ADDR;
     end
+    READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;
     default: 
     begin
         if(RVALID && RREADY)
@@ -209,17 +210,17 @@ always_ff @(posedge clk) begin
     if (rst) begin
         ARLEN_r   <= 4'b0;
         ARID_r    <= 8'b0;
-        counter_r <= 7'd0;
+        counter_r <= 8'd0;
         ARADDR_r  <= 32'b0;
     end
     else if (handshake_AR) begin
         ARLEN_r   <= ARLEN;
         ARID_r    <= ARID;
-        counter_r <= 7'd0;
+        counter_r <= 8'd0;
         ARADDR_r  <= ARADDR;
     end
     else if (handshake_R) begin
-        counter_r <= counter_r + 7'd1;
+        counter_r <= counter_r + 8'd1;
     end
 end
 //------------------------h264 signal----------------------------//
@@ -243,7 +244,7 @@ always_ff @(posedge clk) begin
 end
 
 always_comb begin
-    if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h00110000)) //compress result
+    if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h00100010)) //compress result
         RDATA = h264_out;
     else if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h0010000c))
         RDATA = h264_buf_cnt;

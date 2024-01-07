@@ -52,11 +52,11 @@ always_ff @ (posedge ACLK) begin
                 AR_state   <= M0_STATE;
                 ARADDR_Reg <= ARADDR_M0;
             end
-            else if (ARVALID_M1 && (AW_arbiter == (`Default_W))) begin
+            else if (ARVALID_M1 && (AW_arbiter[1:0] != 2'd1)) begin
                 AR_state   <= M1_STATE;
                 ARADDR_Reg <= ARADDR_M1;
             end
-            else if (ARVALID_M2) begin
+            else if (ARVALID_M2 && (AW_arbiter[1:0] != 2'd1) && (AW_arbiter[1:0] != 2'd2)) begin
                 AR_state   <= M2_STATE;
                 ARADDR_Reg <= ARADDR_M2;
             end

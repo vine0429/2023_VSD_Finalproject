@@ -92,7 +92,7 @@ ANF: vhdi_enc_ist_get_module_id('simv: undefined symbol: vhdi_enc_ist_get_module
 ANF: vhdi_enc_def_get_handle_by_module_id('simv: undefined symbol: vhdi_enc_def_get_handle_by_module_id')
 VCS compile option:
  option[0]: simv
- option[1]: +define+h264_prog_main_test+FSDB_ALL
+ option[1]: +define+h264_prog_main_test+FSDB
  option[2]: +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test
  option[3]: +rdcycle=1
  option[4]: /usr/cad/synopsys/vcs/2023.03/linux64/bin/vcs1
@@ -119,7 +119,7 @@ VCS compile option:
  option[25]: +vcsd1
  option[26]: +itf+/usr/cad/synopsys/vcs/2023.03/linux64/lib/vcsdp_lite.tab
  option[27]: -full64
- option[28]: +define+h264_prog_main_test+FSDB_ALL
+ option[28]: +define+h264_prog_main_test+FSDB
  option[29]: +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test
  option[30]: +rdcycle=1
  option[31]: -picarchive
@@ -165,7 +165,7 @@ VCS_DEPTH=0
 HOST=cav16
 TERM=xterm
 SHELL=/bin/bash
-MAKEFLAGS= -- FSDB=2
+MAKEFLAGS= -- FSDB=1
 HISTSIZE=1000
 SSH_CLIENT=218.173.139.145 49995 5614
 QTDIR=/usr/lib64/qt-3.3
@@ -173,7 +173,7 @@ MGC_LOCATION_MAP=NO_MAP
 QTINC=/usr/lib64/qt-3.3/include
 SSH_TTY=/dev/pts/17
 LC_ALL=C
-SNPS_VCS_INTERNAL_ROOT_PID=12830
+SNPS_VCS_INTERNAL_ROOT_PID=981
 QT_GRAPHICSSYSTEM_CHECKED=1
 GROUP=N26124939
 USER=N26124939
@@ -185,9 +185,9 @@ VCS_MX_HOME_INTERNAL=1
 HOSTTYPE=x86_64-linux
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2023.03/linux64/clang
 ENCOUNTER=/usr/cad/cadence/INNOVUS/cur/tools/fe
-FSDB=2
+FSDB=1
 MAKELEVEL=1
-VCS_USER_OPTIONS=-R -sverilog /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv -debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim +define+h264_prog_main_test+FSDB_ALL +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test +rdcycle=1
+VCS_USER_OPTIONS=-R -sverilog /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv -debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim +define+h264_prog_main_test+FSDB +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test +rdcycle=1
 OVA_UUM=0
 MFLAGS=
 VCS_MODE_FLAG=64
@@ -195,7 +195,7 @@ GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\]
 MAIL=/var/spool/mail/N26124939
 PATH=.:/usr/cad/synopsys/icc2/2022.12-sp6//bin:/usr/cad/synopsys/spyglass/2023.03//SPYGLASS_HOME/bin:/usr/cad/cadence/INNOVUS/cur/tools/celtic/bin:/usr/cad/cadence/INNOVUS/cur/tools/plato/bin:/usr/cad/cadence/INNOVUS/cur/tools/dfII/bin:/usr/cad/cadence/INNOVUS/cur/tools/bin:/usr/cad/cadence/INNOVUS/cur//tools/tlfUtil/bin:/usr/cad/synopsys/vcs/2023.03/amd64/bin:/opt/RISCV/bin:/usr/cad/synopsys/verdi/2020.03//bin:/usr/cad/synopsys/synthesis/2019.12//amd64/syn/bin:/cad/synopsys/lc/cur/bin:/usr/cad/modelsim/modelsim/cur/modeltech/bin:/usr/cad/modelsim/modelsim/cur/bin:/usr/cad/cadence/jasper_2023.03/bin:/usr/cad/cadence/INCISIV/cur/tools/bin:/usr/cad/cadence/INCISIV/cur/tools/vtools/vfault/bin:/usr/cad/cadence/INCISIV/cur/tools/dfII/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/N26124939/.local/bin:/home/N26124939/bin
 maxpend=0
-SNPS_VCS_INTERNAL_CURR_PID=12830
+SNPS_VCS_INTERNAL_CURR_PID=981
 VERDI_HOME=/usr/cad/synopsys/verdi/2020.03/
 PWD=/home/N26124939/VSD/VSD_Project/rtl/build
 VCS_HOME=/usr/cad/synopsys/vcs/2023.03
@@ -209,7 +209,7 @@ VCS_CC=gcc
 LM_LICENSE_FILE=26585@lstn:26585@lstc:26585@lshc:5280@lshc:5280@lstc:5280@lstn:1717@lstn:1717@lsncku:
 HISTCONTROL=ignoredups
 VCS_ARG_ADDED_FOR_TMP=1
-SNPS_VCS_TMPDIR=/tmp/vcs_20240107012432_12830
+SNPS_VCS_TMPDIR=/tmp/vcs_20240107044517_981
 SHLVL=4
 HOME=/home/N26124939
 OSTYPE=linux
@@ -222,7 +222,7 @@ LOGNAME=N26124939
 SNPS_VCS_INTERNAL_MAKE=make
 QTLIB=/usr/lib64/qt-3.3/lib
 MAKE_TERMERR=/dev/pts/17
-SNPS_VCS_INTERNAL_ROOT_START_TIME=1704590672.688228743
+SNPS_VCS_INTERNAL_ROOT_START_TIME=1704602718.001509363
 XDG_DATA_DIRS=/home/N26124939/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 SSH_CONNECTION=218.173.139.145 49995 140.116.157.16 5614
 LESSOPEN=||/usr/bin/lesspipe.sh %s
@@ -245,12 +245,12 @@ SPECMAN_OUTPUT_TO_TTY=1
 FLEXLM_BORROWFILE=/home/N26124939/.cav16-borrow.txt
 Runtime command line arguments:
 argv[0]=simv
-argv[1]=+define+h264_prog_main_test+FSDB_ALL
+argv[1]=+define+h264_prog_main_test+FSDB
 argv[2]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test
 argv[3]=+rdcycle=1
 250 profile - 100
-          CPU/Mem usage: 0.070 sys,  0.320 user,  308.85M mem
-251 Elapsed time:    0:00:00    Sun Jan  7 09:24:38 2024
+          CPU/Mem usage: 0.070 sys,  0.310 user,  300.48M mem
+251 Elapsed time:    0:00:01    Sun Jan  7 12:45:24 2024
 252 pliAppInit
 253 FSDB_GATE is set.
 254 FSDB_RTL is set.
@@ -269,60 +269,56 @@ argv[3]=+rdcycle=1
 267 *  may cause abnormal behavior, please contact Synopsys support for   *
 268 *  assistance.                                                        *
 269 ***********************************************************************
-270 sps_call_fsdbDumpfile_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv(279)
+270 sps_call_fsdbDumpfile_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv(276)
 271 argv[0]: (top.fsdb)
 272 *Verdi* : Create FSDB file 'top.fsdb'
 273 compile option from '/home/N26124939/VSD/VSD_Project/rtl/build/simv.daidir/vcs_rebuild'.
-274   "vcs '-R' '-sverilog' '/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv' '-debug_access+all' '-full64' '+incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim' '+define+h264_prog_main_test+FSDB_ALL' '+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test' '+rdcycle=1' 2>&1"
+274   "vcs '-R' '-sverilog' '/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv' '-debug_access+all' '-full64' '+incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim' '+define+h264_prog_main_test+FSDB' '+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test' '+rdcycle=1' 2>&1"
 275 DVDI_is_vir_unload_enabled is enable
 276 FSDB_VCS_ENABLE_NATIVE_VC is enable
-277 sps_call_fsdbDumpvars_vd_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv(280)
-278 argv[0]: (+struct)
-279 argv[1]: (+mda)
-280 argv[2]: (handle) top_tb.TOP
-281 [spi_vcs_vd_ppi_create_root]: no upf option
-282 FSDB dumper cannot dump UPF related power signal ($power_tree): no ppiPowerNetwork.
-283 Power dumping is enabled and VIR_REDUCTION may not work.
-284 *Verdi* : Begin traversing the scope (top_tb.TOP), layer (0).
-285 *Verdi* : Enable +struct and +mda dumping.
-286 *Verdi* : End of traversing.
-287 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.090 sys,  0.470 user,  417.67M mem
-                   incr: 0.010 sys,  0.140 user,  16.42M mem
-                   accu: 0.010 sys,  0.140 user,  16.42M mem
-              accu incr: 0.010 sys,  0.140 user,  16.42M mem
+277 sps_call_fsdbDumpvars_vd_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv(277)
+278 [spi_vcs_vd_ppi_create_root]: no upf option
+279 FSDB dumper cannot dump UPF related power signal ($power_tree): no ppiPowerNetwork.
+280 Power dumping is enabled and VIR_REDUCTION may not work.
+281 *Verdi* : Begin traversing the scopes, layer (0).
+282 *Verdi* : End of traversing.
+283 pliAppHDL_DumpVarComplete traverse var: profile - 
+          CPU/Mem usage: 0.090 sys,  0.390 user,  401.80M mem
+                   incr: 0.010 sys,  0.080 user,  9.52M mem
+                   accu: 0.010 sys,  0.080 user,  9.52M mem
+              accu incr: 0.010 sys,  0.080 user,  9.52M mem
 
-          Count usage: 142659 var,  142583 idcode,  1603 callback
-                 incr: 142659 var,  142583 idcode,  1603 callback
-                 accu: 142659 var,  142583 idcode,  1603 callback
-            accu incr: 142659 var,  142583 idcode,  1603 callback
-288 Elapsed time:    0:00:01    Sun Jan  7 09:24:39 2024
-289 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.100 sys,  0.510 user,  425.27M mem
-                   incr: 0.010 sys,  0.040 user,  7.60M mem
-                   accu: 0.020 sys,  0.180 user,  24.02M mem
-              accu incr: 0.010 sys,  0.040 user,  7.60M mem
+          Count usage: 6763 var,  6696 idcode,  1502 callback
+                 incr: 6763 var,  6696 idcode,  1502 callback
+                 accu: 6763 var,  6696 idcode,  1502 callback
+            accu incr: 6763 var,  6696 idcode,  1502 callback
+284 Elapsed time:    0:00:01    Sun Jan  7 12:45:24 2024
+285 pliAppHDL_DumpVarComplete: profile - 
+          CPU/Mem usage: 0.090 sys,  0.390 user,  402.99M mem
+                   incr: 0.000 sys,  0.000 user,  1.19M mem
+                   accu: 0.010 sys,  0.080 user,  10.72M mem
+              accu incr: 0.000 sys,  0.000 user,  1.19M mem
 
-          Count usage: 142659 var,  142583 idcode,  1603 callback
+          Count usage: 6763 var,  6696 idcode,  1502 callback
                  incr: 0 var,  0 idcode,  0 callback
-                 accu: 142659 var,  142583 idcode,  1603 callback
+                 accu: 6763 var,  6696 idcode,  1502 callback
             accu incr: 0 var,  0 idcode,  0 callback
-290 Elapsed time:    0:00:01    Sun Jan  7 09:24:39 2024
-291 End of simulation at 1460132020
-292 Elapsed time:    0:00:18    Sun Jan  7 09:24:56 2024
-293 Begin FSDB profile info:
-294 FSDB Writer : bc1(15524335) bcn(25257289) mtf/stf(0/3)
-FSDB Writer elapsed time : flush(3.845152) io wait(0.000000) theadpool wait(0.000000)
+286 Elapsed time:    0:00:01    Sun Jan  7 12:45:24 2024
+287 End of simulation at 1740000000
+288 Elapsed time:    0:00:11    Sun Jan  7 12:45:34 2024
+289 Begin FSDB profile info:
+290 FSDB Writer : bc1(17454949) bcn(5468248) mtf/stf(0/1)
+FSDB Writer elapsed time : flush(1.321449) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
-295 End FSDB profile info
-296 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:96MB
-297                      - BlockUsed:388 Acquire:52839090 BufferUsed:757820258
-298                      - Flush:3 Expand:1 ProducerWait:0 ConsumerWait:257
-299                      - MainProducerTime:17.667441496 TotalConsumerTime:7.789187320
-300                      - ElapsedTime:18.665783000
-301 Producer   0 profile - BlockUsed:388 Acquire:52839090 BufferUsed:757820258
-302 Consumer   0 profile - Affinity:-1 CPUTime:7.789187320 LifeTime:16.435337377 (0.47%)
-303                      - BlockUsed:388 Acquire:52839090 BufferUsed:757820258
-304 SimExit
-305 Elapsed time:    0:00:19    Sun Jan  7 09:24:57 2024
-306 Sim process exit
+291 End FSDB profile info
+292 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:96MB
+293                      - BlockUsed:258 Acquire:37326756 BufferUsed:500812499
+294                      - Flush:3 Expand:1 ProducerWait:0 ConsumerWait:203
+295                      - MainProducerTime:10.707292179 TotalConsumerTime:3.707962547
+296                      - ElapsedTime:11.313550000
+297 Producer   0 profile - BlockUsed:258 Acquire:37326756 BufferUsed:500812499
+298 Consumer   0 profile - Affinity:-1 CPUTime:3.707962547 LifeTime:9.774039396 (0.38%)
+299                      - BlockUsed:258 Acquire:37326756 BufferUsed:500812499
+300 SimExit
+301 Elapsed time:    0:00:12    Sun Jan  7 12:45:35 2024
+302 Sim process exit

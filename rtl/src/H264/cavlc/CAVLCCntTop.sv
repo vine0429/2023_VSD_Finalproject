@@ -81,7 +81,7 @@ always_comb begin
         IDLE      : state_next = (valid)              ? LOAD    : IDLE;
         LOAD      : state_next = CNT;
         CNT       : state_next = (coeff_idx == 4'd15) ? WAITENC : CNT;
-        WAITENC   : state_next = (!cavlc_enc_ready)   ? IDLE    : WAITENC;
+        WAITENC   : state_next = (cavlc_enc_ready)    ? IDLE    : WAITENC;
     endcase
 end
 

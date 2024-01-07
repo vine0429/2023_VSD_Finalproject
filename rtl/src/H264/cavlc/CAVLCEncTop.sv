@@ -5,22 +5,23 @@
 `include "Bitstream.sv"
 
 module CAVLCEncTop(
-    input       clk,
-    input       rst,
-    input [9:0] topleft_x,
-    input [9:0] topleft_y,
-    input       cavlc_cnt_valid,
-    input [1:0] trailing_ones_cnt,
-    input [2:0] trailing_ones_flag,
-    input [4:0] total_zero_cnt,
-    input [4:0] total_coeff_cnt,
-    input [4:0] runbefore_cnt,
-    input [4:0] runbefore_list [0:15],
-    input [7:0] level_code_list [0:15],
-    input [4:0] level_code_cnt,
+    input  logic         clk,
+    input  logic         rst,
+    input  logic         packer_ready,
+    input  logic [9:0]   topleft_x,
+    input  logic [9:0]   topleft_y,
+    input  logic         cavlc_cnt_valid,
+    input  logic [1:0]   trailing_ones_cnt,
+    input  logic [2:0]   trailing_ones_flag,
+    input  logic [4:0]   total_zero_cnt,
+    input  logic [4:0]   total_coeff_cnt,
+    input  logic [4:0]   runbefore_cnt,
+    input  logic [4:0]   runbefore_list [0:15],
+    input  logic [7:0]   level_code_list [0:15],
+    input  logic [4:0]   level_code_cnt,
 
-    output logic cavlc_enc_ready,
-    output logic cavlc_enc_valid,
+    output logic         cavlc_enc_ready,
+    output logic         cavlc_enc_valid,
     output logic [127:0] cavlc_bitstream_code,
     output logic [6:0]   cavlc_bitstream_bit,
     output logic [9:0]   topleft_x_r,
@@ -30,7 +31,7 @@ module CAVLCEncTop(
 localparam IDLE        = 3'd0;
 localparam LOAD        = 3'd1;
 localparam ENC         = 3'd2;
-localparam WAITBIS     = 3'd3;
+localparam WAITPAC     = 3'd3;
 
 logic [1:0] trailing_ones_cnt_r;
 logic [2:0] trailing_ones_flag_r;
@@ -66,11 +67,11 @@ logic [2:0] curr_state;
 logic [2:0] next_state;
 
 assign enc_load        = (curr_state == LOAD);
-assign enc_end         = (curr_state == WAITBIS && next_state == IDLE);
+assign enc_end         = (curr_state == WAITPAC && next_state == IDLE);
 assign start_enc       = (curr_state == ENC);
 assign enc_rst         = (next_state == IDLE);
 assign cavlc_enc_ready = (curr_state == IDLE);
-assign cavlc_enc_valid = (curr_state == WAITBIS);
+assign cavlc_enc_valid = (curr_state == WAITPAC);
 
 always_ff @(posedge clk) begin
     if (rst) begin
@@ -129,8 +130,8 @@ always_comb begin
     case(curr_state)
         IDLE:    next_state = (cavlc_cnt_valid && cavlc_enc_ready) ? LOAD    : IDLE;
         LOAD:    next_state = ENC;
-        ENC:     next_state = (enc_cycle == 4'd15)                 ? WAITBIS : ENC;
-        WAITBIS: next_state = (cavlc_enc_valid)                    ? IDLE    : WAITBIS;
+        ENC:     next_state = (enc_cycle == 4'd15)                 ? WAITPAC : ENC;
+        WAITPAC: next_state = (cavlc_enc_valid && packer_ready)    ? IDLE    : WAITPAC;
     endcase
 end
 

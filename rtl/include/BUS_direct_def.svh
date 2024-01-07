@@ -38,7 +38,6 @@
 `define M1_S7_W             `MX_SX_ID_BITS'b1000_01
 `define M1_NO_W             `MX_SX_ID_BITS'b1111_01
 
-
 // M2
 `define M2_S0_W             `MX_SX_ID_BITS'b0001_10
 `define M2_S1_W             `MX_SX_ID_BITS'b0010_10

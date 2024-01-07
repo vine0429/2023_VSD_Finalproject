@@ -64,6 +64,7 @@ module DRAM_wrapper (
     localparam WRITE_COL_ADDRESS_P   = 4'd4;
     localparam WRITE_DATA_P          = 4'd5;
     localparam WRITE_RESPONSE_P      = 4'd6;
+    localparam WRITE_INTERVAL_P      = 4'd12;
 
     //READ
     localparam READ_ADDRESS_P        = 4'd7;
@@ -76,6 +77,7 @@ module DRAM_wrapper (
     logic                      handshake_W;
     logic                      handshake_R;
     logic                      handshake_RL;
+    logic                      handshake_WL;
     logic [3:0]                state_next_w;
 
     logic [2:0]                precharge_next_w;
@@ -83,22 +85,24 @@ module DRAM_wrapper (
     logic [3:0]                col_delay_next_w;
 
     logic [31:0]               ARADDR_r_add4_w;
+    logic [31:0]               AWADDR_r_add4_w;
 
     //*******************register*********************//
     //AXI WRITE REGISTER
     logic [`AXI_IDS_BITS -1:0] AWID_r;
     logic [`AXI_ADDR_BITS-1:0] AWADDR_r;
+    logic [`AXI_LEN_BITS -1:0] AWLEN_r;
 
     //AXI READ REGISTER
-    logic [`AXI_IDS_BITS -1:0] ARID_r    ;
-    logic [`AXI_ADDR_BITS-1:0] ARADDR_r  ;
-    logic [`AXI_LEN_BITS -1:0] ARLEN_r   ;
+    logic [`AXI_IDS_BITS -1:0] ARID_r;
+    logic [`AXI_ADDR_BITS-1:0] ARADDR_r;
+    logic [`AXI_LEN_BITS -1:0] ARLEN_r;
 
     logic                      DRAM_valid_r;
     logic [`AXI_DATA_BITS-1:0] DRAM_Q_r;
 
     //DRAM SIGNAL REGISTER
-    logic [3:0]                state_current_r ;
+    logic [3:0]                state_current_r;
     logic [`AXI_LEN_BITS -1:0] burst_cnt_r;
     logic [31:0]               DRAM_addr_r;
 
@@ -119,9 +123,11 @@ module DRAM_wrapper (
     assign RRESP          = `AXI_RESP_OKAY;
     assign RLAST          = ((state_current_r == READ_DATA_P) && (ARLEN_r == burst_cnt_r)) ? 1'b1 : 1'b0;
     assign handshake_W    = WVALID  & WREADY;
+    assign handshake_WL   = WVALID  & WREADY & WLAST;
     assign handshake_R    = RVALID  & RREADY;
     assign handshake_RL   = RVALID  & RREADY & RLAST;
     assign ARADDR_r_add4_w = ARADDR_r + 32'd4;
+    assign AWADDR_r_add4_w = AWADDR_r + 32'd4;
 
 
     //*******************state machine********************//
@@ -198,14 +204,21 @@ module DRAM_wrapper (
         end
         //WRITE_DATA_P
         else if (state_current_r == WRITE_DATA_P) begin
-            if (handshake_W) begin
-                //state_next_w     = WRITE_RESPONSE_P;
-                state_next_w     = IDLE_P;
-                col_delay_next_w = col_delay_r + 4'd1;
-            end else begin
-                state_next_w     = WRITE_DATA_P;
-                col_delay_next_w = col_delay_r + 4'd1;
+            col_delay_next_w = col_delay_r + 4'd1;
+            if (handshake_WL) begin
+                state_next_w = IDLE_P;
             end
+            else if (handshake_W) begin
+                state_next_w     = (AWADDR_r_add4_w[22:12] == DRAM_addr_r[22:12]) ? WRITE_INTERVAL_P : WRITE_ROW_ADDRESS_P;
+                row_delay_next_w = (state_next_w == WRITE_ROW_ADDRESS_P) ? 4'd0 : row_delay_next_w;
+            end
+            else
+                state_next_w = WRITE_DATA_P;
+        end
+        //WRITE_INTERVAL
+        else if (state_current_r == WRITE_INTERVAL_P) begin
+                state_next_w     = WRITE_COL_ADDRESS_P;
+                col_delay_next_w = 4'd0;
         end
         //WRITE_RESPONSE_P
         else if (state_current_r == WRITE_RESPONSE_P) begin
@@ -281,8 +294,8 @@ module DRAM_wrapper (
         end
         //WRITE_ROW_ADDRESS_P
         else if (state_next_w == WRITE_ROW_ADDRESS_P) begin
-            DRAM_addr_r[22:12] <= AWADDR_r[22:12];
-            DRAM_A             <= AWADDR_r[22:12];
+            DRAM_addr_r[22:12] <= (handshake_W) ? AWADDR_r_add4_w[22:12] : AWADDR_r[22:12];
+            DRAM_A             <= (handshake_W) ? AWADDR_r_add4_w[22:12] : AWADDR_r[22:12];
             DRAM_CSn           <= 1'b0;
             DRAM_RASn          <= (row_delay_next_w == 4'd0) ? 1'b0 : 1'b1;
             DRAM_CASn          <= 1'b1;
@@ -298,8 +311,8 @@ module DRAM_wrapper (
         end
         //WRITE_COL_ADDRESS_P
         else if (state_next_w == WRITE_COL_ADDRESS_P) begin
-            DRAM_addr_r[11:2] <= {AWADDR_r[11:2]};
-            DRAM_A            <= {1'b0,AWADDR_r[11:2]};
+            DRAM_addr_r[11:2] <= (handshake_W) ? {AWADDR_r_add4_w[11:2]}     : {AWADDR_r[11:2]};
+            DRAM_A            <= (handshake_W) ? {1'b0,AWADDR_r_add4_w[11:2]}: {1'b0,AWADDR_r[11:2]};
             DRAM_CSn          <= 1'b0;
             DRAM_RASn         <= 1'b1;
             DRAM_CASn         <= (col_delay_next_w == 4'd0) ? 1'b0 : 1'b1;
@@ -362,12 +375,17 @@ module DRAM_wrapper (
     //AW
     always_ff @(posedge dram_clk) begin
         if (dram_rst) begin
-            AWID_r   <= 8'd0;
-            AWADDR_r <= 32'b0;
+            AWID_r      <= 8'b0;
+            AWLEN_r     <= 4'd0;
+            AWADDR_r    <= 32'b0;
         end
         else if (state_next_w == WRITE_ADDRESS_P) begin
-            AWID_r   <= AWID;
-            AWADDR_r <= AWADDR;
+            AWID_r      <= AWID;
+            AWLEN_r     <= AWLEN;
+            AWADDR_r    <= AWADDR;
+        end
+        else if (handshake_W) begin
+            AWADDR_r    <= AWADDR_r + 32'd4;
         end
     end
 

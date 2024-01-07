@@ -55,7 +55,7 @@ rtl0: | clean $(bld_dir)
 	make -C $(sim_dir)/prog0/; \
 	cd $(bld_dir); \
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+prog0$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/prog0 \
   +rdcycle=1
