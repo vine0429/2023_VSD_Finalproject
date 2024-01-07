@@ -76,9 +76,7 @@ int main(void)
                 *DMA_en = 1;  // DMA enable
                 asm("wfi");   // Wait DMA dom
 
-                int h264_current_cnt = *H264_buf_cnt;
-
-                if (h264_current_cnt == 64){ //full
+                if (*H264_buf_cnt == 64){ //full
                     *DMA_src_addr  = *Compress_src_addr_temp;
                     *DMA_dest_addr = *Compress_dest_addr_temp;
                     *DMA_data_num  = 64;

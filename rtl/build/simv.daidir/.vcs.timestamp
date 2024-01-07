@@ -552,7 +552,7 @@ ENCOUNTER=/usr/cad/cadence/INNOVUS/cur/tools/fe
 1704551114 /home/N26124939/VSD/VSD_Project/rtl/./src/DRAM_wrapper.sv
 1704551113 /home/N26124939/VSD/VSD_Project/rtl/./src/SRAM_wrapper.sv
 1704551114 /home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/CPU.sv
-1704551114 /home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv
+1704590672 /home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv
 1704551118 ../include/BUS_direct_def.svh
 1704588512 ../include/AXI_def.svh
 1704551118 ../include/def.svh
@@ -567,5 +567,5 @@ ENCOUNTER=/usr/cad/cadence/INNOVUS/cur/tools/fe
 1677385060 /usr/cad/synopsys/vcs/2023.03/linux64/lib/liberrorinf.so
 1677385018 /usr/cad/synopsys/vcs/2023.03/linux64/lib/libsnpsmalloc.so
 1677385055 /usr/cad/synopsys/vcs/2023.03/linux64/lib/libvfs.so
-1704590339 simv.daidir
+1704590697 simv.daidir
 -1 partitionlib

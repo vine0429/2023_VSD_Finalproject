@@ -1366,3 +1366,701 @@ wvSetCursor -win $_nWave1 114421903.140748 -snap {("G3" 3)}
 wvSetCursor -win $_nWave1 114420762.983367 -snap {("G3" 3)}
 wvResizeWindow -win $_nWave1 8 31 893 202
 wvResizeWindow -win $_nWave1 0 23 2194 1163
+wvSetCursor -win $_nWave1 114405429.832391 -snap {("G4" 0)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G2" 2 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*AR*"
+wvSetPosition -win $_nWave1 {("G3" 5)}
+wvSetPosition -win $_nWave1 {("G3" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 5)}
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 6 )} 
+wvSetPosition -win $_nWave1 {("G3" 6)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 114391079.575709 -snap {("G3" 6)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*RDATA*"
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 7 )} 
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 114295463.618853 114567214.233074
+wvSetCursor -win $_nWave1 114436592.771119 -snap {("G3" 7)}
+wvZoom -win $_nWave1 114358147.427147 114379887.476285
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*RVALID*"
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 7)}
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 8 )} 
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 8 )} 
+wvSetPosition -win $_nWave1 {("G3" 8)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 9 )} 
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 9 )} 
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetSignalFilter -win $_nWave1 "*RLAST*"
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 9)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 10 )} 
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 10 )} 
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetSignalFilter -win $_nWave1 "*ARLEN"
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/L1CD"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetSignalFilter -win $_nWave1 "*ARLEN*"
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+{/top_tb/TOP/CPU1/ARLEN_M1\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 11 )} 
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+{/top_tb/TOP/CPU1/ARLEN_M1\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 11 )} 
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvSetPosition -win $_nWave1 {("G4" 1)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/h264_buf_cnt\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARVALID} \
+{/top_tb/TOP/EPU_wrapper/AWADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARADDR_r\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/CPU1/ARADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/state_current_read_r\[2:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/CPU1/AWADDR_M1\[31:0\]} \
+{/top_tb/TOP/CPU1/AWVALID_M1} \
+{/top_tb/TOP/CPU1/cpu/mem_mem_addr_o\[31:0\]} \
+{/top_tb/TOP/CPU1/cpu/L1DC_core_req_o} \
+{/top_tb/TOP/CPU1/L1CD/cacheable} \
+{/top_tb/TOP/EPU_wrapper/ARADDR\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RDATA\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/RVALID} \
+{/top_tb/TOP/CPU1/RVALID_M1} \
+{/top_tb/TOP/CPU1/RLAST_M1} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/CPU1/ARLEN_M1\[7:0\]} \
+{/top_tb/TOP/EPU_wrapper/ARLEN_r\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 2 )} 
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 0)}
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 10)}
+wvSetPosition -win $_nWave1 {("G3" 11)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 132027376.386266 -snap {("G1" 1)}
+wvSetCursor -win $_nWave1 197566145.959305 -snap {("G1" 1)}
+wvZoom -win $_nWave1 166221517.033069 264054752.772532
+wvZoom -win $_nWave1 196484597.955074 201376259.742047
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1

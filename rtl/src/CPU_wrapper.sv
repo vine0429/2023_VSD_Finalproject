@@ -149,7 +149,7 @@ module CPU_wrapper (
     assign handshake_M1_R  = RVALID_M1  & RREADY_M1;
     assign handshake_M1_RL = RVALID_M1  & RREADY_M1 & RLAST_M1;
 
-    assign cacheable       = (L1DC_D_addr_w[31:16] != 16'h1000);
+    assign cacheable       = (L1DC_D_addr_w[31:16] != 16'h1000) && (L1DC_D_addr_w[31:16] != 16'h0010) && (L1DC_D_addr_w[31:16] != 16'h0003);
     assign L1IC_I_wait_w   = ~handshake_M0_R;
     assign L1DC_D_wait_w   = (L1DC_D_req_w) ? ~handshake_M1_R : (L1DC_D_write_w) ? ~handshake_M1_W : 1'b1;
 
