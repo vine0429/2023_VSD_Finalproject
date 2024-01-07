@@ -92,6 +92,17 @@ int main(void)
             }
         }
     }
+    if (*H264_buf_cnt != 0)
+    {   //left
+        *DMA_src_addr  = *Compress_src_addr_temp;
+        *DMA_dest_addr = *Compress_dest_addr_temp;
+        *DMA_data_num  = *H264_buf_cnt;
+        *DMA_en = 1; // DMA enable
+        asm("wfi");  // Wait DMA done
+        *Compress_dest_addr_temp = *Compress_dest_addr_temp + (int)(words_num_buffer<<2);
+        *H264_buf_clear = 1; // enable buffer clear
+        *H264_buf_clear = 0; // disable buffer clear
+    }
     *H264_en = 0;
 
     return 0;

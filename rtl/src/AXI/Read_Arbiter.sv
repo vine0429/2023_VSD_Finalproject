@@ -13,6 +13,7 @@ module Read_Arbiter (
     input           [`AXI_LEN_BITS-1:0]     ARLEN_M0,
     input                                   RLAST_M0,
     // Input M1
+    input                                   WVALID_M1,
     input           [`AXI_ADDR_BITS-1:0]    ARADDR_M1,
     input                                   ARVALID_M1,
     input                                   RREADY_M1,
@@ -52,13 +53,13 @@ always_ff @ (posedge ACLK) begin
                 AR_state   <= M0_STATE;
                 ARADDR_Reg <= ARADDR_M0;
             end
-            else if (ARVALID_M1 && (AW_arbiter[1:0] != 2'd1)) begin
-                AR_state   <= M1_STATE;
-                ARADDR_Reg <= ARADDR_M1;
-            end
-            else if (ARVALID_M2 && (AW_arbiter[1:0] != 2'd1) && (AW_arbiter[1:0] != 2'd2)) begin
+            else if (ARVALID_M2) begin
                 AR_state   <= M2_STATE;
                 ARADDR_Reg <= ARADDR_M2;
+            end
+            else if (ARVALID_M1 && WVALID_M1 == 1'b0) begin
+                AR_state   <= M1_STATE;
+                ARADDR_Reg <= ARADDR_M1;
             end
             else begin
                 AR_state <= IDLE;

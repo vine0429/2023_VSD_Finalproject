@@ -12951,3 +12951,1724 @@ wvZoomIn -win $_nWave1
 wvZoomIn -win $_nWave1
 wvZoomIn -win $_nWave1
 wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WLAST"
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvGetSignalSetSignalFilter -win $_nWave1 "*WLAST*"
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 8 )} 
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 8 )} 
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 133609204.023363 133772650.790059
+wvSelectSignal -win $_nWave1 {( "G4" 7 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 8 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/DMA_wrapper/Unnamed_\$DMA_wrapper_sv_371"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*in*"
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 9 )} 
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 9 )} 
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 133633394.144788 -snap {("G4" 9)}
+wvZoom -win $_nWave1 133619446.687363 133690927.406665
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WLAST*"
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvSetPosition -win $_nWave1 {("G5" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 0)}
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*clk*"
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvSetPosition -win $_nWave1 {("G5" 0)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 0)}
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WREADY'"
+wvGetSignalSetSignalFilter -win $_nWave1 "*wready*"
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSetPosition -win $_nWave1 {("G5" 1)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 2 )} 
+wvSetPosition -win $_nWave1 {("G5" 2)}
+wvGetSignalClose -win $_nWave1
+wvSetCursor -win $_nWave1 133641462.748897 -snap {("G5" 2)}
+wvZoom -win $_nWave1 133640319.057388 133646990.591190
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WVALID*"
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 3 )} 
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 3 )} 
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WDATA*"
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvGetSignalClose -win $_nWave1
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 5 )} 
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 2)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetSignalFilter -win $_nWave1 "*arbiter"
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSetPosition -win $_nWave1 {("G4" 3)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvSetCursor -win $_nWave1 133666711.645042 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133668704.209804 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133671550.730892 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133674112.599872 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133676959.120961 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133679094.011777 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133676816.794906 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133673827.947763 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133671266.078783 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133667850.253477 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133665288.384497 -snap {("G4" 4)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 103100800.000000 135905600.000000
+wvZoom -win $_nWave1 113488986.666667 115850932.266667
+wvSetCursor -win $_nWave1 115417908.906600 -snap {("G4" 5)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoom -win $_nWave1 76154000.000000 147621600.000000
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetCursor -win $_nWave1 115651760.266667 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 115461180.000000 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 115461180.000000 -snap {("G4" 5)}
+wvZoom -win $_nWave1 114984729.333333 115985275.733333
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 134268593.615997 -snap {("G4" 8)}
+wvZoom -win $_nWave1 132560994.426664 135634672.967464
+wvZoom -win $_nWave1 133942100.650933 134069146.030619
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 9 )} 
+wvSetCursor -win $_nWave1 133624825.989366 -snap {("G5" 5)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetSignalFilter -win $_nWave1 "*WREADY'"
+wvGetSignalSetSignalFilter -win $_nWave1 "*wready*"
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvGetSignalSetSignalFilter -win $_nWave1 "*wready*"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 5 )} 
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 5 )} 
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvGetSignalClose -win $_nWave1
+wvZoom -win $_nWave1 133611952.057557 133662092.634074
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G5" 3)}
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvSetPosition -win $_nWave1 {("G5" 5)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 6)}
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 3 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 5 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 4 )} 
+wvSelectSignal -win $_nWave1 {( "G5" 3 )} 
+wvSetCursor -win $_nWave1 133643908.318266 -snap {("G5" 6)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 6 )} 
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetCursor -win $_nWave1 133666571.858826 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133642771.798506 -snap {("G4" 3)}
+wvSetCursor -win $_nWave1 133668176.357275 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133670984.229559 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133674193.226457 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133675262.892089 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133673792.101844 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133672187.603396 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133668577.481887 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133666972.983438 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 133642771.798506 -snap {("G4" 3)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI/Write_Address_Channel"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI/Write_Arbiter"
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/AXI/Write_Arbiter/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 7 )} 
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/AXI/Write_Arbiter/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 7 )} 
+wvSetPosition -win $_nWave1 {("G5" 7)}
+wvGetSignalClose -win $_nWave1
+wvSetPosition -win $_nWave1 {("G5" 4)}
+wvSetPosition -win $_nWave1 {("G4" 10)}
+wvSetPosition -win $_nWave1 {("G4" 9)}
+wvSetPosition -win $_nWave1 {("G4" 8)}
+wvSetPosition -win $_nWave1 {("G4" 7)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvMoveSelected -win $_nWave1
+wvSetPosition -win $_nWave1 {("G4" 4)}
+wvSetPosition -win $_nWave1 {("G4" 5)}
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/CPU1/cpu"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DMA_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/DRAM_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/i_DRAM"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/AXI/Write_Arbiter"
+wvGetSignalSetSignalFilter -win $_nWave1 "*WLAST*"
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/AXI/Write_Arbiter/WREADY_M2} \
+{/top_tb/TOP/AXI/Write_Arbiter/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 6 )} 
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/enc_end} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/start_cnt} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_ready} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlcenctop/packer_ready} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc_cnt_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/paker_waddr\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/DMA_wrapper/state_r\[1:0\]} \
+{/top_tb/TOP/DMA_wrapper/state_w\[1:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WDATA\[31:0\]} \
+{/top_tb/TOP/AXI/AW_arbiter\[5:0\]} \
+{/top_tb/TOP/AXI/Write_Arbiter/WREADY_M2} \
+{/top_tb/TOP/AXI/Write_Arbiter/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/r_counter\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARADDR_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/ARVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/RVALID_M2} \
+{/top_tb/TOP/DRAM_wrapper/state_current_r\[3:0\]} \
+{/top_tb/TOP/DRAM_wrapper/WLAST} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/top_tb/TOP/DMA_wrapper/clk} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/WVALID_M2} \
+{/top_tb/TOP/DMA_wrapper/WDATA_M2\[31:0\]} \
+{/top_tb/TOP/DMA_wrapper/WLAST_M2} \
+{/top_tb/TOP/DMA_wrapper/WREADY_M2} \
+{/top_tb/TOP/DMA_wrapper/DMA_interrupt} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+}
+wvSelectSignal -win $_nWave1 {( "G4" 6 )} 
+wvSetPosition -win $_nWave1 {("G4" 6)}
+wvGetSignalClose -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G4" 4 )} 
+wvSetCursor -win $_nWave1 133985198.509059 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133990012.004404 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133983594.010610 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133988942.338772 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133986268.174691 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133988942.338772 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133986268.174691 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133990012.004404 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133984663.676243 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133989477.171588 -snap {("G4" 5)}
+wvSetCursor -win $_nWave1 133647719.002053 -snap {("G4" 6)}
+wvSetCursor -win $_nWave1 133647719.002053 -snap {("G4" 5)}

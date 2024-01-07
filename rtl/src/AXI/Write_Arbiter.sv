@@ -84,14 +84,14 @@ always_ff @ (posedge ACLK) begin
             AW_state <= IDLE;
         end
         else if (AW_state == IDLE) begin
-	    	if (AWVALID_M1) begin
+            if (AWVALID_M2) begin
+                AW_state <= M2_STATE;
+            end
+	    	else if (AWVALID_M1) begin
                 AW_state <= M1_STATE;
             end
             else if (AWVALID_M0) begin
                 AW_state <= M0_STATE;
-            end
-            else if (AWVALID_M2) begin
-                AW_state <= M2_STATE;
             end
 	    	else begin
                 AW_state <= IDLE;
@@ -235,7 +235,10 @@ end
 // end
 
 always_comb begin
-    if (AWVALID_M0) begin
+    if (M2_W_active) begin
+        AW_arbiter = AW_arbiter_reg;
+    end
+    else if (AWVALID_M0) begin
         if (AWADDR_M0[31:16] == 16'h0000) begin          //ROM
             AW_arbiter = `M0_S0_W;
         end
@@ -263,35 +266,6 @@ always_comb begin
         else begin
             AW_arbiter = `M0_NO_W;
         end                      
-    end
-    else if (AWVALID_M1)begin
-        if (AWADDR_M1[31:16] == 16'h0000) begin          //ROM
-            AW_arbiter = `M1_S0_W;
-        end
-        else if (AWADDR_M1[31:16] == 16'h0001) begin     //IM
-            AW_arbiter = `M1_S1_W;
-        end
-        else if (AWADDR_M1[31:16] == 16'h0002) begin     //DM
-            AW_arbiter = `M1_S2_W;
-        end
-        else if (AWADDR_M1[31:16] == 16'h1000) begin     //Sctrl
-            AW_arbiter = `M1_S3_W;
-        end
-        else if (AWADDR_M1[31:16] == 16'h1001) begin     //WDT
-            AW_arbiter = `M1_S4_W;
-        end
-        else if (AWADDR_M1[31:24] == 8'h20) begin        //DRAM    
-            AW_arbiter = `M1_S5_W;
-        end     
-        else if (AWADDR_M1[31:16] == 16'h0010) begin     //EPU     
-            AW_arbiter = `M1_S6_W;
-        end  
-        else if (AWADDR_M1[31:16] == 16'h0003) begin     //DMA    
-            AW_arbiter = `M1_S7_W;
-        end  
-        else begin
-            AW_arbiter = `M1_NO_W;
-        end  
     end
     else if (AWVALID_M2)begin
         if (AWADDR_M2[31:16] == 16'h0000) begin          //ROM
@@ -322,8 +296,34 @@ always_comb begin
             AW_arbiter = `M2_NO_W;
         end  
     end
-    else if(M2_W_active)    begin
-        AW_arbiter = AW_arbiter_reg;
+    else if (AWVALID_M1)begin
+        if (AWADDR_M1[31:16] == 16'h0000) begin          //ROM
+            AW_arbiter = `M1_S0_W;
+        end
+        else if (AWADDR_M1[31:16] == 16'h0001) begin     //IM
+            AW_arbiter = `M1_S1_W;
+        end
+        else if (AWADDR_M1[31:16] == 16'h0002) begin     //DM
+            AW_arbiter = `M1_S2_W;
+        end
+        else if (AWADDR_M1[31:16] == 16'h1000) begin     //Sctrl
+            AW_arbiter = `M1_S3_W;
+        end
+        else if (AWADDR_M1[31:16] == 16'h1001) begin     //WDT
+            AW_arbiter = `M1_S4_W;
+        end
+        else if (AWADDR_M1[31:24] == 8'h20) begin        //DRAM    
+            AW_arbiter = `M1_S5_W;
+        end     
+        else if (AWADDR_M1[31:16] == 16'h0010) begin     //EPU     
+            AW_arbiter = `M1_S6_W;
+        end  
+        else if (AWADDR_M1[31:16] == 16'h0003) begin     //DMA    
+            AW_arbiter = `M1_S7_W;
+        end  
+        else begin
+            AW_arbiter = `M1_NO_W;
+        end  
     end
     else begin
         AW_arbiter =  `Default_W;
