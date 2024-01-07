@@ -63,7 +63,8 @@ logic [1:0] bias;
 logic [1:0] offset;
 logic [2:0] read_counter_r;
 
-assign cacheable   = (core_addr[31:16] != 16'h1000);
+//sensor 、 dma 、 epu non cacheable
+assign cacheable   = (core_addr[31:16] != 16'h1000) && (core_addr[31:16] != 16'h0010) && (core_addr[31:16] != 16'h0003);
 assign array_index = core_addr[9:4];
 assign hit         = valid[index] && (array_index_r == index) ? (TA_out == core_addr[31:10]) : 1'b0 ;
 assign core_wait   = (!cacheable && (core_req || core_write)) ? D_wait : (core_req) ? ~hit : (core_write) ? D_wait : 1'b0;

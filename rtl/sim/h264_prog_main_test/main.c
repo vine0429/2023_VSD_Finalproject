@@ -3,7 +3,7 @@
 void write_compressor_result();
 volatile unsigned int *H264_en         = (int *)0x00100004;
 volatile unsigned int *H264_buf_clear  = (int *)0x00100008;
-volatile unsigned int *H264_buf_cnt    = (int *)0x0010000c;
+volatile unsigned int *H264_buf_cnt    = (int *)0x0010000C;
 volatile unsigned int *DMA_addr        = (int *)0x00030000;
 volatile unsigned int *DMA_en          = (int *)0x0003000c;
 volatile unsigned int *DMA_clear       = (int *)0x00030010;
@@ -76,15 +76,15 @@ int main(void)
                 *DMA_en = 1;  // DMA enable
                 asm("wfi");   // Wait DMA dom
 
-                *H264_buf_cnt = 20;
+                int h264_current_cnt = *H264_buf_cnt;
 
-                // if (*H264_buf_cnt == 64){ //full
-                //     *DMA_src_addr  = *Compress_src_addr_temp;
-                //     *DMA_dest_addr = *Compress_dest_addr_temp;
-                //     *DMA_data_num  = 64;
-                //     *DMA_en = 1; // DMA enable
-                //     asm("wfi");  // Wait DMA dom
-                // }
+                if (h264_current_cnt == 64){ //full
+                    *DMA_src_addr  = *Compress_src_addr_temp;
+                    *DMA_dest_addr = *Compress_dest_addr_temp;
+                    *DMA_data_num  = 64;
+                    *DMA_en = 1; // DMA enable
+                    asm("wfi");  // Wait DMA dom
+                }
 
                 // 計算下個address
                 *DMA_src_addr_temp  = *DMA_src_addr_temp + (int)(words_num_per_MB<<2); //DRAM
