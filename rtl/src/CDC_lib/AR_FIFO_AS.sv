@@ -10,18 +10,18 @@ module AR_FIFO_AS
         input  logic        wclk,
         input  logic        wrst,
         input  logic        wpush,
-        input  logic [48:0] wdata,
+        input  logic [52:0] wdata,
         output logic        wfull,
 
         input  logic        rclk,
         input  logic        rrst,
         input  logic        rpop,
-        output logic [48:0] rdata,
+        output logic [52:0] rdata,
         output logic        rempty
     );
 
     // Depth = 1
-    logic [48:0] mem;
+    logic [52:0] mem;
 
     // ptr bits = clog2(Depth) = 1
     logic wen;
@@ -51,7 +51,7 @@ module AR_FIFO_AS
     // FIFO write control
     always_ff @(posedge wclk) begin
         if (wrst) begin
-            mem  <= 49'b0;
+            mem  <= 53'b0;
             wptr <= 1'b0;
         end
         else if (wen) begin
@@ -73,6 +73,6 @@ module AR_FIFO_AS
         end
     end
 
-    assign rdata = (!rempty) ? mem : 49'b0;
+    assign rdata = (!rempty) ? mem : 53'b0;
 
 endmodule : AR_FIFO_AS

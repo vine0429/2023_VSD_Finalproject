@@ -197,22 +197,28 @@
         "module",
         33
     ],
+    "top": [
+        "top",
+        "Emx8S",
+        "module",
+        34
+    ],
     "DRAM": [
         "DRAM",
         "fS2SB",
         "module",
-        34
+        35
     ],
     "top_tb": [
         "top_tb",
         "W0eJz",
         "module",
-        35
+        36
     ],
     "...MASTER...": [
         "SIM",
         "amcQw",
         "module",
-        36
+        37
     ]
 }

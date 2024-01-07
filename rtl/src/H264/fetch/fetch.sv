@@ -1,22 +1,21 @@
 `include "epu_define.svh"
 
 module fetch(
-    input        clk,
-    input        rst,
-    input        intra_ready,
-    input        fetch_start_i,
-    input [31:0] data_word_i,
-    input        data_valid_i,
+    input  logic        clk,
+    input  logic        rst,
+    input  logic        h264_en,
+    input  logic        intra_ready,
+    input  logic [31:0] data_word_i,
+    input  logic        data_valid_i,
 
-    output logic       fetch_valid,
-    output logic [5:0] fetch_mb_x_o,
-    output logic [5:0] fetch_mb_y_o,
-    output logic [7:0] matrixY_o [0:15][0:15],
+    output logic        fetch_valid,
+    output logic [5:0]  fetch_mb_x_o,
+    output logic [5:0]  fetch_mb_y_o,
+    output logic [7:0]  matrixY_o [0:15][0:15],
     // output logic [7:0] matrixU_o [0:7][0:7],
     // output logic [7:0] matrixV_o [0:7][0:7],
 
-    output logic        fetch_req_o,
-    output logic [31:0] fetch_addr_o
+    output logic        fetch_req_o
 );
 
 // one macroblock 96 address
@@ -51,7 +50,8 @@ assign data_byte0   = data_word_i[7:0];
 assign data_byte1   = data_word_i[15:8];
 assign data_byte2   = data_word_i[23:16];
 assign data_byte3   = data_word_i[31:24];
-assign fetch_req_o  = (curr_state == IDLE && (fetch_mb_y_o != (`FRAME_HEIGHT >> 4)));
+assign fetch_req_o  = (h264_en && curr_state == LD_Y);
+assign fetch_end    = (fetch_mb_y_o == (`FRAME_HEIGHT >> 4));
 
 assign pos_x0 = pos_x;
 assign pos_x1 = pos_x + 4'd1;
@@ -79,8 +79,8 @@ end : FSM_cur_state
 
 always_comb begin : FSM_next_state
     case (curr_state)
-        IDLE           : next_state  = (fetch_req_o)   ? LD_Y      : IDLE;
-        LD_Y           : next_state  = (fetchY_finish) ? WAITINTRA : LD_Y; //only luma
+        IDLE           : next_state  = (!fetch_end && h264_en) ? LD_Y      : IDLE;
+        LD_Y           : next_state  = (fetchY_finish)         ? WAITINTRA : LD_Y; //only luma
         // LD_U           : next_state  = (fetchU_finish) ? LD_V      : LD_U;
         // LD_V           : next_state  = (fetchV_finish) ? WAITINTRA : LD_V;
         WAITINTRA      : next_state  = (intra_ready && fetch_valid) ? IDLE : WAITINTRA;
@@ -108,13 +108,6 @@ always_ff @(posedge clk) begin
         pos_x <= 4'd0;
     else if ((curr_state == LD_U || curr_state == LD_V) && pos_x == 4'd0 && data_valid_i)
         pos_x <= 4'd4;
-end
-
-always_ff @(posedge clk) begin
-    if (rst)
-        fetch_addr_o <= 32'd0;
-    else if (curr_state == LD_Y && data_valid_i)
-        fetch_addr_o <= fetch_addr_o + 32'd1;
 end
 
 always_ff @(posedge clk) begin

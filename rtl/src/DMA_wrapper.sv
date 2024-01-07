@@ -1,87 +1,77 @@
 `include "../include/AXI_def.svh"
 
 module DMA_wrapper(
-  input clk,
-  input rst,
-
+  input  logic                      clk,
+  input  logic                      rst,
   //--------------------Read Address M2 (DMA)--------------------//
-  input ARREADY_M2,
-  output logic [`AXI_ID_BITS-1:0] ARID_M2,
+  input  logic                      ARREADY_M2,
+  output logic [`AXI_ID_BITS-1:0]   ARID_M2,
   output logic [`AXI_ADDR_BITS-1:0] ARADDR_M2,
-  output logic [`AXI_LEN_BITS-1:0] ARLEN_M2,
+  output logic [`AXI_LEN_BITS-1:0]  ARLEN_M2,
   output logic [`AXI_SIZE_BITS-1:0] ARSIZE_M2,
-  output logic [1:0] ARBURST_M2,
-  output logic ARVALID_M2,
-
+  output logic [1:0]                ARBURST_M2,
+  output logic                      ARVALID_M2,
   //--------------------Read Data M2 (DMA)--------------------//
-  input [`AXI_ID_BITS-1:0] RID_M2,
-  input [`AXI_DATA_BITS-1:0] RDATA_M2,
-  input [1:0] RRESP_M2,
-  input RLAST_M2,
-  input RVALID_M2,
-  output logic RREADY_M2,
-
+  input  logic [`AXI_ID_BITS-1:0]   RID_M2,
+  input  logic [`AXI_DATA_BITS-1:0] RDATA_M2,
+  input  logic [1:0]                RRESP_M2,
+  input  logic                      RLAST_M2,
+  input  logic                      RVALID_M2,
+  output logic                      RREADY_M2,
   //--------------------Write Address M2 (DMA)--------------------//
-  input AWREADY_M2,
-  output logic [`AXI_ID_BITS-1:0] AWID_M2,
+  input  logic                      AWREADY_M2,
+  output logic [`AXI_ID_BITS-1:0]   AWID_M2,
   output logic [`AXI_ADDR_BITS-1:0] AWADDR_M2,
-  output logic [`AXI_LEN_BITS-1:0] AWLEN_M2,
+  output logic [`AXI_LEN_BITS-1:0]  AWLEN_M2,
   output logic [`AXI_SIZE_BITS-1:0] AWSIZE_M2,
-  output logic [1:0] AWBURST_M2,
-  output logic AWVALID_M2,
-
+  output logic [1:0]                AWBURST_M2,
+  output logic                      AWVALID_M2,
   //--------------------Write Data M2 (DMA)--------------------//
-  input WREADY_M2,
+  input  logic                      WREADY_M2,
   output logic [`AXI_DATA_BITS-1:0] WDATA_M2,
   output logic [`AXI_STRB_BITS-1:0] WSTRB_M2,
-  output logic WLAST_M2,
-  output logic WVALID_M2,
-
+  output logic                      WLAST_M2,
+  output logic                      WVALID_M2,
   //--------------------Write Response--------------------//
-  input [`AXI_ID_BITS-1:0] BID_M2,
-  input [1:0] BRESP_M2,
-  input BVALID_M2,
-  output logic BREADY_M2,
-
+  input  logic [`AXI_ID_BITS-1:0]   BID_M2,
+  input  logic [1:0]                BRESP_M2,
+  input  logic                      BVALID_M2,
+  output logic                      BREADY_M2,
   //set as S7
   //-------------------- Read Address --------------------//
-  input [`AXI_IDS_BITS-1:0] ARID_S7,
-  input [`AXI_ADDR_BITS-1:0] ARADDR_S7,
-  input [`AXI_LEN_BITS-1:0] ARLEN_S7,
-  input [`AXI_SIZE_BITS-1:0] ARSIZE_S7,
-  input [1:0] ARBURST_S7,
-  input ARVALID_S7,
-  output logic ARREADY_S7,
-
+  input  logic [`AXI_IDS_BITS-1:0]  ARID_S7,
+  input  logic [`AXI_ADDR_BITS-1:0] ARADDR_S7,
+  input  logic [`AXI_LEN_BITS-1:0]  ARLEN_S7,
+  input  logic [`AXI_SIZE_BITS-1:0] ARSIZE_S7,
+  input  logic [1:0]                ARBURST_S7,
+  input  logic                      ARVALID_S7,
+  output logic                      ARREADY_S7,
   //-------------------- Read Data --------------------//
-  input RREADY_S7,
-  output logic [`AXI_IDS_BITS-1:0] RID_S7,
+  input  logic                      RREADY_S7,
+  output logic [`AXI_IDS_BITS-1:0]  RID_S7,
   output logic [`AXI_DATA_BITS-1:0] RDATA_S7,
-  output logic [1:0] RRESP_S7,
-  output logic RLAST_S7,
-  output logic RVALID_S7,
- 
+  output logic [1:0]                RRESP_S7,
+  output logic                      RLAST_S7,
+  output logic                      RVALID_S7,
   //-------------------- Write Address --------------------//
-  input [`AXI_IDS_BITS-1:0] AWID_S7,
-  input [`AXI_ADDR_BITS-1:0] AWADDR_S7,
-  input [`AXI_LEN_BITS-1:0] AWLEN_S7,
-  input [`AXI_SIZE_BITS-1:0] AWSIZE_S7,
-  input [1:0] AWBURST_S7,
-  input AWVALID_S7,
-  output logic AWREADY_S7,
-
+  input  logic [`AXI_IDS_BITS-1:0]  AWID_S7,
+  input  logic [`AXI_ADDR_BITS-1:0] AWADDR_S7,
+  input  logic [`AXI_LEN_BITS-1:0]  AWLEN_S7,
+  input  logic [`AXI_SIZE_BITS-1:0] AWSIZE_S7,
+  input  logic [1:0]                AWBURST_S7,
+  input  logic                      AWVALID_S7,
+  output logic                      AWREADY_S7,
   //-------------------- Write Data --------------------//
-  input [`AXI_DATA_BITS-1:0] WDATA_S7,
-  input [`AXI_STRB_BITS-1:0] WSTRB_S7,
-  input WLAST_S7,
-  input WVALID_S7,
-  output logic WREADY_S7,
-
+  input  logic [`AXI_DATA_BITS-1:0] WDATA_S7,
+  input  logic [`AXI_STRB_BITS-1:0] WSTRB_S7,
+  input  logic                      WLAST_S7,
+  input  logic                      WVALID_S7,
+  output logic                      WREADY_S7,
   //--------------------Write Response--------------------//
-  input BREADY_S7,
-  output logic [`AXI_IDS_BITS-1:0] BID_S7,
-  output logic [1:0] BRESP_S7,
-  output logic BVALID_S7,
+  input  logic                      BREADY_S7,
+  output logic [`AXI_IDS_BITS-1:0]  BID_S7,
+  output logic [1:0]                BRESP_S7,
+  output logic                      BVALID_S7,
 
   output logic DMA_interrupt
 );
@@ -98,15 +88,14 @@ enum logic [1:0] {IDLE_W, WRITE_ADDR, WRITE_DATA, WRITE_RESP} state_w;
 enum logic [1:0] {IDLE_R, READ_ADDR, READ_DATA} state_r;
 
 logic [31:0] memory [0:63];
-logic DMA_WEB;
+logic        DMA_WEB;
 logic [31:0] DMA_src_addr;
 logic [31:0] DMA_dest_addr;
 logic [31:0] DMA_data_num;
-logic DMA_en;
-logic DMA_clear;
-logic DMA_type;
-logic done;
-integer i;
+logic        DMA_en;
+logic        DMA_clear;
+logic        DMA_type;
+logic        done;
 logic [31:0] r_counter, w_counter;
 
 assign DMA_interrupt = (done);
@@ -125,7 +114,6 @@ begin
   begin
     if(done)
       DMA_src_addr <= 32'd0;
-    //else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030000) && (WSTRB_S7 == 4'd0))
     else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030000) && (WSTRB_S7 == 4'hf))
       DMA_src_addr <= WDATA_S7;
     else
@@ -142,7 +130,6 @@ begin
   begin
     if(done)
       DMA_dest_addr <= 32'd0;
-    //else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030004) && (WSTRB_S7 == 4'd0))
     else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030004) && (WSTRB_S7 == 4'hf))
       DMA_dest_addr <= WDATA_S7;
     else
@@ -287,7 +274,7 @@ begin
     done = 1'b1;
   else
     done = 1'b0;
-end  
+end 
 // ************************************************* 
 //                                             
 //    DMA FSM                       
@@ -367,22 +354,21 @@ end
 // ************************************************* 
 
 //----------------------M2 read----------------------//
-
-assign ARID_M2 = `AXI_ID_BITS'd0;
-// assign ARADDR_M2 = ((state_r == READ_ADDR) && ARVALID_M2 && ARREADY_M2) ? (DMA_src_addr + 32'd4) : (DMA_src_addr);
-assign ARADDR_M2 = DMA_src_addr;
-assign ARVALID_M2 = (state_r == READ_ADDR) ? 1'b1 : 1'b0;
 //assign ARLEN_M2  = `AXI_LEN_BITS'd1;
-assign ARLEN_M2 = DMA_data_num - 32'd1 ; 
-assign ARSIZE_M2 = `AXI_SIZE_WORD;
+// assign ARADDR_M2 = ((state_r == READ_ADDR) && ARVALID_M2 && ARREADY_M2) ? (DMA_src_addr + 32'd4) : (DMA_src_addr);
+assign ARID_M2    = `AXI_ID_BITS'd0;
+assign ARADDR_M2  = DMA_src_addr;
+assign ARVALID_M2 = (state_r == READ_ADDR) ? 1'b1 : 1'b0;
+assign ARLEN_M2   = DMA_data_num - 32'd1 ; 
+assign ARSIZE_M2  = `AXI_SIZE_WORD;
 assign ARBURST_M2 = `AXI_BURST_INC;
-assign RREADY_M2 = 1'b1;
+assign RREADY_M2  = 1'b1;
 
 always_ff @(posedge clk)
 begin
   if(rst) 
   begin
-    for(i=0 ; i<64 ; i=i+1)
+    for(int i=0 ; i<64 ; i=i+1)
       memory[i] <= 32'd0;
   end 
   else if(RVALID_M2 && RREADY_M2) 
@@ -392,34 +378,32 @@ begin
 end
 
 //----------------------M2 write----------------------//
-
-assign AWID_M2 = `AXI_ID_BITS'b0;
-// assign AWADDR_M2 = ((state_w == WRITE_ADDR) && AWREADY_M2 && AWVALID_M2) ? (DMA_dest_addr + 4'd4) : (DMA_dest_addr);
-assign AWADDR_M2 = DMA_dest_addr;
-assign AWVALID_M2 = (state_w == WRITE_ADDR) ? 1'b1 : 1'b0;
 //assign AWLEN_M2 = `AXI_LEN_BITS'b0;
-assign AWLEN_M2 = DMA_data_num - 32'd1 ; 
-assign AWSIZE_M2 = `AXI_SIZE_WORD;
+// assign AWADDR_M2 = ((state_w == WRITE_ADDR) && AWREADY_M2 && AWVALID_M2) ? (DMA_dest_addr + 4'd4) : (DMA_dest_addr);
+assign AWID_M2    = `AXI_ID_BITS'b0;
+assign AWADDR_M2  = DMA_dest_addr;
+assign AWVALID_M2 = (state_w == WRITE_ADDR) ? 1'b1 : 1'b0;
+assign AWLEN_M2   = DMA_data_num - 32'd1;
+assign AWSIZE_M2  = `AXI_SIZE_WORD;
 assign AWBURST_M2 = `AXI_BURST_INC;
-assign WSTRB_M2 = (WVALID_M2 && (state_w == WRITE_DATA)) ? 4'hf : 4'd0;
-assign WLAST_M2 = (w_counter==(DMA_data_num-32'd1) && (WVALID_M2) && (state_w == WRITE_DATA)) ? 1'd1 : 1'd0;
-assign WVALID_M2 = (state_w == WRITE_DATA && (w_counter!=r_counter)) ? 1'b1 : 1'b0;
-assign BREADY_M2 =1'b1;
-assign WDATA_M2 = memory[w_counter[5:0]];
+assign WSTRB_M2   = (WVALID_M2 && (state_w == WRITE_DATA)) ? 4'hf : 4'd0;
+assign WLAST_M2   = (w_counter==(DMA_data_num-32'd1) && (WVALID_M2) && (state_w == WRITE_DATA)) ? 1'd1 : 1'd0;
+assign WVALID_M2  = (state_w == WRITE_DATA && (w_counter!=r_counter)) ? 1'b1 : 1'b0;
+assign BREADY_M2  = 1'b1;
+assign WDATA_M2   = memory[w_counter[5:0]];
 
 //----------------------S7 read----------------------//
-
 assign ARREADY_S7 = 1'b1;
-assign RID_S7 = ARID_S7;
-assign RDATA_S7 = 32'd0;
-assign RRESP_S7 = `AXI_RESP_OKAY;
-assign RLAST_S7 = 1'b1;
+assign RID_S7     = ARID_S7;
+assign RDATA_S7   = 32'd0;
+assign RRESP_S7   = `AXI_RESP_OKAY;
+assign RLAST_S7   = 1'b1;
 
-always_ff @ (posedge clk) 
+always_ff @(posedge clk) 
 begin
-  if (rst) 
+  if (rst)
     RVALID_S7 <= 1'b0;
-  else 
+  else
     begin
       if (RVALID_S7 && RREADY_S7 && RLAST_S7)
         RVALID_S7 <= 1'b0;
@@ -431,13 +415,12 @@ begin
 end
 
 //----------------------S7 write----------------------//
-
 assign AWREADY_S7 = 1'b1;
-assign WREADY_S7 = 1'b1;
-assign BID_S7 = AWID_S7;
-assign BRESP_S7 = `AXI_RESP_OKAY;
+assign WREADY_S7  = 1'b1;
+assign BID_S7     = AWID_S7;
+assign BRESP_S7   = `AXI_RESP_OKAY;
 
-always_ff @ (posedge clk) 
+always_ff @(posedge clk) 
 begin
   if (rst) 
     BVALID_S7 <= 1'b0;

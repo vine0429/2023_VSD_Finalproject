@@ -10,20 +10,20 @@ module AW_FIFO_AS
         input  logic        wclk,
         input  logic        wrst,
         input  logic        wpush,
-        input  logic [48:0] wdata,
+        input  logic [52:0] wdata,
         output logic        wfull,
 
         input  logic        rclk,
         input  logic        rrst,
         input  logic        rpop,
-        output logic [48:0] rdata,
+        output logic [52:0] rdata,
         output logic        rempty
     );
     localparam N = 2; // ptr bit number
     localparam DEPTH = 1 << (N-1);
 
     // Depth = 2^(N-1) = 2
-    logic [48:0] mem [0:DEPTH-1];
+    logic [52:0] mem [0:DEPTH-1];
 
     // ptr bits = clog2(Depth) = 1 + 1 loop bit
     logic wen;
@@ -88,7 +88,7 @@ module AW_FIFO_AS
     // FIFO write control
     always_ff @(posedge wclk) begin
         if (wrst) begin
-            for (int i=0 ; i<(1<<(N-1)); i++) mem[i] <= 49'b0;
+            for (int i=0 ; i<(1<<(N-1)); i++) mem[i] <= 53'b0;
             wptr <= {N{1'b0}};
         end
         else if (wen) begin
@@ -110,6 +110,6 @@ module AW_FIFO_AS
         end
     end
 
-    assign rdata = (!rempty) ? mem[rptr[N-2:0]] : 49'b0;
+    assign rdata = (!rempty) ? mem[rptr[N-2:0]] : 53'b0;
 
 endmodule : AW_FIFO_AS

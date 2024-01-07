@@ -10,7 +10,7 @@
 `define AXI_ID_BITS 4
 `define AXI_IDS_BITS 8
 `define AXI_ADDR_BITS 32
-`define AXI_LEN_BITS 7
+`define AXI_LEN_BITS 8
 `define AXI_SIZE_BITS 3
 `define AXI_DATA_BITS 32
 `define AXI_STRB_BITS 4

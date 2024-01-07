@@ -53,6 +53,7 @@
 /home/N26124939/VSD/VSD_Project/rtl/src/DMA_wrapper.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/DRAM_wrapper.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/EPU_wrapper.sv
+/home/N26124939/VSD/VSD_Project/rtl/src/H264/H264.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/Bitstream.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/CAVLC4x4Buffer.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/cavlc/CAVLCCntTop.sv
@@ -81,7 +82,6 @@
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/dct_quant/tq_mod6.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/dct_quant/tq_quant_4x4.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/fetch/fetch.sv
-/home/N26124939/VSD/VSD_Project/rtl/src/H264/h264_top.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/intra/intra_4x4_pe.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/intra/intra_4x4_top.sv
 /home/N26124939/VSD/VSD_Project/rtl/src/H264/packer/packer.sv

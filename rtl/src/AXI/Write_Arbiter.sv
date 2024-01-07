@@ -283,10 +283,10 @@ always_comb begin
         else if (AWADDR_M1[31:24] == 8'h20) begin        //DRAM    
             AW_arbiter = `M1_S5_W;
         end     
-        else if (AWADDR_M1[31:16] == 16'h0010) begin        //EPU     
+        else if (AWADDR_M1[31:16] == 16'h0010) begin     //EPU     
             AW_arbiter = `M1_S6_W;
         end  
-        else if (AWADDR_M1[31:16] == 16'h0003) begin        //DMA    
+        else if (AWADDR_M1[31:16] == 16'h0003) begin     //DMA    
             AW_arbiter = `M1_S7_W;
         end  
         else begin
@@ -312,10 +312,10 @@ always_comb begin
         else if (AWADDR_M2[31:24] == 8'h20) begin        //DRAM    
             AW_arbiter = `M2_S5_W;
         end     
-        else if (AWADDR_M2[31:16] == 16'h0010) begin        //EPU    
+        else if (AWADDR_M2[31:16] == 16'h0010) begin     //EPU    
             AW_arbiter = `M2_S6_W;
         end    
-        else if (AWADDR_M2[31:16] == 16'h0003) begin        //DMA    
+        else if (AWADDR_M2[31:16] == 16'h0003) begin     //DMA    
             AW_arbiter = `M2_S7_W;
         end    
         else begin

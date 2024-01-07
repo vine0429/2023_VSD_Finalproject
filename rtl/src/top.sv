@@ -60,7 +60,7 @@
 
 
 //H264_lib
-`include "./H264/h264_top.sv"
+`include "./H264/H264.sv"
 
 module top (
     input  logic           cpu_clk         ,
@@ -1132,10 +1132,10 @@ AXI AXI
     .WVALID_S7              (WVALID_S7),
     .WREADY_S7              (WREADY_S7),
     //------------ Write response5 ------------//
-    .BID_S5                 (BID_S7),
-    .BRESP_S5               (BRESP_S7),
-    .BVALID_S5              (BVALID_S7),
-    .BREADY_S5              (BREADY_S7)
+    .BID_S7                 (BID_S7),
+    .BRESP_S7               (BRESP_S7),
+    .BVALID_S7              (BVALID_S7),
+    .BREADY_S7              (BREADY_S7)
 );
 
 DMA_wrapper DMA_wrapper(

@@ -71,7 +71,6 @@ SECTIONS {
     _rodata_end = .;
   } > dram_raw
 
-
   /*To dram_d*/
   _test : {
     . = ALIGN(4);
