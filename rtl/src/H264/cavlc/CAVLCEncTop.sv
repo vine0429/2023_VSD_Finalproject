@@ -11,6 +11,8 @@ module CAVLCEncTop(
     input  logic         packer_ready,
     input  logic [9:0]   topleft_x,
     input  logic [9:0]   topleft_y,
+    input  logic [11:0]  frame_width,
+    input  logic [11:0]  frame_height,
     input  logic         cavlc_cnt_valid,
     input  logic [1:0]   trailing_ones_cnt,
     input  logic [2:0]   trailing_ones_flag,
@@ -163,6 +165,8 @@ end
 CoeffTokenEncoder coefftokenencoder(
     .clk                 (clk),
     .rst                 (rst),
+    .frame_width         (frame_width),
+    .frame_height        (frame_height),
     .h264_reset          (h264_reset),
     .enc_end             (enc_end),
     .trailing_ones_cnt   (trailing_ones_cnt_r),

@@ -1,17 +1,17 @@
-root_dir := $(PWD)
-src_dir := ./src
-h264_dir := $(root_dir)/$(src_dir)/H264
-h264_dirs := $(h264_dir)+$(h264_dir)/cavlc+$(h264_dir)/dct_quant+$(h264_dir)/fetch+$(h264_dir)/intra+$(h264_dir)/packer
-syn_dir := ./syn
-pr_dir := ./pr
-inc_dir := ./include
-sim_dir := ./sim
-vip_dir := $(PWD)/vip
-bld_dir := ./build
-csrc_dir := ./csrc
-simv_dir := ./simv.daidir
+root_dir     := $(PWD)
+src_dir      := ./src
+h264_dir     := $(root_dir)/$(src_dir)/H264
+h264_dirs    := $(h264_dir)+$(h264_dir)/cavlc+$(h264_dir)/dct_quant+$(h264_dir)/fetch+$(h264_dir)/intra+$(h264_dir)/packer
+syn_dir      := ./syn
+pr_dir       := ./pr
+inc_dir      := ./include
+sim_dir      := ./sim
+vip_dir      := $(PWD)/vip
+bld_dir      := ./build
+csrc_dir     := ./csrc
+simv_dir     := ./simv.daidir
 nwavelog_dir := ./nWaveLog
-lib_dir := /usr/cad/CBDK/CBDK018_UMC_Faraday_v1.0/orig_lib/fsa0m_a/2009Q2v2.0/GENERIC_CORE/FrontEnd/verilog
+lib_dir      := /usr/cad/CBDK/CBDK018_UMC_Faraday_v1.0/orig_lib/fsa0m_a/2009Q2v2.0/GENERIC_CORE/FrontEnd/verilog
 
 FSDB_DEF :=
 ifeq ($(FSDB),1)
@@ -22,7 +22,7 @@ endif
 maxpend :=
 ifeq ($(pend),1)
 	maxpend := 1
-else ifeq ($(pend),2)
+else ifeq ($(pend),2) 
 	maxpend := 2
 else
 	maxpend := 0
@@ -49,8 +49,8 @@ vip_b: clean | $(bld_dir)
 	jg ../script/jg_bridge.tcl &
 
 # TA use this to check result
-TA_run:
-
+TA_run: 
+  
 # RTL simulation
 rtl_all: rtl0 rtl1 rtl2 rtl3
 
@@ -88,29 +88,39 @@ rtl3: | clean $(bld_dir)
 	+incdir+$(root_dir)/$(src_dir)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+prog3$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/prog3 \
-  +rdcycle=1
+  +rdcycle=1 
 
-h264:
-	vcs -R -sverilog $(root_dir)/$(sim_dir)/h264_tb.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(inc_dir) \
-	+prog_path=$(root_dir)/$(sim_dir)/h264_0 \
-
-cavlc: | $(bld_dir)
+rtl_project_01:| clean $(bld_dir)
+	make -C $(sim_dir)/project_01/; \
 	cd $(bld_dir); \
-	vcs -R -sverilog $(root_dir)/$(sim_dir)/cavlc_top_tb.sv -debug_access+all -full64 \
-	+incdir+$(root_dir)/$(src_dir)
-
-
-h264_prog_main_test:| clean $(bld_dir)
-	make -C $(sim_dir)/h264_prog_main_test/; \
-	cd $(bld_dir); \
-	vcs -R -sverilog $(root_dir)/$(sim_dir)/h264_prog_main_test_tb.sv -debug_access+all -full64  \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
 	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
-	+define+h264_prog_main_test$(FSDB_DEF) \
-	+prog_path=$(root_dir)/$(sim_dir)/h264_prog_main_test \
-  +rdcycle=1
+	+define+project_01$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_01 \
 
+rtl_project_02:| clean $(bld_dir)
+	make -C $(sim_dir)/project_02/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_02$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_02 \
 
+rtl_project_03:| clean $(bld_dir)
+	make -C $(sim_dir)/project_03/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_03$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_03 \
+
+project_04:| clean $(bld_dir)
+	make -C $(sim_dir)/project_04/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_04$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_04 \
 
 fetch:
 	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
@@ -148,10 +158,6 @@ syn2: | clean $(bld_dir)
 	+define+SYN+prog2$(FSDB_DEF) \
 	+no_notifier \
 	+prog_path=$(root_dir)/$(sim_dir)/prog2 \
-
-
-
-
 
 syn3: | clean $(bld_dir)
 	make -C $(sim_dir)/prog3/; \
@@ -333,12 +339,8 @@ tar: check
 
 clean:
 	rm -rf $(bld_dir); \
-	rm -rf $(csrc_dir); \
-	rm -rf $(simv_dir); \
-	rm -rf $(nwavelog_dir); \
 	rm -rf $(sim_dir)/prog*/result*.txt; \
 	make -C $(sim_dir)/prog0/ clean; \
 	make -C $(sim_dir)/prog1/ clean; \
 	make -C $(sim_dir)/prog2/ clean; \
 	make -C $(sim_dir)/prog3/ clean; \
-	make -C $(sim_dir)/h264_prog_main_test/ clean; \

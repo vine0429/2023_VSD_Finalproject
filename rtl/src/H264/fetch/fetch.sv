@@ -3,6 +3,8 @@
 module fetch(
     input  logic        clk,
     input  logic        rst,
+    input  logic [11:0] frame_width,
+    input  logic [11:0] frame_height,
     input  logic        h264_reset,
     input  logic        h264_en,
     input  logic        intra_ready,
@@ -41,7 +43,7 @@ assign data_byte1   = data_word_i[15:8];
 assign data_byte2   = data_word_i[23:16];
 assign data_byte3   = data_word_i[31:24];
 assign fetch_req_o  = (h264_en && curr_state == LD_Y);
-assign fetch_end    = (fetch_mb_y_o == (`FRAME_HEIGHT >> 4));
+assign fetch_end    = (fetch_mb_y_o == (frame_height >> 4));
 
 assign pos_x0 = pos_x;
 assign pos_x1 = pos_x + 4'd1;

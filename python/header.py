@@ -1,9 +1,10 @@
 import enc
 
 def concate(frame_encnum):
-    SPS_path        = "./bitstream/SPS_header.bin"
-    PPS_path        = "./bitstream/PPS_header.bin"
-    output_path     = "h264.bin"
+    SPS_path         = "./bitstream/SPS_header.bin"
+    PPS_path         = "./bitstream/PPS_header.bin"
+    output_path      = "h264.bin"
+    gold_output_path = "golden.hex"
 
     total_bitstream = bytearray()
 
@@ -28,6 +29,20 @@ def concate(frame_encnum):
     # 將合併後的內容寫入新檔案
     with open(output_path, "wb") as output_file:
         output_file.write(total_bitstream)
+
+    gold_total_bitstream = ""
+
+    # 讀取IDR_slice_golden的內容
+    for frame_num in range(frame_encnum):
+        gold_IDR_slice_path  = "./bitstream/IDR_slice_" + str(frame_num) + "_golden.hex"
+        print(gold_IDR_slice_path)
+        with open(gold_IDR_slice_path, "r") as gold_file:
+            gold_IDR_slice = gold_file.read()
+            gold_total_bitstream = gold_total_bitstream + gold_IDR_slice
+
+    # 將合併後的內容寫入新檔案
+    with open(gold_output_path, "w") as gold_output_file:
+        gold_output_file.write(gold_total_bitstream)
 
 def sps_nal(frame_width, frame_height):
     # SPS NAL
@@ -115,7 +130,7 @@ def sps_nal(frame_width, frame_height):
                 enc.ue(0,pic_order_cnt_type)                +\
                 enc.ue(0,log2_max_pic_order_cnt_lsb_minus4) +\
                 enc.ue(0,max_num_ref_frames)                +\
-                bin(gaps_in_frame_num_value_allowed_flag)[2:]                      +\
+                bin(gaps_in_frame_num_value_allowed_flag)[2:]  +\
                 enc.ue(0,pic_width_in_mbs_minus1)           +\
                 enc.ue(0,pic_height_in_map_units_minus1)    +\
                 bin(frame_mbs_only_flag)[2:]                                       +\
@@ -141,8 +156,6 @@ def sps_nal(frame_width, frame_height):
                 enc.ue(0,log2_max_mv_length_vertical)       +\
                 enc.ue(0,num_reorder_frames)                +\
                 enc.ue(0,max_dec_frame_buffering)
-
-    # print(sps_bitstring)
 
     # 分割二進位字串為 8 位一組的列表
     byte_list = [sps_bitstring[i:i+8] for i in range(0, len(sps_bitstring), 8)]

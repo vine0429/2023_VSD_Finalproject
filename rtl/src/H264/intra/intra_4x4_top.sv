@@ -1,19 +1,21 @@
 `include "intra_4x4_pe.sv"
 
 module intra_4x4_top(
-    input  logic       clk,
-    input  logic       rst,
-    input  logic       h264_reset,
-    input  logic       cavlc_cnt_ready,
-    input  logic       fetch_valid_i,
-    input  logic [5:0] fetch_mb_x_i,
-    input  logic [5:0] fetch_mb_y_i,
-    input  logic [7:0] matrixY_i [0:15][0:15],
+    input  logic        clk,
+    input  logic        rst,
+    input  logic        h264_reset,
+    input  logic [11:0] frame_width,
+    input  logic [11:0] frame_height,
+    input  logic        cavlc_cnt_ready,
+    input  logic        fetch_valid_i,
+    input  logic [5:0]  fetch_mb_x_i,
+    input  logic [5:0]  fetch_mb_y_i,
+    input  logic [7:0]  matrixY_i [0:15][0:15],
 
-    output logic       intra_ready,
-    output logic       dctq_valid,
-    output logic [9:0] topleft_x,
-    output logic [9:0] topleft_y,
+    output logic        intra_ready,
+    output logic        dctq_valid,
+    output logic [9:0]  topleft_x,
+    output logic [9:0]  topleft_y,
     output logic signed [14:0] DCTQ_4x4 [0:3][0:3]
 );
 
@@ -34,8 +36,8 @@ logic        intra_4x4_finish;
 logic mbAddrA_valid;
 logic mbAddrB_valid;
 logic [10:0] A, B, C, D, I, J, K, L;
-logic [7:0] intra4x4_tp [0:`FRAME_WIDTH-1];
-logic [7:0] intra4x4_lp [0:`FRAME_HEIGHT-1];
+logic [7:0] intra4x4_tp [0:1279];
+logic [7:0] intra4x4_lp [0:15];
 // only dc
 // logic [3:0] intra4x4_tm [0:(`FRAME_WIDTH >> 2)-1];
 // logic [3:0] intra4x4_lm [0:(`FRAME_HEIGHT >> 2)-1];
@@ -204,10 +206,10 @@ always_ff @(posedge clk) begin
         B <= intra4x4_tp[topleft_x+10'd1];
         C <= intra4x4_tp[topleft_x+10'd2];
         D <= intra4x4_tp[topleft_x+10'd3];
-        I <= intra4x4_lp[topleft_y+10'd0];
-        J <= intra4x4_lp[topleft_y+10'd1];
-        K <= intra4x4_lp[topleft_y+10'd2];
-        L <= intra4x4_lp[topleft_y+10'd3];
+        I <= intra4x4_lp[topleft_y[3:0]+10'd0];
+        J <= intra4x4_lp[topleft_y[3:0]+10'd1];
+        K <= intra4x4_lp[topleft_y[3:0]+10'd2];
+        L <= intra4x4_lp[topleft_y[3:0]+10'd3];
         mbAddrA_valid <= (topleft_x != 10'd0);
         mbAddrB_valid <= (topleft_y != 10'd0);
     end
@@ -215,26 +217,26 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        for (int i=0; i<`FRAME_WIDTH; i=i+1) 
+        for (int i=0; i<frame_width; i=i+1) 
             intra4x4_tp[i] <= 8'd0;
-        for (int j=0; j<`FRAME_HEIGHT; j=j+1) 
+        for (int j=0; j<16; j=j+1) 
             intra4x4_lp[j] <= 8'd0;
     end
     else if (h264_reset) begin
-        for (int i=0; i<`FRAME_WIDTH; i=i+1) 
+        for (int i=0; i<frame_width; i=i+1) 
             intra4x4_tp[i] <= 8'd0;
-        for (int j=0; j<`FRAME_HEIGHT; j=j+1) 
+        for (int j=0; j<16; j=j+1) 
             intra4x4_lp[j] <= 8'd0;
     end
     else if (next_state == RENEW_PIX) begin
-        intra4x4_tp[topleft_x+10'd0] <= preLoopFilter[3][0];
-        intra4x4_tp[topleft_x+10'd1] <= preLoopFilter[3][1];
-        intra4x4_tp[topleft_x+10'd2] <= preLoopFilter[3][2];
-        intra4x4_tp[topleft_x+10'd3] <= preLoopFilter[3][3];
-        intra4x4_lp[topleft_y+10'd0] <= preLoopFilter[0][3];
-        intra4x4_lp[topleft_y+10'd1] <= preLoopFilter[1][3];
-        intra4x4_lp[topleft_y+10'd2] <= preLoopFilter[2][3];
-        intra4x4_lp[topleft_y+10'd3] <= preLoopFilter[3][3];
+        intra4x4_tp[topleft_x+10'd0]      <= preLoopFilter[3][0];
+        intra4x4_tp[topleft_x+10'd1]      <= preLoopFilter[3][1];
+        intra4x4_tp[topleft_x+10'd2]      <= preLoopFilter[3][2];
+        intra4x4_tp[topleft_x+10'd3]      <= preLoopFilter[3][3];
+        intra4x4_lp[topleft_y[3:0]+10'd0] <= preLoopFilter[0][3];
+        intra4x4_lp[topleft_y[3:0]+10'd1] <= preLoopFilter[1][3];
+        intra4x4_lp[topleft_y[3:0]+10'd2] <= preLoopFilter[2][3];
+        intra4x4_lp[topleft_y[3:0]+10'd3] <= preLoopFilter[3][3];
     end
 end
 

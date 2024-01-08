@@ -11,9 +11,12 @@ file_path = "./yuv/BlowingBubbles_416x240_50.yuv"
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 416
 frame_height = 240
-frame_encnum = 3    # 這邊調整要編碼幾張frame
-frame_chroma = True # 是否要編碼色度
+frame_encnum = 2    # 這邊調整要編碼幾張frame
+frame_chroma = False # 是否要編碼色度
 gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
+gold_output_path = "golden.hex"
+gen_dataS    = True
+dataS_output_file_path  = "./data.S"
 SubWidthC    = 2
 SubHeightC   = 2
 
@@ -158,7 +161,7 @@ for frame_idx in range(frame_encnum):
                 pred_matrix = np.full((4,4),(I+J+K+L) / 4)
             elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
                 pred_matrix = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-            pred_matrix = np.round(pred_matrix+0.001).astype(int) # 四捨五入完變成整數 0.001 是因為python round 112.5 round 會變成 112 怪怪的
+            pred_matrix = np.round(pred_matrix+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001 是因為python round 112.5 round 會變成 112 怪怪的
             predpredMode = 2
             predMode = 2
             pred_res_matrix = intra4x4_luma - pred_matrix
@@ -178,7 +181,7 @@ for frame_idx in range(frame_encnum):
                                         [L,L,L,L]])
             # DC預測模式
             pred_DC_matrix = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-            pred_DC_matrix = np.round(pred_DC_matrix+0.001).astype(int)
+            pred_DC_matrix = np.round(pred_DC_matrix+0.00000001).astype(int)
 
             # 殘差的矩陣結果
             res_Vertical   = intra4x4_luma - pred_Vertical
@@ -287,7 +290,7 @@ for frame_idx in range(frame_encnum):
             pred_topleft_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topleft_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topleft_u = np.round(pred_topleft_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topleft_u = np.round(pred_topleft_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         # 右上角4x4 U
         A = intra4x4_tu[0,(mb_x<<3)+4]
@@ -307,7 +310,7 @@ for frame_idx in range(frame_encnum):
             pred_topright_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topright_u = np.round(pred_topright_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topright_u = np.round(pred_topright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
         
         # 左下角4x4 U
         A = pred_topleft_u[3,0]
@@ -327,7 +330,7 @@ for frame_idx in range(frame_encnum):
             pred_downleft_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downleft_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downleft_u = np.round(pred_downleft_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downleft_u = np.round(pred_downleft_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         # 右下角4x4 U
         A = pred_topright_u[3,0]
@@ -348,7 +351,7 @@ for frame_idx in range(frame_encnum):
             pred_downright_u = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downright_u = np.round(pred_downright_u+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downright_u = np.round(pred_downright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         
         # 左上角4x4 v
@@ -371,7 +374,7 @@ for frame_idx in range(frame_encnum):
             pred_topleft_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topleft_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topleft_v = np.round(pred_topleft_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topleft_v = np.round(pred_topleft_v+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         # 右上角4x4 v
         A = intra4x4_tv[0,(mb_x<<3)+4]
@@ -391,7 +394,7 @@ for frame_idx in range(frame_encnum):
             pred_topright_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topright_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_topright_v = np.round(pred_topright_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_topright_v = np.round(pred_topright_v+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
 
         
@@ -413,7 +416,7 @@ for frame_idx in range(frame_encnum):
             pred_downleft_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downleft_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downleft_v = np.round(pred_downleft_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downleft_v = np.round(pred_downleft_v+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         # 右下角4x4 v
         A = pred_topright_v[0,0]
@@ -434,7 +437,7 @@ for frame_idx in range(frame_encnum):
             pred_downright_v = np.full((4,4),(I+J+K+L) / 4)
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_downright_v = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
-        pred_downright_v = np.round(pred_downright_v+0.001).astype(int) # 四捨五入完變成整數 0.001
+        pred_downright_v = np.round(pred_downright_v+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
         # 計算出各個的殘差
         res_topleft_u   = (topleft_u   - pred_topleft_u  ).astype(int)
@@ -643,7 +646,7 @@ for frame_idx in range(frame_encnum):
         Z = Z / (2**qbits)
 
         # 一定要加上round，硬體只用15個bit表示
-        Z = np.round(Z+0.001).astype(int)
+        Z = np.round(Z+0.00000001).astype(int)
 
         return Z
     
@@ -692,7 +695,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         # 一定要有round
-        Y = np.round((Cit@Wi@Ci) / 256+0.001).astype(int)
+        Y = np.round((Cit@Wi@Ci) / 256+0.00000001).astype(int)
 
         return Y
 
@@ -738,7 +741,7 @@ for frame_idx in range(frame_encnum):
 
         # 多除4
         Y = (Cit@Wi@Ci) / 256
-        Y = np.round(Y+0.001).astype(int)
+        Y = np.round(Y+0.00000001).astype(int)
 
         return Y
 
@@ -753,7 +756,7 @@ for frame_idx in range(frame_encnum):
         
         YD = hadamard@WD@hadamard
 
-        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.001) #9362 = MF[0,0] 
+        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.00000001) #9362 = MF[0,0] 
         ZD = ZD.astype(int)
 
         return ZD
@@ -882,6 +885,16 @@ for frame_idx in range(frame_encnum):
             intra4x4_tc[0,topleft_x >> 2] = Non_Zero_Coefficient
             intra4x4_lc[topleft_y>>2, 0]  = Non_Zero_Coefficient
 
+        # mb_y = 80
+        # mb_x = 144
+        # if (frame_num == 1 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
+        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print(Z)
+        #     print("--------------------")
+
         # 沒有係數要編碼完coeff_token後就直接結束
         if (Non_Zero_Coefficient == 0):
             return cavlc_bitstring
@@ -995,6 +1008,16 @@ for frame_idx in range(frame_encnum):
             if (coeff != 0):
                 Start_encode = True
                 encode_coeff = coeff
+
+        # mb_y = 80
+        # mb_x = 144
+        # if (frame_num == 1 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
+        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print(Z)
+        #     print("--------------------")
 
         return cavlc_bitstring
 
@@ -1204,6 +1227,7 @@ for frame_idx in range(frame_encnum):
                     CAVLC_bitstring = CAVLC_bitstring + CAVLC(matrix_Z, topleft_x = topleft_x, topleft_y = topleft_y, iCbCr = 2)
             # 色度編碼 DC + AC
             if (frame_chroma == True):
+                print("chroma")
                 CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma(mb_x, mb_y)
             # block編碼完成輸出macroblock_layer
             mb_pred_bitstring = ""
@@ -1250,6 +1274,7 @@ for frame_idx in range(frame_encnum):
                 if (byte_value != 0): zero_cnt = 0
     if (gen_gold_hex == True):
         with open("./bitstream/IDR_slice_"+str(frame_idx)+"_golden.hex", "w") as golden_file:
+            last_byte_num = 0
             golden_file.write((0).to_bytes(1, byteorder='big').hex())
             golden_file.write((0).to_bytes(1, byteorder='big').hex())
             golden_file.write((0).to_bytes(1, byteorder='big').hex())
@@ -1276,7 +1301,64 @@ for frame_idx in range(frame_encnum):
                         zero_cnt = 0
                 if (i % 4 == 3):
                     golden_file.write("\n")
+                last_byte_num = i
+            for x in range (4-((last_byte_num % 4)+1)):
+                golden_file.write((0).to_bytes(1, byteorder='big').hex())
+            golden_file.write("\n")
+
+    if (gen_dataS == True):
+        # 初始化一個frame的矩陣用來保存資料
+        matrix   = np.zeros((frame_height,frame_width))
+        matrix_U = np.zeros((frame_height >> 1,frame_width >> 1))
+        matrix_V = np.zeros((frame_height >> 1,frame_width >> 1))
+
+        with open(file_path, "rb") as file, open(dataS_output_file_path, "w") as file_o:
+            # 讀取一個frame的luma資訊保存到matrix之中
+            for frame_num in range(frame_encnum):
+                for y in range (frame_height):
+                    for x in range (frame_width):
+                        byte_value = file.read(1)
+                        matrix[y,x] = int.from_bytes(byte_value, byteorder='big')
+                # 讀取一個frame的U資料保存在matrix之中
+                for y in range (frame_height >> 1):
+                    for x in range (frame_width >> 1):
+                        byte_value = file.read(1)
+                        matrix_U[y,x] = int.from_bytes(byte_value, byteorder='big')
+                # 讀取一個frame的V資料保存在matrix之中
+                for y in range (frame_height >> 1):
+                    for x in range (frame_width >> 1):
+                        byte_value = file.read(1)
+                        matrix_V[y,x] = int.from_bytes(byte_value, byteorder='big')
+
+                if (frame_num == 0):
+                    file_o.write("# Define constants")
+                    file_o.write("\n")
+                    file_o.write(".section .rodata")
+                    file_o.write("\n")
+                    file_o.write(".align 2")
+                    file_o.write("\n")
+                    file_o.write(".global array_addr")
+                    file_o.write("\n")
+                    file_o.write("array_addr:")
+                    file_o.write("\n")
+                    file_o.write("  .word \\")
+                    file_o.write("\n")
+                for mb_y in range (frame_height>>4):
+                    for mb_x in range (frame_width>>4):
+                        topleft_x = (mb_x << 4)
+                        topleft_y = (mb_y << 4)
+                        for y in range (16): #Y
+                            for x in range (0,16,4):
+                                    file_o.write("0x")
+                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+3]))[2:])
+                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+2]))[2:])
+                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+1]))[2:])
+                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+0]))[2:])
+                                    file_o.write(", \\")
+                                    file_o.write("\n")
+
+
 # 最後把SPS、PPS、IDR Slice合在一起
 header.sps_nal(frame_width, frame_height)
 header.pps_nal()
-header.concate(frame_encnum)
+header.concate(frame_encnum, gold_output_path)

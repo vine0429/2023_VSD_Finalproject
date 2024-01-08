@@ -44,9 +44,9 @@ module EPU_wrapper (
 );
 
 //*****************register************************//
-enum logic [2:0] {IDLE, READ_ADDR, READ_DATA, WRITE_ADDR, WRITE_DATA, WRITE_RESP} state, next_state;
+enum logic [1:0] {IDLE, READ_DATA, WRITE_DATA} state, next_state;
 logic data_valid, fetch_req;
-logic [31:0] data_word, fetch_addr, fifo_output_data;
+logic [31:0] data_word;
 logic [7:0]  counter_r;
 logic [7:0]  ARLEN_r;
 logic [7:0]  AWID_r;
@@ -56,10 +56,13 @@ logic [31:0] ARADDR_r;
 logic        h264_en;
 logic        h264_reset;
 logic        h264_buf_clear;
+logic        h264_enc_last4x4;
+logic [8:0]  h264_frame_num;
+logic [11:0] h264_width;
+logic [11:0] h264_height;
 logic [5:0]  h264_addr;
 logic [31:0] h264_out;
 logic [31:0] h264_buf_cnt;
-logic handshake_AW, handshake_W, handshake_WL, handshake_B, handshake_AR, handshake_RL, handshake_R;
 
 //*********************combination*****************//
 assign handshake_AW = AWVALID && AWREADY;
@@ -78,7 +81,7 @@ assign RVALID     = (state == READ_DATA) ? 1'b1 : 1'b0;
 assign RLAST      = ((state == READ_DATA) && (ARLEN_r == counter_r)) ? 1'd1 : 1'd0;
 assign BID        = AWID_r;
 assign BRESP      = `AXI_RESP_OKAY;
-assign BVALID     = ((state == WRITE_RESP) & BREADY) ? 1'd1 : 1'd0;
+assign BVALID     = (BREADY) ? 1'd1 : 1'd0;
 
 //----------------------------state------------------------------//
 always @(posedge clk) 
@@ -94,100 +97,39 @@ begin
   unique case (state)
     IDLE: 
     begin
-        if(AWVALID && AWREADY)
+        if(handshake_AW)
             next_state = WRITE_DATA;
-        else if (ARVALID && ARREADY) 
+        else if (handshake_AR) 
             next_state = READ_DATA;
-        else if(AWVALID)
-            next_state = WRITE_ADDR;
-        else if (ARVALID) 
-            next_state = READ_ADDR;
         else
             next_state = IDLE;
     end
-    WRITE_ADDR: 
-    begin
-        next_state = (AWVALID && AWREADY) ? WRITE_DATA : WRITE_ADDR;
-    end
-    WRITE_DATA: 
-    begin
-        next_state = (WVALID && WREADY && WLAST) ? WRITE_RESP : WRITE_DATA;
-    end
-    WRITE_RESP: 
-    begin
-        if(BVALID && BREADY)
-        begin
-            if(AWVALID && AWREADY)
-                next_state = WRITE_DATA;
-            else if (ARVALID && ARREADY) 
-                next_state = READ_DATA;
-            else if(AWVALID)
-                next_state = WRITE_ADDR;
-            else if (ARVALID) 
-                next_state = READ_ADDR;
-            else
-                next_state = IDLE;
-        end
-        else
-            next_state = WRITE_RESP;
-    end
-    READ_ADDR: 
-    begin
-        next_state = (ARVALID && ARREADY) ? READ_DATA : READ_ADDR;
-    end
-    READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;
-    default: 
-    begin
-        if(RVALID && RREADY)
-        begin
-            if(AWVALID && AWREADY)
-                next_state = WRITE_DATA;
-            else if (ARVALID && ARREADY) 
-                next_state = READ_DATA;
-            else if(AWVALID)
-                next_state = WRITE_ADDR;
-            else if (ARVALID) 
-                next_state = READ_ADDR;
-            else
-                next_state = IDLE;
-        end
-        else
-            next_state = READ_DATA;
-    end
+
+    WRITE_DATA: next_state = (handshake_WL) ? IDLE : WRITE_DATA;
+
+    READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;    
   endcase   
 end
 
 //----------------------------AXI sign------------------------------//
 always_comb 
 begin
-    if (state == IDLE && AWVALID) 
+    if (state == IDLE) 
     begin
         AWREADY = 1'b1;
         WREADY  = 1'b0;
-        ARREADY = 1'b0;
+        ARREADY = 1'b1;
     end
-    else if (state == WRITE_ADDR && AWVALID) 
-    begin
-        AWREADY = 1'b1;
-        WREADY  = 1'b0;
-        ARREADY = 1'b0;
-    end
-    else if (state == WRITE_DATA && WVALID) 
+    else if (state == WRITE_DATA) 
     begin
         AWREADY = 1'b0;
         ARREADY = 1'b0;
-        if (AWADDR_r == 32'h00100004 && WDATA != 32'd0 && (|WSTRB)) //write h264_en
-            WREADY = 1'b1; 
-        else if (AWADDR_r == 32'h00100000 && WDATA != 32'd0 && (|WSTRB)) //write YUV data
+        if (AWADDR_r != 32'h00100000 && (|WSTRB)) //write h264_en
+            WREADY = 1'b1;
+        else if (AWADDR_r == 32'h00100000 && (|WSTRB)) //write YUV data
             WREADY = (h264_en && fetch_req) ? 1'b1 : 1'b0;
         else //write other h264 signal
             WREADY = h264_en;
-    end
-    else if (state == (IDLE || READ_ADDR) && ARVALID) 
-    begin
-        AWREADY = 1'b0;
-        WREADY  = 1'b0;
-        ARREADY = 1'b1;
     end
     else 
     begin
@@ -230,8 +172,12 @@ end
 // H264_en        = 0x00100004;
 // H264_buf_clear = 0x00100008;
 // H264_buf_cnt   = 0x0010000c;
-// H264_reset     = 0x00100014;
 // H264_result    = 0x00100010;
+// H264_width     = 0x00100014;
+// H264_height    = 0x00100018;
+// H264_frame_num = 0x0010001c;
+// H264_reset     = 0x00100020;
+
 always_ff @(posedge clk) begin
     if (rst)
         h264_en <= 1'b0;
@@ -248,8 +194,29 @@ end
 
 always_ff @(posedge clk) begin
     if (rst)
-        h264_reset <= 1'b0;
+        h264_width <= 12'b0;
     else if (handshake_W && AWADDR_r == 32'h00100014 && (|WSTRB))
+        h264_width <= WDATA;
+end
+
+always_ff @(posedge clk) begin
+    if (rst)
+        h264_height <= 12'b0;
+    else if (handshake_W && AWADDR_r == 32'h00100018 && (|WSTRB))
+        h264_height <= WDATA;
+end
+
+always_ff @(posedge clk) begin
+    if (rst)
+        h264_frame_num <= 9'b0;
+    else if (handshake_W && AWADDR_r == 32'h0010001c && (|WSTRB))
+        h264_frame_num <= WDATA;
+end
+
+always_ff @(posedge clk) begin
+    if (rst)
+        h264_reset <= 1'b0;
+    else if (handshake_W && AWADDR_r == 32'h00100020 && (|WSTRB))
         h264_reset <= WDATA;
 end
 
@@ -258,6 +225,8 @@ always_comb begin
         RDATA = h264_out;
     else if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h0010000c))
         RDATA = h264_buf_cnt;
+    else if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h00100024))
+        RDATA = h264_enc_last4x4;
     else 
         RDATA = 32'b0;
 end
@@ -265,17 +234,21 @@ end
 //------------------h264_top--------------------//
 
 H264 H264_i(
-    .clk            (clk),
-    .rst            (rst),
-    .h264_en        (h264_en),
-    .h264_reset     (h264_reset),
-    .data_valid     (data_valid),
-    .data_word      (data_word),
-    .h264_buf_clear (h264_buf_clear),
-    .h264_addr      (counter_r),
-    .h264_out       (h264_out),
-    .h264_buf_cnt   (h264_buf_cnt),
-    .fetch_req      (fetch_req)
+    .clk              (clk),
+    .rst              (rst),
+    .h264_en          (h264_en),
+    .h264_reset       (h264_reset),
+    .h264_frame_num   (h264_frame_num),
+    .frame_width      (h264_width),
+    .frame_height     (h264_height),
+    .data_valid       (data_valid),
+    .data_word        (data_word),
+    .h264_buf_clear   (h264_buf_clear),
+    .h264_addr        (counter_r),
+    .h264_out         (h264_out),
+    .h264_buf_cnt     (h264_buf_cnt),
+    .fetch_req        (fetch_req),
+    .h264_enc_last4x4 (h264_enc_last4x4)
 );
 
 endmodule

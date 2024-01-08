@@ -5,24 +5,26 @@
 `include "Coeff_token_flc.sv"
 //`include "Coeff_token_vlc_chromaDC.sv"
 module CoeffTokenEncoder(
-    input  logic       clk,
-    input  logic       rst,
-    input  logic       h264_reset,
-    input  logic       enc_end,
-    input  logic [1:0] trailing_ones_cnt,
-    input  logic [4:0] total_coeff_cnt,
-    input  logic [9:0] topleft_x,
-    input  logic [9:0] topleft_y,
+    input  logic        clk,
+    input  logic        rst,
+    input  logic [11:0] frame_width,
+    input  logic [11:0] frame_height,
+    input  logic        h264_reset,
+    input  logic        enc_end,
+    input  logic [1:0]  trailing_ones_cnt,
+    input  logic [4:0]  total_coeff_cnt,
+    input  logic [9:0]  topleft_x,
+    input  logic [9:0]  topleft_y,
 
     output logic [15:0] coeff_token,
-    output logic [4:0] coeff_token_len
+    output logic [4:0]  coeff_token_len
 );
 
 logic mbAddrA_valid;
 logic mbAddrB_valid;
-logic [4:0] nA, nB, nC;
-logic [4:0] intra4x4_tc [(`FRAME_WIDTH >>2)-1:0];
-logic [4:0] intra4x4_lc [(`FRAME_HEIGHT>>2)-1:0];
+logic [5:0] nA, nB, nC;
+logic [4:0] intra4x4_tc [1279:0];
+logic [4:0] intra4x4_lc [15:0];
 logic [15:0] CoeffTokenCodeBit_vlc1;
 logic [4:0]  CoeffTokenCodeLength_vlc1;
 logic [15:0] CoeffTokenCodeBit_vlc2;
@@ -36,7 +38,7 @@ logic [4:0]  CoeffTokenCodeLength_vlc_chromaDC;
 
 assign mbAddrA_valid = (topleft_x != 10'd0);
 assign mbAddrB_valid = (topleft_y != 10'd0);
-assign nA = intra4x4_lc[topleft_y>>2];
+assign nA = intra4x4_lc[topleft_y[5:2]];
 assign nB = intra4x4_tc[topleft_x>>2];
 
 always_comb begin
@@ -75,20 +77,20 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        for (int i=0; i< `FRAME_WIDTH_DIV4; i=i+1)
+        for (int i=0; i< frame_width[11:2]; i=i+1)
             intra4x4_tc[i] <= 5'b0;
-        for (int i=0; i< `FRAME_HEIGHT_DIV4; i=i+1)
+        for (int i=0; i< frame_height[11:2]; i=i+1)
             intra4x4_lc[i] <= 5'b0;
     end
     else if (h264_reset) begin
-        for (int i=0; i< `FRAME_WIDTH_DIV4; i=i+1)
+        for (int i=0; i< frame_width[11:2]; i=i+1)
             intra4x4_tc[i] <= 5'b0;
-        for (int i=0; i< `FRAME_HEIGHT_DIV4; i=i+1)
+        for (int i=0; i< frame_height; i=i+1)
             intra4x4_lc[i] <= 5'b0;
     end
     else if (enc_end) begin
         intra4x4_tc[topleft_x>>2] <= total_coeff_cnt;
-        intra4x4_lc[topleft_y>>2] <= total_coeff_cnt;
+        intra4x4_lc[topleft_y[5:2]] <= total_coeff_cnt;
     end
 end
 

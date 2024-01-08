@@ -2,21 +2,23 @@
 `include "CAVLCEncTop.sv"
 
 module CAVLCTop(
-    input              clk,
-    input              rst,
-    input              h264_reset,
-    input              intra_valid,
-    input              packer_ready,
-    input [9:0]        topleft_x,
-    input [9:0]        topleft_y,
-    input [14:0]       scale_i [0:3][0:3],
+    input  logic         clk,
+    input  logic         rst,
+    input  logic         h264_reset,
+    input  logic         intra_valid,
+    input  logic         packer_ready,
+    input  logic [9:0]   topleft_x,
+    input  logic [9:0]   topleft_y,
+    input  logic [11:0]  frame_width,
+    input  logic [11:0]  frame_height,
+    input  logic [14:0]  scale_i [0:3][0:3],
 
     output logic [127:0] cavlc_bitstream_code,
     output logic [6:0]   cavlc_bitstream_bit,
-    output logic       cavlc_cnt_ready,
-    output logic       cavlc_enc_valid,
-    output logic [9:0] topleft_x_enc,
-    output logic [9:0] topleft_y_enc
+    output logic         cavlc_cnt_ready,
+    output logic         cavlc_enc_valid,
+    output logic [9:0]   topleft_x_enc,
+    output logic [9:0]   topleft_y_enc
 );
 
 //count
@@ -81,6 +83,8 @@ CAVLCEncTop cavlcenctop(
     .packer_ready        (packer_ready        ),
     .topleft_x           (topleft_x_r         ),
     .topleft_y           (topleft_y_r         ),
+    .frame_width         (frame_width),
+    .frame_height        (frame_height),
     .cavlc_cnt_valid     (cavlc_cnt_valid     ),
     .trailing_ones_cnt   (trailing_ones_cnt   ),
     .trailing_ones_flag  (trailing_ones_flag  ),

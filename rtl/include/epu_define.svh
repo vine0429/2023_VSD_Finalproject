@@ -4,5 +4,3 @@
 `define HEIGHT_MB_NUM_MINUS1   ((`FRAME_HEIGHT >> 4) - 1)
 `define LAST4x4_TOPLEFT_X      (`FRAME_WIDTH  - 4)
 `define LAST4x4_TOPLEFT_Y      (`FRAME_HEIGHT - 4)
-`define FRAME_WIDTH_DIV4       (`FRAME_WIDTH  >> 2)
-`define FRAME_HEIGHT_DIV4      (`FRAME_HEIGHT >> 2)

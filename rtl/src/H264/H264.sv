@@ -8,13 +8,17 @@ module H264(
     input  logic        rst,
     input  logic        h264_en,
     input  logic        h264_reset,
+    input  logic [8:0]  h264_frame_num,
+    input  logic [11:0] frame_width,
+    input  logic [11:0] frame_height,
     input  logic        data_valid,
     input  logic [31:0] data_word,
     input  logic        h264_buf_clear,
     input  logic  [7:0] h264_addr,
     output logic [31:0] h264_out,
     output logic [31:0] h264_buf_cnt,
-    output logic        fetch_req
+    output logic        fetch_req,
+    output logic        h264_enc_last4x4
 );
 
 // fetch
@@ -42,6 +46,8 @@ logic [9:0]   topleft_y_enc;
 fetch fetch_inst(
     .clk                   (clk),
     .rst                   (rst),
+    .frame_width           (frame_width),
+    .frame_height          (frame_height),
     .h264_reset            (h264_reset),
     .h264_en               (h264_en),
     .intra_ready           (intra_ready),
@@ -58,6 +64,8 @@ intra_4x4_top intra_4x4_top_inst(
     .clk                   (clk),
     .rst                   (rst),
     .h264_reset            (h264_reset),
+    .frame_width           (frame_width),
+    .frame_height          (frame_height),
     .cavlc_cnt_ready       (cavlc_cnt_ready),
     .fetch_valid_i         (fetch_valid),
     .fetch_mb_x_i          (fetch_mb_x),
@@ -73,6 +81,8 @@ intra_4x4_top intra_4x4_top_inst(
 CAVLCTop cavlctop(
     .clk                   (clk),
     .rst                   (rst),
+    .frame_width           (frame_width),
+    .frame_height          (frame_height),
     .h264_reset            (h264_reset),
     .intra_valid           (dctq_valid),
     .packer_ready          (packer_ready),
@@ -92,12 +102,16 @@ packer packer_inst(
     .rst                   (rst),
     .h264_reset            (h264_reset),
     .h264_addr             (h264_addr),
+    .h264_frame_num        (h264_frame_num),
+    .frame_width           (frame_width),
+    .frame_height          (frame_height),
     .h264_buf_clear        (h264_buf_clear),
     .topleft_x_enc         (topleft_x_enc),
     .topleft_y_enc         (topleft_y_enc),
     .cavlc_bitstream_valid (cavlc_enc_valid),
     .cavlc_bitstream_code  (cavlc_bitstream_code),
     .cavlc_bitstream_bit   (cavlc_bitstream_bit),
+    .h264_enc_last4x4      (h264_enc_last4x4),
     .packer_ready          (packer_ready),
     .h264_out              (h264_out),
     .h264_buf_cnt          (h264_buf_cnt)
