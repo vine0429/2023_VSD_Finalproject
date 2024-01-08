@@ -137,6 +137,8 @@ module CPU_wrapper (
     logic [`DATA_BITS-1:0]       L1DC_D_in_w;
     logic [`CACHE_TYPE_BITS-1:0] L1DC_D_type_w;
 
+    logic cacheable;
+
     //*********************combination*****************//
     assign handshake_M1_AW = AWVALID_M1 & AWREADY_M1;
     assign handshake_M1_W  = WVALID_M1  & WREADY_M1;

@@ -1,6 +1,7 @@
 module RunBeforeCounter(
     input clk,
     input rst,
+    input h264_reset,
     input cnt_rst,
     input start_cnt_i,
     input [7:0] coeff_i,
@@ -14,6 +15,8 @@ logic start_cnt_zero;
 always_ff @(posedge clk) begin
     if (rst)
         start_cnt_zero <= 1'b0;
+    else if (h264_reset)
+        start_cnt_zero <= 1'b0;
     else if (cnt_rst)
         start_cnt_zero <= 1'b0;
     else if (start_cnt_i && coeff_i != 8'd0)
@@ -22,6 +25,8 @@ end
 
 always_ff @(posedge clk) begin
     if (rst)
+        runbefore_counter <= 5'b0;
+    else if (h264_reset)
         runbefore_counter <= 5'b0;
     else if (cnt_rst)
         runbefore_counter <= 5'b0;
@@ -33,6 +38,11 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
+        for (int i=0; i<16; i=i+1)
+            runbefore_list[i] <= 5'd0;
+        runbefore_cnt <= 5'd0;
+    end
+    else if (h264_reset) begin
         for (int i=0; i<16; i=i+1)
             runbefore_list[i] <= 5'd0;
         runbefore_cnt <= 5'd0;

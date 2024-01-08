@@ -5,6 +5,9 @@
 `include "tq_dequant_4x4.sv"
 
 module tq_idct_dequant (
+    input  logic         clk,
+    input  logic         rst,
+    input  logic         h264_reset,
     input  logic  [14:0] dequant_i00_i,dequant_i01_i,dequant_i02_i,dequant_i03_i,
     input  logic  [14:0] dequant_i10_i,dequant_i11_i,dequant_i12_i,dequant_i13_i,
     input  logic  [14:0] dequant_i20_i,dequant_i21_i,dequant_i22_i,dequant_i23_i,
@@ -19,10 +22,15 @@ module tq_idct_dequant (
 
 );
 
-logic [14:0]    dequant_i00_w,dequant_i01_w,dequant_i02_w,dequant_i03_w;  
-logic [14:0]    dequant_i10_w,dequant_i11_w,dequant_i12_w,dequant_i13_w;  
-logic [14:0]    dequant_i20_w,dequant_i21_w,dequant_i22_w,dequant_i23_w;  
-logic [14:0]    dequant_i30_w,dequant_i31_w,dequant_i32_w,dequant_i33_w; 
+logic [14:0]   dequant_i00_w,dequant_i01_w,dequant_i02_w,dequant_i03_w;  
+logic [14:0]   dequant_i10_w,dequant_i11_w,dequant_i12_w,dequant_i13_w;  
+logic [14:0]   dequant_i20_w,dequant_i21_w,dequant_i22_w,dequant_i23_w;  
+logic [14:0]   dequant_i30_w,dequant_i31_w,dequant_i32_w,dequant_i33_w; 
+
+logic [14:0]   dequant_i00_r,dequant_i01_r,dequant_i02_r,dequant_i03_r;  
+logic [14:0]   dequant_i10_r,dequant_i11_r,dequant_i12_r,dequant_i13_r;  
+logic [14:0]   dequant_i20_r,dequant_i21_r,dequant_i22_r,dequant_i23_r;  
+logic [14:0]   dequant_i30_r,dequant_i31_r,dequant_i32_r,dequant_i33_r; 
 
 logic [2:0]     mod6_w;
 logic [3:0]     div6_w;
@@ -75,23 +83,80 @@ tq_dequant_4x4 tq_dequant_4x4(
     .coeff33_o(dequant_i33_w)
 );  
 
+always_ff @(posedge clk) begin
+    if (rst) begin
+        dequant_i00_r <= 15'd0;
+        dequant_i10_r <= 15'd0;
+        dequant_i20_r <= 15'd0;
+        dequant_i30_r <= 15'd0;
+        dequant_i01_r <= 15'd0;
+        dequant_i11_r <= 15'd0;
+        dequant_i21_r <= 15'd0;
+        dequant_i31_r <= 15'd0;
+        dequant_i02_r <= 15'd0;
+        dequant_i12_r <= 15'd0;
+        dequant_i22_r <= 15'd0;
+        dequant_i32_r <= 15'd0;
+        dequant_i03_r <= 15'd0;
+        dequant_i13_r <= 15'd0;
+        dequant_i23_r <= 15'd0;
+        dequant_i33_r <= 15'd0;
+    end
+    else if (h264_reset) begin
+        dequant_i00_r <= 15'd0;
+        dequant_i10_r <= 15'd0;
+        dequant_i20_r <= 15'd0;
+        dequant_i30_r <= 15'd0;
+        dequant_i01_r <= 15'd0;
+        dequant_i11_r <= 15'd0;
+        dequant_i21_r <= 15'd0;
+        dequant_i31_r <= 15'd0;
+        dequant_i02_r <= 15'd0;
+        dequant_i12_r <= 15'd0;
+        dequant_i22_r <= 15'd0;
+        dequant_i32_r <= 15'd0;
+        dequant_i03_r <= 15'd0;
+        dequant_i13_r <= 15'd0;
+        dequant_i23_r <= 15'd0;
+        dequant_i33_r <= 15'd0;
+    end
+    else begin
+        dequant_i00_r <= dequant_i00_w;
+        dequant_i10_r <= dequant_i10_w;
+        dequant_i20_r <= dequant_i20_w;
+        dequant_i30_r <= dequant_i30_w;
+        dequant_i01_r <= dequant_i01_w;
+        dequant_i11_r <= dequant_i11_w;
+        dequant_i21_r <= dequant_i21_w;
+        dequant_i31_r <= dequant_i31_w;
+        dequant_i02_r <= dequant_i02_w;
+        dequant_i12_r <= dequant_i12_w;
+        dequant_i22_r <= dequant_i22_w;
+        dequant_i32_r <= dequant_i32_w;
+        dequant_i03_r <= dequant_i03_w;
+        dequant_i13_r <= dequant_i13_w;
+        dequant_i23_r <= dequant_i23_w;
+        dequant_i33_r <= dequant_i33_w;
+    end
+end
+
 tq_idct_4x4 tq_idct_4x4(
-    .idct_s00_i (dequant_i00_w),
-    .idct_s01_i (dequant_i01_w),
-    .idct_s02_i (dequant_i02_w),
-    .idct_s03_i (dequant_i03_w),
-    .idct_s10_i (dequant_i10_w),
-    .idct_s11_i (dequant_i11_w),
-    .idct_s12_i (dequant_i12_w),
-    .idct_s13_i (dequant_i13_w),
-    .idct_s20_i (dequant_i20_w),
-    .idct_s21_i (dequant_i21_w),
-    .idct_s22_i (dequant_i22_w),
-    .idct_s23_i (dequant_i23_w),
-    .idct_s30_i (dequant_i30_w),
-    .idct_s31_i (dequant_i31_w),
-    .idct_s32_i (dequant_i32_w),
-    .idct_s33_i (dequant_i33_w),
+    .idct_s00_i (dequant_i00_r),
+    .idct_s01_i (dequant_i01_r),
+    .idct_s02_i (dequant_i02_r),
+    .idct_s03_i (dequant_i03_r),
+    .idct_s10_i (dequant_i10_r),
+    .idct_s11_i (dequant_i11_r),
+    .idct_s12_i (dequant_i12_r),
+    .idct_s13_i (dequant_i13_r),
+    .idct_s20_i (dequant_i20_r),
+    .idct_s21_i (dequant_i21_r),
+    .idct_s22_i (dequant_i22_r),
+    .idct_s23_i (dequant_i23_r),
+    .idct_s30_i (dequant_i30_r),
+    .idct_s31_i (dequant_i31_r),
+    .idct_s32_i (dequant_i32_r),
+    .idct_s33_i (dequant_i33_r),
 
     .idct_d00_o (idct_i00_o),
     .idct_d01_o (idct_i01_o),

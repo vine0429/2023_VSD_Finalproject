@@ -1,6 +1,7 @@
 module TrailingOneCounter(
     input              clk,
     input              rst,
+    input              h264_reset,
     input              cnt_rst,
     input              start_cnt,
     input        [7:0] coeff_i,
@@ -12,6 +13,7 @@ module TrailingOneCounter(
 logic zero;
 logic ones;
 logic t1s_start_cnt;
+logic stop_cnt;
 
 assign zero = (coeff_i == 8'b0) ? 1'b1 : 1'b0;
 assign ones = (coeff_i == 8'd1 || coeff_i == -8'd1) ? 1'b1 : 1'b0; 
@@ -22,6 +24,8 @@ assign trailing_ones_stop_cnt = ~t1s_start_cnt || stop_cnt;
 always_ff @(posedge clk) begin
     if (rst)
         t1s_start_cnt <= 1'b1;
+    else if (h264_reset)
+        t1s_start_cnt <= 1'b1;
     else if (cnt_rst)
         t1s_start_cnt <= 1'b1;
     else if (stop_cnt && start_cnt)
@@ -30,6 +34,10 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
+        trailing_ones_flag <= 3'b0;
+        trailing_ones_cnt  <= 2'b0;
+    end
+    else if (h264_reset) begin
         trailing_ones_flag <= 3'b0;
         trailing_ones_cnt  <= 2'b0;
     end

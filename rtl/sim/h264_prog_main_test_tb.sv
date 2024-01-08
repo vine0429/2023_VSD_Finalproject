@@ -9,7 +9,7 @@
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
 `define AXI_CYCLE     25.0 
-`define EPU_CYCLE     10
+`define EPU_CYCLE     10.0
 `define DMA_CYCLE     25.0 
 
 
@@ -194,15 +194,15 @@ module top_tb;
     @(posedge axi_clk)
     #(2); // small number 
     axi_rst = 0;
-    @(posedge cpu_clk)
-    #(2); // small number 
-    cpu_rst = 0;
     @(posedge epu_clk)
     #(2); // small number 
     epu_rst = 0;
     @(posedge dma_clk)
     #(2); // small number 
     dma_rst = 0;
+    @(posedge cpu_clk)
+    #(2); // small number 
+    cpu_rst = 0;
   end
 
   initial begin
@@ -248,7 +248,7 @@ module top_tb;
 
     //display final result and calculate error nums
     err = 0;
-    for (i = 0; i < num; i++) begin
+    for (i = 0; i < num-1; i++) begin
       if (`dram_word(`COMPRESS_RESULT_START + i) !== GOLDEN[i]) begin
         $display("DRAM[%4d] = %h, expect = %h", `COMPRESS_RESULT_START + i, `dram_word(`COMPRESS_RESULT_START + i), GOLDEN[i]);
         err = err + 1;

@@ -1,6 +1,7 @@
 module LevelCodeEncoder(
     input               clk,
     input               rst,
+    input               h264_reset,
     input               start_enc,
     input               enc_rst,
     input               enc_load,
@@ -31,6 +32,8 @@ assign coeff_abs = coeff[7] ? (~coeff + 8'd1) : coeff;
 
 always_ff @(posedge clk) begin
     if (rst)
+        encode_idx <= 5'd0;
+    else if (h264_reset)
         encode_idx <= 5'd0;
     else if (enc_rst)
         encode_idx <= 5'd0;
@@ -89,13 +92,15 @@ always_comb begin
         suffixLength = suffixLength + 8'd1;
 
     //the level code bitstring
-    next_levelcode_code = (((levelcode_code << (levelPrefix + 8'd1)) + 128'd1) << levelSuffixLength) + levelSuffixBis;
+    next_levelcode_code = (((levelcode_code << (levelPrefix + 8'd1)) | 128'd1) << levelSuffixLength) | levelSuffixBis;
     next_levelcode_bit  = levelcode_bit + levelPrefix + 8'd1 + levelSuffixLength;
 end
 
 //sufixLength
 always_ff @(posedge clk) begin
     if (rst)
+        suffixLength_r <= 8'd0;
+    else if (h264_reset)
         suffixLength_r <= 8'd0;
     else if (enc_rst)
         suffixLength_r <= 8'd0;
@@ -110,6 +115,10 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
+        levelcode_code <= 128'b0;
+        levelcode_bit  <= 7'd0;
+    end
+    else if (h264_reset) begin
         levelcode_code <= 128'b0;
         levelcode_bit  <= 7'd0;
     end

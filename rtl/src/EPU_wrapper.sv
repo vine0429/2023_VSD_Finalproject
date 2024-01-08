@@ -54,10 +54,12 @@ logic [7:0]  ARID_r;
 logic [31:0] AWADDR_r;
 logic [31:0] ARADDR_r;
 logic        h264_en;
+logic        h264_reset;
 logic        h264_buf_clear;
 logic [5:0]  h264_addr;
 logic [31:0] h264_out;
 logic [31:0] h264_buf_cnt;
+logic handshake_AW, handshake_W, handshake_WL, handshake_B, handshake_AR, handshake_RL, handshake_R;
 
 //*********************combination*****************//
 assign handshake_AW = AWVALID && AWREADY;
@@ -228,7 +230,8 @@ end
 // H264_en        = 0x00100004;
 // H264_buf_clear = 0x00100008;
 // H264_buf_cnt   = 0x0010000c;
-// H264_result    = 0x00110000;
+// H264_reset     = 0x00100014;
+// H264_result    = 0x00100010;
 always_ff @(posedge clk) begin
     if (rst)
         h264_en <= 1'b0;
@@ -241,6 +244,13 @@ always_ff @(posedge clk) begin
         h264_buf_clear <= 1'b0;
     else if (handshake_W && AWADDR_r == 32'h00100008 && (|WSTRB))
         h264_buf_clear <= WDATA;
+end
+
+always_ff @(posedge clk) begin
+    if (rst)
+        h264_reset <= 1'b0;
+    else if (handshake_W && AWADDR_r == 32'h00100014 && (|WSTRB))
+        h264_reset <= WDATA;
 end
 
 always_comb begin
@@ -258,6 +268,7 @@ H264 H264_i(
     .clk            (clk),
     .rst            (rst),
     .h264_en        (h264_en),
+    .h264_reset     (h264_reset),
     .data_valid     (data_valid),
     .data_word      (data_word),
     .h264_buf_clear (h264_buf_clear),

@@ -8,6 +8,7 @@
 module CAVLCCntTop(
     input              clk,
     input              rst,
+    input              h264_reset,
     input              valid,
     input [9:0]        topleft_x,         
     input [9:0]        topleft_y, 
@@ -51,6 +52,7 @@ localparam WAITENC   = 3'd3;
 logic [7:0] coeff;
 logic [2:0] state_curr, state_next;
 logic [3:0] coeff_idx;
+logic load, start_cnt, cnt_rst, trailing_ones_stop_cnt;
 
 assign load            = (state_next == LOAD);
 assign start_cnt       = (state_curr == CNT);
@@ -63,6 +65,10 @@ always_ff @(posedge clk) begin
         topleft_x_r        <= 10'd0;
         topleft_y_r        <= 10'd0;
     end
+    else if (h264_reset) begin
+        topleft_x_r        <= 10'd0;
+        topleft_y_r        <= 10'd0;
+    end
     else if (state_next == LOAD) begin
         topleft_x_r <= topleft_x;
         topleft_y_r <= topleft_y;
@@ -71,6 +77,8 @@ end
 
 always_ff @(posedge clk) begin
     if (rst)
+        state_curr <= IDLE;
+    else if (h264_reset)
         state_curr <= IDLE;
     else
         state_curr <= state_next;
@@ -88,6 +96,8 @@ end
 always_ff @(posedge clk)begin
     if (rst)
         coeff_idx <= 4'b0;
+    else if (h264_reset)
+        coeff_idx <= 4'b0;
     else if (state_next == LOAD)
         coeff_idx <= 4'b0;
     else if (state_curr == CNT)
@@ -97,6 +107,7 @@ end
 CAVLC4x4Buffer cavlc4x4buffer(
     .clk         (clk),
     .rst         (rst),
+    .h264_reset  (h264_reset),
     .load        (load),
     .coeff_idx_i (coeff_idx),
     .scale00_i   (scale00_i[7:0]),
@@ -121,6 +132,7 @@ CAVLC4x4Buffer cavlc4x4buffer(
 TotalCoeffCounter totalcoeffcounter(
     .clk             (clk),
     .rst             (rst),
+    .h264_reset      (h264_reset),
     .cnt_rst         (cnt_rst),
     .start_cnt_i     (start_cnt),
     .coeff_i         (coeff),
@@ -130,6 +142,7 @@ TotalCoeffCounter totalcoeffcounter(
 TotalZeroCounter totalzerocounter(
     .clk             (clk),
     .rst             (rst),
+    .h264_reset      (h264_reset),
     .cnt_rst         (cnt_rst),
     .start_cnt       (start_cnt),
     .coeff_i         (coeff),
@@ -139,6 +152,7 @@ TotalZeroCounter totalzerocounter(
 TrailingOneCounter trailingonecounter(
     .clk                    (clk),
     .rst                    (rst),
+    .h264_reset             (h264_reset),
     .cnt_rst                (cnt_rst),
     .start_cnt       (start_cnt),
     .coeff_i                (coeff),
@@ -150,6 +164,7 @@ TrailingOneCounter trailingonecounter(
 LevelCodeList levelcodelist(
     .clk                    (clk),
     .rst                    (rst),
+    .h264_reset             (h264_reset),
     .cnt_rst                (cnt_rst),
     .start_cnt_i            (start_cnt),
     .trailing_ones_stop_cnt (trailing_ones_stop_cnt),
@@ -162,6 +177,7 @@ LevelCodeList levelcodelist(
 RunBeforeCounter runbeforecounter(
     .clk                    (clk),
     .rst                    (rst),
+    .h264_reset             (h264_reset),
     .cnt_rst                (cnt_rst),
     .start_cnt_i            (start_cnt),
     .coeff_i                (coeff),

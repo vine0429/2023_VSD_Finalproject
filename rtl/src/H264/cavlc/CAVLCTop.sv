@@ -4,6 +4,7 @@
 module CAVLCTop(
     input              clk,
     input              rst,
+    input              h264_reset,
     input              intra_valid,
     input              packer_ready,
     input [9:0]        topleft_x,
@@ -37,6 +38,7 @@ logic cavlc_enc_ready;
 CAVLCCntTop cavlccnttop(
     .clk                (clk),
     .rst                (rst),
+    .h264_reset         (h264_reset),
     .valid              (intra_valid),
     .topleft_x          (topleft_x),
     .topleft_y          (topleft_y),
@@ -75,6 +77,7 @@ CAVLCCntTop cavlccnttop(
 CAVLCEncTop cavlcenctop(
     .clk                 (clk                 ),
     .rst                 (rst                 ),
+    .h264_reset          (h264_reset          ),
     .packer_ready        (packer_ready        ),
     .topleft_x           (topleft_x_r         ),
     .topleft_y           (topleft_y_r         ),

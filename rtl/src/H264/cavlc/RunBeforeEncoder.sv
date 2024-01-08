@@ -1,6 +1,7 @@
 module RunBeforeEncoder(
     input       clk,
     input       rst,
+    input       h264_reset,
     input       start_enc,
     input       enc_rst,
     input       enc_load,
@@ -25,6 +26,8 @@ assign run_before = runbefore_list[encode_idx];
 
 always_ff @(posedge clk) begin
     if (rst)
+        encode_idx <= 5'd0;
+    else if (h264_reset)
         encode_idx <= 5'd0;
     else if (enc_rst)
         encode_idx <= 5'd0;
@@ -222,6 +225,8 @@ end
 always_ff @(posedge clk) begin
     if (rst)
         zero_left_r <= 5'd0;
+    else if (h264_reset)
+        zero_left_r <= 5'd0;
     else if (enc_rst)
         zero_left_r <= 5'd0;
     else if (enc_load)
@@ -232,6 +237,10 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
+        runbefore_code <= 32'b0;
+        runbefore_bit  <= 5'd0;
+    end
+    else if (h264_reset) begin
         runbefore_code <= 32'b0;
         runbefore_bit  <= 5'd0;
     end

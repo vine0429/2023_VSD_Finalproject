@@ -1,12 +1,13 @@
 `include "./fetch/fetch.sv"
 `include "./intra/intra_4x4_top.sv"
-`include "CAVLCTop.sv"
-`include "packer.sv"
+`include "./cavlc/CAVLCTop.sv"
+`include "./packer/packer.sv"
 
 module H264(
     input  logic        clk,
     input  logic        rst,
     input  logic        h264_en,
+    input  logic        h264_reset,
     input  logic        data_valid,
     input  logic [31:0] data_word,
     input  logic        h264_buf_clear,
@@ -22,8 +23,6 @@ logic [5:0]   fetch_mb_x;
 logic [5:0]   fetch_mb_y;
 logic         fetch_valid;
 logic [7:0]   matrixY [0:15][0:15];
-logic [7:0]   matrixU [0:7][0:7];
-logic [7:0]   matrixV [0:7][0:7];
 // intra
 logic         intra_ready;
 logic         dctq_valid;
@@ -43,6 +42,7 @@ logic [9:0]   topleft_y_enc;
 fetch fetch_inst(
     .clk                   (clk),
     .rst                   (rst),
+    .h264_reset            (h264_reset),
     .h264_en               (h264_en),
     .intra_ready           (intra_ready),
     .data_word_i           (data_word),
@@ -51,21 +51,18 @@ fetch fetch_inst(
     .fetch_mb_x_o          (fetch_mb_x),
     .fetch_mb_y_o          (fetch_mb_y),
     .matrixY_o             (matrixY),
-    // .matrixU_o          (matrixU),
-    // .matrixV_o          (matrixV),
     .fetch_req_o           (fetch_req)
 );
 
 intra_4x4_top intra_4x4_top_inst(
     .clk                   (clk),
     .rst                   (rst),
+    .h264_reset            (h264_reset),
     .cavlc_cnt_ready       (cavlc_cnt_ready),
     .fetch_valid_i         (fetch_valid),
     .fetch_mb_x_i          (fetch_mb_x),
     .fetch_mb_y_i          (fetch_mb_y),
     .matrixY_i             (matrixY),
-    // .matrixU_i          (matrixU),
-    // .matrixV_i          (matrixV),
     .intra_ready           (intra_ready),
     .dctq_valid            (dctq_valid),
     .topleft_x             (topleft_x),
@@ -76,6 +73,7 @@ intra_4x4_top intra_4x4_top_inst(
 CAVLCTop cavlctop(
     .clk                   (clk),
     .rst                   (rst),
+    .h264_reset            (h264_reset),
     .intra_valid           (dctq_valid),
     .packer_ready          (packer_ready),
     .topleft_x             (topleft_x),
@@ -92,6 +90,7 @@ CAVLCTop cavlctop(
 packer packer_inst(
     .clk                   (clk),
     .rst                   (rst),
+    .h264_reset            (h264_reset),
     .h264_addr             (h264_addr),
     .h264_buf_clear        (h264_buf_clear),
     .topleft_x_enc         (topleft_x_enc),

@@ -1,9 +1,0 @@
-{"vcs1":{"timestamp_begin":1704608946.027847984, "rt":3.42, "ut":2.85, "st":0.24}}
-{"vcselab":{"timestamp_begin":1704608949.527522615, "rt":1.02, "ut":0.53, "st":0.12}}
-{"link":{"timestamp_begin":1704608950.601491746, "rt":0.26, "ut":0.18, "st":0.09}}
-{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1704608945.481214149}
-{"VCS_COMP_START_TIME": 1704608945.481214149}
-{"VCS_COMP_END_TIME": 1704608964.005401685}
-{"VCS_USER_OPTIONS": "-R -sverilog /home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test_tb.sv -debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim +define+h264_prog_main_test+FSDB +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_prog_main_test +rdcycle=1"}
-{"vcs1": {"peak_mem": 350112}}
-{"vcselab": {"peak_mem": 236320}}

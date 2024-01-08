@@ -1,6 +1,7 @@
 module CAVLC4x4Buffer(
     input        clk,
     input        rst,
+    input        h264_reset,
     input        load,           // from quant
     input        [3:0] coeff_idx_i,  // 0 ~ 15
     input        [7:0] scale00_i,
@@ -40,6 +41,24 @@ module CAVLC4x4Buffer(
 
     always_ff @(posedge clk) begin
         if (rst) begin
+            scale00_buf <= 8'b0;
+            scale01_buf <= 8'b0;
+            scale02_buf <= 8'b0;
+            scale03_buf <= 8'b0;
+            scale10_buf <= 8'b0;
+            scale11_buf <= 8'b0;
+            scale12_buf <= 8'b0;
+            scale13_buf <= 8'b0;
+            scale20_buf <= 8'b0;
+            scale21_buf <= 8'b0;
+            scale22_buf <= 8'b0;
+            scale23_buf <= 8'b0;
+            scale30_buf <= 8'b0;
+            scale31_buf <= 8'b0;
+            scale32_buf <= 8'b0;
+            scale33_buf <= 8'b0;
+        end
+        else if (h264_reset) begin
             scale00_buf <= 8'b0;
             scale01_buf <= 8'b0;
             scale02_buf <= 8'b0;

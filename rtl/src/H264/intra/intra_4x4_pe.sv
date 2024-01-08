@@ -6,6 +6,7 @@ module intra_4x4_pe(
     //luma
     input clk,
     input rst,
+    input h264_reset,
     input [10:0] A,B,C,D,
     input [10:0] I,J,K,L,
     input [3:0] next_state,
@@ -24,11 +25,13 @@ localparam CNT_TOPLEFT = 4'd3;
 localparam CNT_PREPARE = 4'd4;
 localparam CNT_PRED    = 4'd5;
 localparam CNT_RES     = 4'd6;
-localparam CNT_DCTQ    = 4'd7;
-localparam CNT_IDCTQ   = 4'd8;
-localparam CNT_PRELOOP = 4'd9;
-localparam RENEW_PIX   = 4'd10;
-localparam WAIT_CAVLC  = 4'd11;
+localparam CNT_DCT     = 4'd7;
+localparam CNT_Q       = 4'd8;
+localparam CNT_IQ      = 4'd9;
+localparam CNT_IDCT    = 4'd10;
+localparam CNT_PRELOOP = 4'd11;
+localparam RENEW_PIX   = 4'd12;
+localparam WAIT_CAVLC  = 4'd13;
 
 logic signed [14:0] DCTQ_4x4_r   [0:3][0:3];
 logic signed [14:0] IDCTDQ_4x4   [0:3][0:3];
@@ -39,6 +42,11 @@ logic        [7:0]  pred_matrix  [0:3][0:3];
 // CNT_PRED
 always_ff @(posedge clk) begin
     if (rst) begin
+        for (int i=0; i<4; i=i+1)
+            for(int j=0; j<4; j=j+1)
+                pred_matrix[i][j] <= 8'd0;
+    end
+    else if (h264_reset) begin
         for (int i=0; i<4; i=i+1)
             for(int j=0; j<4; j=j+1)
                 pred_matrix[i][j] <= 8'd0;
@@ -75,6 +83,11 @@ always_ff @(posedge clk) begin
             for(int j=0; j<4; j=j+1)
                 intra4x4_res[i][j] <= 9'd0;
     end
+    else if (h264_reset) begin
+        for (int i=0; i<4; i=i+1)
+            for(int j=0; j<4; j=j+1)
+                intra4x4_res[i][j] <= 9'd0;
+    end
     else if (next_state == CNT_RES) begin
         for (int i=0; i<4; i=i+1)
             for(int j=0; j<4; j=j+1)
@@ -84,6 +97,8 @@ end
 
 // DCTQ
 tq_dct_quant tq_dct_quant_inst(
+    .clk(clk),
+    .rst(rst),
     .dct_i00_i(intra4x4_res[0][0]), .dct_i01_i(intra4x4_res[0][1]), .dct_i02_i(intra4x4_res[0][2]), .dct_i03_i(intra4x4_res[0][3]),
     .dct_i10_i(intra4x4_res[1][0]), .dct_i11_i(intra4x4_res[1][1]), .dct_i12_i(intra4x4_res[1][2]), .dct_i13_i(intra4x4_res[1][3]),
     .dct_i20_i(intra4x4_res[2][0]), .dct_i21_i(intra4x4_res[2][1]), .dct_i22_i(intra4x4_res[2][2]), .dct_i23_i(intra4x4_res[2][3]),
@@ -103,7 +118,12 @@ always_ff @(posedge clk) begin
             for(int j=0; j<4; j=j+1)
                 DCTQ_4x4_r[i][j] <= 15'd0;
     end
-    else if (next_state == CNT_DCTQ) begin
+    else if (h264_reset) begin
+        for (int i=0; i<4; i=i+1)
+            for(int j=0; j<4; j=j+1)
+                DCTQ_4x4_r[i][j] <= 15'd0;
+    end
+    else if (next_state == CNT_Q) begin
         for (int i=0; i<4; i=i+1)
             for(int j=0; j<4; j=j+1)
                 DCTQ_4x4_r[i][j] <= DCTQ_4x4[i][j];
@@ -112,6 +132,9 @@ end
 
 // IDCTQ
 tq_idct_dequant tq_idct_dequant_inst(
+    .clk(clk),
+    .rst(rst),
+    .h264_reset(h264_reset),
     .dequant_i00_i(DCTQ_4x4_r[0][0]), .dequant_i01_i(DCTQ_4x4_r[0][1]), .dequant_i02_i(DCTQ_4x4_r[0][2]), .dequant_i03_i(DCTQ_4x4_r[0][3]),
     .dequant_i10_i(DCTQ_4x4_r[1][0]), .dequant_i11_i(DCTQ_4x4_r[1][1]), .dequant_i12_i(DCTQ_4x4_r[1][2]), .dequant_i13_i(DCTQ_4x4_r[1][3]),
     .dequant_i20_i(DCTQ_4x4_r[2][0]), .dequant_i21_i(DCTQ_4x4_r[2][1]), .dequant_i22_i(DCTQ_4x4_r[2][2]), .dequant_i23_i(DCTQ_4x4_r[2][3]),
@@ -131,7 +154,12 @@ always_ff @(posedge clk) begin
             for(int j=0; j<4; j=j+1)
                 IDCTDQ_4x4_r[i][j] <= 15'd0;
     end
-    else if (next_state == CNT_IDCTQ) begin
+    else if (h264_reset) begin
+        for (int i=0; i<4; i=i+1)
+            for(int j=0; j<4; j=j+1)
+                IDCTDQ_4x4_r[i][j] <= 15'd0;
+    end
+    else if (next_state == CNT_IDCT) begin
         for (int i=0; i<4; i=i+1)
             for(int j=0; j<4; j=j+1)
                 IDCTDQ_4x4_r[i][j] <= IDCTDQ_4x4[i][j];
@@ -141,6 +169,11 @@ end
 // PRELOOP
 always_ff @(posedge clk) begin
     if (rst) begin
+        for (int i=0; i<4; i=i+1)
+            for(int j=0; j<4; j=j+1)
+                preLoopFilter[i][j] <= 8'd0;
+    end
+    else if (h264_reset) begin
         for (int i=0; i<4; i=i+1)
             for(int j=0; j<4; j=j+1)
                 preLoopFilter[i][j] <= 8'd0;

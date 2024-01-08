@@ -1,4 +1,4 @@
-read_file -autoread -top top {../src ../include ../src/AXI}
+read_file -autoread -top top {../src ../include ../src/AXI ../src/H264 ../src/H264/dct_quant ../src/H264/intra ../src/H264/fetch ../src/H264/packer ../src/H264/cavlc}
 current_design top
 link
 uniquify

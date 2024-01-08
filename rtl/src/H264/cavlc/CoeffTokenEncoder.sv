@@ -3,15 +3,16 @@
 `include "Coeff_token_vlc2.sv"
 `include "Coeff_token_vlc3.sv"
 `include "Coeff_token_flc.sv"
-`include "Coeff_token_vlc_chromaDC.sv"
+//`include "Coeff_token_vlc_chromaDC.sv"
 module CoeffTokenEncoder(
-    input       clk,
-    input       rst,
-    input       enc_end,
-    input [1:0] trailing_ones_cnt,
-    input [4:0] total_coeff_cnt,
-    input [9:0] topleft_x,
-    input [9:0] topleft_y,
+    input  logic       clk,
+    input  logic       rst,
+    input  logic       h264_reset,
+    input  logic       enc_end,
+    input  logic [1:0] trailing_ones_cnt,
+    input  logic [4:0] total_coeff_cnt,
+    input  logic [9:0] topleft_x,
+    input  logic [9:0] topleft_y,
 
     output logic [15:0] coeff_token,
     output logic [4:0] coeff_token_len
@@ -79,6 +80,12 @@ always_ff @(posedge clk) begin
         for (int i=0; i< `FRAME_HEIGHT_DIV4; i=i+1)
             intra4x4_lc[i] <= 5'b0;
     end
+    else if (h264_reset) begin
+        for (int i=0; i< `FRAME_WIDTH_DIV4; i=i+1)
+            intra4x4_tc[i] <= 5'b0;
+        for (int i=0; i< `FRAME_HEIGHT_DIV4; i=i+1)
+            intra4x4_lc[i] <= 5'b0;
+    end
     else if (enc_end) begin
         intra4x4_tc[topleft_x>>2] <= total_coeff_cnt;
         intra4x4_lc[topleft_y>>2] <= total_coeff_cnt;
@@ -113,11 +120,11 @@ Coeff_token_flc coeff_token_flc(
     .CodeLength                (CoeffTokenCodeLength_flc)
 );
 
-Coeff_token_vlc_chromaDC coeff_token_vlc_chromaDC(
-    .total_coeff_cnt_i         (total_coeff_cnt),
-    .trailing_ones_cnt_i       (trailing_ones_cnt),
-    .CodeBit                   (CoeffTokenCodeBit_vlc_chromaDC),
-    .CodeLength                (CoeffTokenCodeLength_vlc_chromaDC)
-);
+// Coeff_token_vlc_chromaDC coeff_token_vlc_chromaDC(
+//     .total_coeff_cnt_i         (total_coeff_cnt),
+//     .trailing_ones_cnt_i       (trailing_ones_cnt),
+//     .CodeBit                   (CoeffTokenCodeBit_vlc_chromaDC),
+//     .CodeLength                (CoeffTokenCodeLength_vlc_chromaDC)
+// );
 
 endmodule : CoeffTokenEncoder

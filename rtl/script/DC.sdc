@@ -1,18 +1,20 @@
 #####CLK PERIOD CAN BE ADJUSTED UP TO 20.0 IF SYNTHESIS GOES WRONG#####
-create_clock -name cpu_clk  -period 5.8   [get_ports cpu_clk]
+create_clock -name cpu_clk  -period 7.0   [get_ports cpu_clk]
 create_clock -name axi_clk  -period 25.0  [get_ports axi_clk]
 create_clock -name rom_clk  -period 50.2  [get_ports rom_clk]
 create_clock -name dram_clk -period 30.4  [get_ports dram_clk]
 create_clock -name sram_clk -period 11.0  [get_ports sram_clk]
-set_clock_groups -asynchronous -group {cpu_clk} -group {axi_clk} -group {rom_clk} -group {dram_clk} -group {sram_clk}
+create_clock -name epu_clk -period  10.0   [get_ports epu_clk]
+create_clock -name dma_clk -period  25.0   [get_ports dma_clk]
+set_clock_groups -asynchronous -group {cpu_clk} -group {axi_clk} -group {rom_clk} -group {dram_clk} -group {sram_clk} -group {epu_clk} -group {dma_clk}
 
 set_dont_touch_network      [all_clocks]
 set_fix_hold                [all_clocks]
 set_clock_uncertainty  0.1  [all_clocks]
 set_clock_latency      1.0  [all_clocks]
-set_ideal_network           [get_ports {cpu_clk axi_clk rom_clk dram_clk sram_clk}]
+set_ideal_network           [get_ports {cpu_clk axi_clk rom_clk dram_clk sram_clk epu_clk dma_clk}]
 
-#####REMEMBER TO SET THIS MAX DELAY TO 1/2 CLK PERIOD#####
+###REMEMBER TO SET THIS MAX DELAY TO 1/2 CLK PERIOD#####
 # cpu_clk
 set_input_delay  -max 2.9  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
 set_input_delay  -min 0.0  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
@@ -43,6 +45,17 @@ set_input_delay  -min 0.0 -clock dram_clk [remove_from_collection [all_inputs] [
 set_output_delay -max 2.9 -clock dram_clk [all_outputs]
 set_output_delay -min 0.0 -clock dram_clk [all_outputs]
 
+# epu_clk
+set_input_delay  -max 2.9 -clock epu_clk [remove_from_collection [all_inputs] [get_ports {epu_clk}]]
+set_input_delay  -min 0.0 -clock epu_clk [remove_from_collection [all_inputs] [get_ports {epu_clk}]]
+set_output_delay -max 2.9 -clock epu_clk [all_outputs]
+set_output_delay -min 0.0 -clock epu_clk [all_outputs]
+
+# dma_clk
+set_input_delay  -max 2.9 -clock dma_clk [remove_from_collection [all_inputs] [get_ports {dma_clk}]]
+set_input_delay  -min 0.0 -clock dma_clk [remove_from_collection [all_inputs] [get_ports {dma_clk}]]
+set_output_delay -max 2.9 -clock dma_clk [all_outputs]
+set_output_delay -min 0.0 -clock dma_clk [all_outputs]
 
 set_driving_cell -library fsa0m_a_t33_generic_io_ss1p62v125c -lib_cell XMD -pin {O} [all_inputs]
 #set_drive 0.1  [all_inputs]
