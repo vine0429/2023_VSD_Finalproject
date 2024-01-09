@@ -1544,3 +1544,401 @@ wvSelectSignal -win $_nWave1 {( "G3" 24 )}
 wvSetRadix -win $_nWave1 -format UDec
 wvSetCursor -win $_nWave1 763740117.325381 -snap {("G3" 4)}
 wvSetCursor -win $_nWave1 763639733.189812 -snap {("G3" 6)}
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 411908971.023586 -snap {("G1" 3)}
+wvZoom -win $_nWave1 378073591.260934 441331040.382413
+wvSetCursor -win $_nWave1 380977084.947626 -snap {("G1" 3)}
+wvSetCursor -win $_nWave1 381325504.190034 -snap {("G1" 2)}
+wvSetSearchMode -win $_nWave1 -value d76f5d6f
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 9 )} 
+wvSelectSignal -win $_nWave1 {( "G1" 2 )} 
+wvSetSearchMode -win $_nWave1 -value 00c1d005
+wvSearchPrev -win $_nWave1
+wvZoom -win $_nWave1 180054429.749187 182299798.200255
+wvZoom -win $_nWave1 181109780.404192 181226583.536592
+wvZoomOut -win $_nWave1
+wvZoomIn -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvExpandBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G1" 8)}
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvSetRadix -win $_nWave1 -1Com
+wvSelectSignal -win $_nWave1 {( "G1" 8 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetCursor -win $_nWave1 181023214.557505 -snap {("G1" 7)}
+wvZoom -win $_nWave1 181019783.376137 181036653.351196
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSetRadix -win $_nWave1 -Unsigned
+wvResizeWindow -win $_nWave1 54 237 960 332
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvSetCursor -win $_nWave1 181008504.371625 -snap {("G1" 9)}
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvZoomOut -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G1" 7 )} 
+wvSetSearchMode -win $_nWave1 -posedge
+wvSearchNext -win $_nWave1
+wvSetCursor -win $_nWave1 181024973.849894 -snap {("G4" 4)}
+wvSetCursor -win $_nWave1 181010484.571831 -snap {("G4" 4)}
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvSetPosition -win $_nWave1 {("G3" 23)}
+wvGetSignalOpen -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_enc_last4x4} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_frame_num\[8:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_y_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_x_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/cavlc_buffer_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_y\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_x\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/A\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/B\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/C\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/D\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/I\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/J\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/K\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/L\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_y_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_x_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvSetPosition -win $_nWave1 {("G3" 24)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvExpandBus -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvSetRadix -win $_nWave1 -2Com
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvSelectSignal -win $_nWave1 {( "G3" 24 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 20 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 23 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/top_tb"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst"
+wvGetSignalSetScope -win $_nWave1 "/top_tb/TOP/EPU_wrapper/H264_i/packer_inst"
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst"
+wvGetSignalSetSignalFilter -win $_nWave1 "*top*"
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_enc_last4x4} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_frame_num\[8:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_y_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_x_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/cavlc_buffer_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_y\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_x\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/A\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/B\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/C\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/D\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/I\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/J\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/K\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/L\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_y_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_x_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvGetSignalSetScope -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst"
+wvGetSignalSetSignalFilter -win $_nWave1 "**"
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_enc_last4x4} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_frame_num\[8:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_y_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_x_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/cavlc_buffer_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_y\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_x\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/A\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/B\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/C\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/D\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/I\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/J\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/K\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/L\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_y_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_x_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSetPosition -win $_nWave1 {("G3" 27)}
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/output_data32\[31:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_enc_last4x4} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/h264_frame_num\[8:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_y_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/topleft_x_enc\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_enc_valid} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_bit\[6:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlc_bitstream_code\[127:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/top_tb/TOP/EPU_wrapper/H264_i/packer_inst/cavlc_buffer_len\[8:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_y\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/topleft_x\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/A\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/B\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/C\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/D\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/I\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/J\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/K\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/L\[10:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_luma\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/pred_matrix\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/IDCTDQ_4x4_r\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra_4x4_pe_inst/intra4x4_res\[3\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra4x4_tp\[0:1279\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/preLoopFilter\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_y_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/topleft_x_r\[9:0\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[0\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[1\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[2\]\[0:3\]} \
+{/top_tb/TOP/EPU_wrapper/H264_i/cavlctop/cavlccnttop/cavlc4x4buffer/scale_buf\[3\]\[0:3\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+}
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvGetSignalClose -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvAddSignal -win $_nWave1 \
+           "/top_tb/TOP/EPU_wrapper/H264_i/intra_4x4_top_inst/intra4x4_tp\[0:7\]"
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvSetPosition -win $_nWave1 {("G3" 29)}
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvExpandBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 1309)}
+wvScrollUp -win $_nWave1 1253
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvCollapseBus -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvSetPosition -win $_nWave1 {("G3" 29)}
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvCut -win $_nWave1
+wvSetPosition -win $_nWave1 {("G3" 29)}
+wvSetPosition -win $_nWave1 {("G3" 28)}
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvResizeWindow -win $_nWave1 1098 31 1095 1154
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSetRadix -win $_nWave1 -format UDec
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvDisplayGridCount -win $_nWave1 -off
+wvGetSignalClose -win $_nWave1
+wvReloadFile -win $_nWave1
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSetRadix -win $_nWave1 -2Com
+wvSelectSignal -win $_nWave1 {( "G3" 28 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSetRadix -win $_nWave1 -format Bin
+wvSetRadix -win $_nWave1 -2Com
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 32 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSelectSignal -win $_nWave1 {( "G3" 29 30 31 32 )} 
+wvSetRadix -win $_nWave1 -format UDec

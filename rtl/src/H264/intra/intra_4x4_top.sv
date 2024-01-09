@@ -30,7 +30,7 @@ logic [9:0]  topleft_x_buf;
 logic [9:0]  topleft_y_buf;
 
 logic [7:0]  intra_4x4_luma [0:3][0:3];
-logic signed [8:0]  preLoopFilter  [0:3][0:3];
+logic signed [9:0]  preLoopFilter  [0:3][0:3];
 logic        intra_4x4_finish;
 
 logic mbAddrA_valid;
@@ -229,14 +229,14 @@ always_ff @(posedge clk) begin
             intra4x4_lp[j] <= 8'd0;
     end
     else if (next_state == RENEW_PIX) begin
-        intra4x4_tp[topleft_x+10'd0]      <= (preLoopFilter[3][0][8]) ? (~preLoopFilter[3][0] + 9'd1): preLoopFilter[3][0][7:0];
-        intra4x4_tp[topleft_x+10'd1]      <= (preLoopFilter[3][1][8]) ? (~preLoopFilter[3][1] + 9'd1): preLoopFilter[3][1][7:0];
-        intra4x4_tp[topleft_x+10'd2]      <= (preLoopFilter[3][2][8]) ? (~preLoopFilter[3][2] + 9'd1): preLoopFilter[3][2][7:0];
-        intra4x4_tp[topleft_x+10'd3]      <= (preLoopFilter[3][3][8]) ? (~preLoopFilter[3][3] + 9'd1): preLoopFilter[3][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd0] <= (preLoopFilter[0][3][8]) ? (~preLoopFilter[0][3] + 9'd1): preLoopFilter[0][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd1] <= (preLoopFilter[1][3][8]) ? (~preLoopFilter[1][3] + 9'd1): preLoopFilter[1][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd2] <= (preLoopFilter[2][3][8]) ? (~preLoopFilter[2][3] + 9'd1): preLoopFilter[2][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd3] <= (preLoopFilter[3][3][8]) ? (~preLoopFilter[3][3] + 9'd1): preLoopFilter[3][3][7:0];
+        intra4x4_tp[topleft_x+10'd0]      <= (preLoopFilter[3][0][9]) ? 8'd0 : (preLoopFilter[3][0][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][0][7:0]; //negative = 0 
+        intra4x4_tp[topleft_x+10'd1]      <= (preLoopFilter[3][1][9]) ? 8'd0 : (preLoopFilter[3][1][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][1][7:0]; //more than 255 is 255
+        intra4x4_tp[topleft_x+10'd2]      <= (preLoopFilter[3][2][9]) ? 8'd0 : (preLoopFilter[3][2][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][2][7:0];
+        intra4x4_tp[topleft_x+10'd3]      <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+10'd0] <= (preLoopFilter[0][3][9]) ? 8'd0 : (preLoopFilter[0][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[0][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+10'd1] <= (preLoopFilter[1][3][9]) ? 8'd0 : (preLoopFilter[1][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[1][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+10'd2] <= (preLoopFilter[2][3][9]) ? 8'd0 : (preLoopFilter[2][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[2][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+10'd3] <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
     end
 end
 
