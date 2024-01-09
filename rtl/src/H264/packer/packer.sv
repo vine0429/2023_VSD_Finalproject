@@ -37,7 +37,7 @@ logic [74:0]  slice_header;
 logic  [8:0]  slice_header_len;
 logic [21:0]  macroblock_header;
 logic  [8:0]  macroblock_header_len;
-logic [31:0]  rbsp;
+logic [30:0]  rbsp;
 
 logic [31:0] mem [0:63];
 logic [31:0] paker_waddr;
@@ -51,7 +51,7 @@ assign slice_header          = {32'b1,17'b01100101100010001,h264_frame_num,17'b1
 assign slice_header_len      = 8'd75;
 assign macroblock_header     = 22'b1111111111111111110111;
 assign macroblock_header_len = 8'd22;
-assign rbsp                  = {1'b1, 31'b0};
+assign rbsp                  = {1'b1, 30'b0};
 assign h264_out              = mem[h264_addr];
 assign h264_buf_cnt          = paker_waddr;
 assign packer_ready          = (~h264_buf_clear) && (paker_waddr != 32'd64);
@@ -78,9 +78,12 @@ always_comb begin
         next_cavlc_code = (next_cavlc_code << cavlc_bitstream_bit) | cavlc_bitstream_code;
     end
     else if (cavlc_bitstream_valid && enc_last4x4) begin
-        next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit + 6'd32;
+        next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit + 6'd31;
         next_cavlc_code = (cavlc_buffer << cavlc_bitstream_bit) | cavlc_bitstream_code;
-        next_cavlc_code = (next_cavlc_code << 8'd32) | rbsp;
+        if (next_cavlc_len[2:0] == 3'b111)
+            next_cavlc_code = (next_cavlc_code << 8'd31);
+        else
+            next_cavlc_code = (next_cavlc_code << 8'd31) | rbsp;
     end
     else if (cavlc_bitstream_valid) begin
         next_cavlc_len  = left_cavlc_len + cavlc_bitstream_bit;

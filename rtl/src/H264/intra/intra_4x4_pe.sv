@@ -15,7 +15,7 @@ module intra_4x4_pe(
     input [7:0] intra4x4_luma [0:3][0:3],
 
     output logic signed [14:0] DCTQ_4x4 [0:3][0:3],
-    output logic [7:0]  preLoopFilter [0:3][0:3]
+    output logic signed [8:0]  preLoopFilter [0:3][0:3]
 );
 
 localparam IDLE        = 4'd0;

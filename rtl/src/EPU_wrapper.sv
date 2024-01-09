@@ -94,21 +94,21 @@ end
 
 always_comb 
 begin
-  unique case (state)
-    IDLE: 
-    begin
-        if(handshake_AW)
-            next_state = WRITE_DATA;
-        else if (handshake_AR) 
-            next_state = READ_DATA;
-        else
-            next_state = IDLE;
-    end
+    case (state)
+        IDLE: 
+        begin
+            if(handshake_AW)
+                next_state = WRITE_DATA;
+            else if (handshake_AR) 
+                next_state = READ_DATA;
+            else
+                next_state = IDLE;
+        end
 
-    WRITE_DATA: next_state = (handshake_WL) ? IDLE : WRITE_DATA;
+        WRITE_DATA: next_state = (handshake_WL) ? IDLE : WRITE_DATA;
 
-    READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;    
-  endcase   
+        READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;    
+    endcase   
 end
 
 //----------------------------AXI sign------------------------------//

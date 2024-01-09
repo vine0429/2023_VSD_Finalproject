@@ -5,13 +5,13 @@ import enc # 哥倫布編碼
 import header
 
 # 要讀取的文件
-file_path = "./yuv/Rabbit_320x160_100.yuv"
+file_path = "./yuv/akiyo_176x144_300.yuv"
 
 # YUV的長寬資訊與要壓縮幾張
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
-frame_width  = 320
-frame_height = 160
-frame_encnum = 5    # 這邊調整要編碼幾張frame
+frame_width  = 176
+frame_height = 144
+frame_encnum = 50  # 這邊調整要編碼幾張frame
 frame_chroma = False # 是否要編碼色度
 gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 gold_output_path = "golden.hex"
@@ -232,14 +232,24 @@ for frame_idx in range(frame_encnum):
         # 轉成整數型態
         pred_res_matrix = pred_res_matrix.astype(int)
 
-        preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
+        preLoopFilter = np.abs(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix)
 
-        if (topleft_y == 64 and topleft_x == 88 and frame_idx == 3):
-            print("topleft_y == 64 and topleft_x == 88")
-            print("intra4x4_luma = ")
-            print(intra4x4_luma)
-            print("preLoopFilter = ")
-            print(preLoopFilter)
+        # if (topleft_y == 68 and topleft_x == 68 and frame_idx == 2):
+        #     print("topleft_y == 68 and topleft_x == 68")
+        #     print("intra4x4_luma = ")
+        #     print(intra4x4_luma)
+        #     print("A = ", A)
+        #     print("B = ", B)
+        #     print("C = ", C)
+        #     print("D = ", D)
+        #     print("I = ", I)
+        #     print("J = ", J)
+        #     print("K = ", K)
+        #     print("L = ", L)
+        #     print("pred_matrix = ")
+        #     print(pred_matrix)
+        #     print("preLoopFilter = ")
+        #     print(preLoopFilter)
 
         # 更新模式與像素數值
         intra4x4_tp[0,topleft_x+0]   = preLoopFilter[3,0]; intra4x4_tp[0,topleft_x+1] =  preLoopFilter[3,1]; intra4x4_tp[0,topleft_x+2] =  preLoopFilter[3,2]; intra4x4_tp[0,topleft_x+3] =  preLoopFilter[3,3]
@@ -892,15 +902,15 @@ for frame_idx in range(frame_encnum):
             intra4x4_tc[0,topleft_x >> 2] = Non_Zero_Coefficient
             intra4x4_lc[topleft_y>>2, 0]  = Non_Zero_Coefficient
 
-        mb_y = 64
-        mb_x = 80
-        if (frame_idx == 3 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
-            print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
-            print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
-            print(cavlc_bitstring)
-            print(len(cavlc_bitstring))
-            print(Z)
-            print("--------------------")
+        # mb_y = 64
+        # mb_x = 64
+        # if (frame_idx == 2 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
+        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print(Z)
+        #     print("--------------------")
 
         # 沒有係數要編碼完coeff_token後就直接結束
         if (Non_Zero_Coefficient == 0):
@@ -1016,15 +1026,15 @@ for frame_idx in range(frame_encnum):
                 Start_encode = True
                 encode_coeff = coeff
 
-        mb_y = 64
-        mb_x = 80
-        if (frame_idx == 3 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
-            print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
-            print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
-            print(cavlc_bitstring)
-            print(len(cavlc_bitstring))
-            print(Z)
-            print("--------------------")
+        # mb_y = 64
+        # mb_x = 64
+        # if (frame_idx == 2 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
+        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+        #     print(cavlc_bitstring)
+        #     print(len(cavlc_bitstring))
+        #     print(Z)
+        #     print("--------------------")
 
         return cavlc_bitstring
 
@@ -1221,9 +1231,9 @@ for frame_idx in range(frame_encnum):
                                             [matrix[topleft_y+1,topleft_x+0],matrix[topleft_y+1,topleft_x+1],matrix[topleft_y+1,topleft_x+2],matrix[topleft_y+1,topleft_x+3]],
                                             [matrix[topleft_y+2,topleft_x+0],matrix[topleft_y+2,topleft_x+1],matrix[topleft_y+2,topleft_x+2],matrix[topleft_y+2,topleft_x+3]],
                                             [matrix[topleft_y+3,topleft_x+0],matrix[topleft_y+3,topleft_x+1],matrix[topleft_y+3,topleft_x+2],matrix[topleft_y+3,topleft_x+3]]])
-                    if (topleft_y == 64 and topleft_x == 88 and frame_idx == 3):
-                        print("topleft_y == 64 and topleft_x == 88, encode_matrix = ")
-                        print(encode_matrix)
+                    # if (topleft_y == 64 and topleft_x == 88 and frame_idx == 3):
+                    #     print("topleft_y == 64 and topleft_x == 88, encode_matrix = ")
+                    #     print(encode_matrix)
                     # 決定當前4x4要使用哪種預測模式
                     prev_intra4x4_pred_mode_flag, rem_intra4x4_pred_mode, pred_res_matrix = predMode(intra4x4_luma = encode_matrix, topleft_x = topleft_x, topleft_y = topleft_y)
                     # 將prev_intra4x4_pred_mode_flag、rem_intra4x4_pred_mode先儲存起來，等到整個macroblock都預測完成後再照順序輸出mb_pred bitstream (residual編碼順序與mb_pred輸出bitstream順序不同)
@@ -1313,6 +1323,8 @@ for frame_idx in range(frame_encnum):
                     golden_file.write("\n")
                 last_byte_num = i
             for x in range (4-((last_byte_num % 4)+1)):
+                if ((4-((last_byte_num % 4)+1)) == 4):
+                    break;
                 golden_file.write((0).to_bytes(1, byteorder='big').hex())
             golden_file.write("\n")
 
@@ -1370,7 +1382,7 @@ if (gen_dataS == True):
                                 file_o.write(byte2)
                                 file_o.write(byte1)
                                 file_o.write(byte0)
-                                # if (topleft_y+y == 66 and topleft_x+x == 88 and frame_num_datas==3):
+                                # if (topleft_y+y == 71 and topleft_x+x == 72 and frame_num_datas==2):
                                 #     print(byte3)
                                 #     print(byte2)
                                 #     print(byte1)

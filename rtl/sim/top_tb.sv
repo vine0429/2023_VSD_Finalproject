@@ -4,10 +4,12 @@
 // reset define
 // `define RST_NS        1005
 // clock define (don't modify)
-`define DRAM_CYCLE    30.4
+`define DRAM_CYCLE    50.0
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
-// `define AXI_CYCLE     25.0 // 40Mhz
+`define AXI_CYCLE     25.0 
+`define EPU_CYCLE     10.0
+`define DMA_CYCLE     25.0 
 
 
 `ifdef SYN
@@ -57,6 +59,8 @@ module top_tb;
   logic dram_clk;
   logic rom_clk;
   logic sram_clk;
+  logic epu_clk;
+  logic dma_clk;
   logic rst;
   logic [31:0] GOLDEN[4096];
   logic [7:0] Memory_byte0[32768];
@@ -93,6 +97,8 @@ module top_tb;
   logic rom_rst ;
   logic dram_rst;
   logic sram_rst;
+  logic dma_rst;
+  logic epu_rst;
   
   
   // clock generater
@@ -101,6 +107,8 @@ module top_tb;
   always #(`DRAM_CYCLE/2)   dram_clk    = ~dram_clk;
   always #(`ROM_CYCLE/2)    rom_clk     = ~rom_clk;
   always #(`SRAM_CYCLE/2)   sram_clk    = ~sram_clk;
+  always #(`EPU_CYCLE/2)    epu_clk     = ~epu_clk;
+  always #(`DMA_CYCLE/2)    dma_clk     = ~dma_clk;
   
   // module instantiation
   top TOP(
@@ -109,11 +117,18 @@ module top_tb;
     .rom_clk        (rom_clk      ),
     .dram_clk       (dram_clk     ),
     .sram_clk       (sram_clk     ),
+    .epu_clk        (epu_clk      ),
+    .dma_clk        (dma_clk      ),
+
     .cpu_rst		    (cpu_rst      ),
     .axi_rst		    (axi_rst      ),
     .rom_rst        (rom_rst      ),
     .dram_rst       (dram_rst     ),
     .sram_rst       (sram_rst     ),
+    .epu_rst        (epu_rst      ),
+    .dma_rst        (dma_rst      ),
+
+
     .ROM_out        (ROM_out      ),
     .sensor_ready   (sensor_ready ),
     .sensor_out     (sensor_out   ),
@@ -160,6 +175,9 @@ module top_tb;
     sram_rst = 1;
     axi_rst  = 1;
     cpu_rst  = 1;
+    epu_rst  = 1;
+    dma_rst  = 1;
+
     @(posedge dram_clk)
     #(2); // small number 
     dram_rst = 0;
@@ -172,6 +190,12 @@ module top_tb;
     @(posedge axi_clk)
     #(2); // small number 
     axi_rst = 0;
+    @(posedge epu_clk)
+    #(2); // small number 
+    epu_rst = 0;
+    @(posedge dma_clk)
+    #(2); // small number 
+    dma_rst = 0;
     @(posedge cpu_clk)
     #(2); // small number 
     cpu_rst = 0;
@@ -184,6 +208,8 @@ module top_tb;
     dram_clk        = 0;
     rom_clk         = 0;
     sram_clk        = 0;
+    epu_clk         = 0;
+    dma_clk         = 0;
     sensor_counter  = 0; 
     data_counter    = 0;
     $value$plusargs("prog_path=%s", prog_path);
@@ -322,6 +348,8 @@ module top_tb;
       $display("        SRAM    : %10f %10f", `SRAM_CYCLE, (1000/`SRAM_CYCLE));
       $display("        CPU     : %10f %10f", `CPU_CYCLE, (1000/`CPU_CYCLE));
       $display("        AXI     : %10f %10f", `AXI_CYCLE, (1000/`AXI_CYCLE));
+      $display("        EPU     : %10f %10f", `EPU_CYCLE, (1000/`EPU_CYCLE));
+      $display("        DMA     : %10f %10f", `DMA_CYCLE, (1000/`DMA_CYCLE));
     end
   endtask
   

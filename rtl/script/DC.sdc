@@ -2,7 +2,7 @@
 create_clock -name cpu_clk  -period 7.0   [get_ports cpu_clk]
 create_clock -name axi_clk  -period 25.0  [get_ports axi_clk]
 create_clock -name rom_clk  -period 50.2  [get_ports rom_clk]
-create_clock -name dram_clk -period 30.4  [get_ports dram_clk]
+create_clock -name dram_clk -period 50.0  [get_ports dram_clk]
 create_clock -name sram_clk -period 11.0  [get_ports sram_clk]
 create_clock -name epu_clk -period  10.0   [get_ports epu_clk]
 create_clock -name dma_clk -period  25.0   [get_ports dma_clk]
