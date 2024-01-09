@@ -5,13 +5,13 @@ import enc # 哥倫布編碼
 import header
 
 # 要讀取的文件
-file_path = "./yuv/akiyo_176x144_300.yuv"
+file_path = "./yuv/mobile_352x288_300.yuv"
 
 # YUV的長寬資訊與要壓縮幾張
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
-frame_width  = 176
-frame_height = 144
-frame_encnum = 50  # 這邊調整要編碼幾張frame
+frame_width  = 352
+frame_height = 288
+frame_encnum = 4  # 這邊調整要編碼幾張frame
 frame_chroma = False # 是否要編碼色度
 gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 gold_output_path = "golden.hex"
@@ -232,10 +232,22 @@ for frame_idx in range(frame_encnum):
         # 轉成整數型態
         pred_res_matrix = pred_res_matrix.astype(int)
 
-        preLoopFilter = np.abs(IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix)
+        preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
 
-        # if (topleft_y == 68 and topleft_x == 68 and frame_idx == 2):
-        #     print("topleft_y == 68 and topleft_x == 68")
+        # if (topleft_y == 0 and topleft_x == 4 and frame_idx == 0):
+        #     print("topleft_y == 0 and topleft_x == 4")
+        #     print("preLoopFilter = ")
+        #     print(preLoopFilter)
+
+        for i in range(len(preLoopFilter)):
+            for j in range(len(preLoopFilter[i])):
+                if preLoopFilter[i][j] > 255:
+                    preLoopFilter[i][j] = 255
+                elif preLoopFilter[i][j] < 0:
+                    preLoopFilter[i][j] = 0
+
+        # if (topleft_y == 0 and topleft_x == 4 and frame_idx == 0):
+        #     print("topleft_y == 0 and topleft_x == 4")
         #     print("intra4x4_luma = ")
         #     print(intra4x4_luma)
         #     print("A = ", A)
@@ -250,6 +262,8 @@ for frame_idx in range(frame_encnum):
         #     print(pred_matrix)
         #     print("preLoopFilter = ")
         #     print(preLoopFilter)
+        #     print("pred_res_matrix = ")
+        #     print(pred_res_matrix)
 
         # 更新模式與像素數值
         intra4x4_tp[0,topleft_x+0]   = preLoopFilter[3,0]; intra4x4_tp[0,topleft_x+1] =  preLoopFilter[3,1]; intra4x4_tp[0,topleft_x+2] =  preLoopFilter[3,2]; intra4x4_tp[0,topleft_x+3] =  preLoopFilter[3,3]
@@ -902,8 +916,8 @@ for frame_idx in range(frame_encnum):
             intra4x4_tc[0,topleft_x >> 2] = Non_Zero_Coefficient
             intra4x4_lc[topleft_y>>2, 0]  = Non_Zero_Coefficient
 
-        # mb_y = 64
-        # mb_x = 64
+        # mb_y = 0
+        # mb_x = 0
         # if (frame_idx == 2 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
         #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
         #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
@@ -1026,8 +1040,8 @@ for frame_idx in range(frame_encnum):
                 Start_encode = True
                 encode_coeff = coeff
 
-        # mb_y = 64
-        # mb_x = 64
+        # mb_y = 0
+        # mb_x = 0
         # if (frame_idx == 2 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
         #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
         #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
@@ -1308,10 +1322,12 @@ for frame_idx in range(frame_encnum):
                     zero_cnt = zero_cnt + 1
 
                 if zero_cnt == 2 and (byte_value == 1 or byte_value == 2 or byte_value == 3):
+                    print("fatal !! hardware can't add 0x03")
                     golden_file.write((3).to_bytes(1, byteorder='big').hex())
                     golden_file.write(byte_value.to_bytes(1, byteorder='big').hex())
                     zero_cnt = 0
                 elif zero_cnt == 3 and byte_value == 0:
+                    print("fatal !! hardware can't add 0x03")
                     golden_file.write((3).to_bytes(1, byteorder='big').hex())
                     golden_file.write(byte_value.to_bytes(1, byteorder='big').hex())
                     zero_cnt = 1

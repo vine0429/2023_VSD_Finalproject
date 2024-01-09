@@ -16,45 +16,45 @@ set_ideal_network           [get_ports {cpu_clk axi_clk rom_clk dram_clk sram_cl
 
 ###REMEMBER TO SET THIS MAX DELAY TO 1/2 CLK PERIOD#####
 # cpu_clk
-set_input_delay  -max 2.9  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
+set_input_delay  -max 3.5  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
 set_input_delay  -min 0.0  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
-set_output_delay -max 2.9  -clock cpu_clk [all_outputs]
+set_output_delay -max 3.5  -clock cpu_clk [all_outputs]
 set_output_delay -min 0.0  -clock cpu_clk [all_outputs]
 
 # axi_clk
-set_input_delay  -max 2.9 -clock axi_clk [remove_from_collection [all_inputs] [get_ports {axi_clk}]]
+set_input_delay  -max 3.5 -clock axi_clk [remove_from_collection [all_inputs] [get_ports {axi_clk}]]
 set_input_delay  -min 0.0 -clock axi_clk [remove_from_collection [all_inputs] [get_ports {axi_clk}]]
-set_output_delay -max 2.9 -clock axi_clk [all_outputs]
+set_output_delay -max 3.5 -clock axi_clk [all_outputs]
 set_output_delay -min 0.0 -clock axi_clk [all_outputs]
 
 # sram_clk
-set_input_delay  -max 2.9 -clock sram_clk [remove_from_collection [all_inputs] [get_ports {sram_clk}]]
+set_input_delay  -max 3.5 -clock sram_clk [remove_from_collection [all_inputs] [get_ports {sram_clk}]]
 set_input_delay  -min 0.0 -clock sram_clk [remove_from_collection [all_inputs] [get_ports {sram_clk}]]
-set_output_delay -max 2.9 -clock sram_clk [all_outputs]
+set_output_delay -max 3.5 -clock sram_clk [all_outputs]
 set_output_delay -min 0.0 -clock sram_clk [all_outputs]
 
 # rom_clk
-set_input_delay  -max 2.9 -clock rom_clk [remove_from_collection [all_inputs] [get_ports {rom_clk}]]
+set_input_delay  -max 3.5 -clock rom_clk [remove_from_collection [all_inputs] [get_ports {rom_clk}]]
 set_input_delay  -min 0.0 -clock rom_clk [remove_from_collection [all_inputs] [get_ports {rom_clk}]]
-set_output_delay -max 2.9 -clock rom_clk [all_outputs]
+set_output_delay -max 3.5 -clock rom_clk [all_outputs]
 set_output_delay -min 0.0 -clock rom_clk [all_outputs]
 
 # dram_clk
-set_input_delay  -max 2.9 -clock dram_clk [remove_from_collection [all_inputs] [get_ports {dram_clk}]]
+set_input_delay  -max 3.5 -clock dram_clk [remove_from_collection [all_inputs] [get_ports {dram_clk}]]
 set_input_delay  -min 0.0 -clock dram_clk [remove_from_collection [all_inputs] [get_ports {dram_clk}]]
-set_output_delay -max 2.9 -clock dram_clk [all_outputs]
+set_output_delay -max 3.5 -clock dram_clk [all_outputs]
 set_output_delay -min 0.0 -clock dram_clk [all_outputs]
 
 # epu_clk
-set_input_delay  -max 2.9 -clock epu_clk [remove_from_collection [all_inputs] [get_ports {epu_clk}]]
+set_input_delay  -max 3.5 -clock epu_clk [remove_from_collection [all_inputs] [get_ports {epu_clk}]]
 set_input_delay  -min 0.0 -clock epu_clk [remove_from_collection [all_inputs] [get_ports {epu_clk}]]
-set_output_delay -max 2.9 -clock epu_clk [all_outputs]
+set_output_delay -max 3.5 -clock epu_clk [all_outputs]
 set_output_delay -min 0.0 -clock epu_clk [all_outputs]
 
 # dma_clk
-set_input_delay  -max 2.9 -clock dma_clk [remove_from_collection [all_inputs] [get_ports {dma_clk}]]
+set_input_delay  -max 3.5 -clock dma_clk [remove_from_collection [all_inputs] [get_ports {dma_clk}]]
 set_input_delay  -min 0.0 -clock dma_clk [remove_from_collection [all_inputs] [get_ports {dma_clk}]]
-set_output_delay -max 2.9 -clock dma_clk [all_outputs]
+set_output_delay -max 3.5 -clock dma_clk [all_outputs]
 set_output_delay -min 0.0 -clock dma_clk [all_outputs]
 
 set_driving_cell -library fsa0m_a_t33_generic_io_ss1p62v125c -lib_cell XMD -pin {O} [all_inputs]

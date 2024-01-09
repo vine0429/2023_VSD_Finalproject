@@ -125,11 +125,6 @@ always_ff @(posedge clk) begin
         for (int i=0; i<16; i=i+1)
             mem[i] <= 32'd0;
     end
-    else if (h264_reset) begin
-        paker_waddr <= 32'd0;
-        for (int i=0; i<16; i=i+1)
-            mem[i] <= 32'd0;
-    end
     else if (h264_buf_clear) begin
         paker_waddr <= 32'd0;
         for (int i=0; i<64; i=i+1)
