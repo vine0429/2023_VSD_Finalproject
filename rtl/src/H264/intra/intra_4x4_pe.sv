@@ -99,6 +99,7 @@ end
 tq_dct_quant tq_dct_quant_inst(
     .clk(clk),
     .rst(rst),
+    .h264_reset(h264_reset),
     .dct_i00_i(intra4x4_res[0][0]), .dct_i01_i(intra4x4_res[0][1]), .dct_i02_i(intra4x4_res[0][2]), .dct_i03_i(intra4x4_res[0][3]),
     .dct_i10_i(intra4x4_res[1][0]), .dct_i11_i(intra4x4_res[1][1]), .dct_i12_i(intra4x4_res[1][2]), .dct_i13_i(intra4x4_res[1][3]),
     .dct_i20_i(intra4x4_res[2][0]), .dct_i21_i(intra4x4_res[2][1]), .dct_i22_i(intra4x4_res[2][2]), .dct_i23_i(intra4x4_res[2][3]),

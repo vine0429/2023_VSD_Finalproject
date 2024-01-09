@@ -114,13 +114,61 @@ rtl_project_03:| clean $(bld_dir)
 	+define+project_03$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/project_03 \
 
-project_04:| clean $(bld_dir)
+rtl_project_04:| clean $(bld_dir)
 	make -C $(sim_dir)/project_04/; \
 	cd $(bld_dir); \
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
 	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+project_04$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/project_04 \
+
+rtl_project_05:| clean $(bld_dir)
+	make -C $(sim_dir)/project_05/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_05$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_05 \
+
+rtl_project_06:| clean $(bld_dir)
+	make -C $(sim_dir)/project_06/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_06$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_06 \
+
+rtl_project_07:| clean $(bld_dir)
+	make -C $(sim_dir)/project_07/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_07$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_07 \
+
+rtl_project_08:| clean $(bld_dir)
+	make -C $(sim_dir)/project_08/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_08$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_08 \
+
+rtl_project_09:| clean $(bld_dir)
+	make -C $(sim_dir)/project_09/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_09$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_09 \
+
+rtl_project_10:| clean $(bld_dir)
+	make -C $(sim_dir)/project_10/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_10$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_10 \
 
 fetch:
 	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
