@@ -30,7 +30,7 @@ logic [9:0]  topleft_x_buf;
 logic [9:0]  topleft_y_buf;
 
 logic [7:0]  intra_4x4_luma [0:3][0:3];
-logic [8:0]  preLoopFilter  [0:3][0:3];
+logic [7:0]  preLoopFilter  [0:3][0:3];
 logic        intra_4x4_finish;
 
 logic mbAddrA_valid;

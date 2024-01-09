@@ -123,11 +123,11 @@ always_ff @(posedge clk) begin
         fetch_mb_y_o <= 6'd0;
     end
     else if (curr_state == WAITINTRA && next_state == IDLE) begin
-        if (fetch_mb_x_o == `WIDTH_MB_NUM_MINUS1)
+        if (fetch_mb_x_o == ((frame_width >> 4) - 6'd1))
             fetch_mb_x_o <= 6'd0;
         else 
             fetch_mb_x_o <= fetch_mb_x_o + 6'd1;
-        if (fetch_mb_x_o == `WIDTH_MB_NUM_MINUS1)
+        if (fetch_mb_x_o == ((frame_width >> 4) - 6'd1))
             fetch_mb_y_o <= fetch_mb_y_o + 6'd1;
     end
 end

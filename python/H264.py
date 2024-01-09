@@ -5,13 +5,13 @@ import enc # 哥倫布編碼
 import header
 
 # 要讀取的文件
-file_path = "./yuv/BlowingBubbles_416x240_50.yuv"
+file_path = "./yuv/Rabbit_320x160_100.yuv"
 
 # YUV的長寬資訊與要壓縮幾張
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
-frame_width  = 416
-frame_height = 240
-frame_encnum = 2    # 這邊調整要編碼幾張frame
+frame_width  = 320
+frame_height = 160
+frame_encnum = 5    # 這邊調整要編碼幾張frame
 frame_chroma = False # 是否要編碼色度
 gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 gold_output_path = "golden.hex"
@@ -233,6 +233,13 @@ for frame_idx in range(frame_encnum):
         pred_res_matrix = pred_res_matrix.astype(int)
 
         preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
+
+        if (topleft_y == 64 and topleft_x == 88 and frame_idx == 3):
+            print("topleft_y == 64 and topleft_x == 88")
+            print("intra4x4_luma = ")
+            print(intra4x4_luma)
+            print("preLoopFilter = ")
+            print(preLoopFilter)
 
         # 更新模式與像素數值
         intra4x4_tp[0,topleft_x+0]   = preLoopFilter[3,0]; intra4x4_tp[0,topleft_x+1] =  preLoopFilter[3,1]; intra4x4_tp[0,topleft_x+2] =  preLoopFilter[3,2]; intra4x4_tp[0,topleft_x+3] =  preLoopFilter[3,3]
@@ -885,15 +892,15 @@ for frame_idx in range(frame_encnum):
             intra4x4_tc[0,topleft_x >> 2] = Non_Zero_Coefficient
             intra4x4_lc[topleft_y>>2, 0]  = Non_Zero_Coefficient
 
-        # mb_y = 80
-        # mb_x = 144
-        # if (frame_num == 1 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
-        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
-        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
-        #     print(cavlc_bitstring)
-        #     print(len(cavlc_bitstring))
-        #     print(Z)
-        #     print("--------------------")
+        mb_y = 64
+        mb_x = 80
+        if (frame_idx == 3 and topleft_x >= mb_x and topleft_x < (mb_x + 16) and topleft_y >= mb_y and topleft_y < (mb_y + 16) and Non_Zero_Coefficient == 0):
+            print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+            print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+            print(cavlc_bitstring)
+            print(len(cavlc_bitstring))
+            print(Z)
+            print("--------------------")
 
         # 沒有係數要編碼完coeff_token後就直接結束
         if (Non_Zero_Coefficient == 0):
@@ -1009,15 +1016,15 @@ for frame_idx in range(frame_encnum):
                 Start_encode = True
                 encode_coeff = coeff
 
-        # mb_y = 80
-        # mb_x = 144
-        # if (frame_num == 1 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
-        #     print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
-        #     print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
-        #     print(cavlc_bitstring)
-        #     print(len(cavlc_bitstring))
-        #     print(Z)
-        #     print("--------------------")
+        mb_y = 64
+        mb_x = 80
+        if (frame_idx == 3 and topleft_x >= mb_x and topleft_x < mb_x + 16 and topleft_y >= mb_y and topleft_y < mb_y + 16):
+            print("nC = ", nC, "Trailing_ones_cnt = ", Trailing_ones_cnt, "Non_Zero_Coefficient = ", Non_Zero_Coefficient)
+            print("topleft_y = ", topleft_y, "topleft_x = ", topleft_x)
+            print(cavlc_bitstring)
+            print(len(cavlc_bitstring))
+            print(Z)
+            print("--------------------")
 
         return cavlc_bitstring
 
@@ -1214,6 +1221,9 @@ for frame_idx in range(frame_encnum):
                                             [matrix[topleft_y+1,topleft_x+0],matrix[topleft_y+1,topleft_x+1],matrix[topleft_y+1,topleft_x+2],matrix[topleft_y+1,topleft_x+3]],
                                             [matrix[topleft_y+2,topleft_x+0],matrix[topleft_y+2,topleft_x+1],matrix[topleft_y+2,topleft_x+2],matrix[topleft_y+2,topleft_x+3]],
                                             [matrix[topleft_y+3,topleft_x+0],matrix[topleft_y+3,topleft_x+1],matrix[topleft_y+3,topleft_x+2],matrix[topleft_y+3,topleft_x+3]]])
+                    if (topleft_y == 64 and topleft_x == 88 and frame_idx == 3):
+                        print("topleft_y == 64 and topleft_x == 88, encode_matrix = ")
+                        print(encode_matrix)
                     # 決定當前4x4要使用哪種預測模式
                     prev_intra4x4_pred_mode_flag, rem_intra4x4_pred_mode, pred_res_matrix = predMode(intra4x4_luma = encode_matrix, topleft_x = topleft_x, topleft_y = topleft_y)
                     # 將prev_intra4x4_pred_mode_flag、rem_intra4x4_pred_mode先儲存起來，等到整個macroblock都預測完成後再照順序輸出mb_pred bitstream (residual編碼順序與mb_pred輸出bitstream順序不同)
@@ -1306,56 +1316,67 @@ for frame_idx in range(frame_encnum):
                 golden_file.write((0).to_bytes(1, byteorder='big').hex())
             golden_file.write("\n")
 
-    if (gen_dataS == True):
-        # 初始化一個frame的矩陣用來保存資料
-        matrix   = np.zeros((frame_height,frame_width))
-        matrix_U = np.zeros((frame_height >> 1,frame_width >> 1))
-        matrix_V = np.zeros((frame_height >> 1,frame_width >> 1))
+#############################################################################################
 
-        with open(file_path, "rb") as file, open(dataS_output_file_path, "w") as file_o:
-            # 讀取一個frame的luma資訊保存到matrix之中
-            for frame_num in range(frame_encnum):
-                for y in range (frame_height):
-                    for x in range (frame_width):
-                        byte_value = file.read(1)
-                        matrix[y,x] = int.from_bytes(byte_value, byteorder='big')
-                # 讀取一個frame的U資料保存在matrix之中
-                for y in range (frame_height >> 1):
-                    for x in range (frame_width >> 1):
-                        byte_value = file.read(1)
-                        matrix_U[y,x] = int.from_bytes(byte_value, byteorder='big')
-                # 讀取一個frame的V資料保存在matrix之中
-                for y in range (frame_height >> 1):
-                    for x in range (frame_width >> 1):
-                        byte_value = file.read(1)
-                        matrix_V[y,x] = int.from_bytes(byte_value, byteorder='big')
+if (gen_dataS == True):
+    # 初始化一個frame的矩陣用來保存資料
+    matrix   = np.zeros((frame_height,frame_width))
+    matrix_U = np.zeros((frame_height >> 1,frame_width >> 1))
+    matrix_V = np.zeros((frame_height >> 1,frame_width >> 1))
 
-                if (frame_num == 0):
-                    file_o.write("# Define constants")
-                    file_o.write("\n")
-                    file_o.write(".section .rodata")
-                    file_o.write("\n")
-                    file_o.write(".align 2")
-                    file_o.write("\n")
-                    file_o.write(".global array_addr")
-                    file_o.write("\n")
-                    file_o.write("array_addr:")
-                    file_o.write("\n")
-                    file_o.write("  .word \\")
-                    file_o.write("\n")
-                for mb_y in range (frame_height>>4):
-                    for mb_x in range (frame_width>>4):
-                        topleft_x = (mb_x << 4)
-                        topleft_y = (mb_y << 4)
-                        for y in range (16): #Y
-                            for x in range (0,16,4):
-                                    file_o.write("0x")
-                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+3]))[2:])
-                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+2]))[2:])
-                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+1]))[2:])
-                                    file_o.write(hex(int(matrix[topleft_y+y,topleft_x+x+0]))[2:])
-                                    file_o.write(", \\")
-                                    file_o.write("\n")
+    with open(file_path, "rb") as file, open(dataS_output_file_path, "w") as file_o:
+        # 讀取一個frame的luma資訊保存到matrix之中
+        for frame_num_datas in range(frame_encnum):
+            for y in range (frame_height):
+                for x in range (frame_width):
+                    byte_value = file.read(1)
+                    matrix[y,x] = int.from_bytes(byte_value, byteorder='big')
+            # 讀取一個frame的U資料保存在matrix之中
+            for y in range (frame_height >> 1):
+                for x in range (frame_width >> 1):
+                    byte_value = file.read(1)
+                    matrix_U[y,x] = int.from_bytes(byte_value, byteorder='big')
+            # 讀取一個frame的V資料保存在matrix之中
+            for y in range (frame_height >> 1):
+                for x in range (frame_width >> 1):
+                    byte_value = file.read(1)
+                    matrix_V[y,x] = int.from_bytes(byte_value, byteorder='big')
+
+            if (frame_num_datas == 0):
+                file_o.write("# Define constants")
+                file_o.write("\n")
+                file_o.write(".section .rodata")
+                file_o.write("\n")
+                file_o.write(".align 2")
+                file_o.write("\n")
+                file_o.write(".global array_addr")
+                file_o.write("\n")
+                file_o.write("array_addr:")
+                file_o.write("\n")
+                file_o.write("  .word \\")
+                file_o.write("\n")
+            for mb_y in range (frame_height>>4):
+                for mb_x in range (frame_width>>4):
+                    topleft_x = (mb_x << 4)
+                    topleft_y = (mb_y << 4)
+                    for y in range (16): #Y
+                        for x in range (0,16,4):
+                                file_o.write("0x")
+                                byte3 = hex(int(matrix[topleft_y+y,topleft_x+x+3]))[2:].zfill(2)
+                                byte2 = hex(int(matrix[topleft_y+y,topleft_x+x+2]))[2:].zfill(2)
+                                byte1 = hex(int(matrix[topleft_y+y,topleft_x+x+1]))[2:].zfill(2)
+                                byte0 = hex(int(matrix[topleft_y+y,topleft_x+x+0]))[2:].zfill(2)
+                                file_o.write(byte3)
+                                file_o.write(byte2)
+                                file_o.write(byte1)
+                                file_o.write(byte0)
+                                # if (topleft_y+y == 66 and topleft_x+x == 88 and frame_num_datas==3):
+                                #     print(byte3)
+                                #     print(byte2)
+                                #     print(byte1)
+                                #     print(byte0)
+                                file_o.write(", \\")
+                                file_o.write("\n")
 
 
 # 最後把SPS、PPS、IDR Slice合在一起
