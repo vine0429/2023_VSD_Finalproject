@@ -73,8 +73,8 @@ assign handshake_AR = ARVALID && ARREADY;
 assign handshake_RL = RVALID  && RREADY && RLAST;
 assign handshake_R  = RVALID  && RREADY;
 
-assign data_valid = ((state == WRITE_DATA) & WVALID & WREADY & AWADDR_r == 32'h00100000) ? 1'd1 : 1'd0; 
-assign data_word  = ((state == WRITE_DATA) & WVALID & WREADY & AWADDR_r == 32'h00100000) ? WDATA : 32'd0; 
+assign data_valid = ((state == WRITE_DATA) & WVALID & WREADY & AWADDR_r == 32'h00100000) ? 1'd1 : 1'd0;
+assign data_word  = ((state == WRITE_DATA) & WVALID & WREADY & AWADDR_r == 32'h00100000) ? WDATA : 32'd0;
 assign RID        = ARID_r;
 assign RRESP      = `AXI_RESP_OKAY;
 assign RVALID     = (state == READ_DATA) ? 1'b1 : 1'b0;
@@ -84,55 +84,41 @@ assign BRESP      = `AXI_RESP_OKAY;
 assign BVALID     = (BREADY) ? 1'd1 : 1'd0;
 
 //----------------------------state------------------------------//
-always @(posedge clk) 
-begin 
-  if (rst) 
+always @(posedge clk) begin
+  if (rst)
     state <= IDLE;
-  else 
+  else
     state <= next_state;
 end
 
-always_comb 
-begin
+always_comb begin
     case (state)
-        IDLE: 
-        begin
-            if(handshake_AW)
-                next_state = WRITE_DATA;
-            else if (handshake_AR) 
-                next_state = READ_DATA;
-            else
-                next_state = IDLE;
-        end
-
-        WRITE_DATA: next_state = (handshake_WL) ? IDLE : WRITE_DATA;
-
-        READ_DATA: next_state = (handshake_RL) ? IDLE : READ_DATA;    
-    endcase   
+        IDLE:       next_state = (AWVALID)      ? WRITE_DATA :
+                                 (handshake_AR) ? READ_DATA  : IDLE;
+        WRITE_DATA: next_state = (handshake_WL) ? IDLE       : WRITE_DATA;
+        READ_DATA:  next_state = (handshake_RL) ? IDLE       : READ_DATA;
+    endcase
 end
 
 //----------------------------AXI sign------------------------------//
-always_comb 
-begin
-    if (state == IDLE) 
-    begin
+always_comb begin
+    if (state == IDLE && AWVALID) begin
         AWREADY = 1'b1;
+        WREADY  = 1'b0;
+        ARREADY = 1'b0;
+    end
+    else if (state == IDLE && ARVALID) begin
+        AWREADY = 1'b0;
         WREADY  = 1'b0;
         ARREADY = 1'b1;
     end
-    else if (state == WRITE_DATA) 
-    begin
+    else if (state == WRITE_DATA) begin
         AWREADY = 1'b0;
         ARREADY = 1'b0;
-        if (AWADDR_r != 32'h00100000 && (|WSTRB)) //write h264_en
-            WREADY = 1'b1;
-        else if (AWADDR_r == 32'h00100000 && (|WSTRB)) //write YUV data
-            WREADY = (h264_en && fetch_req) ? 1'b1 : 1'b0;
-        else //write other h264 signal
-            WREADY = h264_en;
+        WREADY  = (AWADDR_r != 32'h00100000 && (|WSTRB)) ? 1'b1 :
+                  (AWADDR_r == 32'h00100000 && (|WSTRB)) ? (h264_en && fetch_req) : h264_en;
     end
-    else 
-    begin
+    else begin
         WREADY  = 1'b0;
         AWREADY = 1'b0;
         ARREADY = 1'b0;
@@ -227,7 +213,7 @@ always_comb begin
         RDATA = h264_buf_cnt;
     else if ((state == READ_DATA) && RREADY && RVALID && (ARADDR_r == 32'h00100024))
         RDATA = h264_enc_last4x4;
-    else 
+    else
         RDATA = 32'b0;
 end
 

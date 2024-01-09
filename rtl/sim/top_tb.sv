@@ -8,7 +8,7 @@
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
 `define AXI_CYCLE     25.0 
-`define EPU_CYCLE     10.0
+`define EPU_CYCLE     20.0
 `define DMA_CYCLE     25.0 
 
 

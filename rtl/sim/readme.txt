@@ -2,9 +2,10 @@ project01: BlowingBubbles_416x240 1  frame
 project02: BlowingBubbles_416x240 2  frame
 project03: Rabbit_320x160         5  frame
 project04: kunkun_640x480         2  frame
-project05: akiyo_176x144          50 frame
+project05: akiyo_176x144          5  frame
 project06: foreman_176x144        10 frame
 project07: carphone_176x144       7  frame
 project08: mobile_352x288         4  frame
 project09: asiagodtone_1280x720   1  frame
 project10: rickroll_1280x720      2  frame
+project11: husky_176x144          2  frame

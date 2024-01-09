@@ -95,6 +95,7 @@ always_ff @(posedge clk) begin
 end
 
 Coeff_token_vlc1 coeff_token_vlc1(
+    .clk                       (clk),
     .total_coeff_cnt_i         (total_coeff_cnt),
     .trailing_ones_cnt_i       (trailing_ones_cnt),
     .CodeBit                   (CoeffTokenCodeBit_vlc1),
@@ -102,6 +103,7 @@ Coeff_token_vlc1 coeff_token_vlc1(
 );
 
 Coeff_token_vlc2 coeff_token_vlc2(
+    .clk                       (clk),
     .total_coeff_cnt_i         (total_coeff_cnt),
     .trailing_ones_cnt_i       (trailing_ones_cnt),
     .CodeBit                   (CoeffTokenCodeBit_vlc2),
@@ -109,6 +111,7 @@ Coeff_token_vlc2 coeff_token_vlc2(
 );
 
 Coeff_token_vlc3 coeff_token_vlc3(
+    .clk                       (clk),
     .total_coeff_cnt_i         (total_coeff_cnt),
     .trailing_ones_cnt_i       (trailing_ones_cnt),
     .CodeBit                   (CoeffTokenCodeBit_vlc3),
@@ -116,6 +119,7 @@ Coeff_token_vlc3 coeff_token_vlc3(
 );
 
 Coeff_token_flc coeff_token_flc(
+    .clk                       (clk),
     .total_coeff_cnt_i         (total_coeff_cnt),
     .trailing_ones_cnt_i       (trailing_ones_cnt),
     .CodeBit                   (CoeffTokenCodeBit_flc),

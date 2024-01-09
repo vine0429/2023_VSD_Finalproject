@@ -54,8 +54,8 @@ always_ff @(posedge clk) begin
     else if (next_state == CNT_PRED) begin
         // only dc mode
         if (!mbAddrA_valid && !mbAddrB_valid) begin
-            for (int i=0; i<4; i=i+1) 
-                for(int j=0; j<4; j=j+1) 
+            for (int i=0; i<4; i=i+1)
+                for(int j=0; j<4; j=j+1)
                     pred_matrix[i][j] <= 8'd128;
         end
         else if (!mbAddrA_valid && mbAddrB_valid) begin

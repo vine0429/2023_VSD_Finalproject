@@ -106,12 +106,10 @@ assign DMA_interrupt = (done);
 //                                             
 // ************************************************* 
 //src_addr = 0x00030000;
-always_ff @(posedge clk) 
-begin 
+always_ff @(posedge clk) begin 
   if(rst)
     DMA_src_addr <= 32'd0;
-  else 
-  begin
+  else begin
     if(done)
       DMA_src_addr <= 32'd0;
     else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030000) && (WSTRB_S7 == 4'hf))
@@ -122,12 +120,10 @@ begin
 end
 
 //dest_addr = 0x00030004;
-always_ff @(posedge clk) 
-begin 
+always_ff @(posedge clk) begin 
   if(rst)
     DMA_dest_addr <= 32'd0;
-  else 
-  begin
+  else begin
     if(done)
       DMA_dest_addr <= 32'd0;
     else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030004) && (WSTRB_S7 == 4'hf))
@@ -138,12 +134,10 @@ begin
 end
 
 //data_num  = 0x00030008;
-always_ff @(posedge clk) 
-begin 
+always_ff @(posedge clk) begin 
   if(rst)
     DMA_data_num <= 32'd0;
-  else 
-  begin
+  else begin
     if(done)
       DMA_data_num <= 32'd0;
     else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7 == 32'h00030008) && (WSTRB_S7 == 4'hf))
@@ -154,21 +148,18 @@ begin
 end
 
 //DMA_en = 0x0003000c;
-always_ff @(posedge clk) 
-begin 
+always_ff @(posedge clk) begin 
   if(rst)
     DMA_en <= 1'b0;
-  else 
-  begin
+  else begin
     if(done)
       DMA_en <= 1'b0;
-    else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7[15:0] == 16'h000c) && (WSTRB_S7 == 4'hf))
-    begin
+    else if(WVALID_S7 && WREADY_S7 && (AWADDR_S7[15:0] == 16'h000c) && (WSTRB_S7 == 4'hf)) begin
       if(WDATA_S7 == 32'd0)
         DMA_en <= 1'b0;
       else
         DMA_en <= 1'b1;
-    end
+    end 
     else
       DMA_en <= DMA_en;
   end
@@ -354,8 +345,6 @@ end
 // ************************************************* 
 
 //----------------------M2 read----------------------//
-//assign ARLEN_M2  = `AXI_LEN_BITS'd1;
-// assign ARADDR_M2 = ((state_r == READ_ADDR) && ARVALID_M2 && ARREADY_M2) ? (DMA_src_addr + 32'd4) : (DMA_src_addr);
 assign ARID_M2    = `AXI_ID_BITS'd0;
 assign ARADDR_M2  = DMA_src_addr;
 assign ARVALID_M2 = (state_r == READ_ADDR) ? 1'b1 : 1'b0;
@@ -378,8 +367,6 @@ begin
 end
 
 //----------------------M2 write----------------------//
-//assign AWLEN_M2 = `AXI_LEN_BITS'b0;
-// assign AWADDR_M2 = ((state_w == WRITE_ADDR) && AWREADY_M2 && AWVALID_M2) ? (DMA_dest_addr + 4'd4) : (DMA_dest_addr);
 assign AWID_M2    = `AXI_ID_BITS'b0;
 assign AWADDR_M2  = DMA_dest_addr;
 assign AWVALID_M2 = (state_w == WRITE_ADDR) ? 1'b1 : 1'b0;

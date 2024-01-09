@@ -1,7 +1,9 @@
 root_dir     := $(PWD)
 src_dir      := ./src
 h264_dir     := $(root_dir)/$(src_dir)/H264
+h264t_dir    := $(root_dir)/$(src_dir)/H264_test
 h264_dirs    := $(h264_dir)+$(h264_dir)/cavlc+$(h264_dir)/dct_quant+$(h264_dir)/fetch+$(h264_dir)/intra+$(h264_dir)/packer
+h264t_dirs   := $(h264t_dir)+$(h264t_dir)/cavlc+$(h264t_dir)/dct_quant+$(h264t_dir)/fetch+$(h264t_dir)/intra+$(h264t_dir)/packer
 syn_dir      := ./syn
 pr_dir       := ./pr
 inc_dir      := ./include
@@ -22,7 +24,7 @@ endif
 maxpend :=
 ifeq ($(pend),1)
 	maxpend := 1
-else ifeq ($(pend),2) 
+else ifeq ($(pend),2)
 	maxpend := 2
 else
 	maxpend := 0
@@ -49,8 +51,8 @@ vip_b: clean | $(bld_dir)
 	jg ../script/jg_bridge.tcl &
 
 # TA use this to check result
-TA_run: 
-  
+TA_run:
+
 # RTL simulation
 rtl_all: rtl0 rtl1 rtl2 rtl3
 
@@ -67,7 +69,7 @@ rtl1: | clean $(bld_dir)
 	make -C $(sim_dir)/prog1/; \
 	cd $(bld_dir); \
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+prog1$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/prog1 \
   +rdcycle=1
@@ -76,7 +78,7 @@ rtl2: | clean $(bld_dir)
 	make -C $(sim_dir)/prog2/; \
 	cd $(bld_dir); \
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+prog2$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/prog2 \
   +rdcycle=1
@@ -85,10 +87,10 @@ rtl3: | clean $(bld_dir)
 	make -C $(sim_dir)/prog3/; \
 	cd $(bld_dir); \
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_WDT.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
 	+define+prog3$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/prog3 \
-  +rdcycle=1 
+  +rdcycle=1
 
 rtl_project_01:| clean $(bld_dir)
 	make -C $(sim_dir)/project_01/; \
@@ -178,12 +180,18 @@ rtl_project_11:| clean $(bld_dir)
 	+define+project_11$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
 
+h264_test01 :
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_h264.sv -debug_access+all -full64  \
+	+incdir+$(h264t_dirs)+$(root_dir)/$(sim_dir)+$(root_dir)/$(inc_dir) \
+	+define+h264_test01$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/h264_test01 \
+
 fetch:
 	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
 
 # Post-Synthesis simulation
 syn_all: syn0 syn1 syn2 syn3
-
+syn_project_all : syn_project_02 syn_project_05 syn_project_10 syn_project_11
 
 syn0: | clean $(bld_dir)
 	make -C $(sim_dir)/prog0/; \
@@ -224,6 +232,115 @@ syn3: | clean $(bld_dir)
 	+no_notifier \
 	+prog_path=$(root_dir)/$(sim_dir)/prog3 \
 
+syn_project_01: | clean $(bld_dir)
+	make -C $(sim_dir)/project_01/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_01$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_01 \
+  +rdcycle=1
+
+syn_project_02: | clean $(bld_dir)
+	make -C $(sim_dir)/project_02/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_02$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_02 \
+  +rdcycle=1
+
+syn_project_03: | clean $(bld_dir)
+	make -C $(sim_dir)/project_03/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_03$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_03 \
+  +rdcycle=1
+
+syn_project_04: | clean $(bld_dir)
+	make -C $(sim_dir)/project_04/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_04$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_04 \
+  +rdcycle=1
+
+syn_project_05: | clean $(bld_dir)
+	make -C $(sim_dir)/project_05/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_05$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_05 \
+  +rdcycle=1
+
+syn_project_06: | clean $(bld_dir)
+	make -C $(sim_dir)/project_06/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_06$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_06 \
+  +rdcycle=1
+
+syn_project_07: | clean $(bld_dir)
+	make -C $(sim_dir)/project_07/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_07$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_07 \
+  +rdcycle=1
+
+syn_project_08: | clean $(bld_dir)
+	make -C $(sim_dir)/project_08/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_08$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_08 \
+  +rdcycle=1
+
+syn_project_09: | clean $(bld_dir)
+	make -C $(sim_dir)/project_09/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_09$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_09 \
+  +rdcycle=1
+
+syn_project_10: | clean $(bld_dir)
+	make -C $(sim_dir)/project_10/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_10$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_10 \
+  +rdcycle=1
+
+syn_project_11: | clean $(bld_dir)
+	make -C $(sim_dir)/project_11/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
+	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+SYN+project_11$(FSDB_DEF) \
+	+no_notifier \
+	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
+  +rdcycle=1
 
 # Post-Layout simulation
 pr_all: pr0 pr1 pr2 pr3

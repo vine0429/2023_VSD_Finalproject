@@ -40,7 +40,7 @@ logic  [8:0]  macroblock_header_len;
 logic [30:0]  rbsp;
 
 logic [31:0] mem [0:63];
-logic [31:0] paker_waddr;
+logic [6:0]  paker_waddr;
 logic        enc_last;
 logic enc_slice_header, enc_mb_header, enc_last4x4;
 
@@ -54,11 +54,12 @@ assign macroblock_header_len = 8'd22;
 assign rbsp                  = {1'b1, 30'b0};
 assign h264_out              = mem[h264_addr];
 assign h264_buf_cnt          = paker_waddr;
-assign packer_ready          = (~h264_buf_clear) && (paker_waddr != 32'd64);
+assign packer_ready          = (~h264_buf_clear) && (paker_waddr != 7'd64);
 
 always_comb begin
     output_valid      = 1'b0;
     left_cavlc_len    = cavlc_buffer_len;
+    output_data32     = 32'b0;
 
     if (cavlc_buffer_len >= 9'd32) begin
         output_data32     = cavlc_buffer[cavlc_buffer_len-1 -: 32];
@@ -121,17 +122,17 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        paker_waddr <= 32'd0;
+        paker_waddr <= 7'd0;
         for (int i=0; i<16; i=i+1)
             mem[i] <= 32'd0;
     end
     else if (h264_buf_clear) begin
-        paker_waddr <= 32'd0;
+        paker_waddr <= 7'd0;
         for (int i=0; i<64; i=i+1)
             mem[i] <= 32'd0;
     end
-    else if (output_valid && paker_waddr != 32'd64) begin
-        paker_waddr      <= paker_waddr + 32'd1;
+    else if (output_valid && (paker_waddr != 7'd64)) begin
+        paker_waddr      <= paker_waddr + 7'd1;
         mem[paker_waddr] <= output_data32;
     end
 end

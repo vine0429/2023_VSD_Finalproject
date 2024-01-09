@@ -8,9 +8,9 @@
 `define DRAM_CYCLE    50.0
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
-`define AXI_CYCLE     25.0 
-`define EPU_CYCLE     10.0
-`define DMA_CYCLE     25.0 
+`define AXI_CYCLE     25.0
+`define EPU_CYCLE     20.0
+`define DMA_CYCLE     25.0
 
 
 `ifdef SYN
@@ -84,7 +84,7 @@ module top_tb;
   logic DRAM_RASn;
   logic DRAM_CASn;
   logic [10:0] DRAM_A;
-  logic [31:0] DRAM_D; 
+  logic [31:0] DRAM_D;
   logic DRAM_valid;
 
 
@@ -102,8 +102,8 @@ module top_tb;
   logic dma_rst;
   logic epu_rst;
 
-  
-  
+
+
   // clock generater
   always #(`CPU_CYCLE/2)    cpu_clk     = ~cpu_clk;
   always #(`AXI_CYCLE/2)    axi_clk     = ~axi_clk;
@@ -113,7 +113,7 @@ module top_tb;
   always #(`EPU_CYCLE/2)    epu_clk     = ~epu_clk;
   always #(`DMA_CYCLE/2)    dma_clk     = ~dma_clk;
 
-  
+
   //module instantiation
   top TOP(
     .cpu_clk		(cpu_clk      ), // CPU CLOCK DOMAIN
@@ -171,7 +171,7 @@ module top_tb;
     .D              (DRAM_D       ),
     .VALID          (DRAM_valid   )
   );
-  
+
   // reset release sequence (DRAM -> ROM -> SRAM -> AXI -> CPU)
   initial begin
     dram_rst = 1;
@@ -183,31 +183,31 @@ module top_tb;
     dma_rst  = 1;
 
     @(posedge dram_clk)
-    #(2); // small number 
+    #(2); // small number
     dram_rst = 0;
     @(posedge rom_clk)
-    #(2); // small number 
+    #(2); // small number
     rom_rst = 0;
     @(posedge sram_clk)
-    #(2); // small number 
+    #(2); // small number
     sram_rst = 0;
     @(posedge axi_clk)
-    #(2); // small number 
+    #(2); // small number
     axi_rst = 0;
     @(posedge epu_clk)
-    #(2); // small number 
+    #(2); // small number
     epu_rst = 0;
     @(posedge dma_clk)
-    #(2); // small number 
+    #(2); // small number
     dma_rst = 0;
     @(posedge cpu_clk)
-    #(2); // small number 
+    #(2); // small number
     cpu_rst = 0;
   end
 
   initial begin
     // reset
-    cpu_clk         = 0;  
+    cpu_clk         = 0;
     axi_clk         = 0;
     dram_clk        = 0;
     rom_clk         = 0;
@@ -218,7 +218,7 @@ module top_tb;
 
     $value$plusargs("prog_path=%s", prog_path);
     $display("prog_path=%s", prog_path);
-    // wait for dram reset = 0 
+    // wait for dram reset = 0
     wait(dram_rst)
     wait(~dram_rst)
     $readmemh({prog_path, "/rom0.hex"}, i_ROM.Memory_byte0);
@@ -229,7 +229,7 @@ module top_tb;
     $readmemh({prog_path, "/dram1.hex"}, i_DRAM.Memory_byte1);
     $readmemh({prog_path, "/dram2.hex"}, i_DRAM.Memory_byte2);
     $readmemh({prog_path, "/dram3.hex"}, i_DRAM.Memory_byte3);
-    
+
     //read golden and write to GOLDEN array
     num = 0; // GOLDEN DATA NUM
     gf = $fopen({prog_path, "/golden.hex"}, "r");
@@ -243,7 +243,7 @@ module top_tb;
     while (1) begin
       @(negedge cpu_clk)
       if (`mem_word(`SIM_END) == `SIM_END_CODE) break;
-    end	
+    end
     $display("\nDone\n");
 
     //write simulation result
@@ -282,15 +282,15 @@ module top_tb;
 
     //DUMP FILE
     `ifdef FSDB
-      $fsdbDumpfile("top.fsdb");
+      $fsdbDumpfile("top2.fsdb");
       $fsdbDumpvars;
     `elsif FSDB_ALL
-      $fsdbDumpfile("top.fsdb");
+      $fsdbDumpfile("top2.fsdb");
       $fsdbDumpvars("+struct", "+mda", TOP);
     `endif
 
 
-    // if reach maximum simulation time, finish program 
+    // if reach maximum simulation time, finish program
     #(`CPU_CYCLE*`MAX)
     for (i = 0; i < num; i++) begin
       if (`dram_word(`COMPRESS_RESULT_START + i) !== GOLDEN[i]) begin
@@ -343,7 +343,7 @@ module top_tb;
         $display("        *  Simulation Failed!!   *   /^ ^ ^ \\  |");
         $display("        *                        *  |^ ^ ^ ^ |w| ");
         $display("        **************************   \\m___m__|_|");
-        $display("         Totally has %d errors                     ", err); 
+        $display("         Totally has %d errors                     ", err);
         $display("\n");
       end
       $display("                  %10s %10s", "CYCLE", "FREQ");
@@ -356,7 +356,7 @@ module top_tb;
       $display("        DMA     : %10f %10f", `DMA_CYCLE, (1000/`DMA_CYCLE));
     end
   endtask
-  
+
   int unsigned fo_ROM, fo_DRAM, fo_IM, fo_DM;
   initial begin
     fo_ROM   = $fopen("ROM.txt", "w");
@@ -364,7 +364,7 @@ module top_tb;
     fo_IM    = $fopen("IM.txt", "w");
     fo_DM    = $fopen("DM.txt", "w");
   end
-  
+
   // get memory value
   task mem_monitor;
     begin

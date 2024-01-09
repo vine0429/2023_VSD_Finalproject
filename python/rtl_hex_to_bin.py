@@ -1,7 +1,7 @@
 import header
 
-frame_width  = 176 
-frame_height = 144
+frame_width  = 1280 
+frame_height = 720
 
 hex_file_path = "./compressor_result.hex"
 bin_file_path = "./compressor_result.bin"

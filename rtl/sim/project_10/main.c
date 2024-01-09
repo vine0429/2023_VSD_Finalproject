@@ -26,7 +26,7 @@ unsigned int _epu_compress_file_start  = 0x00100010; // write result dest start
 
 const unsigned int RAW_file_width  = 1280; // 480
 const unsigned int RAW_file_height = 720; // 360
-const unsigned int RAW_file_frames = 11;   //
+const unsigned int RAW_file_frames = 2;   //
 
 const unsigned int words_num_buffer = 64;
 const unsigned int words_num_per_MB = 64; 

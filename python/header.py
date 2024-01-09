@@ -1,6 +1,6 @@
 import enc
 
-def concate(frame_encnum):
+def concate(frame_encnum, gold_output_path = "golden.hex"):
     SPS_path         = "./bitstream/SPS_header.bin"
     PPS_path         = "./bitstream/PPS_header.bin"
     output_path      = "h264.bin"
