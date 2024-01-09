@@ -6,42 +6,42 @@
 `include "RunBeforeCounter.sv"
 
 module CAVLCCntTop(
-    input              clk,
-    input              rst,
-    input              h264_reset,
-    input              valid,
-    input [9:0]        topleft_x,         
-    input [9:0]        topleft_y, 
-    input              cavlc_enc_ready,
-    input [14:0]       scale00_i,
-    input [14:0]       scale01_i,
-    input [14:0]       scale02_i,
-    input [14:0]       scale03_i,
-    input [14:0]       scale10_i,
-    input [14:0]       scale11_i,
-    input [14:0]       scale12_i,
-    input [14:0]       scale13_i,
-    input [14:0]       scale20_i,
-    input [14:0]       scale21_i,
-    input [14:0]       scale22_i,
-    input [14:0]       scale23_i,
-    input [14:0]       scale30_i,
-    input [14:0]       scale31_i,
-    input [14:0]       scale32_i,
-    input [14:0]       scale33_i,
+    input               clk,
+    input               rst,
+    input               h264_reset,
+    input               valid,
+    input [10:0]        topleft_x,         
+    input [10:0]        topleft_y, 
+    input               cavlc_enc_ready,
+    input [14:0]        scale00_i,
+    input [14:0]        scale01_i,
+    input [14:0]        scale02_i,
+    input [14:0]        scale03_i,
+    input [14:0]        scale10_i,
+    input [14:0]        scale11_i,
+    input [14:0]        scale12_i,
+    input [14:0]        scale13_i,
+    input [14:0]        scale20_i,
+    input [14:0]        scale21_i,
+    input [14:0]        scale22_i,
+    input [14:0]        scale23_i,
+    input [14:0]        scale30_i,
+    input [14:0]        scale31_i,
+    input [14:0]        scale32_i,
+    input [14:0]        scale33_i,
 
-    output logic       cavlc_cnt_valid,
-    output logic       cavlc_cnt_ready,
-    output logic [1:0] trailing_ones_cnt,
-    output logic [2:0] trailing_ones_flag,
-    output logic [4:0] total_zero_cnt,
-    output logic [4:0] total_coeff_cnt,
-    output logic [4:0] runbefore_cnt,
-    output logic [4:0] runbefore_list [0:15],
-    output logic [7:0] level_code_list [0:15],
-    output logic [4:0] level_code_cnt,
-    output logic [9:0] topleft_x_r,
-    output logic [9:0] topleft_y_r
+    output logic        cavlc_cnt_valid,
+    output logic        cavlc_cnt_ready,
+    output logic [1:0]  trailing_ones_cnt,
+    output logic [2:0]  trailing_ones_flag,
+    output logic [4:0]  total_zero_cnt,
+    output logic [4:0]  total_coeff_cnt,
+    output logic [4:0]  runbefore_cnt,
+    output logic [4:0]  runbefore_list [0:15],
+    output logic [7:0]  level_code_list [0:15],
+    output logic [4:0]  level_code_cnt,
+    output logic [10:0] topleft_x_r,
+    output logic [10:0] topleft_y_r
 );
 
 localparam IDLE      = 3'd0;
@@ -62,12 +62,12 @@ assign cavlc_cnt_ready = (state_curr == IDLE);
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        topleft_x_r        <= 10'd0;
-        topleft_y_r        <= 10'd0;
+        topleft_x_r        <= 11'd0;
+        topleft_y_r        <= 11'd0;
     end
     else if (h264_reset) begin
-        topleft_x_r        <= 10'd0;
-        topleft_y_r        <= 10'd0;
+        topleft_x_r        <= 11'd0;
+        topleft_y_r        <= 11'd0;
     end
     else if (state_next == LOAD) begin
         topleft_x_r <= topleft_x;
@@ -154,7 +154,7 @@ TrailingOneCounter trailingonecounter(
     .rst                    (rst),
     .h264_reset             (h264_reset),
     .cnt_rst                (cnt_rst),
-    .start_cnt       (start_cnt),
+    .start_cnt              (start_cnt),
     .coeff_i                (coeff),
     .trailing_ones_stop_cnt (trailing_ones_stop_cnt),
     .trailing_ones_flag     (trailing_ones_flag),

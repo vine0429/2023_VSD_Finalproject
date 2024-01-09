@@ -9,8 +9,8 @@ module CAVLCEncTop(
     input  logic         rst,
     input  logic         h264_reset,
     input  logic         packer_ready,
-    input  logic [9:0]   topleft_x,
-    input  logic [9:0]   topleft_y,
+    input  logic [10:0]  topleft_x,
+    input  logic [10:0]  topleft_y,
     input  logic [11:0]  frame_width,
     input  logic [11:0]  frame_height,
     input  logic         cavlc_cnt_valid,
@@ -27,8 +27,8 @@ module CAVLCEncTop(
     output logic         cavlc_enc_valid,
     output logic [127:0] cavlc_bitstream_code,
     output logic [6:0]   cavlc_bitstream_bit,
-    output logic [9:0]   topleft_x_r,
-    output logic [9:0]   topleft_y_r
+    output logic [10:0]  topleft_x_r,
+    output logic [10:0]  topleft_y_r
 );
 
 localparam IDLE        = 3'd0;
@@ -81,8 +81,8 @@ always_ff @(posedge clk) begin
         total_zero_cnt_r     <= 5'b0;
         total_coeff_cnt_r    <= 5'b0;
         level_code_cnt_r     <= 5'b0;
-        topleft_x_r          <= 10'd0;
-        topleft_y_r          <= 10'd0;
+        topleft_x_r          <= 11'd0;
+        topleft_y_r          <= 11'd0;
         runbefore_cnt_r      <= 5'd0;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;
@@ -95,8 +95,8 @@ always_ff @(posedge clk) begin
         total_zero_cnt_r     <= 5'b0;
         total_coeff_cnt_r    <= 5'b0;
         level_code_cnt_r     <= 5'b0;
-        topleft_x_r          <= 10'd0;
-        topleft_y_r          <= 10'd0;
+        topleft_x_r          <= 11'd0;
+        topleft_y_r          <= 11'd0;
         runbefore_cnt_r      <= 5'd0;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;
@@ -109,8 +109,8 @@ always_ff @(posedge clk) begin
         total_zero_cnt_r     <= 5'b0;
         total_coeff_cnt_r    <= 5'b0;
         level_code_cnt_r     <= 5'b0;
-        topleft_x_r          <= 10'd0;
-        topleft_y_r          <= 10'd0;
+        topleft_x_r          <= 11'd0;
+        topleft_y_r          <= 11'd0;
         runbefore_cnt_r      <= 5'd0;
         for (int i=0; i<16; i=i+1) begin
             level_code_list_r[i] <= 8'b0;

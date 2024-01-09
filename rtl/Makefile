@@ -170,6 +170,14 @@ rtl_project_10:| clean $(bld_dir)
 	+define+project_10$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/project_10 \
 
+rtl_project_11:| clean $(bld_dir)
+	make -C $(sim_dir)/project_11/; \
+	cd $(bld_dir); \
+	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
+	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
+	+define+project_11$(FSDB_DEF) \
+	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
+
 fetch:
 	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
 

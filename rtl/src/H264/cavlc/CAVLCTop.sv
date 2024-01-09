@@ -7,8 +7,8 @@ module CAVLCTop(
     input  logic         h264_reset,
     input  logic         intra_valid,
     input  logic         packer_ready,
-    input  logic [9:0]   topleft_x,
-    input  logic [9:0]   topleft_y,
+    input  logic [10:0]  topleft_x,
+    input  logic [10:0]  topleft_y,
     input  logic [11:0]  frame_width,
     input  logic [11:0]  frame_height,
     input  logic [14:0]  scale_i [0:3][0:3],
@@ -17,8 +17,8 @@ module CAVLCTop(
     output logic [6:0]   cavlc_bitstream_bit,
     output logic         cavlc_cnt_ready,
     output logic         cavlc_enc_valid,
-    output logic [9:0]   topleft_x_enc,
-    output logic [9:0]   topleft_y_enc
+    output logic [10:0]   topleft_x_enc,
+    output logic [10:0]   topleft_y_enc
 );
 
 //count
@@ -31,8 +31,8 @@ logic [4:0] runbefore_cnt;
 logic [4:0] runbefore_list [0:15];
 logic [7:0] level_code_list [0:15];
 logic [4:0] level_code_cnt;
-logic [9:0] topleft_x_r;
-logic [9:0] topleft_y_r;
+logic [10:0] topleft_x_r;
+logic [10:0] topleft_y_r;
 
 //encoder
 logic cavlc_enc_ready;

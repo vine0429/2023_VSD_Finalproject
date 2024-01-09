@@ -5,13 +5,13 @@ import enc # 哥倫布編碼
 import header
 
 # 要讀取的文件
-file_path = "./yuv/mobile_352x288_300.yuv"
+file_path = "./yuv/rickroll_1280x720_30.yuv"
 
 # YUV的長寬資訊與要壓縮幾張
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
-frame_width  = 352
-frame_height = 288
-frame_encnum = 4  # 這邊調整要編碼幾張frame
+frame_width  = 1280
+frame_height = 720
+frame_encnum = 2  # 這邊調整要編碼幾張frame
 frame_chroma = False # 是否要編碼色度
 gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 gold_output_path = "golden.hex"

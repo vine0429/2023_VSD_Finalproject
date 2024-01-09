@@ -13,8 +13,8 @@ module CoeffTokenEncoder(
     input  logic        enc_end,
     input  logic [1:0]  trailing_ones_cnt,
     input  logic [4:0]  total_coeff_cnt,
-    input  logic [9:0]  topleft_x,
-    input  logic [9:0]  topleft_y,
+    input  logic [10:0] topleft_x,
+    input  logic [10:0] topleft_y,
 
     output logic [15:0] coeff_token,
     output logic [4:0]  coeff_token_len
@@ -23,7 +23,7 @@ module CoeffTokenEncoder(
 logic mbAddrA_valid;
 logic mbAddrB_valid;
 logic [5:0] nA, nB, nC;
-logic [4:0] intra4x4_tc [1279:0];
+logic [4:0] intra4x4_tc [319:0];
 logic [4:0] intra4x4_lc [15:0];
 logic [15:0] CoeffTokenCodeBit_vlc1;
 logic [4:0]  CoeffTokenCodeLength_vlc1;
@@ -36,8 +36,8 @@ logic [4:0]  CoeffTokenCodeLength_flc;
 logic [15:0] CoeffTokenCodeBit_vlc_chromaDC;
 logic [4:0]  CoeffTokenCodeLength_vlc_chromaDC;
 
-assign mbAddrA_valid = (topleft_x != 10'd0);
-assign mbAddrB_valid = (topleft_y != 10'd0);
+assign mbAddrA_valid = (topleft_x != 11'd0);
+assign mbAddrB_valid = (topleft_y != 11'd0);
 assign nA = intra4x4_lc[topleft_y[5:2]];
 assign nB = intra4x4_tc[topleft_x>>2];
 
@@ -77,15 +77,15 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        for (int i=0; i< frame_width[11:2]; i=i+1)
+        for (int i=0; i< 320; i=i+1)
             intra4x4_tc[i] <= 5'b0;
-        for (int i=0; i< frame_height[11:2]; i=i+1)
+        for (int i=0; i< 16; i=i+1)
             intra4x4_lc[i] <= 5'b0;
     end
     else if (h264_reset) begin
-        for (int i=0; i< frame_width[11:2]; i=i+1)
+        for (int i=0; i< 320; i=i+1)
             intra4x4_tc[i] <= 5'b0;
-        for (int i=0; i< frame_height; i=i+1)
+        for (int i=0; i< 16; i=i+1)
             intra4x4_lc[i] <= 5'b0;
     end
     else if (enc_end) begin

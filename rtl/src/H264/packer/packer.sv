@@ -9,8 +9,8 @@ module packer(
     input  logic [11:0]  frame_width,
     input  logic [11:0]  frame_height,
     input  logic         h264_buf_clear,
-    input  logic [9:0]   topleft_x_enc,
-    input  logic [9:0]   topleft_y_enc,
+    input  logic [10:0]  topleft_x_enc,
+    input  logic [10:0]  topleft_y_enc,
     input  logic         cavlc_bitstream_valid,
     input  logic [127:0] cavlc_bitstream_code,
     input  logic [6:0]   cavlc_bitstream_bit,
@@ -44,7 +44,7 @@ logic [31:0] paker_waddr;
 logic        enc_last;
 logic enc_slice_header, enc_mb_header, enc_last4x4;
 
-assign enc_slice_header      = (topleft_x_enc == 10'd0 && topleft_y_enc == 10'd0);
+assign enc_slice_header      = (topleft_x_enc == 11'd0 && topleft_y_enc == 11'd0);
 assign enc_mb_header         = (topleft_x_enc[3:0] == 4'd0 && topleft_y_enc[3:0] == 4'd0);
 assign enc_last4x4           = ((topleft_x_enc == (frame_width-3'd4)) && (topleft_y_enc == (frame_height-3'd4)));
 assign slice_header          = {32'b1,17'b01100101100010001,h264_frame_num,17'b10000000000001111};

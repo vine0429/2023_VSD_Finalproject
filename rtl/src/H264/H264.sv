@@ -23,15 +23,15 @@ module H264(
 
 // fetch
 logic         fetch_finish;
-logic [5:0]   fetch_mb_x;
-logic [5:0]   fetch_mb_y;
+logic [6:0]   fetch_mb_x;
+logic [6:0]   fetch_mb_y;
 logic         fetch_valid;
 logic [7:0]   matrixY [0:15][0:15];
 // intra
 logic         intra_ready;
 logic         dctq_valid;
-logic [9:0]   topleft_x;
-logic [9:0]   topleft_y;
+logic [10:0]  topleft_x;
+logic [10:0]  topleft_y;
 logic [14:0]  DCTQ_4x4 [0:3][0:3];
 // cavlc
 logic         cavlc_cnt_ready;
@@ -40,8 +40,8 @@ logic         packer_ready;
 logic [31:0]  paker_waddr;
 logic [127:0] cavlc_bitstream_code;
 logic [6:0]   cavlc_bitstream_bit;
-logic [9:0]   topleft_x_enc;
-logic [9:0]   topleft_y_enc;
+logic [10:0]  topleft_x_enc;
+logic [10:0]  topleft_y_enc;
 
 fetch fetch_inst(
     .clk                   (clk),

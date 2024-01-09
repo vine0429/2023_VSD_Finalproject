@@ -12,8 +12,8 @@ module fetch(
     input  logic        data_valid_i,
 
     output logic        fetch_valid,
-    output logic [5:0]  fetch_mb_x_o,
-    output logic [5:0]  fetch_mb_y_o,
+    output logic [6:0]  fetch_mb_x_o,
+    output logic [6:0]  fetch_mb_y_o,
     output logic [7:0]  matrixY_o [0:15][0:15],
     output logic        fetch_req_o
 );
@@ -115,20 +115,20 @@ end
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        fetch_mb_x_o <= 6'd0;
-        fetch_mb_y_o <= 6'd0;
+        fetch_mb_x_o <= 7'd0;
+        fetch_mb_y_o <= 7'd0;
     end
     else if (h264_reset) begin
-        fetch_mb_x_o <= 6'd0;
-        fetch_mb_y_o <= 6'd0;
+        fetch_mb_x_o <= 7'd0;
+        fetch_mb_y_o <= 7'd0;
     end
     else if (curr_state == WAITINTRA && next_state == IDLE) begin
-        if (fetch_mb_x_o == ((frame_width >> 4) - 6'd1))
-            fetch_mb_x_o <= 6'd0;
+        if (fetch_mb_x_o == ((frame_width >> 4) - 7'd1))
+            fetch_mb_x_o <= 7'd0;
         else 
-            fetch_mb_x_o <= fetch_mb_x_o + 6'd1;
-        if (fetch_mb_x_o == ((frame_width >> 4) - 6'd1))
-            fetch_mb_y_o <= fetch_mb_y_o + 6'd1;
+            fetch_mb_x_o <= fetch_mb_x_o + 7'd1;
+        if (fetch_mb_x_o == ((frame_width >> 4) - 7'd1))
+            fetch_mb_y_o <= fetch_mb_y_o + 7'd1;
     end
 end
 

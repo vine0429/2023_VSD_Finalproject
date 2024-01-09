@@ -8,14 +8,14 @@ module intra_4x4_top(
     input  logic [11:0] frame_height,
     input  logic        cavlc_cnt_ready,
     input  logic        fetch_valid_i,
-    input  logic [5:0]  fetch_mb_x_i,
-    input  logic [5:0]  fetch_mb_y_i,
+    input  logic [6:0]  fetch_mb_x_i,
+    input  logic [6:0]  fetch_mb_y_i,
     input  logic [7:0]  matrixY_i [0:15][0:15],
 
     output logic        intra_ready,
     output logic        dctq_valid,
-    output logic [9:0]  topleft_x,
-    output logic [9:0]  topleft_y,
+    output logic [10:0] topleft_x,
+    output logic [10:0] topleft_y,
     output logic signed [14:0] DCTQ_4x4 [0:3][0:3]
 );
 
@@ -23,11 +23,11 @@ logic [1:0]  i4x4;
 logic [1:0]  i8x8;
 logic [3:0]  curr_state;
 logic [3:0]  next_state;
-logic [5:0]  mb_x;
-logic [5:0]  mb_y;
+logic [6:0]  mb_x;
+logic [6:0]  mb_y;
 logic [7:0]  matrixY_buf [0:15][0:15];
-logic [9:0]  topleft_x_buf;
-logic [9:0]  topleft_y_buf;
+logic [10:0]  topleft_x_buf;
+logic [10:0]  topleft_y_buf;
 
 logic [7:0]  intra_4x4_luma [0:3][0:3];
 logic signed [9:0]  preLoopFilter  [0:3][0:3];
@@ -147,16 +147,16 @@ end
 // CNT_TOPLEFT
 always_ff @(posedge clk) begin
     if (rst) begin
-        topleft_x <= 10'd0;
-        topleft_y <= 10'd0;
-        topleft_x_buf <= 10'b0;
-        topleft_y_buf <= 10'b0;
+        topleft_x <= 11'd0;
+        topleft_y <= 11'd0;
+        topleft_x_buf <= 11'b0;
+        topleft_y_buf <= 11'b0;
     end
     else if (h264_reset) begin
-        topleft_x <= 10'd0;
-        topleft_y <= 10'd0;
-        topleft_x_buf <= 10'b0;
-        topleft_y_buf <= 10'b0;
+        topleft_x <= 11'd0;
+        topleft_y <= 11'd0;
+        topleft_x_buf <= 11'b0;
+        topleft_y_buf <= 11'b0;
     end
     else if (next_state == CNT_TOPLEFT) begin
         topleft_x <= (mb_x << 4) + ((i8x8 & 4'b0001) << 3) + ((i4x4 & 4'b0001) << 2);
@@ -202,16 +202,16 @@ always_ff @(posedge clk) begin
         for (int i=0; i<4; i=i+1) 
             for(int j=0; j<4; j=j+1) 
                 intra_4x4_luma[j][i] = matrixY_buf[topleft_y_buf+j][topleft_x_buf+i];
-        A <= intra4x4_tp[topleft_x+10'd0];
-        B <= intra4x4_tp[topleft_x+10'd1];
-        C <= intra4x4_tp[topleft_x+10'd2];
-        D <= intra4x4_tp[topleft_x+10'd3];
-        I <= intra4x4_lp[topleft_y[3:0]+10'd0];
-        J <= intra4x4_lp[topleft_y[3:0]+10'd1];
-        K <= intra4x4_lp[topleft_y[3:0]+10'd2];
-        L <= intra4x4_lp[topleft_y[3:0]+10'd3];
-        mbAddrA_valid <= (topleft_x != 10'd0);
-        mbAddrB_valid <= (topleft_y != 10'd0);
+        A <= intra4x4_tp[topleft_x+11'd0];
+        B <= intra4x4_tp[topleft_x+11'd1];
+        C <= intra4x4_tp[topleft_x+11'd2];
+        D <= intra4x4_tp[topleft_x+11'd3];
+        I <= intra4x4_lp[topleft_y[3:0]+11'd0];
+        J <= intra4x4_lp[topleft_y[3:0]+11'd1];
+        K <= intra4x4_lp[topleft_y[3:0]+11'd2];
+        L <= intra4x4_lp[topleft_y[3:0]+11'd3];
+        mbAddrA_valid <= (topleft_x != 11'd0);
+        mbAddrB_valid <= (topleft_y != 11'd0);
     end
 end
 
@@ -229,14 +229,14 @@ always_ff @(posedge clk) begin
             intra4x4_lp[j] <= 8'd0;
     end
     else if (next_state == RENEW_PIX) begin
-        intra4x4_tp[topleft_x+10'd0]      <= (preLoopFilter[3][0][9]) ? 8'd0 : (preLoopFilter[3][0][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][0][7:0]; //negative = 0 
-        intra4x4_tp[topleft_x+10'd1]      <= (preLoopFilter[3][1][9]) ? 8'd0 : (preLoopFilter[3][1][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][1][7:0]; //more than 255 is 255
-        intra4x4_tp[topleft_x+10'd2]      <= (preLoopFilter[3][2][9]) ? 8'd0 : (preLoopFilter[3][2][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][2][7:0];
-        intra4x4_tp[topleft_x+10'd3]      <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd0] <= (preLoopFilter[0][3][9]) ? 8'd0 : (preLoopFilter[0][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[0][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd1] <= (preLoopFilter[1][3][9]) ? 8'd0 : (preLoopFilter[1][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[1][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd2] <= (preLoopFilter[2][3][9]) ? 8'd0 : (preLoopFilter[2][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[2][3][7:0];
-        intra4x4_lp[topleft_y[3:0]+10'd3] <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
+        intra4x4_tp[topleft_x+11'd0]      <= (preLoopFilter[3][0][9]) ? 8'd0 : (preLoopFilter[3][0][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][0][7:0]; //negative = 0 
+        intra4x4_tp[topleft_x+11'd1]      <= (preLoopFilter[3][1][9]) ? 8'd0 : (preLoopFilter[3][1][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][1][7:0]; //more than 255 is 255
+        intra4x4_tp[topleft_x+11'd2]      <= (preLoopFilter[3][2][9]) ? 8'd0 : (preLoopFilter[3][2][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][2][7:0];
+        intra4x4_tp[topleft_x+11'd3]      <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+11'd0] <= (preLoopFilter[0][3][9]) ? 8'd0 : (preLoopFilter[0][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[0][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+11'd1] <= (preLoopFilter[1][3][9]) ? 8'd0 : (preLoopFilter[1][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[1][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+11'd2] <= (preLoopFilter[2][3][9]) ? 8'd0 : (preLoopFilter[2][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[2][3][7:0];
+        intra4x4_lp[topleft_y[3:0]+11'd3] <= (preLoopFilter[3][3][9]) ? 8'd0 : (preLoopFilter[3][3][8:0] > 9'd255) ? 8'd255 : preLoopFilter[3][3][7:0];
     end
 end
 

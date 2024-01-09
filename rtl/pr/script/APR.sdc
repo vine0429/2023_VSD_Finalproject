@@ -1,6 +1,6 @@
 set sdc_version 1.2
 current_design top
-create_clock [get_ports {cpu_clk}] -name cpu_clk -period 5.8 -waveform {0 2.9}
+create_clock [get_ports {cpu_clk}] -name cpu_clk -period 7.0 -waveform {0 3.5}
 create_clock [get_ports {axi_clk}] -name axi_clk -period 25.0 -waveform {0 12.5}
 create_clock [get_ports {rom_clk}] -name rom_clk -period 50.2 -waveform {0 25.1}
 create_clock [get_ports {dram_clk}] -name dram_clk -period 30.4 -waveform {0 15.2}
@@ -11,9 +11,9 @@ set_clock_uncertainty  -setup 0.5  [get_clocks {cpu_clk axi_clk rom_clk dram_clk
 set_clock_uncertainty  -hold 0.02  [get_clocks {cpu_clk axi_clk rom_clk dram_clk sram_clk}]
 
 # cpu_clk
-set_input_delay  -max 2.9  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
+set_input_delay  -max 3.5  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
 set_input_delay  -min 0.0  -clock cpu_clk [remove_from_collection [all_inputs] [get_ports {cpu_clk}]]
-set_output_delay -max 2.9  -clock cpu_clk [all_outputs]
+set_output_delay -max 3.5  -clock cpu_clk [all_outputs]
 set_output_delay -min 0.0  -clock cpu_clk [all_outputs]
 
 # axi_clk
@@ -39,8 +39,6 @@ set_input_delay  -max 15.2 -clock dram_clk [remove_from_collection [all_inputs] 
 set_input_delay  -min 0.0 -clock dram_clk [remove_from_collection [all_inputs] [get_ports {dram_clk}]]
 set_output_delay -max 15.2 -clock dram_clk [all_outputs]
 set_output_delay -min 0.0 -clock dram_clk [all_outputs]
-
-
 
 set_drive 0.1 [all_inputs]
 set_load -pin_load 20 [all_outputs]
