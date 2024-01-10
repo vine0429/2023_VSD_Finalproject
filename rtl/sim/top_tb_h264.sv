@@ -1,17 +1,18 @@
 `include "monitor.sv"
-`include "CYCLE_MAX.sv"
 `timescale 1ns/10ps
 // reset define
 // `define RST_NS        1005
 
 // clock define (don't modify)
-`define DRAM_CYCLE    50.0
+`define DRAM_CYCLE    30.4
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
 `define AXI_CYCLE     25.0
 `define EPU_CYCLE     10.0
 `define DMA_CYCLE     25.0
 
+`define CPU_CYCLE     6.0 // 100Mhz
+`define MAX           3000 // 3000000
 
 `ifdef SYN
 `include "top_syn.v"
@@ -77,8 +78,11 @@ module top_tb;
   logic [31:0] fetch_addr;
   logic [31:0] packer_waddr;
 
+  assign data_valid = fetch_req;
+  assign data_word  = raw_mem[fetch_addr];
+
   // clock generater
-  always #(`EPU_CYCLE/2)    epu_clk     = ~epu_clk;
+  always #(`EPU_CYCLE/2) epu_clk = ~epu_clk;
 
   always_ff @(posedge epu_clk) begin
     if (epu_rst)
@@ -105,11 +109,11 @@ module top_tb;
     .rst              (epu_rst),
     .h264_en          (1'b1),
     .h264_reset       (1'b0),
-    .h264_frame_num   (12'd1),
+    .h264_frame_num   (12'd0),
     .frame_width      (12'd416),
     .frame_height     (12'd240),
-    .data_valid       (fetch_req),
-    .data_word        (raw_mem[fetch_addr]),
+    .data_valid       (data_valid),
+    .data_word        (data_word),
     .h264_buf_clear   (1'b0),
     .h264_addr        (8'b0),
     .h264_out         (),
@@ -144,9 +148,14 @@ module top_tb;
     end
     $fclose(gf);
 
-    #10000;
+    #(`EPU_CYCLE*2);
 
-    while(!h264_enc_last4x4); //wait until end
+    while (!h264_enc_last4x4) begin
+      #(`EPU_CYCLE);
+    end
+    //wait until end
+
+    #(`EPU_CYCLE*2000);
 
     //write simulation result
     fcomp = $fopen({prog_path,"/compressor_result.hex"}, "w");
@@ -189,10 +198,12 @@ module top_tb;
       $fsdbDumpvars("+struct", "+mda", TOP);
     `endif
 
-    result(num, num); //err=num -> all wrong
+    // if reach maximum simulation time
+    // #(`CPU_CYCLE*`MAX)
+    // result(num, num); //err=num -> all wrong
 
-    $display("Golden num= %d", num);
-    $finish;
+    // $display("Golden num= %d", num);
+    // $finish;
   end
 
   task result;

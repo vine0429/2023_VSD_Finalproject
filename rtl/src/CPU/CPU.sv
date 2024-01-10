@@ -273,7 +273,7 @@ module CPU(
         .clk_i(clk_i),
         .rst_i(rst_i),
 
-        .timer_interrupt_i      (timer_interrupt_i  | dma_interrupt_i ), //add dma_interrupt
+        .timer_interrupt_i      (timer_interrupt_i | dma_interrupt_i ), //add dma_interrupt
         .sctrl_interrupt_i      (sctrl_interrupt_i      ),
 
         .interrupt_taken_i      (interrupt_taken_w      ),

@@ -1,0 +1,470 @@
+Command: vcs -R -sverilog /home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv \
+-debug_access+all -full64 +incdir+/home/N26124939/VSD/VSD_Project/rtl/./src+/home/N26124939/VSD/VSD_Project/rtl/./src/H264+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264/packer+/home/N26124939/VSD/VSD_Project/rtl/./src/AXI+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim \
++define+prog3 +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/prog3 -l /home/N26124939/VSD/VSD_Project/rtl/./sim/prog3/rtl_sim.log \
++rdcycle=1
+*** Using c compiler gcc instead of cc ...
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Wed Jan 10 19:45:39 2024
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/monitor.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/CYCLE_MAX.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/CPU.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/CPU_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/SRAM_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/SRAM_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/SRAM_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/SRAM_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/DRAM_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/DRAM_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/DRAM_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/DRAM_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/ROM_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/ROM_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/ROM_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/ROM_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/AXI.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/AXI.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/AXI.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/STRL_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/STRL_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/STRL_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/STRL_wrapper.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/sensor_ctrl.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/STRL_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/WDT_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/WDT_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/WDT_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/WDT_wrapper.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./WDT/WDT.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/WDT_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/DMA_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/DMA_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/EPU_wrapper.sv'.
+Parsing included file '../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/EPU_wrapper.sv'.
+Parsing included file '../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/EPU_wrapper.sv'.
+Parsing included file '../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/EPU_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/RegisterFile.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/PC.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/MEM_WB.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/MEM_WB.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/IF_ID.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/IF_ID.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/ID_EX.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/ID_EX.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/Controller.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/Controller.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/ExecuteStage.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/ExecuteStage.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/EX_MEM.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/EX_MEM.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/DecodeStage.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/DecodeStage.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/CSR_REG.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/CSR_REG.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/MemoryStage.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CPU/MemoryStage.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/L1C_inst.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/L1C_inst.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/L1C_data.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/L1C_data.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/tag_array_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CACHE/data_array_wrapper.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Arbiter.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Arbiter.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Arbiter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Address_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Address_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Address_Channel.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Data_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Data_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Data_Channel.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Response_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Response_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Write_Response_Channel.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Arbiter.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Arbiter.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Arbiter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Address_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Address_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Address_Channel.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Data_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Data_Channel.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/Read_Data_Channel.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/DD_Flip_Flop_1bit.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/DD_Flip_Flop_2bit.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/DD_Flip_Flop_3bit.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_M_CDC.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_M_CDC.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_M_CDC.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_S_CDC.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/AXI_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_S_CDC.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/../../include/BUS_direct_def.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AXI_S_CDC.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AR_FIFO_MA.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AR_FIFO_AS.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/R_FIFO_AM.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/R_FIFO_SA.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AW_FIFO_MA.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/AW_FIFO_AS.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/W_FIFO_MA.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/W_FIFO_AS.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/B_FIFO_AM.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./CDC_lib/B_FIFO_SA.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/./H264/H264.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./fetch/fetch.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./fetch/fetch.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./H264/H264.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./intra/intra_4x4_top.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra/intra_4x4_pe.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra/intra_4x4_pe.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_quant_4x4.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_quant_4x4.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_dct_4x4.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_dct_4x4.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_div6.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_div6.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_mod6.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_mod6.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_dct_quant.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra/intra_4x4_pe.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_idct_dequant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_idct_dequant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_idct_4x4.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_idct_4x4.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_idct_dequant.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_dequant_4x4.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/dct_quant/tq_dequant_4x4.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/../dct_quant/tq_idct_dequant.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/intra/intra_4x4_pe.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./intra/intra_4x4_top.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./H264/H264.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./cavlc/CAVLCTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLC4x4Buffer.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/TotalCoeffCounter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/TotalZeroCounter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/TrailingOneCounter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/LevelCodeList.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/RunBeforeCounter.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCCntTop.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./cavlc/CAVLCTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/Coeff_token_vlc1.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/Coeff_token_vlc2.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/Coeff_token_vlc3.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/Coeff_token_flc.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CoeffTokenEncoder.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/LevelCodeEncoder.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/TotalZerosEncoder.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/RunBeforeEncoder.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/Bitstream.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/cavlc/CAVLCEncTop.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./cavlc/CAVLCTop.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./H264/H264.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./packer/packer.sv'.
+Parsing included file '../include/epu_define.svh'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/H264/./packer/packer.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/./H264/H264.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/SRAM/SRAM_rtl.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/data_array/data_array_rtl.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/tag_array/tag_array_rtl.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/ROM/ROM.v'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/DRAM/DRAM.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv'.
+
+Warning-[RVOSFD] Return value discarded
+/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv, 282
+  System function '$fscanf' is invoked as task, its return value is discarded.
+  "/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv", 282
+  Source info:       $fscanf(gf, "%h\n", GOLDEN[num]);
+
+Top Level Modules:
+       top_tb
+TimeScale is 1 ns / 10 ps
+
+Warning-[IWNF] Implicit wire has no fanin
+/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/AXI.sv, 782
+  Implicit wire 'WLAST_M0_AXI' does not have any driver, please make sure this
+  is intended.
+
+
+Warning-[IWNF] Implicit wire has no fanin
+/home/N26124939/VSD/VSD_Project/rtl/./src/./AXI/AXI.sv, 783
+  Implicit wire 'WREADY_M0_AXI' does not have any driver, please make sure 
+  this is intended.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv, 141
+"top TOP( .cpu_clk (cpu_clk),  .axi_clk (axi_clk),  .rom_clk (rom_clk),  .dram_clk (dram_clk),  .sram_clk (sram_clk),  .epu_clk (epu_clk),  .dma_clk (dma_clk),  .cpu_rst (cpu_rst),  .axi_rst (axi_rst),  .rom_rst (rom_rst),  .dram_rst (dram_rst),  .sram_rst (sram_rst),  .epu_rst (epu_rst),  .dma_rst (dma_rst),  .ROM_out (ROM_out),  .sensor_ready (sensor_ready),  .sensor_out (sensor_out),  .DRAM_valid (DRAM_valid),  .DRAM_Q (DRAM_Q),  .ROM_read (ROM_read),  .ROM_enable (ROM_enable),  .ROM_address (ROM_address),  .sensor_en (sensor_en),  .DRAM_CSn (DRAM_CSn),  .DRAM_WEn (DRAM_WEn),  .DRAM_RASn (DRAM_RASn),  .DRAM_CASn (DRAM_CASn),  .DRAM_A (DRAM_A),  .DRAM_D (DRAM_D));"
+  The following 32-bit expression is connected to 12-bit port "ROM_address" of
+  module "top", instance "TOP".
+  Expression: ROM_address
+  Instantiated module defined at: 
+  "/home/N26124939/VSD/VSD_Project/rtl/./src/top.sv", 64
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv, 177
+"ROM i_ROM( .CK (rom_clk),  .CS (ROM_enable),  .OE (ROM_read),  .A (ROM_address),  .DO (ROM_out));"
+  The following 32-bit expression is connected to 12-bit port "A" of module 
+  "ROM", instance "i_ROM".
+  Expression: ROM_address
+  Instantiated module defined at: 
+  "/home/N26124939/VSD/VSD_Project/rtl/./sim/ROM/ROM.v", 1
+  Use +lint=PCWM for more details.
+
+Starting vcs inline pass...
+
+32 modules and 0 UDP read.
+recompiling module SRAM_wrapper
+recompiling module DRAM_wrapper
+recompiling module AXI
+recompiling module STRL_wrapper
+recompiling module DMA_wrapper
+recompiling module EPU_wrapper
+recompiling module ExecuteStage
+recompiling module EX_MEM
+recompiling module MemoryStage
+recompiling module tag_array_wrapper
+recompiling module data_array_wrapper
+recompiling module Read_Arbiter
+recompiling module Read_Address_Channel
+recompiling module Read_Data_Channel
+recompiling module AXI_M_CDC
+recompiling module AXI_S_CDC
+recompiling module fetch
+recompiling module tq_dct4
+recompiling module tq_div6
+recompiling module tq_idct4h
+recompiling module tq_idct4v
+recompiling module intra_4x4_pe
+recompiling module intra_4x4_top
+recompiling module LevelCodeList
+recompiling module RunBeforeCounter
+recompiling module CAVLCCntTop
+recompiling module CoeffTokenEncoder
+recompiling module TotalZerosEncoder
+recompiling module CAVLCEncTop
+recompiling module CAVLCTop
+recompiling module DRAM
+recompiling module top_tb
+All of 32 modules done
+make[1]: Entering directory '/home/N26124939/VSD/VSD_Project/rtl/build/csrc'
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir \
+-Wl,-rpath=/usr/cad/synopsys/vcs/2023.03/linux64/lib -L/usr/cad/synopsys/vcs/2023.03/linux64/lib \
+-Wl,-rpath-link=./  /usr/lib64/libnuma.so.1   objs/amcQw_d.o  _13333_archive_1.so \
+SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o \
+-lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /usr/cad/synopsys/vcs/2023.03/linux64/lib/vcs_tls.o \
+-Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive       _vcs_pli_stub_.o   /usr/cad/synopsys/vcs/2023.03/linux64/lib/vcs_save_restore_new.o \
+/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/pli.a -ldl  -lc -lm -lpthread \
+-ldl 
+../simv up to date
+make[1]: Leaving directory '/home/N26124939/VSD/VSD_Project/rtl/build/csrc'
+Command: /home/N26124939/VSD/VSD_Project/rtl/build/./simv +define+prog3 +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/prog3 -a /home/N26124939/VSD/VSD_Project/rtl/./sim/prog3/rtl_sim.log +rdcycle=1
+Chronologic VCS simulator copyright 1991-2023
+Contains Synopsys proprietary information.
+Compiler version U-2023.03_Full64; Runtime version U-2023.03_Full64;  Jan 10 19:45 2024
+`dram_word(`TEST_START) = ffffffff, cycle_number =       92783
+`ismem_word(`FOR_LOOP_ADDR) = 0000006f
+              556704
+`dram_word(`TEST_START)2 = ffffffff, cycle_number =      279576
+             1677462
+
+Done
+
+DRAM[262144] = ffffffff, pass
+DRAM[262145] = 000060ae, pass
+
+
+
+
+        **************************               
+        *                        *       |__||  
+        *  Congratulations !!    *      / O.O  | 
+        *                        *    /_____   | 
+        *  Simulation PASS!!     *   /^ ^ ^ \  |
+        *                        *  |^ ^ ^ ^ |w| 
+        **************************   \m___m__|_|
+
+
+                       CYCLE       FREQ
+        DRAM    :  30.400000  32.894737
+        ROM     :  50.200000  19.920319
+        SRAM    :  11.000000  90.909091
+        CPU     :   6.000000 166.666667
+        AXI     :  25.000000  40.000000
+$finish called from file "/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_WDT.sv", line 323.
+$finish at simulation time            176946600
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1769466000 ps
+CPU Time:      3.010 seconds;       Data structure size:  16.6Mb
+Wed Jan 10 19:45:47 2024
+CPU time: 3.072 seconds to compile + .565 seconds to elab + .347 seconds to link + 3.061 seconds in simulation

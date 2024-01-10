@@ -46,14 +46,14 @@ always_ff @(posedge ACLK) begin
     end else begin
         case(AR_state)
             IDLE: begin
-                      if (ARVALID_M2) begin AR_state <= M2_STATE; ARADDR_reg <= ARADDR_M2;  end
-                 else if (ARVALID_M1) begin AR_state <= M1_STATE; ARADDR_reg <= ARADDR_M1;  end
-                 else if (ARVALID_M0) begin AR_state <= M0_STATE; ARADDR_reg <= ARADDR_M0;  end
+                      if (ARVALID_M2)               begin AR_state <= M2_STATE; ARADDR_reg <= ARADDR_M2;  end
+                 else if (ARVALID_M1 && ~WVALID_M1) begin AR_state <= M1_STATE; ARADDR_reg <= ARADDR_M1;  end
+                 else if (ARVALID_M0)               begin AR_state <= M0_STATE; ARADDR_reg <= ARADDR_M0;  end
             end
             M2_STATE: if (RLAST_M2 && RREADY_M2) begin AR_state <= IDLE; ARADDR_reg <= 32'b0;  end
             M1_STATE: if (RLAST_M1 && RREADY_M1) begin AR_state <= IDLE; ARADDR_reg <= 32'b0;  end
             M0_STATE: if (RLAST_M0 && RREADY_M0) begin AR_state <= IDLE; ARADDR_reg <= 32'b0;  end
-            default : AR_state <= IDLE;
+            default :                            begin AR_state <= IDLE; ARADDR_reg <= 32'b0;  end
         endcase
     end
 end
@@ -68,32 +68,32 @@ end
 
 always_comb begin
     case(AR_state)
-        M2_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M2_S0_W : //ROM
-                               (ARADDR_reg[31:16] == 16'h0001) ? `M2_S1_W : //IM
-                               (ARADDR_reg[31:16] == 16'h0002) ? `M2_S2_W : //DM
-                               (ARADDR_reg[31:16] == 16'h1000) ? `M2_S3_W : //Sctrl
-                               (ARADDR_reg[31:16] == 16'h1001) ? `M2_S4_W : //WDT
-                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M2_S5_W : //DRAM
-                               (ARADDR_reg[31:16] == 16'h0010) ? `M2_S6_W : //EPU
-                               (ARADDR_reg[31:16] == 16'h0003) ? `M2_S7_W : `M2_NO_W; //DMA
+        M2_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M2_S0_R : //ROM
+                               (ARADDR_reg[31:16] == 16'h0001) ? `M2_S1_R : //IM
+                               (ARADDR_reg[31:16] == 16'h0002) ? `M2_S2_R : //DM
+                               (ARADDR_reg[31:16] == 16'h1000) ? `M2_S3_R : //Sctrl
+                               (ARADDR_reg[31:16] == 16'h1001) ? `M2_S4_R : //WDT
+                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M2_S5_R : //DRAM
+                               (ARADDR_reg[31:16] == 16'h0010) ? `M2_S6_R : //EPU
+                               (ARADDR_reg[31:16] == 16'h0003) ? `M2_S7_R : `M2_NO_R; //DMA
 
-        M1_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M1_S0_W : //ROM
-                               (ARADDR_reg[31:16] == 16'h0001) ? `M1_S1_W : //IM
-                               (ARADDR_reg[31:16] == 16'h0002) ? `M1_S2_W : //DM
-                               (ARADDR_reg[31:16] == 16'h1000) ? `M1_S3_W : //Sctrl
-                               (ARADDR_reg[31:16] == 16'h1001) ? `M1_S4_W : //WDT
-                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M1_S5_W : //DRAM
-                               (ARADDR_reg[31:16] == 16'h0010) ? `M1_S6_W : //EPU
-                               (ARADDR_reg[31:16] == 16'h0003) ? `M1_S7_W : `M1_NO_W; //DMA
+        M1_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M1_S0_R : //ROM
+                               (ARADDR_reg[31:16] == 16'h0001) ? `M1_S1_R : //IM
+                               (ARADDR_reg[31:16] == 16'h0002) ? `M1_S2_R : //DM
+                               (ARADDR_reg[31:16] == 16'h1000) ? `M1_S3_R : //Sctrl
+                               (ARADDR_reg[31:16] == 16'h1001) ? `M1_S4_R : //WDT
+                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M1_S5_R : //DRAM
+                               (ARADDR_reg[31:16] == 16'h0010) ? `M1_S6_R : //EPU
+                               (ARADDR_reg[31:16] == 16'h0003) ? `M1_S7_R : `M1_NO_R; //DMA
         
-        M0_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M0_S0_W : //ROM
-                               (ARADDR_reg[31:16] == 16'h0001) ? `M0_S1_W : //IM
-                               (ARADDR_reg[31:16] == 16'h0002) ? `M0_S2_W : //DM
-                               (ARADDR_reg[31:16] == 16'h1000) ? `M0_S3_W : //Sctrl
-                               (ARADDR_reg[31:16] == 16'h1001) ? `M0_S4_W : //WDT
-                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M0_S5_W : //DRAM
-                               (ARADDR_reg[31:16] == 16'h0010) ? `M0_S6_W : //EPU
-                               (ARADDR_reg[31:16] == 16'h0003) ? `M0_S7_W : `M0_NO_W; //DMA
+        M0_STATE: AR_arbiter = (ARADDR_reg[31:16] == 16'h0000) ? `M0_S0_R : //ROM
+                               (ARADDR_reg[31:16] == 16'h0001) ? `M0_S1_R : //IM
+                               (ARADDR_reg[31:16] == 16'h0002) ? `M0_S2_R : //DM
+                               (ARADDR_reg[31:16] == 16'h1000) ? `M0_S3_R : //Sctrl
+                               (ARADDR_reg[31:16] == 16'h1001) ? `M0_S4_R : //WDT
+                               (ARADDR_reg[31:24] ==  8'h20  ) ? `M0_S5_R : //DRAM
+                               (ARADDR_reg[31:16] == 16'h0010) ? `M0_S6_R : //EPU
+                               (ARADDR_reg[31:16] == 16'h0003) ? `M0_S7_R : `M0_NO_R; //DMA
         default:  AR_arbiter = `Default_R;
     endcase
 end

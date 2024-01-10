@@ -2,7 +2,7 @@
 `include "CYCLE_MAX.sv"
 `timescale 1ns/10ps
 // clock define (don't modify)
-`define DRAM_CYCLE    50.0
+`define DRAM_CYCLE    30.4
 `define ROM_CYCLE     50.2
 `define SRAM_CYCLE    11.0
 `define AXI_CYCLE     25.0 
@@ -261,6 +261,8 @@ module top_tb;
     sram_clk        = 0;
     epu_clk         = 0;
     dma_clk         = 0;
+    sensor_counter  = 0; 
+    data_counter    = 0;
     $value$plusargs("prog_path=%s", prog_path);
     // wait for dram reset = 0 
     wait(dram_rst)

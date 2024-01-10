@@ -40,6 +40,7 @@ localparam   M1_STATE  = 2'd2;
 localparam   M2_STATE  = 2'd3;
 
 logic  [1:0] AW_state;
+logic  [1:0] nAW_state;
 logic [31:0] AWADDR_reg;
 
 always_ff @(posedge ACLK) begin
@@ -57,7 +58,7 @@ always_ff @(posedge ACLK) begin
             M2_STATE: if (WLAST_M2 && WREADY_M2) begin AW_state <= IDLE; AWADDR_reg <= 32'b0;  end
             M1_STATE: if (WLAST_M1 && WREADY_M1) begin AW_state <= IDLE; AWADDR_reg <= 32'b0;  end
             M0_STATE: if (WLAST_M0 && WREADY_M0) begin AW_state <= IDLE; AWADDR_reg <= 32'b0;  end
-            default : AW_state <= IDLE;
+            default :                            begin AW_state <= IDLE; AWADDR_reg <= 32'b0;  end
         endcase
     end
 end

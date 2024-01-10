@@ -96,7 +96,7 @@ module WDT_wrapper (
     assign RLAST         = (state_current_r == `STATE_R) && (ARLEN_r == counter_r);
 
     assign WDEN_write    = (handshake_AW && AWADDR == 32'h1001_0100 && (|WSTRB));
-    assign WDLIVE_write  = (handshake_AW && AWADDR == 32'h1001_0200 && WDATA!=32'd0 && (|WSTRB));
+    assign WDLIVE_write  = (handshake_AW && AWADDR == 32'h1001_0200 && (|WSTRB));
     assign WTOCNT_write  = (handshake_AW && AWADDR == 32'h1001_0300 && (|WSTRB));
 
     //*********************state machine*****************//

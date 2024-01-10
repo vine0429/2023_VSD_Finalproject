@@ -153,7 +153,7 @@ REMOTEHOST=140.116.157.24
 SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
 MANPATH=/usr/cad/synopsys/synthesis/2019.12//doc/syn/man:/usr/cad/synopsys/vcs/2023.03/doc/man
 SNPS_VCS_INTERNAL_MAKE_OPT=
-XDG_SESSION_ID=193653
+XDG_SESSION_ID=194198
 XLOCALEDIR=/usr/cad/synopsys/icc2/2022.12-sp6//etc/locale
 GUESTFISH_INIT=\e[1;34m
 HOSTNAME=cav16
@@ -165,20 +165,20 @@ TERM=xterm
 HOST=cav16
 HISTSIZE=1000
 MAKEFLAGS= -- FSDB=1
-SSH_CLIENT=140.116.157.24 60852 5614
+SSH_CLIENT=140.116.157.24 62218 5614
 MGC_LOCATION_MAP=NO_MAP
 QTDIR=/usr/lib64/qt-3.3
 QTINC=/usr/lib64/qt-3.3/include
-SSH_TTY=/dev/pts/24
+SSH_TTY=/dev/pts/1
 LC_ALL=C
-SNPS_VCS_INTERNAL_ROOT_PID=17650
+SNPS_VCS_INTERNAL_ROOT_PID=8640
 QT_GRAPHICSSYSTEM_CHECKED=1
 USER=N26124939
 GROUP=N26124939
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
 LD_LIBRARY_PATH=/usr/cad/synopsys/vcs/2023.03/lib:/usr/cad/synopsys/vcs/2023.03/linux64/lib::::/usr/cad/cadence/INNOVUS/cur//tools/tlfUtil/lib:/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64:/lib64:/usr/lib64:/usr/local/lib64:/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/:/usr/cad/cadence/INCISIV/cur/tools/lib:/usr/cad/cadence/INCISIV/cur/tools/vtools/vfault/lib:/usr/openwin/lib:/usr/dt/lib:/usr/lib:/usr/local/lib
 SCRIPT_NAME=vcs
-MAKE_TERMOUT=/dev/pts/24
+MAKE_TERMOUT=/dev/pts/1
 VCS_MX_HOME_INTERNAL=1
 HOSTTYPE=x86_64-linux
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2023.03/linux64/clang
@@ -193,7 +193,7 @@ GUESTFISH_PS1=\[\e[1;32m\]><fs>\[\e[0;31m\]
 maxpend=0
 PATH=.:/usr/cad/synopsys/icc2/2022.12-sp6//bin:/usr/cad/synopsys/spyglass/2023.03//SPYGLASS_HOME/bin:/usr/cad/cadence/INNOVUS/cur/tools/celtic/bin:/usr/cad/cadence/INNOVUS/cur/tools/plato/bin:/usr/cad/cadence/INNOVUS/cur/tools/dfII/bin:/usr/cad/cadence/INNOVUS/cur/tools/bin:/usr/cad/cadence/INNOVUS/cur//tools/tlfUtil/bin:/usr/cad/synopsys/vcs/2023.03/amd64/bin:/opt/RISCV/bin:/usr/cad/synopsys/verdi/2020.03//bin:/usr/cad/synopsys/synthesis/2019.12//amd64/syn/bin:/cad/synopsys/lc/cur/bin:/usr/cad/modelsim/modelsim/cur/modeltech/bin:/usr/cad/modelsim/modelsim/cur/bin:/usr/cad/cadence/jasper_2023.03/bin:/usr/cad/cadence/INCISIV/cur/tools/bin:/usr/cad/cadence/INCISIV/cur/tools/vtools/vfault/bin:/usr/cad/cadence/INCISIV/cur/tools/dfII/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/N26124939/.local/bin:/home/N26124939/bin
 MAIL=/var/spool/mail/N26124939
-SNPS_VCS_INTERNAL_CURR_PID=17650
+SNPS_VCS_INTERNAL_CURR_PID=8640
 VERDI_HOME=/usr/cad/synopsys/verdi/2020.03/
 PWD=/home/N26124939/VSD/VSD_Project/rtl
 VCS_HOME=/usr/cad/synopsys/vcs/2023.03
@@ -207,7 +207,7 @@ VCS_CC=gcc
 LM_LICENSE_FILE=26585@lstn:26585@lstc:26585@lshc:5280@lshc:5280@lstc:5280@lstn:1717@lstn:1717@lsncku:
 HISTCONTROL=ignoredups
 VCS_ARG_ADDED_FOR_TMP=1
-SNPS_VCS_TMPDIR=/tmp/vcs_20240109160606_17650
+SNPS_VCS_TMPDIR=/tmp/vcs_20240110123657_8640
 HOME=/home/N26124939
 SHLVL=3
 OSTYPE=linux
@@ -218,17 +218,17 @@ VENDOR=unknown
 LOGNAME=N26124939
 MACHTYPE=x86_64
 SNPS_VCS_INTERNAL_MAKE=make
-MAKE_TERMERR=/dev/pts/24
+MAKE_TERMERR=/dev/pts/1
 QTLIB=/usr/lib64/qt-3.3/lib
-SNPS_VCS_INTERNAL_ROOT_START_TIME=1704816366.690843728
-SSH_CONNECTION=140.116.157.24 60852 140.116.157.16 5614
+SNPS_VCS_INTERNAL_ROOT_START_TIME=1704890217.988275090
+SSH_CONNECTION=140.116.157.24 62218 140.116.157.16 5614
 XDG_DATA_DIRS=/home/N26124939/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 LESSOPEN=||/usr/bin/lesspipe.sh %s
 SHLIB_PATH=/usr/cad/synopsys/verdi/2020.03//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2020.03//share/PLI/VCS/LINUX64/:
 sysc_uni_pwd=/home/N26124939/VSD/VSD_Project/rtl
 vip_dir=/home/N26124939/VSD/VSD_Project/rtl/vip
 XDG_RUNTIME_DIR=/run/user/1055
-DISPLAY=localhost:29.0
+DISPLAY=localhost:11.0
 VCS_ARCH=linux64
 SYN_MAN_DIR=/usr/cad/synopsys/vcs/2023.03/doc/man
 QT_PLUGIN_PATH=/usr/lib64/kde4/plugins:/usr/lib/kde4/plugins
@@ -247,7 +247,7 @@ argv[1]=+define+h264_test01+FSDB
 argv[2]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_test01
 247 profile - 100
           CPU/Mem usage: 0.060 sys,  0.320 user,  292.52M mem
-248 Elapsed time:    0:00:00    Wed Jan 10 00:06:10 2024
+248 Elapsed time:    0:00:00    Wed Jan 10 20:37:01 2024
 249 pliAppInit
 250 FSDB_GATE is set.
 251 FSDB_RTL is set.
@@ -266,7 +266,7 @@ argv[2]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_test01
 264 *  may cause abnormal behavior, please contact Synopsys support for   *
 265 *  assistance.                                                        *
 266 ***********************************************************************
-267 sps_call_fsdbDumpfile_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_h264.sv(189)
+267 sps_call_fsdbDumpfile_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_h264.sv(194)
 268 argv[0]: (h264.fsdb)
 269 *Verdi* FSDB WARNING: The FSDB file already exists. Overwriting the FSDB file may crash the programs that are using this file.
 270 *Verdi* : Create FSDB file 'h264.fsdb'
@@ -274,49 +274,49 @@ argv[2]=+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_test01
 272   "vcs '-R' '-sverilog' '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_h264.sv' '-debug_access+all' '-full64' '+incdir+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test/cavlc+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test/dct_quant+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test/fetch+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test/intra+/home/N26124939/VSD/VSD_Project/rtl/./src/H264_test/packer+/home/N26124939/VSD/VSD_Project/rtl/./sim+/home/N26124939/VSD/VSD_Project/rtl/./include' '+define+h264_test01+FSDB' '+prog_path=/home/N26124939/VSD/VSD_Project/rtl/./sim/h264_test01' 2>&1"
 273 DVDI_is_vir_unload_enabled is enable
 274 FSDB_VCS_ENABLE_NATIVE_VC is enable
-275 sps_call_fsdbDumpvars_vd_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_h264.sv(190)
+275 sps_call_fsdbDumpvars_vd_main at 0 : /home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_h264.sv(195)
 276 [spi_vcs_vd_ppi_create_root]: no upf option
 277 FSDB dumper cannot dump UPF related power signal ($power_tree): no ppiPowerNetwork.
 278 Power dumping is enabled and VIR_REDUCTION may not work.
 279 *Verdi* : Begin traversing the scopes, layer (0).
 280 *Verdi* : End of traversing.
 281 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.090 sys,  0.360 user,  393.43M mem
-                   incr: 0.020 sys,  0.030 user,  9.15M mem
-                   accu: 0.020 sys,  0.030 user,  9.15M mem
-              accu incr: 0.020 sys,  0.030 user,  9.15M mem
+          CPU/Mem usage: 0.080 sys,  0.340 user,  393.45M mem
+                   incr: 0.010 sys,  0.020 user,  9.18M mem
+                   accu: 0.010 sys,  0.020 user,  9.18M mem
+              accu incr: 0.010 sys,  0.020 user,  9.18M mem
 
-          Count usage: 1222 var,  1189 idcode,  312 callback
-                 incr: 1222 var,  1189 idcode,  312 callback
-                 accu: 1222 var,  1189 idcode,  312 callback
-            accu incr: 1222 var,  1189 idcode,  312 callback
-282 Elapsed time:    0:00:01    Wed Jan 10 00:06:11 2024
+          Count usage: 1222 var,  1189 idcode,  310 callback
+                 incr: 1222 var,  1189 idcode,  310 callback
+                 accu: 1222 var,  1189 idcode,  310 callback
+            accu incr: 1222 var,  1189 idcode,  310 callback
+282 Elapsed time:    0:00:01    Wed Jan 10 20:37:02 2024
 283 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.090 sys,  0.360 user,  394.48M mem
+          CPU/Mem usage: 0.080 sys,  0.340 user,  394.50M mem
                    incr: 0.000 sys,  0.000 user,  1.05M mem
-                   accu: 0.020 sys,  0.030 user,  10.21M mem
+                   accu: 0.010 sys,  0.020 user,  10.23M mem
               accu incr: 0.000 sys,  0.000 user,  1.05M mem
 
-          Count usage: 1222 var,  1189 idcode,  312 callback
+          Count usage: 1222 var,  1189 idcode,  310 callback
                  incr: 0 var,  0 idcode,  0 callback
-                 accu: 1222 var,  1189 idcode,  312 callback
+                 accu: 1222 var,  1189 idcode,  310 callback
             accu incr: 0 var,  0 idcode,  0 callback
-284 Elapsed time:    0:00:01    Wed Jan 10 00:06:11 2024
-285 End of simulation at 0
-286 Elapsed time:    0:00:01    Wed Jan 10 00:06:11 2024
+284 Elapsed time:    0:00:01    Wed Jan 10 20:37:02 2024
+285 End of simulation at 126877000
+286 Elapsed time:    0:00:02    Wed Jan 10 20:37:03 2024
 287 Begin FSDB profile info:
-288 FSDB Writer : bc1(29) bcn(284) mtf/stf(0/0)
-FSDB Writer elapsed time : flush(0.248442) io wait(0.000000) theadpool wait(0.000000)
+288 FSDB Writer : bc1(285192) bcn(1956658) mtf/stf(0/0)
+FSDB Writer elapsed time : flush(0.707468) io wait(0.000000) theadpool wait(0.000000)
 FSDB Writer cpu time : MT Compression : 0
 289 End FSDB profile info
 290 Parallel profile     - ProducerThread:1 ConsumerThread:1 Buffer:64MB
-291                      - BlockUsed:1 Acquire:0 BufferUsed:0
-292                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:0
-293                      - MainProducerTime:0.467754019 TotalConsumerTime:0.000000000
-294                      - ElapsedTime:1.283406000
-295 Producer   0 profile - BlockUsed:1 Acquire:0 BufferUsed:0
-296 Consumer   0 profile - Affinity:-1 CPUTime:0.000000000 LifeTime:0.000000000 (-nan%)
-297                      - BlockUsed:1 Acquire:0 BufferUsed:0
+291                      - BlockUsed:22 Acquire:2495294 BufferUsed:39761732
+292                      - Flush:3 Expand:0 ProducerWait:0 ConsumerWait:20
+293                      - MainProducerTime:2.248826458 TotalConsumerTime:0.420682959
+294                      - ElapsedTime:3.529897000
+295 Producer   0 profile - BlockUsed:22 Acquire:2495294 BufferUsed:39761732
+296 Consumer   0 profile - Affinity:-1 CPUTime:0.420682959 LifeTime:1.204940490 (0.35%)
+297                      - BlockUsed:22 Acquire:2495294 BufferUsed:39761732
 298 SimExit
-299 Elapsed time:    0:00:02    Wed Jan 10 00:06:12 2024
+299 Elapsed time:    0:00:04    Wed Jan 10 20:37:05 2024
 300 Sim process exit
