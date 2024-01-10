@@ -1,0 +1,120 @@
+module h264_formal(
+    input clk,
+    input rst
+
+);
+
+// ************************************************* 
+//                                             
+//    fetch                        
+//                                             
+// ************************************************* 
+
+logic fetch_tri;
+assign fetch_tri = fetch_inst.fetch_start_i;
+
+
+fetch_state : assert property
+(
+@(posedge clk)
+disable iff (rst)
+$onehot({(fetch_inst.curr_state == fetch_inst.IDLE), (fetch_inst.curr_state == fetch_inst.LD_Y), 
+        (fetch_inst.curr_state == fetch_inst.LD_U), (fetch_inst.curr_state == fetch_inst.LD_V), (fetch_inst.curr_state == fetch_inst.WAITINTRA)})
+);
+
+// ************************************************* 
+//                                             
+//    intra                        
+//                                             
+// ************************************************* 
+
+logic intra_tri;
+assign intra_tri = fetch_inst.fetch_start_i;
+
+intra_state : assert property
+(
+@(posedge clk)
+disable iff (rst)
+$onehot({(intra_4x4_top_inst.curr_state == intra_4x4_top_inst.IDLE), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.LOAD), 
+        (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.NEXT_4x4), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_TOPLEFT), 
+        (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_PREPARE), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_PRED), 
+        (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_RES), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_DCTQ), 
+        (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_IDCTQ), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.CNT_PRELOOP), 
+        (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.RENEW_PIX), (intra_4x4_top_inst.curr_state == intra_4x4_top_inst.WAIT_CAVLC)})
+);
+
+
+// ************************************************* 
+//                                             
+//    cavlc                        
+//                                             
+// ************************************************* 
+
+logic cavlc_tri;
+assign cavlc_tri = cavlctop.intra_valid;
+
+cavlc_state_enc : assert property
+(
+@(posedge clk)
+disable iff (rst)
+$onehot({(cavlctop.cavlcenctop.curr_state == cavlctop.cavlcenctop.IDLE), (cavlctop.cavlcenctop.curr_state == cavlctop.cavlcenctop.LOAD), 
+        (cavlctop.cavlcenctop.curr_state == cavlctop.cavlcenctop.ENC), (cavlctop.cavlcenctop.curr_state == cavlctop.cavlcenctop.WAITBIS)})
+);
+
+cavlc_state_cnt : assert property
+(
+@(posedge clk)
+disable iff (rst)
+$onehot({(cavlctop.cavlccnttop.state_curr == cavlctop.cavlccnttop.IDLE), (cavlctop.cavlccnttop.state_curr == cavlctop.cavlccnttop.LOAD), 
+        (cavlctop.cavlccnttop.state_curr == cavlctop.cavlccnttop.CNT), (cavlctop.cavlccnttop.state_curr == cavlctop.cavlccnttop.WAITENC)})
+);
+
+// ************************************************* 
+//                                             
+//    packer                        
+//                                             
+// ************************************************* 
+
+logic packer_tri, buffer_tri;
+logic [255:0] golden_buffer;
+logic [8:0] golden_len;
+logic [31:0] golden_addr;
+assign packer_tri = packer_inst.cavlc_bitstream_valid;
+assign buffer_tri = (packer_inst.cavlc_bitstream_valid || packer_inst.output_valid);
+assign golden_buffer = packer_inst.next_cavlc_code;
+assign golden_len = packer_inst.next_cavlc_len;
+
+always_ff @(posedge clk) 
+begin
+    if (rst) begin
+        golden_addr <= 32'd0;
+    end
+    else if (packer_inst.output_valid) begin
+        golden_addr <= golden_addr + 32'd1;
+    end
+end
+
+packer_buffer : assert property
+(
+@(posedge clk)
+disable iff (rst)
+buffer_tri |=> (packer_inst.cavlc_buffer == $past(golden_buffer, 1))
+);
+
+packer_len : assert property
+(
+@(posedge clk)
+disable iff (rst)
+buffer_tri |=> (packer_inst.cavlc_buffer_len == $past(golden_len, 1))
+);
+
+packer_addr : assert property
+(
+@(posedge clk)
+disable iff (rst)
+(packer_inst.output_valid) |=> (packer_inst.paker_waddr == golden_addr)
+);
+
+
+endmodule
+bind h264_top h264_formal h264_formal_i(.*);

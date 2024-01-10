@@ -1,0 +1,1200 @@
+`timescale 1ns / 10ps
+`include "../include/def.svh"
+`include "../src/CPU/RegisterFile.sv"
+`include "../src/CPU/PC.sv"
+`include "../src/CPU/MEM_WB.sv"
+`include "../src/CPU/IF_ID.sv"
+`include "../src/CPU/ID_EX.sv"
+`include "../src/CPU/Controller.sv"
+`include "../src/CPU/ExecuteStage.sv"
+`include "../src/CPU/EX_MEM.sv"
+`include "../src/CPU/DecodeStage.sv"
+`include "../src/CPU/CSR_REG.sv"
+`include "../src/CPU/MemoryStage.sv"
+module ISA_Formal(
+    input clk_i,
+    input rst_i
+);
+// ------------------
+//
+//      IFID
+//
+// ------------------
+logic [31:0] ifid_pc;
+logic [31:0] ifid_insn;
+
+always_ff @(posedge clk_i) begin
+    if (rst_i) begin
+        ifid_pc   <= 0    ;
+        ifid_insn <= `INST_NOP;
+    end
+    else if (IF_ID.id_bubble_i) begin
+        ifid_pc   <= 0    ;
+        ifid_insn <= `INST_NOP;
+    end
+    else if (IF_ID.id_stall_i) begin
+        ;
+    end
+    else begin
+        ifid_pc   <= IF_ID.if_pc_reg_i  ;
+        ifid_insn <= IF_ID.L1IC_core_out_i;
+    end
+end
+// ------------------
+//
+//      IDEX
+//
+// ------------------
+logic [31:0] idex_pc;
+logic [31:0] idex_insn;
+
+
+always_ff @(posedge clk_i) begin
+    if (rst_i) begin
+        idex_pc     <= 0;
+        idex_insn   <= `INST_NOP;
+    end
+    else if (ID_EX.ex_stall_i) begin
+        ;
+    end
+    else if (ID_EX.ex_bubble_i || ID_EX.id_stall_i) begin
+        idex_pc     <= 0;    
+        idex_insn   <= `INST_NOP;  
+    end
+    else begin
+        idex_pc     <= ifid_pc;
+        idex_insn   <= ifid_insn;
+    end
+end
+
+// ------------------
+//
+//      EXMEM
+//
+// ------------------
+logic [31:0] exmem_pc;
+logic [31:0] exmem_insn;
+
+always_ff @(posedge clk_i) begin
+    if (rst_i) begin
+        exmem_pc     <= 0;
+        exmem_insn   <= `INST_NOP;
+    end
+    else if (EX_MEM.mem_stall_i) begin
+        ;
+    end
+    else begin
+        exmem_pc     <= idex_pc;
+        exmem_insn   <= idex_insn;
+    end
+end
+
+// ------------------
+//
+//      MEMWB
+//
+// ------------------
+logic [31:0] memwb_pc;
+logic [31:0] memwb_insn;
+
+always_ff @(posedge clk_i) begin
+    if (rst_i) begin
+        memwb_pc     <= 0;
+        memwb_insn   <= `INST_NOP;
+    end
+    else if (MEM_WB.wb_stall_i) begin
+        ;
+    end
+    else begin
+        memwb_pc     <= exmem_pc;
+        memwb_insn   <= exmem_insn;
+        // memwb_insn   <= MEM_WB.wb_insn_o;
+    end
+end
+
+
+rd_nonzero : assume property(CPU.L1IC_core_out_i[11:7]!='d0);
+
+asm_valid_RV32I_inst : assume property ( 
+    
+    (CPU.L1IC_core_out_i[6:0]==7'b0110111) //lui
+ || (CPU.L1IC_core_out_i[6:0]==7'b0010111) //auipc
+ || (CPU.L1IC_core_out_i[6:0]==7'b1101111) //jal
+ ||((CPU.L1IC_core_out_i[6:0]==7'b1100111) && (CPU.L1IC_core_out_i[14:12]==3'b000)) //jalr
+ || ((CPU.L1IC_core_out_i[6:0]==7'b1100011) && (CPU.L1IC_core_out_i[14:12]!=3'b010) && (CPU.L1IC_core_out_i[14:12]!=3'b011))//Btype
+ ||((CPU.L1IC_core_out_i[6:0]==7'b0000011) && ((CPU.L1IC_core_out_i[14:12]==3'b000) || (CPU.L1IC_core_out_i[14:12]==3'b001) || (CPU.L1IC_core_out_i[14:12]==3'b010)||(CPU.L1IC_core_out_i[14:12]==3'b100)||(CPU.L1IC_core_out_i[14:12]==3'b101))) //Itype_L
+ ||((CPU.L1IC_core_out_i[6:0]==7'b0100011) && ((CPU.L1IC_core_out_i[14:12]==3'b000) || (CPU.L1IC_core_out_i[14:12]==3'b001) || (CPU.L1IC_core_out_i[14:12]==3'b010))) //Stype
+ ||((CPU.L1IC_core_out_i[6:0]==7'b0010011))//Itype
+ ||((CPU.L1IC_core_out_i[6:0]==7'b0110011) && (((CPU.L1IC_core_out_i[14:12]==3'b000) && ((CPU.L1IC_core_out_i[31:25]==7'd0) || (CPU.L1IC_core_out_i[31:25]==7'b0100000)))//Rtype
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b001) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b010) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b011) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b100) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b101) && ((CPU.L1IC_core_out_i[31:25]==7'd0) || (CPU.L1IC_core_out_i[31:25]==7'b0100000)))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b110) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+                                               ||((CPU.L1IC_core_out_i[14:12]==3'b111) &&  (CPU.L1IC_core_out_i[31:25]==7'd0))
+ ))                                        
+ || ((CPU.L1IC_core_out_i[6:0]==7'b1110011) && (CPU.L1IC_core_out_i[14:12]!=3'b000) && (CPU.L1IC_core_out_i[14:12]!=3'b100))
+ || ((CPU.L1IC_core_out_i[6:0]==7'b0110011) && (CPU.L1IC_core_out_i[14:12]==3'b000) && (CPU.L1IC_core_out_i[31:25]==7'd1))  //MUL
+ || ((CPU.L1IC_core_out_i[6:0]==7'b0110011) && (CPU.L1IC_core_out_i[14:12]==3'b001) && (CPU.L1IC_core_out_i[31:25]==7'd1))  //MULH  
+ || ((CPU.L1IC_core_out_i[6:0]==7'b0110011) && (CPU.L1IC_core_out_i[14:12]==3'b010) && (CPU.L1IC_core_out_i[31:25]==7'd1))  //MULHSU
+ || ((CPU.L1IC_core_out_i[6:0]==7'b0110011) && (CPU.L1IC_core_out_i[14:12]==3'b011) && (CPU.L1IC_core_out_i[31:25]==7'd1))  //MULHU
+    /*&& ((CPU.L1IC_core_out_i[31:20] == 12'h300) || (CPU.L1IC_core_out_i[31:20] == 12'h304) || (CPU.L1IC_core_out_i[31:20] == 12'h305) || (CPU.L1IC_core_out_i[31:20] == 12'h341) || (CPU.L1IC_core_out_i[31:20] == 12'h344) || (CPU.L1IC_core_out_i[31:20] == 12'hB00) || (CPU.L1IC_core_out_i[31:20] == 12'hB02) || (CPU.L1IC_core_out_i[31:20] == 12'hB80) || (CPU.L1IC_core_out_i[31:20] == 12'hB82))*///CSR
+ );
+logic [31:0] cpudata1  =   (memwb_insn[19:15] == 5'b0)? 32'd0 : RegisterFile.registerfile_mem[memwb_insn[19:15]];
+logic [31:0] cpudata2  =   (memwb_insn[24:20] == 5'b0)? 32'd0 : RegisterFile.registerfile_mem[memwb_insn[24:20]];
+logic [31:0] cpu_itype_imm = {{21{memwb_insn[31]}},memwb_insn[30:20]};
+logic [31:0] cpu_stype_imm = {{21{memwb_insn[31]}},memwb_insn[30:25],memwb_insn[11:7]};
+logic [31:0] cpu_btype_imm = {{20{memwb_insn[31]}},memwb_insn[7],memwb_insn[30:25],memwb_insn[11:8],1'b0};
+logic [31:0] cpu_jtype_imm = {{12{memwb_insn[31]}},memwb_insn[19:12],memwb_insn[20],memwb_insn[30:25],memwb_insn[24:21],1'b0};
+
+logic [4:0] rs1  = memwb_insn[19:15];
+logic [4:0] rs2  = memwb_insn[24:20];
+logic [4:0] rd   = memwb_insn[11:7];
+
+logic [6:0] opcode   =   memwb_insn[6:0];
+logic [6:0] funct7   =   memwb_insn[31:25];
+logic [2:0] funct3   =   memwb_insn[14:12];
+
+logic signed[31:0] rs1_value = (rs1==5'd0)?32'd0:RegisterFile.registerfile_mem[rs1];
+logic signed[31:0] rs2_value = (rs2==5'd0)?32'd0:RegisterFile.registerfile_mem[rs2];
+
+logic [31:0] data1  =   (rs1 == 5'b0)? 32'd0 : RegisterFile.registerfile_mem[rs1];
+logic [31:0] data2  =   (rs2 == 5'b0)? 32'd0 : RegisterFile.registerfile_mem[rs2];
+
+
+logic [11:0] csr_addr = memwb_insn[31:20];
+logic [31:0] csr_read_data, csr_write_data;
+logic [3:0]  csr_pointer;
+logic [31:0] uimm = {27'd0 , memwb_insn[19:15]};
+
+logic signed[31:0] itype_sign_imm = {{21{memwb_insn[31]}},memwb_insn[30:20]};
+logic [31:0] itype_imm = {{21{memwb_insn[31]}},memwb_insn[30:20]};
+logic [31:0] stype_imm = {{21{memwb_insn[31]}},memwb_insn[30:25],memwb_insn[11:7]};
+logic [31:0] btype_imm = {{20{memwb_insn[31]}},memwb_insn[7],memwb_insn[30:25],memwb_insn[11:8],1'b0};
+logic [31:0] utype_imm = {memwb_insn[31:12],12'b0};
+logic [31:0] jtype_imm = {{12{memwb_insn[31]}},memwb_insn[19:12],memwb_insn[20],memwb_insn[30:25],memwb_insn[24:21],1'b0};
+
+logic wb_stall;
+
+always_ff@(posedge clk_i)begin
+    if (rst_i)
+    wb_stall <= 'd0;
+    else 
+    wb_stall <=memwb.wb_stall_i;
+
+end
+//----------------------------------------------------------------
+//
+//                          RTYPE
+//
+//
+//----------------------------------------------------------------
+//-----------------------------ADD--------------------------------
+logic signed [31:0]add_golden;
+assign add_golden[0] = data1[0] + data2[0];
+
+
+logic add_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b000)&&(memwb_insn[31:25]==7'b0)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+add_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (add_trigger|->(add_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+add_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (add_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SUB--------------------------------
+logic signed [31:0]sub_golden;
+assign sub_golden[0] = data1[0] - data2[0];
+
+
+logic sub_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b000)&&(memwb_insn[31:25]==7'b0100000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+sub_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sub_trigger|->(sub_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+sub_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sub_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLL--------------------------------
+logic [31:0]sll_golden;
+assign sll_golden = data1 << data2[4:0];
+
+
+logic sll_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b001)&&(memwb_insn[31:25]==7'b0000000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+sll_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sll_trigger|->(sll_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+sll_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sll_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLT--------------------------------
+logic [31:0]slt_golden;
+assign slt_golden = (rs1_value < rs2_value)? 32'd1:32'd0;
+
+
+logic slt_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b010)&&(memwb_insn[31:25]==7'b0000000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+slt_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slt_trigger|->(slt_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+slt_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slt_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLTU--------------------------------
+logic [31:0]sltu_golden;
+assign sltu_golden = (data1 < data2)? 32'd1:32'd0;
+
+
+logic sltu_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b011)&&(memwb_insn[31:25]==7'b0000000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+sltu_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sltu_trigger|->(sltu_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+sltu_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sltu_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------XOR--------------------------------
+logic [31:0]xor_golden;
+assign xor_golden = data1 ^ data2;
+
+
+logic xor_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b100)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+xor_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (xor_trigger|->(xor_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+xor_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (xor_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SRL--------------------------------
+logic [31:0]srl_golden;
+assign srl_golden = data1 >> data2[4:0];
+
+
+logic srl_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b101)&&(memwb_insn[31:25]==7'b0)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+srl_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srl_trigger|->(srl_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+srl_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srl_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SRA--------------------------------
+logic [31:0]sra_golden;
+assign sra_golden = rs1_value >>> data2[4:0];
+
+
+logic sra_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b101)&&(memwb_insn[31:25]==7'b0100000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+sra_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sra_trigger|->(sra_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+sra_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sra_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------OR--------------------------------
+logic [31:0]or_golden;
+assign or_golden = data1 | data2;
+
+
+logic or_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b110)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+or_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (or_trigger|->(or_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+or_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (or_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------AND--------------------------------
+logic [31:0]and_golden;
+assign and_golden = data1 & data2;
+
+
+logic and_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b111)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+and_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (and_trigger|->(and_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+and_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (and_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+
+//----------------------------------------------------------------
+//
+//                          ITYPE
+//
+//
+//----------------------------------------------------------------
+//-----------------------------ADDI--------------------------------
+logic [31:0]addi_golden;
+assign addi_golden = data1 + itype_imm;
+
+
+logic addi_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+addi_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (addi_trigger|->(addi_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+addi_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (addi_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLTI--------------------------------
+logic [31:0]slti_golden;
+assign slti_golden = (rs1_value < itype_sign_imm)? 32'd1:32'd0;
+
+
+logic slti_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b010)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+slti_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slti_trigger|->(slti_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+slti_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slti_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLTIU--------------------------------
+logic [31:0]sltiu_golden;
+assign sltiu_golden = (data1 < itype_imm)? 32'd1:32'd0;
+
+
+logic sltiu_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b011)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+sltiu_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sltiu_trigger|->(sltiu_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+sltiu_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (sltiu_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------XORI--------------------------------
+logic [31:0] xori_golden; 
+assign xori_golden = data1 ^ itype_imm;
+
+
+logic xori_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b100)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+xori_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (xori_trigger|->(xori_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+xori_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (xori_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------ORI--------------------------------
+logic [31:0] ori_golden; 
+assign ori_golden = data1 | itype_imm;
+
+
+logic ori_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b110)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+ori_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (ori_trigger|->(ori_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+ori_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (ori_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------ANDI--------------------------------
+logic [31:0] andi_golden; 
+assign andi_golden = data1 & itype_imm;
+
+
+logic andi_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b111)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+andi_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (andi_trigger|->(andi_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+andi_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (andi_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SLLI--------------------------------
+logic [31:0] slli_golden; 
+assign slli_golden = data1 << memwb_insn[24:20];
+
+
+logic slli_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b001)&&(memwb_insn[31:25]==7'b0)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+slli_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slli_trigger|->(slli_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+slli_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (slli_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SRLI--------------------------------
+logic [31:0] srli_golden; 
+assign srli_golden = data1 >> memwb_insn[24:20];
+
+
+logic srli_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b101)&&(memwb_insn[31:25]==7'b0)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+srli_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srli_trigger|->(srli_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+srli_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srli_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------SRAI--------------------------------
+logic [31:0] srai_golden; 
+assign srai_golden = rs1_value >>> memwb_insn[24:20];
+
+
+logic srai_trigger = ((memwb_insn[6:0]==7'b0010011)&&(memwb_insn[14:12]==3'b101)&&(memwb_insn[31:25]==7'b0100000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+srai_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srai_trigger|->(srai_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+
+
+srai_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (srai_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------LW--------------------------------
+logic lw_trigger = ((memwb_insn[6:0]==7'b0000011)&&(memwb_insn[14:12]==3'b010)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] lw_addr_golden = itype_imm + data1;
+logic [31:0] lw_addr;
+logic [31:0] lw_data_golden;
+logic [4:0]  lw_rd;      
+
+always_ff@(posedge clk_i)begin
+    if (rst_i) begin
+        lw_addr <= 'd0;
+        lw_data_golden <= 'd0;
+        lw_rd   <= 'd0;
+    end else begin
+        lw_addr <= memorystage.mem_alu_result_i;
+        lw_data_golden <= RegisterFile.wb_reg_wdata_i[31:0];
+        lw_rd   <= rd;
+    end
+end    
+
+
+ast_lw_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lw_trigger |-> (lw_addr_golden == lw_addr)
+);
+ast_lw_data_check:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lw_trigger |=> (lw_data_golden[0] == RegisterFile.registerfile_mem[lw_rd][0])
+);
+
+//-----------------------------LB--------------------------------
+logic lb_trigger = ((memwb_insn[6:0]==7'b0000011)&&(memwb_insn[14:12]==3'b000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] lb_addr_golden = itype_imm + data1;
+logic [31:0] lb_addr;
+logic [31:0] lb_data_golden;
+logic [4:0]  lb_rd;      
+
+always_ff@(posedge clk_i)begin
+    if (rst_i) begin
+        lb_addr <= 'd0;
+        lb_data_golden <= 'd0;
+        lb_rd   <= 'd0;
+    end else begin
+        lb_addr <= memorystage.mem_alu_result_i;
+        lb_data_golden <= RegisterFile.wb_reg_wdata_i[31:0];
+        lb_rd   <= rd;
+    end
+end    
+
+
+ast_lb_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lb_trigger |-> (lb_addr_golden == lb_addr)
+);
+ast_lb_data_check:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lb_trigger |=> (lb_data_golden[0] == RegisterFile.registerfile_mem[lb_rd][0])
+);
+
+//-----------------------------LBU--------------------------------
+logic lbu_trigger = ((memwb_insn[6:0]==7'b0000011)&&(memwb_insn[14:12]==3'b100)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] lbu_addr_golden = itype_imm + data1;
+logic [31:0] lbu_addr;
+logic [31:0] lbu_data_golden;
+logic [4:0]  lbu_rd;      
+
+always_ff@(posedge clk_i)begin
+    if (rst_i) begin
+        lbu_addr <= 'd0;
+        lbu_data_golden <= 'd0;
+        lbu_rd   <= 'd0;
+    end else begin
+        lbu_addr <= memorystage.mem_alu_result_i;
+        lbu_data_golden <= RegisterFile.wb_reg_wdata_i[31:0];
+        lbu_rd   <= rd;
+    end
+end    
+
+
+ast_lbu_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lbu_trigger |-> (lbu_addr_golden == lbu_addr)
+);
+ast_lbu_data_check:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lbu_trigger |=> (lbu_data_golden[0] == RegisterFile.registerfile_mem[lbu_rd][0])
+);
+
+//-----------------------------LH--------------------------------
+logic lh_trigger = ((memwb_insn[6:0]==7'b0000011)&&(memwb_insn[14:12]==3'b101)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] lh_addr_golden = itype_imm + data1;
+logic [31:0] lh_addr;
+logic [31:0] lh_data_golden;
+logic [4:0]  lh_rd;      
+
+always_ff@(posedge clk_i)begin
+    if (rst_i) begin
+        lh_addr <= 'd0;
+        lh_data_golden <= 'd0;
+        lh_rd   <= 'd0;
+    end else begin
+        lh_addr <= memorystage.mem_alu_result_i;
+        lh_data_golden <= RegisterFile.wb_reg_wdata_i[31:0];
+        lh_rd   <= rd;
+    end
+end    
+
+
+ast_lh_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lh_trigger |-> (lh_addr_golden == lh_addr)
+);
+ast_lh_data_check:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lh_trigger |=> (lh_data_golden[0] == RegisterFile.registerfile_mem[lh_rd][0])
+);
+
+//-----------------------------LHU--------------------------------
+logic lhu_trigger = ((memwb_insn[6:0]==7'b0000011)&&(memwb_insn[14:12]==3'b001)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] lhu_addr_golden = itype_imm + data1;
+logic [31:0] lhu_addr;
+logic [31:0] lhu_data_golden;
+logic [4:0]  lhu_rd;      
+
+always_ff@(posedge clk_i)begin
+    if (rst_i) begin
+        lhu_addr <= 'd0;
+        lhu_data_golden <= 'd0;
+        lhu_rd   <= 'd0;
+    end else begin
+        lhu_addr <= memorystage.mem_alu_result_i;
+        lhu_data_golden <= RegisterFile.wb_reg_wdata_i[31:0];
+        lhu_rd   <= rd;
+    end
+end    
+
+
+ast_lhu_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lhu_trigger |-> (lhu_addr_golden == lhu_addr)
+);
+ast_lhu_data_check:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    lhu_trigger |=> (lhu_data_golden[0] == RegisterFile.registerfile_mem[lhu_rd][0])
+);
+
+//-----------------------------JALR--------------------------------
+logic [31:0] jalr_golden = memwb_pc + 32'd4;
+logic [31:0] jalr_pc_golden = itype_imm + data1;
+logic jalr_trigger = ((memwb_insn[6:0]==7'b1100111)&&(memwb_insn[14:12]==3'b000)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+jalr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (jalr_trigger|->((jalr_golden==RegisterFile.wb_reg_wdata_i) && (jalr_pc_golden == cpudata1 + cpu_itype_imm)))
+);
+jalr_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (jalr_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+// ----------------------------------------------------------------
+//
+//                          S TYPE
+//
+//
+// ----------------------------------------------------------------
+//-----------------------------SW--------------------------------
+logic   sw_trigger = (memwb_insn[6:0]==7'b0100011)&&(memwb_insn[14:12]==3'b010);
+logic   [31:0]  sw_golden = data2;
+logic   [31:0]  sw_addr =  cpu_stype_imm + cpudata1; 
+logic   [31:0]  sw_addr_golden = stype_imm + data1;
+
+ast_sw_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sw_trigger |-> (sw_addr_golden[0] == sw_addr[0])
+);
+ast_sw_data_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sw_trigger |-> (sw_golden[0] == cpudata2[0])
+);
+
+//-----------------------------SB--------------------------------
+logic   sb_trigger = (memwb_insn[6:0]==7'b0100011)&&(memwb_insn[14:12]==3'b000);
+logic   [31:0]  sb_golden = data2;
+logic   [31:0]  sb_addr =  cpu_stype_imm + cpudata1; 
+logic   [31:0]  sb_addr_golden = stype_imm + data1;
+
+ast_sb_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sb_trigger |-> (sb_addr_golden[0] == sb_addr[0])
+);
+ast_sb_data_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sb_trigger |-> (sb_golden == cpudata2)
+);
+
+//-----------------------------SH--------------------------------
+logic   sh_trigger = (memwb_insn[6:0]==7'b0100011)&&(memwb_insn[14:12]==3'b001);
+logic   [31:0]  sh_golden = data2;
+logic   [31:0]  sh_addr =  cpu_stype_imm + cpudata1; 
+logic   [31:0]  sh_addr_golden = stype_imm + data1;
+
+ast_sh_addr_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sh_trigger |-> (sh_addr_golden[0] == sh_addr[0])
+);
+ast_sh_data_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+     sh_trigger |-> (sh_golden[0] == cpudata2[0])
+);
+
+//----------------------------------------------------------------
+//
+//                          B TYPE
+//
+//
+//----------------------------------------------------------------
+//-----------------------------BEQ--------------------------------
+logic beq_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b000)&(!wb_stall);
+logic beq_zero_golden = (data1==data2)? 1'd1 : 1'd0;
+logic [31:0] beq_pc_taken,beq_pc_taken_reg;
+logic [31:0] beq_pc_not_taken,beq_pc_not_taken_reg;
+logic [31:0] beq_pc_golden = memwb_pc + btype_imm;
+logic beq_zero_reg,beq_zero;
+logic beq_taken = (beq_zero_golden == beq_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        beq_zero_reg            <= 'd0;
+        beq_pc_taken_reg        <= 'd0;
+        beq_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        beq_zero_reg            <= ExecuteStage.op1_eq_op2;
+        beq_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        beq_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        beq_zero        <= 'd0;
+        beq_pc_taken    <= 'd0;
+        beq_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        beq_zero        <= beq_zero_reg;
+        beq_pc_taken    <= beq_pc_taken_reg;
+        beq_pc_not_taken<= beq_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_beq_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    beq_trigger |-> (beq_zero_golden == beq_zero )
+);
+ast_beq_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (beq_trigger & beq_taken) |-> (beq_pc_golden[0] == beq_pc_taken[0])
+);
+ast_beq_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (beq_trigger & ~beq_taken) |-> (beq_pc_golden[0] == beq_pc_not_taken[0])
+);
+
+//-----------------------------BNE--------------------------------
+logic bne_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b001)&(!wb_stall);
+logic bne_zero_golden = (data1!=data2)? 1'd1 : 1'd0;
+logic [31:0] bne_pc_taken,bne_pc_taken_reg;
+logic [31:0] bne_pc_not_taken,bne_pc_not_taken_reg;
+logic [31:0] bne_pc_golden = memwb_pc + btype_imm;
+logic bne_zero_reg,bne_zero;
+logic bne_taken = (bne_zero_golden == bne_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bne_zero_reg            <= 'd0;
+        bne_pc_taken_reg        <= 'd0;
+        bne_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        bne_zero_reg            <= ~ExecuteStage.op1_eq_op2;
+        bne_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        bne_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bne_zero        <= 'd0;
+        bne_pc_taken    <= 'd0;
+        bne_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        bne_zero        <= bne_zero_reg;
+        bne_pc_taken    <= bne_pc_taken_reg;
+        bne_pc_not_taken<= bne_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_bne_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    bne_trigger |-> (bne_zero_golden == bne_zero )
+);
+ast_bne_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bne_trigger & bne_taken) |-> (bne_pc_golden[0] == bne_pc_taken[0])
+);
+ast_bne_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bne_trigger & ~bne_taken) |-> (bne_pc_golden[0] == bne_pc_not_taken[0])
+);
+
+//-----------------------------BLT--------------------------------
+logic blt_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b100)&(!wb_stall);
+logic blt_zero_golden = (rs1_value < rs2_value)? 1'd1 : 1'd0;
+logic [31:0] blt_pc_taken,blt_pc_taken_reg;
+logic [31:0] blt_pc_not_taken,blt_pc_not_taken_reg;
+logic [31:0] blt_pc_golden = memwb_pc + btype_imm;
+logic blt_zero_reg,blt_zero;
+logic blt_taken = (blt_zero_golden == blt_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        blt_zero_reg            <= 'd0;
+        blt_pc_taken_reg        <= 'd0;
+        blt_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        blt_zero_reg            <= ~ExecuteStage.op1_ge_op2_signed;
+        blt_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        blt_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        blt_zero        <= 'd0;
+        blt_pc_taken    <= 'd0;
+        blt_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        blt_zero        <= blt_zero_reg;
+        blt_pc_taken    <= blt_pc_taken_reg;
+        blt_pc_not_taken<= blt_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_blt_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    blt_trigger |-> (blt_zero_golden == blt_zero )
+);
+ast_blt_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (blt_trigger & blt_taken) |-> (blt_pc_golden[0] == blt_pc_taken[0])
+);
+ast_blt_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (blt_trigger & ~blt_taken) |-> (blt_pc_golden[0] == blt_pc_not_taken[0])
+);
+
+//-----------------------------BGE--------------------------------
+logic bge_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b101)&(!wb_stall);
+logic bge_zero_golden = (rs1_value < rs2_value)? 1'd0 : 1'd1;
+logic [31:0] bge_pc_taken,bge_pc_taken_reg;
+logic [31:0] bge_pc_not_taken,bge_pc_not_taken_reg;
+logic [31:0] bge_pc_golden = memwb_pc + btype_imm;
+logic bge_zero_reg,bge_zero;
+logic bge_taken = (bge_zero_golden == bge_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bge_zero_reg            <= 'd0;
+        bge_pc_taken_reg        <= 'd0;
+        bge_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        bge_zero_reg            <= ExecuteStage.op1_ge_op2_signed;
+        bge_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        bge_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bge_zero        <= 'd0;
+        bge_pc_taken    <= 'd0;
+        bge_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        bge_zero        <= bge_zero_reg;
+        bge_pc_taken    <= bge_pc_taken_reg;
+        bge_pc_not_taken<= bge_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_bge_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    bge_trigger |-> (bge_zero_golden == bge_zero )
+);
+ast_bge_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bge_trigger & bge_taken) |-> (bge_pc_golden[0] == bge_pc_taken[0])
+);
+ast_bge_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bge_trigger & ~bge_taken) |-> (bge_pc_golden[0] == bge_pc_not_taken[0])
+);
+
+//-----------------------------BLTU--------------------------------
+logic bltu_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b110)&(!wb_stall);
+logic bltu_zero_golden = (data1 < data2)? 1'b1 : 1'b0;
+logic [31:0] bltu_pc_taken,bltu_pc_taken_reg;
+logic [31:0] bltu_pc_not_taken,bltu_pc_not_taken_reg;
+logic [31:0] bltu_pc_golden = memwb_pc + btype_imm;
+logic bltu_zero_reg,bltu_zero;
+logic bltu_taken = (bltu_zero_golden == bltu_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bltu_zero_reg            <= 'd0;
+        bltu_pc_taken_reg        <= 'd0;
+        bltu_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        bltu_zero_reg            <= ~ExecuteStage.op1_ge_op2_unsigned;
+        bltu_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        bltu_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bltu_zero        <= 'd0;
+        bltu_pc_taken    <= 'd0;
+        bltu_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        bltu_zero        <= bltu_zero_reg;
+        bltu_pc_taken    <= bltu_pc_taken_reg;
+        bltu_pc_not_taken<= bltu_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_bltu_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    bltu_trigger |-> (bltu_zero_golden == bltu_zero )
+);
+ast_bltu_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bltu_trigger & bltu_taken) |-> (bltu_pc_golden[0] == bltu_pc_taken[0])
+);
+ast_bltu_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bltu_trigger & ~bltu_taken) |-> (bltu_pc_golden[0] == bltu_pc_not_taken[0])
+);
+
+//-----------------------------BGEU--------------------------------
+logic bgeu_trigger =  (memwb_insn[6:0]==7'b1100011)&&(memwb_insn[14:12]==3'b111)&(!wb_stall);
+logic bgeu_zero_golden = (data1 < data2)? 1'b0 : 1'b1;
+logic [31:0] bgeu_pc_taken,bgeu_pc_taken_reg;
+logic [31:0] bgeu_pc_not_taken,bgeu_pc_not_taken_reg;
+logic [31:0] bgeu_pc_golden = memwb_pc + btype_imm;
+logic bgeu_zero_reg,bgeu_zero;
+logic bgeu_taken = (bgeu_zero_golden == bgeu_zero) ? 1'd1 : 1'd0;
+
+
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bgeu_zero_reg            <= 'd0;
+        bgeu_pc_taken_reg        <= 'd0;
+        bgeu_pc_not_taken_reg    <= 'd0;   
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        bgeu_zero_reg            <= ExecuteStage.op1_ge_op2_unsigned;
+        bgeu_pc_taken_reg        <= ExecuteStage.ex_pc_add_imm_i; 
+        bgeu_pc_not_taken_reg    <= ExecuteStage.ex_pc_add4_i;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        bgeu_zero        <= 'd0;
+        bgeu_pc_taken    <= 'd0;
+        bgeu_pc_not_taken<= 'd0;   
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        bgeu_zero        <= bgeu_zero_reg;
+        bgeu_pc_taken    <= bgeu_pc_taken_reg;
+        bgeu_pc_not_taken<= bgeu_pc_not_taken_reg;
+
+    end       
+end 
+
+ast_bgeu_taken_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    bgeu_trigger |-> (bgeu_zero_golden == bgeu_zero )
+);
+ast_bgeu_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bgeu_trigger & bgeu_taken) |-> (bgeu_pc_golden[0] == bgeu_pc_taken[0])
+);
+ast_bgeu_not_taken_pc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (bgeu_trigger & ~bgeu_taken) |-> (bgeu_pc_golden[0] == bgeu_pc_not_taken[0])
+);
+
+//----------------------------------------------------------------
+//
+//                          U TYPE
+//
+//
+//----------------------------------------------------------------
+//-----------------------------AUIPC--------------------------------
+logic [31:0] auipc_golden = memwb_pc + utype_imm;
+logic auipc_trigger =  ((memwb_insn[6:0]==7'b0010111)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+auipc_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (auipc_trigger|->(auipc_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+auipc_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (auipc_trigger|=>(registerfile.wb_rd_i==rd))
+);
+//-----------------------------LUI--------------------------------
+logic [31:0] lui_golden = utype_imm;
+logic lui_trigger =  ((memwb_insn[6:0]==7'b0110111)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+lui_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (lui_trigger|->(lui_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+lui_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (lui_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//----------------------------------------------------------------
+//
+//                          J TYPE
+//
+//
+//----------------------------------------------------------------
+logic [31:0] jal_golden = memwb_pc + 32'd4;
+logic [31:0] jal_pc_golden = memwb_pc + jtype_imm;
+logic jal_trigger =((memwb_insn[6:0]==7'b1101111)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+logic [31:0] jal_addr,jal_addr_reg;
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        jal_addr_reg  <= 'd0;  
+    end else if (EX_MEM.mem_stall_i) begin
+        ;
+    end else begin
+        jal_addr_reg  <= ExecuteStage.ex_jump_addr_w;
+    end       
+end 
+always@(posedge clk_i)begin
+    if(rst_i) begin
+        jal_addr  <= 'd0;  
+    end else if (MEM_WB.mem_stall_i) begin
+        ;
+    end  else begin
+        jal_addr  <= jal_addr_reg;
+    end       
+end 
+jal_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (jal_trigger|->((jal_golden[0]==RegisterFile.wb_reg_wdata_i[0]) && (jal_pc_golden[0] == jal_addr[0])))
+);
+// ----------------------------------------------------------------
+//
+//                         RTYPE(M)
+//
+//
+// ----------------------------------------------------------------
+//-----------------------------MUL--------------------------------
+logic[63:0] mul_golden = data1 * data2;
+logic mul_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b000)&&(memwb_insn[31:25]==7'd1)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+
+mul_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mul_trigger|->(mul_golden[0]==RegisterFile.wb_reg_wdata_i[0]))
+);
+mul_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mul_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+//-----------------------------MULH--------------------------------
+logic[63:0] mulh_golden = $signed(data1) * $signed(data2);
+logic mulh_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b001)&&(memwb_insn[31:25]==7'd1)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+
+mulh_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulh_trigger|->(mulh_golden[32]==RegisterFile.wb_reg_wdata_i[0]))
+);
+mulh_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulh_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+
+
+//-----------------------------MULHU--------------------------------
+logic[63:0] mulhu_golden = $unsigned(data1) * $unsigned(data2);
+logic mulhu_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b011)&&(memwb_insn[31:25]==7'd1)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+
+mulhu_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulhu_trigger|->(mulhu_golden[32]==RegisterFile.wb_reg_wdata_i[0]))
+);
+mulhu_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulhu_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+
+//-----------------------------MULHSU--------------------------------
+logic signed [63:0] mulhsu_golden;
+assign mulhsu_golden = $signed(data1) *$signed({1'b0,data2});
+
+logic mulhsu_trigger = ((memwb_insn[6:0]==7'b0110011)&&(memwb_insn[14:12]==3'b010)&&(memwb_insn[31:25]==7'd1)&&(rd!=5'd0)&&(MEM_WB.wb_reg_write_o)&(!wb_stall));
+
+mulhsu_check: assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulhsu_trigger  |->(mulhsu_golden[32]==RegisterFile.wb_reg_wdata_i[0]))  
+);
+mulhsu_check_rd:assert property(
+    @(posedge clk_i) disable iff(rst_i)
+    (mulhsu_trigger|=>(registerfile.wb_rd_i==rd))
+);
+
+endmodule
+
+
+
+bind CPU ISA_Formal ISA_Formal(
+    .clk_i(clk_i),
+    .rst_i(rst_i), 
+    .*);

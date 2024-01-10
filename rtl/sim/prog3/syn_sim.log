@@ -49594,3 +49594,8 @@ Error: "/home/N26124939/VSD/VSD_Project/rtl/./sim/DRAM/DRAM.sv", 166: top_tb.i_D
 
 Interrupt at time 9047500 ps
 
+Received SIGHUP (signal 1), exiting.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 9047500 ps
+CPU Time:      8.570 seconds;       Data structure size: 103.3Mb
+Wed Jan 10 21:53:08 2024

@@ -54,7 +54,7 @@ vip_b: clean | $(bld_dir)
 TA_run:
 
 # RTL simulation
-rtl_all: rtl0 rtl1 rtl2 rtl3 rtl_project_01 rtl_project_02 rtl_project_03 rtl_project_04 rtl_project_05 rtl_project_06 rtl_project_07 rtl_project_08 rtl_project_09 rtl_project_10 rtl_project_11
+rtl_all: rtl0 rtl1 rtl2 rtl_project_01 rtl_project_02 rtl_project_03 rtl_project_04 rtl_project_05 rtl_project_06 rtl_project_07 rtl_project_08 rtl_project_09 rtl_project_10
 
 rtl0: | clean $(bld_dir)
 	make -C $(sim_dir)/prog0/; \
@@ -186,26 +186,15 @@ rtl_project_10:| clean $(bld_dir)
 	+prog_path=$(root_dir)/$(sim_dir)/project_10 \
 	-l $(root_dir)/$(sim_dir)/project_10/rtl_sim.log \
 
-rtl_project_11:| clean $(bld_dir)
-	make -C $(sim_dir)/project_11/; \
-	cd $(bld_dir); \
-	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64  \
-	+incdir+$(root_dir)/$(src_dir)+$(h264_dirs)+$(root_dir)/$(src_dir)/AXI+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
-	+define+project_11$(FSDB_DEF) \
-	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
-	-l $(root_dir)/$(sim_dir)/project_11/rtl_sim.log \
-
 h264_test01 :
 	vcs -R -sverilog $(root_dir)/$(sim_dir)/top_tb_h264.sv -debug_access+all -full64  \
 	+incdir+$(h264t_dirs)+$(root_dir)/$(sim_dir)+$(root_dir)/$(inc_dir) \
 	+define+h264_test01$(FSDB_DEF) \
 	+prog_path=$(root_dir)/$(sim_dir)/h264_test01 \
 
-fetch:
-	vcs -R -sverilog fetch_test.sv fetch_tb.sv -debug_access+all -full64 \
 
 # Post-Synthesis simulation
-syn_all: syn0 syn1 syn2 syn3 syn_project_01 syn_project_02 syn_project_03 syn_project_04 syn_project_05 syn_project_06 syn_project_07 syn_project_08 syn_project_09 syn_project_10 syn_project_11
+syn_all: syn0 syn1 syn2 syn_project_01 syn_project_02 syn_project_03 syn_project_04 syn_project_05 syn_project_06 syn_project_07 syn_project_08 syn_project_09 syn_project_10
 
 syn0: | clean $(bld_dir)
 	make -C $(sim_dir)/prog0/; \
@@ -360,19 +349,8 @@ syn_project_10: | clean $(bld_dir)
 	-l $(root_dir)/$(sim_dir)/project_10/syn_sim.log \
   +rdcycle=1
 
-syn_project_11: | clean $(bld_dir)
-	make -C $(sim_dir)/project_11/; \
-	cd $(bld_dir); \
-	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
-	+incdir+$(root_dir)/$(syn_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
-	+define+SYN+project_11$(FSDB_DEF) \
-	+no_notifier \
-	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
-	-l $(root_dir)/$(sim_dir)/project_11/syn_sim.log \
-  +rdcycle=1
-
 # Post-Layout simulation
-pr_all: pr0 pr1 pr2 pr3 pr_project_01 pr_project_02 pr_project_03 pr_project_04 pr_project_05 pr_project_06 pr_project_07 pr_project_08 pr_project_09 pr_project_10 pr_project_11
+pr_all: pr0 pr1 pr2 pr_project_01 pr_project_02 pr_project_03 pr_project_04 pr_project_05 pr_project_06 pr_project_07 pr_project_08 pr_project_09 pr_project_10
 
 pr0: | clean $(bld_dir)
 	make -C $(sim_dir)/prog0/; \
@@ -528,17 +506,6 @@ pr_project_10: | clean $(bld_dir)
 	+prog_path=$(root_dir)/$(sim_dir)/project_10 \
 	-l $(root_dir)/$(sim_dir)/project_10/pr_sim.log \
 
-pr_project_11: | clean $(bld_dir)
-	make -C $(sim_dir)/project_11/; \
-	cd $(bld_dir); \
-	vcs -R -sverilog +neg_tchk -negdelay -v $(lib_dir)/fsa0m_a_generic_core_21.lib.src  $(root_dir)/$(sim_dir)/top_tb_project.sv -debug_access+all -full64 -diag=sdf:verbose \
-	+incdir+$(root_dir)/$(pr_dir)+$(root_dir)/$(inc_dir)+$(root_dir)/$(sim_dir) \
-	+define+PR+project_11$(FSDB_DEF) \
-	+no_notifier \
-	+maxdelays \
-	+prog_path=$(root_dir)/$(sim_dir)/project_11 \
-	-l $(root_dir)/$(sim_dir)/project_11/pr_sim.log \
-
 
 # Utilities
 nWave: | $(bld_dir)
@@ -588,6 +555,12 @@ icc2_gui: | $(pr_dir)
 spyglass: | $(bld_dir)
 	cd $(bld_dir); \
 	spyglass -tcl ../script/Spyglass_CDC.tcl &
+
+
+
+ISA		: | $(bld_dir)
+	cd $(bld_dir); \
+	jg   ../script/ISA_Formal.tcl &	
 
 # Check file structure
 BLUE=\033[1;34m
@@ -671,3 +644,13 @@ clean:
 	make -C $(sim_dir)/prog1/ clean; \
 	make -C $(sim_dir)/prog2/ clean; \
 	make -C $(sim_dir)/prog3/ clean; \
+	make -C $(sim_dir)/project_01/ clean; \
+	make -C $(sim_dir)/project_02/ clean; \
+	make -C $(sim_dir)/project_03/ clean; \
+	make -C $(sim_dir)/project_04/ clean; \
+	make -C $(sim_dir)/project_05/ clean; \
+	make -C $(sim_dir)/project_06/ clean; \
+	make -C $(sim_dir)/project_07/ clean; \
+	make -C $(sim_dir)/project_08/ clean; \
+	make -C $(sim_dir)/project_09/ clean; \
+	make -C $(sim_dir)/project_10/ clean; \

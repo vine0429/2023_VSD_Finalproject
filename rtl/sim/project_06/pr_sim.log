@@ -1,0 +1,40 @@
+Command: vcs -R -sverilog +neg_tchk -negdelay -v /usr/cad/CBDK/CBDK018_UMC_Faraday_v1.0/orig_lib/fsa0m_a/2009Q2v2.0/GENERIC_CORE/FrontEnd/verilog/fsa0m_a_generic_core_21.lib.src \
+/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_project.sv -debug_access+all -full64 \
+-diag=sdf:verbose +incdir+/home/N26124939/VSD/VSD_Project/rtl/./pr+/home/N26124939/VSD/VSD_Project/rtl/./include+/home/N26124939/VSD/VSD_Project/rtl/./sim \
++define+PR+project_06 +no_notifier +maxdelays +prog_path=/home/N26124939/VSD/VSD_Project/rtl/./simproject_06 \
+-l /home/N26124939/VSD/VSD_Project/rtl/./sim/project_06/pr_sim.log
+*** Using c compiler gcc instead of cc ...
+                         Chronologic VCS (TM)
+         Version U-2023.03_Full64 -- Wed Jan 10 22:13:42 2024
+
+                    Copyright (c) 1991 - 2023 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_project.sv'
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/monitor.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_project.sv'.
+Parsing included file '/home/N26124939/VSD/VSD_Project/rtl/./sim/CYCLE_MAX.sv'.
+Back to file '/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_project.sv'.
+
+Error-[SFCOR] Source file cannot be opened
+  Source file "top_pr.v" cannot be opened for reading due to 'No such file or 
+  directory'.
+  Please fix above issue and compile again.
+  "/home/N26124939/VSD/VSD_Project/rtl/./sim/top_tb_project.sv", 24
+  Source info: `include "top_pr.v"
+
+1 error
+CPU time: .250 seconds to compile

@@ -24,12 +24,12 @@ unsigned int _dram_compress_file_start = 0x20010000; // write result dest start
 unsigned int _epu_raw_file_start       = 0x00100000; // read raw file dest start
 unsigned int _epu_compress_file_start  = 0x00100010; // write result dest start
 
-const unsigned int RAW_file_width  = 176; // 480
-const unsigned int RAW_file_height = 144; // 360
-const unsigned int RAW_file_frames = 2;   //
+const unsigned int RAW_file_width  = 416; // 480
+const unsigned int RAW_file_height = 240; // 360
+const unsigned int RAW_file_frames = 3;   //
 
 const unsigned int words_num_buffer = 64;
-const unsigned int words_num_per_MB = 64; 
+const unsigned int words_num_per_MB = 64;
 
 //RAW addr initial
 int *DMA_src_addr_temp       = &_dram_raw_file_start;
