@@ -5,17 +5,19 @@ import enc # 哥倫布編碼
 import header
 
 # 要讀取的文件
-file_path = "./yuv/rickroll_1280x720_30.yuv"
+file_path = "./yuv/asiagodtone_1280x720_187.yuv"
 
 # YUV的長寬資訊與要壓縮幾張
 # 長寬調整要更改SPS中的 pic_width_in_mbs_minus1、pic_height_in_map_units_minus1
 frame_width  = 1280
 frame_height = 720
-frame_encnum = 2  # 這邊調整要編碼幾張frame
+frame_encnum = 1     # 這邊調整要編碼幾張frame
+start_frame  = 88    # 選擇第幾張開始編碼
+QP           = 12    # 量化程度
 frame_chroma = False # 是否要編碼色度
-gen_gold_hex = True # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
+gen_gold_hex = False # 是否要產生出IDR slice 的gold.hex (還沒加上sps、pps)
 gold_output_path = "golden.hex"
-gen_dataS    = True
+gen_dataS    = False
 dataS_output_file_path  = "./data.S"
 SubWidthC    = 2
 SubHeightC   = 2
@@ -66,7 +68,7 @@ for frame_idx in range(frame_encnum):
     # 打開文件以二進制模式讀取
     with open(file_path, "rb") as file:
         # 選擇要encode第幾張
-        file.seek(int(frame_width * frame_height * 1.5 * frame_idx))
+        file.seek(int(frame_width * frame_height * 1.5 * (frame_idx + start_frame)))
         # 讀取一個frame的luma資訊保存到matrix之中
         for y in range (frame_height):
             for x in range (frame_width):
@@ -82,6 +84,7 @@ for frame_idx in range(frame_encnum):
             for x in range (frame_width >> 1):
                 byte_value = file.read(1)
                 matrix_V[y,x] = int.from_bytes(byte_value, byteorder='big')
+
     #############################################################################################################################################################################################
     # 編碼到目前的block top參考像素
     intra4x4_tp = np.full((1,frame_width),0)
@@ -111,8 +114,6 @@ for frame_idx in range(frame_encnum):
     intra4x4_tvc = np.full((1,frame_width>>1),0)
     # 編碼到目前的block left參考V Total Coefficient
     intra4x4_lvc = np.full((frame_height>>1,1),0)
-    # QP 值
-    QP = 27
 
     # 一個macroblock的mb_pred bitstream
     temp_mp_pred = [""]*16
@@ -232,7 +233,7 @@ for frame_idx in range(frame_encnum):
         # 轉成整數型態
         pred_res_matrix = pred_res_matrix.astype(int)
 
-        preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix), QP = QP) + pred_matrix
+        preLoopFilter = IQT_and_IDCT(DCT_and_QT(pred_res_matrix, QP = QP), QP = QP) + pred_matrix
 
         # if (topleft_y == 0 and topleft_x == 4 and frame_idx == 0):
         #     print("topleft_y == 0 and topleft_x == 4")
@@ -272,7 +273,7 @@ for frame_idx in range(frame_encnum):
         intra4x4_lm[topleft_y>>2,0]  = predMode
 
         return prev_intra4x4_pred_mode_flag, rem_intra4x4_pred_mode, pred_res_matrix
-    
+
     def intra_16x16_chroma(mb_x, mb_y):
         topleft_u = np.zeros((4,4)); topright_u = np.zeros((4,4)); downleft_u = np.zeros((4,4)); downright_u = np.zeros((4,4))
         topleft_v = np.zeros((4,4)); topright_v = np.zeros((4,4)); downleft_v = np.zeros((4,4)); downright_v = np.zeros((4,4))
@@ -299,7 +300,7 @@ for frame_idx in range(frame_encnum):
                 elif (i4x4 == 1 and iCbCr == 1): topright_v  = encode_matrix # 右上角4x4 V
                 elif (i4x4 == 2 and iCbCr == 1): downleft_v  = encode_matrix # 左下角4x4 V
                 elif (i4x4 == 3 and iCbCr == 1): downright_v = encode_matrix # 右下角4x4 V
-        
+
         # 得到左方與上方的像素座標
         # 左上角4x4 U
         mbAddrA_valid = (mb_x != 0)
@@ -342,7 +343,7 @@ for frame_idx in range(frame_encnum):
         elif (mbAddrA_valid and mbAddrB_valid):  # 情況4: 上左都能用 A、B、C、D、I、J、K、L 像素取平均
             pred_topright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
         pred_topright_u = np.round(pred_topright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
-        
+
         # 左下角4x4 U
         A = pred_topleft_u[3,0]
         B = pred_topleft_u[3,1]
@@ -372,7 +373,7 @@ for frame_idx in range(frame_encnum):
         J = pred_downleft_u[1,3]
         K = pred_downleft_u[2,3]
         L = pred_downleft_u[3,3]
-        
+
         # 色度只做DC Mode
         if ((not mbAddrA_valid) and (not mbAddrB_valid)): # 情況1: 都不可用
             pred_downright_u = np.full((4,4),128)
@@ -384,7 +385,7 @@ for frame_idx in range(frame_encnum):
             pred_downright_u = np.full((4,4),(A+B+C+D+I+J+K+L) / 8)
         pred_downright_u = np.round(pred_downright_u+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
-        
+
         # 左上角4x4 v
         mbAddrA_valid = (mb_x != 0)
         mbAddrB_valid = (mb_y != 0)
@@ -428,7 +429,7 @@ for frame_idx in range(frame_encnum):
         pred_topright_v = np.round(pred_topright_v+0.00000001).astype(int) # 四捨五入完變成整數 0.00000001
 
 
-        
+
         # 左下角4x4 v
         A = pred_topleft_v[0,0]
         B = pred_topleft_v[0,1]
@@ -497,12 +498,12 @@ for frame_idx in range(frame_encnum):
                                [dct_downleft_v[0,0], dct_downright_v[0,0]]])
 
         # DC 經過Hadamard與量化
-        chromaDC_H_QT_u = chromaDC_H_QT(chromaDC_u)
-        chromaDC_H_QT_v = chromaDC_H_QT(chromaDC_v)
+        chromaDC_H_QT_u = chromaDC_H_QT(chromaDC_u, QP = QP)
+        chromaDC_H_QT_v = chromaDC_H_QT(chromaDC_v, QP = QP)
 
         # DC 經過反Hadamard與反量化
-        chromaDC_IH_IQT_u = chromaDC_IH_IQT(chromaDC_H_QT_u)
-        chromaDC_IH_IQT_v = chromaDC_IH_IQT(chromaDC_H_QT_v)
+        chromaDC_IH_IQT_u = chromaDC_IH_IQT(chromaDC_H_QT_u, QP = QP)
+        chromaDC_IH_IQT_v = chromaDC_IH_IQT(chromaDC_H_QT_v, QP = QP)
 
         # DC 送入熵編碼
         chromaDC_bitstring = ""
@@ -510,14 +511,14 @@ for frame_idx in range(frame_encnum):
         chromaDC_bitstring = chromaDC_bitstring + CAVLC_chromaDC(chromaDC_H_QT_v)
 
         # AC DCT 和 量化
-        dct_qt_topleft_u   = DCT_and_QT(res_topleft_u  )
-        dct_qt_topright_u  = DCT_and_QT(res_topright_u )
-        dct_qt_downleft_u  = DCT_and_QT(res_downleft_u )
-        dct_qt_downright_u = DCT_and_QT(res_downright_u)
-        dct_qt_topleft_v   = DCT_and_QT(res_topleft_v  )
-        dct_qt_topright_v  = DCT_and_QT(res_topright_v )
-        dct_qt_downleft_v  = DCT_and_QT(res_downleft_v )
-        dct_qt_downright_v = DCT_and_QT(res_downright_v)
+        dct_qt_topleft_u   = DCT_and_QT(res_topleft_u  , QP = QP)
+        dct_qt_topright_u  = DCT_and_QT(res_topright_u , QP = QP)
+        dct_qt_downleft_u  = DCT_and_QT(res_downleft_u , QP = QP)
+        dct_qt_downright_u = DCT_and_QT(res_downright_u, QP = QP)
+        dct_qt_topleft_v   = DCT_and_QT(res_topleft_v  , QP = QP)
+        dct_qt_topright_v  = DCT_and_QT(res_topright_v , QP = QP)
+        dct_qt_downleft_v  = DCT_and_QT(res_downleft_v , QP = QP)
+        dct_qt_downright_v = DCT_and_QT(res_downright_v, QP = QP)
 
         # AC 送入熵編碼
         chromaAC_bitstring = ""
@@ -531,14 +532,14 @@ for frame_idx in range(frame_encnum):
         chromaAC_bitstring = chromaAC_bitstring + CAVLC(dct_qt_downright_v, topleft_x = ((mb_x*16) + 8), topleft_y = ((mb_y*16) + 8), iCbCr = 1)
 
         # 知道decoder端看到的殘差矩陣是多少
-        decoder_topleft_u   = IQT(dct_qt_topleft_u);   decoder_topleft_u[0,0]   = (chromaDC_IH_IQT_u)[0,0]
-        decoder_topright_u  = IQT(dct_qt_topright_u);  decoder_topright_u[0,0]  = (chromaDC_IH_IQT_u)[0,1]
-        decoder_downleft_u  = IQT(dct_qt_downleft_u);  decoder_downleft_u[0,0]  = (chromaDC_IH_IQT_u)[1,0]
-        decoder_downright_u = IQT(dct_qt_downright_u); decoder_downright_u[0,0] = (chromaDC_IH_IQT_u)[1,1]
-        decoder_topleft_v   = IQT(dct_qt_topleft_v);   decoder_topleft_v[0,0]   = (chromaDC_IH_IQT_v)[0,0]
-        decoder_topright_v  = IQT(dct_qt_topright_v);  decoder_topright_v[0,0]  = (chromaDC_IH_IQT_v)[0,1]
-        decoder_downleft_v  = IQT(dct_qt_downleft_v);  decoder_downleft_v[0,0]  = (chromaDC_IH_IQT_v)[1,0]
-        decoder_downright_v = IQT(dct_qt_downright_v); decoder_downright_v[0,0] = (chromaDC_IH_IQT_v)[1,1]
+        decoder_topleft_u   = IQT(dct_qt_topleft_u  ,QP = QP); decoder_topleft_u[0,0]   = (chromaDC_IH_IQT_u)[0,0]
+        decoder_topright_u  = IQT(dct_qt_topright_u ,QP = QP); decoder_topright_u[0,0]  = (chromaDC_IH_IQT_u)[0,1]
+        decoder_downleft_u  = IQT(dct_qt_downleft_u ,QP = QP); decoder_downleft_u[0,0]  = (chromaDC_IH_IQT_u)[1,0]
+        decoder_downright_u = IQT(dct_qt_downright_u,QP = QP); decoder_downright_u[0,0] = (chromaDC_IH_IQT_u)[1,1]
+        decoder_topleft_v   = IQT(dct_qt_topleft_v  ,QP = QP); decoder_topleft_v[0,0]   = (chromaDC_IH_IQT_v)[0,0]
+        decoder_topright_v  = IQT(dct_qt_topright_v ,QP = QP); decoder_topright_v[0,0]  = (chromaDC_IH_IQT_v)[0,1]
+        decoder_downleft_v  = IQT(dct_qt_downleft_v ,QP = QP); decoder_downleft_v[0,0]  = (chromaDC_IH_IQT_v)[1,0]
+        decoder_downright_v = IQT(dct_qt_downright_v,QP = QP); decoder_downright_v[0,0] = (chromaDC_IH_IQT_v)[1,1]
 
         dec_res_topleft_u   = IDCT(decoder_topleft_u)
         dec_res_topright_u  = IDCT(decoder_topright_u)
@@ -596,7 +597,7 @@ for frame_idx in range(frame_encnum):
         # 回傳intra_16x16_chroma 編碼結果
         return (chromaDC_bitstring + chromaAC_bitstring)
 
-    def DCT_and_QT(residual):
+    def DCT_and_QT(residual, QP = 27):
         # DCT
         # 參考資料:https://ir.nctu.edu.tw/bitstream/11536/57223/4/352004.pdf
         # 輸入4*4矩陣 X
@@ -619,7 +620,7 @@ for frame_idx in range(frame_encnum):
         # 得到經過核心轉換後的矩陣W
         W = C@X@Ct
 
-        Z = QT(W, QP = 27)
+        Z = QT(W, QP)
 
         return Z
 
@@ -651,26 +652,53 @@ for frame_idx in range(frame_encnum):
     def QT(W, QP = 27):
         # 原本的浮點數矩陣E
         E = np.array([[  0.25,0.1581,  0.25,0.1581],
-                    [0.1581,   0.1,0.1581,   0.1],
-                    [  0.25,0.1581,  0.25,0.1581],
-                    [0.1581,   0.1,0.1581,   0.1]])
+                      [0.1581,   0.1,0.1581,   0.1],
+                      [  0.25,0.1581,  0.25,0.1581],
+                      [0.1581,   0.1,0.1581,   0.1]])
 
-        # 查表替換掉原本的浮點數 QP mod 6 = 3
-        # 0.25   -> 9362
-        # 0.1    -> 3647
-        # 0.1581 -> 5243
+        #q is qbits
+        q = 15 + math.floor(QP/6);
 
-        MF = np.array([[9362,5825,9362,5825],
-                    [5825,3647,5825,3647],
-                    [9362,5825,9362,5825],
-                    [5825,3647,5825,3647]])
+        #M is the multiplying factor which is found from QP value
+        #MF is the multiplying factor matrix
+        #rem(QP,6) alpha   beta    gamma
+        #          (a)     (b)      (g)
+        #0         13107   5243    8066
+        #1         11916   4660    7490
+        #2         10082   4194    6554
+        #3         9362    3647    5825
+        #4         8192    3355    5243
+        #5         7282    2893    4559
+
+        # 查表替換掉原本的浮點數 QP mod 6
+        MF = np.array([[13107, 5243, 8066],
+                       [11916, 4660, 7490],
+                       [10082, 4194, 6554],
+                       [9362 , 3647, 5825],
+                       [8192 , 3355, 5243],
+                       [7282 , 2893, 4559]]);
+
+        x = QP % 6
+
+        a = MF[x,0]
+        b = MF[x,1]
+        g = MF[x,2]
+
+        M  = np.array([[a,g,a,g],
+                       [g,b,g,b],
+                       [a,g,a,g],
+                       [g,b,g,b]])
+
+        # M  = np.array([[9362,5825,9362,5825],
+        #                [5825,3647,5825,3647],
+        #                [9362,5825,9362,5825],
+        #                [5825,3647,5825,3647]])
 
         # 輸入矩陣W 輸出矩陣Z
         # 首先將W矩陣與MF矩陣直接進行相同位置元素的乘法運算
-        Z  = np.multiply(W, MF)
+        Z  = np.multiply(W, M)
 
         # 進行量化運算 選擇QP = 27, qbits = 19
-        QP = 27
         qbits = 15 + math.floor(QP/6)
 
         # 最後把結果右移qbits次即可得到DCT&量化後的矩陣Z
@@ -680,8 +708,8 @@ for frame_idx in range(frame_encnum):
         Z = np.round(Z+0.00000001).astype(int)
 
         return Z
-    
-    def IQT(Z):
+
+    def IQT(Z, QP = 27):
         # H264 採用非一致性量化
         # 將量化後的結果反運算得到解碼時真正解出來的像素值，以利後續的幀內預測計算與實際圖的殘差
         # q is qbits
@@ -691,11 +719,11 @@ for frame_idx in range(frame_encnum):
         # coefficient.
         #   delta lambda miu
         SM = np.array([[10 ,16 ,13],
-                    [11 ,18 ,14],
-                    [13 ,20 ,16],
-                    [14 ,23 ,18],
-                    [16 ,25 ,20],
-                    [18 ,29 ,23]])
+                       [11 ,18 ,14],
+                       [13 ,20 ,16],
+                       [14 ,23 ,18],
+                       [16 ,25 ,20],
+                       [18 ,29 ,23]])
 
         x = QP%6
 
@@ -705,15 +733,15 @@ for frame_idx in range(frame_encnum):
         m = SM[x,2]
 
         V = np.array([[d ,m ,d ,m],
-                    [m ,l ,m ,l],
-                    [d ,m ,d ,m],
-                    [m ,l ,m ,l]])
+                      [m ,l ,m ,l],
+                      [d ,m ,d ,m],
+                      [m ,l ,m ,l]])
 
         Wi = (Z * V)
         Wi = Wi << (q -15)
 
         return Wi
-    
+
     def IDCT(Wi):
         Ci = np.array([[1   ,  1 ,   1 ,   1],
                     [1   ,1/2 ,-1/2 ,  -1],
@@ -740,11 +768,11 @@ for frame_idx in range(frame_encnum):
         # coefficient.
         #   delta lambda miu
         SM = np.array([[10 ,16 ,13],
-                    [11 ,18 ,14],
-                    [13 ,20 ,16],
-                    [14 ,23 ,18],
-                    [16 ,25 ,20],
-                    [18 ,29 ,23]])
+                       [11 ,18 ,14],
+                       [13 ,20 ,16],
+                       [14 ,23 ,18],
+                       [16 ,25 ,20],
+                       [18 ,29 ,23]])
 
         x = QP%6
 
@@ -754,9 +782,9 @@ for frame_idx in range(frame_encnum):
         m = SM[x,2]
 
         V = np.array([[d ,m ,d ,m],
-                    [m ,l ,m ,l],
-                    [d ,m ,d ,m],
-                    [m ,l ,m ,l]])
+                      [m ,l ,m ,l],
+                      [d ,m ,d ,m],
+                      [m ,l ,m ,l]])
 
         Wi = (Z * V)
         Wi = Wi << (q -15)
@@ -776,34 +804,50 @@ for frame_idx in range(frame_encnum):
 
         return Y
 
-    def chromaDC_H_QT(WD):
+    def chromaDC_H_QT(WD, QP = 27):
         # WD is the block of 2x2 chroma DC coefficients
-        QP = 27
         qbits = 15 + math.floor(QP/6)
 
         # 參考資料: https://huyunf.github.io/blogs/2017/11/20/h264_trans_qdq_algorithm/
         hadamard = np.array([[1, 1],
                              [1,-1]])
         
+        MF = np.array([[13107, 5243, 8066],
+                       [11916, 4660, 7490],
+                       [10082, 4194, 6554],
+                       [9362 , 3647, 5825],
+                       [8192 , 3355, 5243],
+                       [7282 , 2893, 4559]]);
+        
+        x = MF[QP%6,0]
+
         YD = hadamard@WD@hadamard
 
-        ZD = np.round((YD * 9362) / (2** (qbits + 1))+0.00000001) #9362 = MF[0,0] 
+        ZD = np.round((YD * x) / (2** (qbits + 1))+0.00000001) #9362 = MF[0,0]
         ZD = ZD.astype(int)
 
         return ZD
-    
-    def chromaDC_IH_IQT(ZD):
+
+    def chromaDC_IH_IQT(ZD, QP = 27):
         # WD is the block of 2x2 chroma DC coefficients
-        QP = 27
         qbits = math.floor(QP/6)
 
         # 參考資料: https://huyunf.github.io/blogs/2017/11/20/h264_trans_qdq_algorithm/
         hadamard = np.array([[1, 1],
                              [1,-1]])
         
+        SM = np.array([[10 ,16 ,13],
+                       [11 ,18 ,14],
+                       [13 ,20 ,16],
+                       [14 ,23 ,18],
+                       [16 ,25 ,20],
+                       [18 ,29 ,23]])
+        
+        x = SM[QP%6,0]
+
         WQD = hadamard@ZD@hadamard
 
-        WD = (WQD * 14).astype(int) << (qbits - 1) #14 = V[0,0]
+        WD = (WQD * x).astype(int) << (qbits - 1) #x = V[0,0]
 
         return WD
 
@@ -852,7 +896,7 @@ for frame_idx in range(frame_encnum):
             for coeff in row:
                 if (coeff != 0) : Non_Zero_Coefficient = Non_Zero_Coefficient + 1
 
-        if ((iCbCr == 0 or iCbCr == 1) and (Z[0,0] != 0)): 
+        if ((iCbCr == 0 or iCbCr == 1) and (Z[0,0] != 0)):
             Non_Zero_Coefficient = Non_Zero_Coefficient - 1
 
         # 實現矩陣Z的ZigZag掃描
@@ -1256,12 +1300,11 @@ for frame_idx in range(frame_encnum):
                     elif (prev_intra4x4_pred_mode_flag == 0):
                         mp_pred[(i8x8 << 2) + i4x4] = "0" + rem_intra4x4_pred_mode
                     # 殘差矩陣經過DCT和量化運算
-                    matrix_Z = DCT_and_QT(pred_res_matrix)
+                    matrix_Z = DCT_and_QT(pred_res_matrix, QP = QP)
                     # 將此量化後的矩陣送入CAVLC編碼
                     CAVLC_bitstring = CAVLC_bitstring + CAVLC(matrix_Z, topleft_x = topleft_x, topleft_y = topleft_y, iCbCr = 2)
             # 色度編碼 DC + AC
             if (frame_chroma == True):
-                print("chroma")
                 CAVLC_bitstring = CAVLC_bitstring + intra_16x16_chroma(mb_x, mb_y)
             # block編碼完成輸出macroblock_layer
             mb_pred_bitstring = ""
@@ -1343,9 +1386,7 @@ for frame_idx in range(frame_encnum):
                     break;
                 golden_file.write((0).to_bytes(1, byteorder='big').hex())
             golden_file.write("\n")
-
-#############################################################################################
-
+###########################################################################################
 if (gen_dataS == True):
     # 初始化一個frame的矩陣用來保存資料
     matrix   = np.zeros((frame_height,frame_width))
@@ -1355,6 +1396,8 @@ if (gen_dataS == True):
     with open(file_path, "rb") as file, open(dataS_output_file_path, "w") as file_o:
         # 讀取一個frame的luma資訊保存到matrix之中
         for frame_num_datas in range(frame_encnum):
+            # 選擇要encode第幾張
+            file.seek(int(frame_width * frame_height * 1.5 * (frame_num_datas + start_frame)))
             for y in range (frame_height):
                 for x in range (frame_width):
                     byte_value = file.read(1)
@@ -1405,9 +1448,7 @@ if (gen_dataS == True):
                                 #     print(byte0)
                                 file_o.write(", \\")
                                 file_o.write("\n")
-
-
 # 最後把SPS、PPS、IDR Slice合在一起
 header.sps_nal(frame_width, frame_height)
-header.pps_nal()
-header.concate(frame_encnum, gold_output_path)
+header.pps_nal(QP=QP)
+header.concate(frame_encnum)

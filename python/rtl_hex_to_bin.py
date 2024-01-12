@@ -1,6 +1,6 @@
 import header
 
-frame_width  = 1280 
+frame_width  = 1280
 frame_height = 720
 
 hex_file_path = "./compressor_result.hex"
@@ -11,7 +11,7 @@ with open(hex_file_path, "r") as hex_file, open(bin_file_path, "wb") as bin_file
         hex_values = line.strip()
         byte_array = bytes.fromhex(hex_values)
         bin_file.write(byte_array)
-        
+
 def concate():
     SPS_path        = "./bitstream/SPS_header.bin"
     PPS_path        = "./bitstream/PPS_header.bin"

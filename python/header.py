@@ -1,6 +1,6 @@
 import enc
 
-def concate(frame_encnum, gold_output_path = "golden.hex"):
+def concate(frame_encnum):
     SPS_path         = "./bitstream/SPS_header.bin"
     PPS_path         = "./bitstream/PPS_header.bin"
     output_path      = "h264.bin"
@@ -30,7 +30,7 @@ def concate(frame_encnum, gold_output_path = "golden.hex"):
     with open(output_path, "wb") as output_file:
         output_file.write(total_bitstream)
 
-    gold_total_bitstream = ""
+        gold_total_bitstream = ""
 
     # 讀取IDR_slice_golden的內容
     for frame_num in range(frame_encnum):
@@ -187,7 +187,7 @@ def sps_nal(frame_width, frame_height):
                 file.write(byte_value.to_bytes(1, byteorder='big'))
                 if (byte_value != 0): zero_cnt = 0
 
-def pps_nal():
+def pps_nal(QP):
     # PPS NAL
     start_code         = 1 #(32 bits)
     forbidden_zero_bit = 0 #(1 bits)
@@ -204,8 +204,8 @@ def pps_nal():
     num_ref_idx_l1_active_minus1                 = 0  #(ue v bits)
     weighted_pred_flag                           = 0  #(1 bits) [False]
     weighted_bipred_idc                          = 0  #(2 bits) [Default]
-    pic_init_qp_minus26                          = 1  #(se v bits)
-    pic_init_qs_minus26                          = 1  #(se v bits)
+    pic_init_qp_minus26                          = QP-26  #(se v bits)
+    pic_init_qs_minus26                          = QP-26  #(se v bits)
     chroma_qp_index_offset                       = 0  #(se v bits)
     deblocking_filter_control_present_flag       = 1  #(1 bits) [True]
     constrained_intra_pred_flag                  = 0  #(1 bits) [False]

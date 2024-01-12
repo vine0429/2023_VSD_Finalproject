@@ -459,7 +459,7 @@ pr_project_06: | clean $(bld_dir)
 	+define+PR+project_06$(FSDB_DEF) \
 	+no_notifier \
 	+maxdelays \
-	+prog_path=$(root_dir)/$(sim_dir)project_06 \
+	+prog_path=$(root_dir)/$(sim_dir)/project_06 \
 	-l $(root_dir)/$(sim_dir)/project_06/pr_sim.log \
 
 pr_project_07: | clean $(bld_dir)
@@ -560,7 +560,7 @@ spyglass: | $(bld_dir)
 
 ISA		: | $(bld_dir)
 	cd $(bld_dir); \
-	jg   ../script/ISA_Formal.tcl &	
+	jg   ../script/ISA_Formal.tcl &
 
 # Check file structure
 BLUE=\033[1;34m
